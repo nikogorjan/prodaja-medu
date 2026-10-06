@@ -5,7 +5,7 @@ Live theme: molding-home1 (#196923326797). Never push to live without asking.
 
 ## Content JSON is owned by the theme editor. Do not touch it casually.
 
-Content JSON = `templates/**/*.json`, `sections/*.json` (header-group,
+Content JSON = `templates/*.json`, `templates/customers/*.json`, `sections/*.json` (header-group,
 footer-group), `config/settings_data.json`. These hold the images, text,
 section order and settings the customer sets in the Shopify theme editor.
 
@@ -33,3 +33,10 @@ Rules:
 ## Visual checks
 Dev server runs at http://127.0.0.1:9292. Screenshot via headless Chrome
 over the DevTools protocol (plain --screenshot hangs on the dev server).
+
+## Gotcha: Shopify CLI ignore globs
+`templates/**/*.json` does NOT match `templates/index.json` in the Shopify CLI
+(`**` requires at least one directory). Always list `templates/*.json` and
+`templates/customers/*.json` separately. Verify with
+`shopify theme push --development --nodelete --verbose` and grep the
+"Files to be uploaded" list for content JSON. Verified clean on 2026-10-06.
