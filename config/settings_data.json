@@ -432,17 +432,17 @@
           "1597367617767"
         ],
         "settings": {
-          "enable": true,
+          "enable": false,
           "duration": 8,
-          "text": "Someone recently bought",
-          "verify": "Verified"
+          "text": "Nekdo je pravkar kupil",
+          "verify": "Preverjeno"
         }
       },
       "recently-viewed": {
         "type": "recently-viewed",
         "settings": {
           "enable": true,
-          "title": "Recently viewed",
+          "title": "Nedavno ogledano",
           "limit": 6
         }
       },
@@ -476,98 +476,63 @@
       "slideshow-1": {
         "type": "slideshow-1",
         "blocks": {
-          "1561259906467": {
+          "slide_semen": {
             "type": "image",
             "settings": {
               "enable_video": false,
               "video_hosted": "",
-              "image": "shopify://shop_images/Mags_Corner_comb_2_Right_Lint_grey_Rebar_Square_Coffee_Table_marble_tabletop_soft_black_frame_Moire_Kelim_green_DLM_sun_yellow_cb7f484e-59a1-46ee-8c0b-8aa9b9971738.jpg",
+              "image": "shopify://shop_images/semen-cebelnjak-vrt.webp",
+              "image2": "",
+              "image_mobile": "shopify://shop_images/semen-cebelnjak-vrt-mobile.webp",
               "alignment": "center center",
-              "text_alignment": "left center",
-              "bgwrap": "#a29f9a",
+              "text_alignment": "center center",
+              "bgwrap": "#f5efe3",
               "show_overlay": true,
-              "gradient_overlay": false,
+              "gradient_overlay": true,
               "bg_overlay": "#000000",
-              "opacity_overlay": 0.2,
-              "slide_toptitle": "Decoration",
+              "opacity_overlay": 0.35,
+              "slide_toptitle": "Čebelarstvo in apiturizem Šemen · od leta 1982",
               "margin_title": 1.5,
-              "slide_toptitle_color": "#ffffff",
-              "slide_title": "Refresh your <br> living room.",
+              "slide_toptitle_color": "#f3dca4",
+              "slide_title": "Med iz našega čebelnjaka",
               "slide_title_color": "#ffffff",
-              "subheading": "",
+              "subheading": "Družinsko čebelarstvo z več kot 40-letno tradicijo. Domači med, čebelji izdelki in doživetja v poslikanem čebelnjaku.",
               "subheading_color": "#ffffff",
-              "button_label": "Shop Decoration",
-              "button_link": "shopify://collections/tools",
+              "button_label": "Oglejte si izdelke",
+              "button_link": "shopify://collections/all",
               "stylebtns": "btn-theme",
-              "bg_button": "#ffffff",
-              "color_button": "#202025",
-              "bg_button_hover": "#eeeeee",
-              "color_button_hover": "#202025",
-              "button_label_2": "",
-              "button_link_2": "shopify://collections/all",
-              "stylebtns_2": "btn-underline",
+              "bg_button": "#c99a5c",
+              "color_button": "#ffffff",
+              "bg_button_hover": "#ffffff",
+              "color_button_hover": "#222222",
+              "button_label_2": "Apiturizem",
+              "button_link_2": "/pages/apiturizem",
+              "stylebtns_2": "btn-outline",
               "bg_button_2": "#ffffff",
               "color_button_2": "#ffffff",
               "bg_button_hover_2": "#ffffff",
-              "color_button_hover_2": "#ffffff"
-            }
-          },
-          "108726f6-4aa5-4791-b3da-44f38358c9b2": {
-            "type": "image",
-            "settings": {
-              "enable_video": false,
-              "video_hosted": "",
-              "image": "shopify://shop_images/PC_Portable_olive_Palissade_Lounge_chair_olive_Palissade_Table_olive_Coffee_M_mint_Rainbow_mug.jpg",
-              "alignment": "center center",
-              "text_alignment": "left center",
-              "bgwrap": "#968574",
-              "show_overlay": true,
-              "gradient_overlay": false,
-              "bg_overlay": "#000000",
-              "opacity_overlay": 0.1,
-              "slide_toptitle": "Hay PC Portable Lamp",
-              "margin_title": 1.5,
-              "slide_toptitle_color": "#ffffff",
-              "slide_title": "Pierre Charpin’s <br> refined lamp.",
-              "slide_title_color": "#ffffff",
-              "subheading": "",
-              "subheading_color": "#ffffff",
-              "button_label": "Discover",
-              "button_link": "shopify://collections/tools",
-              "stylebtns": "btn-theme",
-              "bg_button": "#ffffff",
-              "color_button": "#202025",
-              "bg_button_hover": "#eeeeee",
-              "color_button_hover": "#202025",
-              "button_label_2": "",
-              "button_link_2": "shopify://collections/all",
-              "stylebtns_2": "btn-underline",
-              "bg_button_2": "#ffffff",
-              "color_button_2": "#ffffff",
-              "bg_button_hover_2": "#ffffff",
-              "color_button_hover_2": "#ffffff"
+              "color_button_hover_2": "#222222"
             }
           }
         },
         "block_order": [
-          "1561259906467",
-          "108726f6-4aa5-4791-b3da-44f38358c9b2"
+          "slide_semen"
         ],
         "settings": {
           "enable_slideshow": true,
           "setwidthout": "full",
-          "slideshow_height_adapt": "650",
+          "slideshow_height_adapt": "750",
           "slideshow_height_mobile": "500",
           "setwidth": "container",
           "slideshow_mobile": true,
-          "autorotate": true,
+          "autorotate": false,
           "autorotate_speed": 5,
-          "anim_slideshow": "zoom",
-          "e_arrow": true,
+          "anim_slideshow": "fade",
+          "e_arrow": false,
           "color_arrow": "#ffffff",
           "bg_arrow": "#ffffff",
           "opacity_arrow": 0.2,
-          "e_dot": true,
+          "e_dot": false,
           "slide_dot": "square",
           "color_dot_nav": "#ffffff",
           "color_dot_active": "#ffffff"
@@ -2154,12 +2119,12 @@
           "cookie_style": "style-2",
           "cookie_background": "#202025",
           "cookie_color": "#ffffff",
-          "cookie_message": "<div class=\"subtop mb-3\"> Cookie Policy </div>\nThis website uses cookies to ensure you get the best experience on our website.",
+          "cookie_message": "<div class=\"subtop mb-3\"> Piškotki </div>\nSpletno mesto uporablja piškotke, da vam zagotovi najboljšo uporabniško izkušnjo.",
           "cookie_url": "shopify://pages/privacy-policy",
-          "cookie_url_text": "Read Privacy",
-          "cookie_ok": "accept all",
+          "cookie_url_text": "Politika zasebnosti",
+          "cookie_ok": "Sprejmi vse",
           "style_btn": "btn-theme btn-white",
-          "decline": "Decline",
+          "decline": "Zavrni",
           "decline_style_btn": "btn-outline btn-outline-white"
         }
       },
@@ -2173,14 +2138,14 @@
           "pnewletter_time_delay": 3,
           "pnewletter_time": 20,
           "pnewletter_background": "#ffffff",
-          "subtitle": "FIRST TIMER?",
-          "pnewletter_title": "Sign Up & Save 15%",
+          "subtitle": "PRVIČ PRI NAS?",
+          "pnewletter_title": "Prijavite se na novice",
           "pnewletter_title_cl": "",
           "pnew_size_heading": "h3",
-          "pnewletter_description": "<p>Subscribe to our newsletter and enjoy 15% off your first order. </p>",
+          "pnewletter_description": "<p>Prijavite se na naše novice in prvi izveste za sezonski med in dogodke v čebelnjaku.</p>",
           "pnewletter_description_cl": "",
-          "button": "Get offer",
-          "pnewletter_description_sub": "By completing this form, you are signing up to receive our emails and can unsubscribe at any time"
+          "button": "Prijava",
+          "pnewletter_description_sub": "Z oddajo obrazca se strinjate s prejemanjem naših e-novic. Odjavite se lahko kadar koli."
         }
       },
       "footer": {

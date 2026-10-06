@@ -23,7 +23,7 @@
         "e_size": "cover",
         "e_repeat": "no-repeat",
         "title_top": "",
-        "title": "Subscrible & Get <span class=\"text-theme\">10% <\/span> Discount",
+        "title": "Prijavite se na <span class=\"text-theme\">novice</span> iz čebelnjaka",
         "des": "",
         "html_left": false,
         "html_left_block": "",
@@ -40,8 +40,8 @@
           "type": "text",
           "settings": {
             "widthlogofooter": 150,
-            "title": "About us",
-            "text": "<div class=\"pr-lg-4 rte\">\n<p class=\"mt-3\">Molding® is an independent, female-founded label dedicated to creating luxury-grade active garments. Thanks to Molding for allowing us to use their photography and products in this demo store.<\/p>\n<\/div>",
+            "title": "O nas",
+            "text": "<div class=\"pr-lg-4 rte\">\n<p class=\"mt-3\">Čebelarstvo in apiturizem Šemen je družinsko čebelarstvo s tradicijo od leta 1982. Ponujamo domači med in čebelje izdelke iz lastne pridelave ter doživetja v našem poslikanem čebelnjaku.</p>\n</div>",
             "width": "25%"
           }
         },
@@ -94,8 +94,8 @@
             "btn_bg_new": "#bb5237",
             "btn_cl_new": "#f7f7f7",
             "btn_cl_new_hover": "#ffffff",
-            "title": "Sign up & save 15%",
-            "subheading": "<p>Get a 15% discount on your first order.<\/p>",
+            "title": "Novice iz čebelnjaka",
+            "subheading": "<p>Prijavite se in prvi izveste za sezonski med in dogodke.</p>",
             "enablesocial": true,
             "width": "25%"
           }
@@ -133,7 +133,7 @@
         "payment_info": "svg",
         "link_list_bottom": "",
         "copyright": true,
-        "customcopyright": "All rights reserved.",
+        "customcopyright": "Vse pravice pridržane.",
         "padding_top": 64,
         "padding_bottom": 32,
         "m_padding_top": 32,

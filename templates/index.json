@@ -1,70 +1,5 @@
 {
   "sections": {
-    "hero_semen": {
-      "type": "slideshow-1",
-      "blocks": {
-        "slide_1": {
-          "type": "image",
-          "settings": {
-            "enable_video": false,
-            "video_hosted": "",
-            "image": "shopify://shop_images/semen-cebelnjak-vrt.webp",
-            "image2": "",
-            "image_mobile": "shopify://shop_images/semen-cebelnjak-vrt-mobile.webp",
-            "alignment": "center center",
-            "text_alignment": "center center",
-            "bgwrap": "#f5efe3",
-            "show_overlay": true,
-            "gradient_overlay": true,
-            "bg_overlay": "#000000",
-            "opacity_overlay": 0.35,
-            "slide_toptitle": "Čebelarstvo in apiturizem Šemen · od leta 1982",
-            "margin_title": 1.5,
-            "slide_toptitle_color": "#f3dca4",
-            "slide_title": "Med iz našega čebelnjaka",
-            "slide_title_color": "#ffffff",
-            "subheading": "Družinsko čebelarstvo z več kot 40-letno tradicijo. Domači med, čebelji izdelki in doživetja v poslikanem čebelnjaku.",
-            "subheading_color": "#ffffff",
-            "button_label": "Oglejte si izdelke",
-            "button_link": "shopify://collections/all",
-            "stylebtns": "btn-theme",
-            "bg_button": "#c99a5c",
-            "color_button": "#ffffff",
-            "bg_button_hover": "#ffffff",
-            "color_button_hover": "#222222",
-            "button_label_2": "Apiturizem",
-            "button_link_2": "/pages/apiturizem",
-            "stylebtns_2": "btn-outline",
-            "bg_button_2": "#000000",
-            "color_button_2": "#ffffff",
-            "bg_button_hover_2": "#ffffff",
-            "color_button_hover_2": "#222222"
-          }
-        }
-      },
-      "block_order": [
-        "slide_1"
-      ],
-      "settings": {
-        "enable_slideshow": true,
-        "setwidthout": "full",
-        "slideshow_height_adapt": "750",
-        "slideshow_height_mobile": "500",
-        "setwidth": "container",
-        "slideshow_mobile": true,
-        "autorotate": false,
-        "autorotate_speed": 5,
-        "anim_slideshow": "fade",
-        "e_arrow": false,
-        "color_arrow": "#000",
-        "bg_arrow": "#fff",
-        "opacity_arrow": 1,
-        "e_dot": false,
-        "slide_dot": "square",
-        "color_dot_nav": "#000",
-        "color_dot_active": "#C99A5C"
-      }
-    },
     "16485444103c52f5e9": {
       "type": "service",
       "blocks": {
@@ -592,7 +527,6 @@
     }
   },
   "order": [
-    "hero_semen",
     "16485444103c52f5e9",
     "70da4000-c1cf-4928-8203-f21c081874c6",
     "8f7efc88-8555-4d5d-984d-bfed30a488ff",
