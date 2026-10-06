@@ -27,7 +27,7 @@
         "enable_language_topbar": true,
         "enable_social_topbar": true,
         "enable_login_topbar": false,
-        "text_topbar": "Domači med iz čebelnjaka Šemen · dostava po vsej Sloveniji",
+        "text_topbar": "Domači med iz čebelnjaka Šemen",
         "buttonall_topbar": "V trgovino",
         "buttonall_link_topbar": "shopify://collections/all"
       }
