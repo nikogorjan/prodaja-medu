@@ -50,6 +50,8 @@
             "enable_hurrify": true,
             "enable_payment_button": true,
             "waitlist": true,
+            "enable_question": true,
+            "enable_sibling": true,
             "product_selector": "radio",
             "sw_color_product": true,
             "color_circle": true,
@@ -79,7 +81,8 @@
             "banner_txt_color": "#202025",
             "banner_bg_color": "linear-gradient(180deg, rgba(238, 247, 241, 1), rgba(238, 247, 241, 1) 100%)",
             "banner_radius": 8
-          }
+          },
+          "disabled": true
         },
         "842b653e-7ccb-4f45-ad7c-8619b58f56ee": {
           "type": "separator",
@@ -90,11 +93,11 @@
           "settings": {
             "block_style": "ver",
             "icon_1": "truck",
-            "icon_text_1": "Free shipping",
+            "icon_text_1": "Dostava po Sloveniji",
             "icon_2": "lock",
-            "icon_text_2": "Secure payment",
-            "icon_3": "shield",
-            "icon_text_3": "2 Year Warranty",
+            "icon_text_2": "Varno plačilo",
+            "icon_3": "leaf",
+            "icon_text_3": "Lastna pridelava",
             "icon_4": "none",
             "icon_text_4": ""
           }
@@ -107,31 +110,32 @@
           "type": "countdown",
           "settings": {
             "title_heading": "🔥 Sale ends in !"
-          }
+          },
+          "disabled": true
         },
         "1431e891-e819-4fa1-8416-0cb3956f0e39": {
           "type": "description",
           "disabled": true,
           "settings": {
             "enable_tab": true,
-            "title_tab": "Description"
+            "title_tab": "Opis"
           }
         },
         "2830007b-b9f5-4f33-86cf-680e0a91ca8d": {
           "type": "tabcustom",
           "settings": {
-            "title_tab": "Shipping information",
+            "title_tab": "Dostava in prevzem",
             "icon": "truck",
-            "answer_content": "<p>- No EU import duties.<br/>- Ships within 1-2 business days.<br/>- Ships in our fully recyclable and biodegradable signature boxes.</p>",
+            "answer_content": "<p>Pošiljamo po vsej Sloveniji. Naročilo odpošljemo v 1–3 delovnih dneh. Po dogovoru je možen tudi osebni prevzem v našem čebelnjaku.</p>",
             "page": ""
           }
         },
         "0a71f30d-dba2-4bca-a64d-c3cc2ed17e7d": {
           "type": "tabcustom",
           "settings": {
-            "title_tab": "Care Guide",
+            "title_tab": "Shranjevanje medu",
             "icon": "leaf",
-            "answer_content": "<p>Hand-wash warm. Tumble dry low. This product has been washed at the factory after sewing to minimize fabric shrinkage.</p>",
+            "answer_content": "<p>Med hranite v tesno zaprtem kozarcu, na suhem in temnem mestu pri sobni temperaturi. Kristalizacija je naraven proces in znak pristnosti. Kristaliziran med utekočinite v vodni kopeli do 40 °C, da ohrani vse svoje lastnosti.</p>",
             "page": ""
           }
         },
@@ -140,7 +144,7 @@
           "disabled": true,
           "settings": {
             "icon": "globe",
-            "free_word": "55% Linen, 45% Rayon"
+            "free_word": "Iz našega čebelnjaka"
           }
         },
         "b7034bf2-48fd-492f-a089-3169873730db": {
@@ -148,7 +152,7 @@
           "disabled": true,
           "settings": {
             "icon": "lock",
-            "free_word": "Secure payment"
+            "free_word": "Varno plačilo"
           }
         },
         "13c388e5-8dd3-4462-9284-ec3f2c9aabc6": {
@@ -156,7 +160,7 @@
           "disabled": true,
           "settings": {
             "icon": "shield",
-            "free_word": "2 Year Warranty"
+            "free_word": "Lastna pridelava"
           }
         },
         "9cd2d8a0-a8b4-46d7-b3a7-b1609af99285": {
@@ -167,14 +171,16 @@
             "fake_view_duration": 3,
             "fake_view_text_prefix": "👀",
             "fake_view_text_suffix": "customers are viewing this product"
-          }
+          },
+          "disabled": true
         },
         "2cf20ef7-ba29-4dd5-8c98-df0b96ba3c5b": {
           "type": "text",
           "settings": {
             "text": "🔥  30 sold in last 18 hours",
             "text_style": "body"
-          }
+          },
+          "disabled": true
         },
         "1be7473b-00b2-4ad9-a7c0-356b86de67a7": {
           "type": "shipping",
@@ -183,14 +189,15 @@
         "83a6f5b6-88e4-4eb3-9899-a085ea9c58bd": {
           "type": "shippingtime",
           "settings": {
-            "shipping_button": "Delivery information",
+            "shipping_button": "Informacije o dostavi",
             "page_shipping": "delivery-service"
-          }
+          },
+          "disabled": true
         },
         "883720d7-3346-4495-85a0-add8b3d7a51f": {
           "type": "trust-badge",
           "settings": {
-            "trust-heading": "Guarantee safe checkout",
+            "trust-heading": "Varno plačilo",
             "width_image": 66
           }
         },
@@ -203,10 +210,10 @@
           "disabled": true,
           "settings": {
             "enable_tabvertical": false,
-            "gtab_des": "Description",
+            "gtab_des": "Opis",
             "gtab_review_enable": true,
-            "gtab_review": "Review",
-            "stab_title1": "Tab 1",
+            "gtab_review": "Mnenja",
+            "stab_title1": "Zavihek 1",
             "stab_content1": "<p>111</p>",
             "stab_title2": "",
             "stab_content2": "",
@@ -220,7 +227,7 @@
           "type": "related-product",
           "disabled": true,
           "settings": {
-            "title_heading": "Related products",
+            "title_heading": "Sorodni izdelki",
             "size_text": "h6",
             "product_limit": 3
           }
@@ -264,11 +271,11 @@
         "enable_video_looping": true,
         "stock_enable": true,
         "sizeguide_enable": true,
-        "sizeguide_title": "Size Guide",
+        "sizeguide_title": "Tabela velikosti",
         "sizeguide_page": "size-guide",
-        "crosssell_title": "Cross selling",
-        "upsell_accept": "Add to cart",
-        "upsell_decline": "No, thanks",
+        "crosssell_title": "Dodatna ponudba",
+        "upsell_accept": "Dodaj v košarico",
+        "upsell_decline": "Ne, hvala",
         "upsell_time": 3,
         "enable": true,
         "mix_1": "#262626",
@@ -284,11 +291,11 @@
       "settings": {
         "animation": "fade-up",
         "bgsection": "#ffffff",
-        "bundle_title": "Frequently Bought Together",
+        "bundle_title": "Pogosto kupljeno skupaj",
         "size_text": "h4",
         "limit_bundle": 3,
         "enable_border": true,
-        "btn_add": "Add selected items",
+        "btn_add": "Dodaj izbrane izdelke",
         "paddingsection": "40px 0px 40px 0px",
         "paddingmobile": "40px 0px 40px 0px",
         "marginsection": "0px 0px 0px 0px",
@@ -301,7 +308,7 @@
         "6889c9ba-caef-4edd-9757-6711505cb095": {
           "type": "description",
           "settings": {
-            "title_tab": "Description"
+            "title_tab": "Opis"
           }
         },
         "b69a53cf-5bc1-4b18-add3-92af436f966c": {
@@ -310,7 +317,8 @@
             "title_tab": "Material",
             "answer_content": "",
             "page": "material"
-          }
+          },
+          "disabled": true
         },
         "450a0011-a13e-4bad-9fbb-454bc0a862b4": {
           "type": "content",
@@ -318,13 +326,14 @@
             "title_tab": "Sizing",
             "answer_content": "<p>We recommend sizing up.<br/>Model is wearing size M.<br/>Height: 180cm / 5’9”<br/>Bra size: EU 75, US/UK: 34</p>",
             "page": ""
-          }
+          },
+          "disabled": true
         },
         "f4c1b859-6506-4354-b686-25d6efffda01": {
           "type": "content",
           "settings": {
-            "title_tab": "Care",
-            "answer_content": "<p>We use the highest quality technical fabrics available on the market and are passionate about creating timeless, lasting items. To keep your activewear in great shape, wash it on cold and gentle cycle, do not tumble dry and hang dry immediately after washing. Do not bleach.</p>",
+            "title_tab": "Shranjevanje",
+            "answer_content": "<p>Med hranite v tesno zaprtem kozarcu, na suhem in temnem mestu pri sobni temperaturi. Kristalizacija je naraven proces in znak pristnosti medu.</p>",
             "page": ""
           }
         },
@@ -332,13 +341,13 @@
           "type": "review",
           "disabled": true,
           "settings": {
-            "title_tab": "Reviews"
+            "title_tab": "Mnenja"
           }
         },
         "2e69c5c0-ab83-4cda-9c38-1aaab6fdf1cc": {
           "type": "related-product",
           "settings": {
-            "title_heading": "Buy with",
+            "title_heading": "Morda vas zanima",
             "size_text": "h6",
             "product_limit": 3
           }
@@ -382,8 +391,8 @@
           "type": "service",
           "settings": {
             "bgblock": "rgba(0,0,0,0)",
-            "title": "Free Shipping",
-            "description": "From all orders over $100",
+            "title": "Dostava po Sloveniji",
+            "description": "Pošljemo na vaš naslov ali pripravimo za prevzem",
             "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-truck\" viewbox=\"0 0 82 82\"><path d=\"M7.238 68.717H1.867V2.12H58.4v16.736h3.886c9.755 0 17.663 7.908 17.663 17.663v32.199h-5.917M55.781 68.717H25.487\"></path><path d=\"M58.334 42.124h15.068v-4.27c0-6.82-5.53-12.35-12.351-12.35h-2.718v16.62M73.909 70.236a9.125 9.125 0 1 0-18.013-2.931 9.125 9.125 0 0 0 18.013 2.93ZM25.367 70.235a9.125 9.125 0 1 0-18.012-2.931 9.125 9.125 0 0 0 7.54 10.471 9.125 9.125 0 0 0 10.472-7.54Z\"></path><path d=\"M13.723 77.507c-3.966.658-7.937 1.51-11.857 2.593M60.373 76.736c-10.512-1.212-24.298-1.969-38.645-.451M79.768 80.121s-4.96-1.222-12.975-2.395\"></path></svg>"
           }
         },
@@ -391,8 +400,8 @@
           "type": "service",
           "settings": {
             "bgblock": "rgba(0,0,0,0)",
-            "title": "The Beach Club",
-            "description": "Be rewarded every time",
+            "title": "Lastna pridelava",
+            "description": "Med iz našega čebelnjaka",
             "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-plant-based\" viewbox=\"0 0 82 82\"><path d=\"M41 20.701V80M56.735 26.294c0 8.703-7.045 15.758-15.735 15.758s-15.735-7.055-15.735-15.758C25.265 14.719 41 2 41 2s15.735 12.719 15.735 24.294ZM30.479 46.972c6.145 6.154 6.145 16.132 0 22.285-6.145 6.154-16.107 6.154-22.252 0C.054 61.072 2.2 40.936 2.2 40.936s20.106-2.149 28.279 6.036Z\"></path><path d=\"M41 77.861S27.525 60.403 10.092 50.177M51.412 46.972c-6.145 6.154-6.145 16.132 0 22.285 6.145 6.153 16.107 6.154 22.252 0 8.173-8.185 6.027-28.321 6.027-28.321s-20.106-2.149-28.279 6.036Z\"></path><path d=\"M40.891 77.861s13.475-17.458 30.908-27.684\"></path></svg>"
           }
         },
@@ -400,8 +409,8 @@
           "type": "service",
           "settings": {
             "bgblock": "rgba(0,0,0,0)",
-            "title": "Instant Refunds",
-            "description": "Return money within 30 days",
+            "title": "Skrbno pakirano",
+            "description": "Vsak kozarec zapakiramo ročno",
             "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-package\" viewbox=\"0 0 82 82\"><path d=\"M80 21v39L41 80 2 60V21L41 2l39 19Z\"></path><path d=\"m2 21 39 20 38.571-19.807M41 41.478v38.338\"></path><path d=\"m27.715 8.643 38.409 19.473v17.543l-11.617 6.067V33.83L16.098 14.355\"></path></svg>"
           }
         },
@@ -409,8 +418,8 @@
           "type": "service",
           "settings": {
             "bgblock": "rgba(0,0,0,0)",
-            "title": "Wear Now",
-            "description": "Pay in easy instalments.",
+            "title": "Tradicija od 1982",
+            "description": "Več kot 40 let izkušenj",
             "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" class=\"icon icon-shield\" viewbox=\"0 0 64 64\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class=\"a\" d=\"M21.18 31.69L28.54 39l15.91-15.88\"></path><path class=\"a\" d=\"M53 12.54v15.24a31.41 31.41 0 0 1-3.7 14.95A25.46 25.46 0 0 1 32 56a25.46 25.46 0 0 1-17.3-13.27A31.41 31.41 0 0 1 11 27.78V12.54C24.88 13.67 32 8 32 8s7.12 5.67 21 4.54z\"></path></svg>"
           }
         }
@@ -611,8 +620,6 @@
             "w_image": 40,
             "pos_image": 81,
             "e_image": "right",
-            "image": "shopify://shop_images/Mega_Dot_Dot_Cushion_Soft_Ruban_Square_Mirror_Result_Chair_Rainbow_Mug_Peas.jpg",
-            "image2": "shopify://shop_images/Ruban_Mirror_Kaleido_Tray_Marbled_Jug_Tann_Iris_Mug_Frotte.jpg",
             "enable_video": false,
             "overlay_color": "#000000",
             "overlay_opacity": 30,
@@ -642,6 +649,7 @@
         "template--14654207721557__30d4e0bd-da81-4442-b71d-c0fd1f5b3906-16658225273f87a081-0",
         "template--14654207721557__30d4e0bd-da81-4442-b71d-c0fd1f5b3906-16658225273f87a081-1"
       ],
+      "disabled": true,
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
@@ -665,8 +673,7 @@
             "quote": "<h4>“Absolutely loved it. The fit, the quality and the color. This is a slim fit jean like none other and the only one I will buy.”</h4>",
             "rate": 5,
             "author": "— Susan P.",
-            "info": "",
-            "avatar": "shopify://shop_images/505761_2_55788bf6-4880-470b-89b0-4e4790ee3009.jpg"
+            "info": ""
           }
         },
         "template--14684877652053__70b7f2d2-4c12-4305-88bd-da89e2d18d5b-1665853262e19e6bf8-1": {
@@ -676,8 +683,7 @@
             "quote": "<h4>“ The most comfortable shoes ever!! I have them in 3 colors. And I am not done. \"</h4>",
             "rate": 5,
             "author": "—  Jaycie Glove",
-            "info": "",
-            "avatar": "shopify://shop_images/Borosilicate_Mug_Borosilicate_Cup_2daa9e8d-48ec-418a-a679-0c60b91678c4.jpg"
+            "info": ""
           }
         },
         "template--14684877652053__70b7f2d2-4c12-4305-88bd-da89e2d18d5b-1665853262e19e6bf8-2": {
@@ -687,8 +693,7 @@
             "quote": "<h4>\" I love Lola! They're one of my favorite brands. Customer service is excellent. I have only returned items once and it was so easy. \" </h4>",
             "rate": 5,
             "author": "—  Kai Felix",
-            "info": "",
-            "avatar": "shopify://shop_images/Tool_Box_dusty_green_Flowerpot_with_Saucer_grey.jpg"
+            "info": ""
           }
         }
       },
@@ -697,6 +702,7 @@
         "template--14684877652053__70b7f2d2-4c12-4305-88bd-da89e2d18d5b-1665853262e19e6bf8-1",
         "template--14684877652053__70b7f2d2-4c12-4305-88bd-da89e2d18d5b-1665853262e19e6bf8-2"
       ],
+      "disabled": true,
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
@@ -724,22 +730,22 @@
         "template--14684877652053__bcb1cba3-80fc-49a2-a033-40cf0618e9c8-16659371170e440ef7-0": {
           "type": "faq",
           "settings": {
-            "faq_title": "Is the shipping free?",
-            "faq_des": "<p>Yes. Worldwide shipping is already included in the price. We use DHL express with 3 days delivery time.</p>"
+            "faq_title": "Kako poteka dostava?",
+            "faq_des": "<p>Pošiljamo po vsej Sloveniji. Naročilo odpošljemo v 1–3 delovnih dneh.</p>"
           }
         },
         "template--14684877652053__bcb1cba3-80fc-49a2-a033-40cf0618e9c8-16659371170e440ef7-1": {
           "type": "faq",
           "settings": {
-            "faq_title": "When will I receive my item?",
-            "faq_des": "<p>When we have received your order, you will automatically receive an e-mail confirming your order. Orders made before 2 PM (CET) will be picked, packed and shipped the same day. Delivery time is usually 2-4 working days with DHL Express.</p>"
+            "faq_title": "Zakaj je med kristaliziral?",
+            "faq_des": "<p>Kristalizacija je naraven proces in znak pristnega medu. Kozarec postavite v toplo vodno kopel do 40 °C in med se utekočini.</p>"
           }
         },
         "template--14684877652053__bcb1cba3-80fc-49a2-a033-40cf0618e9c8-16659371170e440ef7-2": {
           "type": "faq",
           "settings": {
-            "faq_title": "Can I change or return my item?",
-            "faq_des": "<p>If you want to change a product into another model, strap color etc., please contact us so we are able to reserve the new item in our stock immediately. You are always entitled to an exchange or refund within 30 days after you have received your package, as long as the item has not been used.</p>"
+            "faq_title": "Je možen osebni prevzem?",
+            "faq_des": "<p>Da, po predhodnem dogovoru v našem čebelnjaku.</p>"
           }
         }
       },
@@ -748,6 +754,7 @@
         "template--14684877652053__bcb1cba3-80fc-49a2-a033-40cf0618e9c8-16659371170e440ef7-1",
         "template--14684877652053__bcb1cba3-80fc-49a2-a033-40cf0618e9c8-16659371170e440ef7-2"
       ],
+      "disabled": true,
       "settings": {
         "animation": "",
         "setwidth": "container",
@@ -756,8 +763,8 @@
         "e_repeat": "no-repeat",
         "e_pos": "center center",
         "title_top": "",
-        "title": "FAQs",
-        "des": "Have a question ? We are here to help.",
+        "title": "Pogosta vprašanja",
+        "des": "Imate vprašanje? Z veseljem pomagamo.",
         "align-heading": "center",
         "title_size": "h6",
         "e_first_open": false,
@@ -773,6 +780,7 @@
     },
     "16956665928504d885": {
       "type": "apps",
+      "disabled": true,
       "settings": {
         "animation": "",
         "setwidth": "container",
@@ -788,7 +796,7 @@
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
-        "heading": "You may also like",
+        "heading": "Morda vam bo všeč",
         "heading_size": "h3",
         "heading_align": "center",
         "products_to_show": 10,
@@ -803,12 +811,13 @@
     },
     "product-recent": {
       "type": "recently-viewed",
+      "disabled": true,
       "settings": {
         "enable": true,
         "animation": "fade-up",
         "setwidth": "container",
         "title_top": "",
-        "title": "Recently viewed",
+        "title": "Nedavno ogledano",
         "des": "",
         "align-heading": "center",
         "limit": 6,

@@ -17,9 +17,8 @@
         "show_collection_description": true,
         "show_collection_image": true,
         "save_allproducts": true,
-        "img_bannercollection": "shopify:\/\/shop_images\/PC_Portable_olive_Palissade_Lounge_chair_olive_Palissade_Table_olive_Coffee_M_mint_Rainbow_mug.jpg",
-        "title_all": "All Products",
-        "des_all": "<p>Shop now, not later. Browse the best of our favorite sale styles and brands.<\/p>",
+        "title_all": "Vsi izdelki",
+        "des_all": "<p>Domači med in čebelji izdelki iz našega čebelnjaka.</p>",
         "style_banner": "full",
         "heading_size": "h2",
         "img_height": "450px",
@@ -38,43 +37,37 @@
         "template--21109129117976__48a9fffb-7b1f-4bc5-9e0b-4f19556846d2-collection-3": {
           "type": "collection",
           "settings": {
-            "collection": "kitchen",
-            "image": "shopify:\/\/shop_images\/c11_5b7e4c3f-365b-4fe5-b867-a331974b34d3.jpg"
+            "collection": "kitchen"
           }
         },
         "template--21109129117976__48a9fffb-7b1f-4bc5-9e0b-4f19556846d2-collection-1": {
           "type": "collection",
           "settings": {
-            "collection": "decoration",
-            "image": "shopify:\/\/shop_images\/c12_8001b951-ef72-4684-b69c-9876107c91a9.jpg"
+            "collection": "decoration"
           }
         },
         "012b04ac-f446-483f-a6aa-c59e3444912d": {
           "type": "collection",
           "settings": {
-            "collection": "office",
-            "image": "shopify:\/\/shop_images\/b3.png"
+            "collection": "office"
           }
         },
         "bcd6b727-9c9f-4c33-9b79-0d4ca6070131": {
           "type": "collection",
           "settings": {
-            "collection": "lighting",
-            "image": "shopify:\/\/shop_images\/b4.png"
+            "collection": "lighting"
           }
         },
         "template--21109129117976__48a9fffb-7b1f-4bc5-9e0b-4f19556846d2-collection-2": {
           "type": "collection",
           "settings": {
-            "collection": "books",
-            "image": "shopify:\/\/shop_images\/c13.jpg"
+            "collection": "books"
           }
         },
         "collection_rynbdE": {
           "type": "collection",
           "settings": {
-            "collection": "best-seller",
-            "image": "shopify:\/\/shop_images\/c14.jpg"
+            "collection": "best-seller"
           }
         }
       },
@@ -86,6 +79,7 @@
         "template--21109129117976__48a9fffb-7b1f-4bc5-9e0b-4f19556846d2-collection-2",
         "collection_rynbdE"
       ],
+      "disabled": true,
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
@@ -120,20 +114,20 @@
         "4aae42f0-8564-4ba9-bf69-e0db437bad2b": {
           "type": "heading",
           "settings": {
-            "title": "Summer Saving",
+            "title": "Med iz lastne pridelave",
             "size_text": "h4"
           }
         },
         "05fa68df-6d3c-4ed2-afd2-39d1c6945a8a": {
           "type": "paragraph",
           "settings": {
-            "subtext": "Save an additional 10% on all clearance items."
+            "subtext": "Vsak kozarec napolnimo doma, v majhnih serijah."
           }
         },
         "71224ca7-db08-44d5-8f55-df529ccb46af": {
           "type": "button",
           "settings": {
-            "button": "Shop now",
+            "button": "V trgovino",
             "link": "#",
             "style_btn": "btn-outline"
           }
@@ -144,6 +138,7 @@
         "05fa68df-6d3c-4ed2-afd2-39d1c6945a8a",
         "71224ca7-db08-44d5-8f55-df529ccb46af"
       ],
+      "disabled": true,
       "settings": {
         "animation": "fade",
         "setwidth": "container",

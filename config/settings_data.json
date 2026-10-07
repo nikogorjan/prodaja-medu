@@ -488,7 +488,7 @@
               "show_overlay": true,
               "gradient_overlay": true,
               "bg_overlay": "#000000",
-              "opacity_overlay": 0.6,
+              "opacity_overlay": 0.8,
               "slide_toptitle": "Iz našega čebelnjaka",
               "margin_title": 1.5,
               "slide_toptitle_color": "#f3dca4",
