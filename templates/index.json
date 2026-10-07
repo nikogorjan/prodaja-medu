@@ -451,7 +451,7 @@
         "prostori_image": {
           "type": "image_block",
           "settings": {
-            "style_content": "custom",
+            "style_content": "default",
             "w_image": 40,
             "pos_image": 88,
             "e_image": "left",
