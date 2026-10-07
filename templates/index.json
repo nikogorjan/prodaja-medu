@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "16485444103c52f5e9": {
@@ -245,8 +254,7 @@
             "button_link": "shopify://collections/all",
             "vertical": "bottom",
             "horizontal": "center",
-            "text_align": "center",
-            "image_mobile": ""
+            "text_align": "center"
           }
         },
         "template--19541121335616__ea256325-7ebc-4ad1-9d79-25dc551f1f31-168751421229c70d7f-1": {
@@ -269,8 +277,7 @@
             "button_link": "/pages/apiturizem",
             "vertical": "bottom",
             "horizontal": "center",
-            "text_align": "center",
-            "image_mobile": ""
+            "text_align": "center"
           }
         }
       },
@@ -304,16 +311,16 @@
         "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-0": {
           "type": "image_block",
           "settings": {
-            "style_content": "custom",
+            "style_content": "default",
             "w_image": 40,
             "pos_image": 88,
             "e_image": "right",
             "image": "shopify://shop_images/semen-poslikan-cebelnjak.png",
-            "image2": "shopify://shop_images/semen-cebele-poslikava.webp",
+            "image2": "",
             "enable_video": false,
             "overlay_color": "#000000",
             "overlay_opacity": 0,
-            "text_circle": "Čebelarstvo Šemen · od 1982",
+            "text_circle": "",
             "video_url": ""
           }
         },
@@ -440,7 +447,7 @@
         "title_color": "#ffffff",
         "bg_overlay": "#000000",
         "gradient_bg": "",
-        "opacity_bg_overlay": 0.45,
+        "opacity_bg_overlay": 0.5,
         "paddingsection": "0px 0px 0px 0px",
         "marginsection": "0px 0px 0px 0px"
       }
@@ -448,22 +455,6 @@
     "prostori_semen": {
       "type": "image-content-6",
       "blocks": {
-        "prostori_image": {
-          "type": "image_block",
-          "settings": {
-            "style_content": "default",
-            "w_image": 40,
-            "pos_image": 88,
-            "e_image": "left",
-            "image": "shopify://shop_images/semen-apiturizem-soba.webp",
-            "image2": "",
-            "enable_video": false,
-            "overlay_color": "#000000",
-            "overlay_opacity": 0,
-            "text_circle": "",
-            "video_url": ""
-          }
-        },
         "prostori_text": {
           "type": "text_block",
           "settings": {
@@ -479,6 +470,22 @@
             "align": "left",
             "enable_padding_left": true,
             "enable_padding_right": false
+          }
+        },
+        "prostori_image": {
+          "type": "image_block",
+          "settings": {
+            "style_content": "default",
+            "w_image": 40,
+            "pos_image": 88,
+            "e_image": "left",
+            "image": "shopify://shop_images/semen-apiturizem-soba.webp",
+            "image2": "shopify://shop_images/semen-apiturizem-sprostitev.png",
+            "enable_video": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "text_circle": "",
+            "video_url": ""
           }
         }
       },
@@ -509,7 +516,6 @@
         "opacity_bg_overlay": 0,
         "newletter_color": "#222222",
         "colorborder": "#c99a5c",
-        "image_bg": "",
         "e_size": "cover",
         "e_repeat": "no-repeat",
         "e_position": "center center",
