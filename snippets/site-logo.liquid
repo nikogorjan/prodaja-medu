@@ -1,10 +1,11 @@
 <!-- site-logo.liquid -->
 {%- liquid
   assign logo_max_width = section.settings.logo_max_width
+  assign logo_padding = section.settings.logo_padding | default: 0
   assign logodark = section.settings.logo
   assign logowhite= section.settings.logo_white
 -%}
-<style>.site-header__logo img {width: {{ logo_max_width | append: 'px' }};}.site-header__logo.has-logo{font-size: 0;line-height: 0;}.site-header__logo.has-logo a{font-size: 0;line-height: 0;}</style>
+<style>.site-header__logo img {width: {{ logo_max_width | append: 'px' }};}.site-header__logo .site-header__logo-link{padding:{{ logo_padding }}px 0;}.site-header__logo.has-logo{font-size: 0;line-height: 0;}.site-header__logo.has-logo a{font-size: 0;line-height: 0;}</style>
 {%- if template.name == 'index' -%}
 <h1 class="site-header__logo {% if logodark != blank %} has-logo {% endif %}" itemscope itemtype="http://schema.org/Organization">
   {%- else -%}

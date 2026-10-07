@@ -257,7 +257,7 @@
       "settings": {
         "logo": "shopify://shop_images/semen-logo.png",
         "logo_white": "shopify://shop_images/semen-logo.png",
-        "logo_max_width": 80,
+        "logo_max_width": 65,
         "enable_transparent": false,
         "hover_transparent": false,
         "enable_white": false,
@@ -303,7 +303,8 @@
         "icon_wishlist": "icon",
         "icon_login": "icon",
         "e_link_login": "link",
-        "icon_search": "icon"
+        "icon_search": "icon",
+        "logo_padding": 12
       }
     },
     "store-messages": {
