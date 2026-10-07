@@ -187,7 +187,7 @@
                               >
                               </div>
                             </div>
-                            {%- else -%}
+                            {%- elsif request.design_mode -%}
                               <div class="image-content__image">
                               {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                               </div>
