@@ -1909,5 +1909,12 @@
     }
   }
   {%- endif -%}
-  </style>
+    /* Čebelarstvo Šemen: menijske povezave raztegnemo čez celotno višino glave, da podčrtaj aktivne povezave sedi na spodnjem robu glave tudi ob višjem logotipu. */
+  @media (min-width: 1000px) {
+    .site-header .row-header.align-items-center { align-items: stretch !important; }
+    .site-header .row-header > .col-logo, .site-header .row-header > .col-bottom__right, .site-header .row-header > .header-bottom__right { display: flex; align-items: center; }
+    .site-header .col-menu, .site-header .col-menu .site-nav, .site-header .col-menu .site-nav > .site-nav__item { display: flex !important; align-items: stretch !important; height: auto; }
+    .site-header .col-menu .site-nav > .site-nav__item > .site-nav__link { display: flex !important; align-items: center; height: 100%; }
+  }
+</style>
   
