@@ -14,7 +14,7 @@
     "slideshow": "slideshow-1",
     "sectionheading": "heading-1",
     "loading": "border",
-    "favicon": "shopify://shop_images/ico.png",
+    "favicon": "shopify://shop_images/semen-logo.png",
     "meta_description": "Pose Shopify Template with multiple layouts and styles allows you to create different structures and satisfies any specific requirements for different kinds of business.",
     "enable_radius_allimg": false,
     "color_primary": "#d96b4f",
@@ -476,14 +476,13 @@
       "slideshow-1": {
         "type": "slideshow-1",
         "blocks": {
-          "slide_semen": {
+          "slide_izdelki": {
             "type": "image",
             "settings": {
               "enable_video": false,
               "video_hosted": "",
-              "image": "shopify://shop_images/semen-cebelnjak-vrt.webp",
-              "image2": "",
-              "image_mobile": "shopify://shop_images/semen-cebelnjak-vrt-mobile.webp",
+              "image": "shopify://shop_images/semen-vsi-izdelki.jpg",
+              "image_mobile": "shopify://shop_images/semen-vsi-izdelki.jpg",
               "alignment": "center center",
               "text_alignment": "center center",
               "bgwrap": "#f5efe3",
@@ -491,6 +490,43 @@
               "gradient_overlay": true,
               "bg_overlay": "#000000",
               "opacity_overlay": 0.35,
+              "slide_toptitle": "Iz našega čebelnjaka",
+              "margin_title": 1.5,
+              "slide_toptitle_color": "#f3dca4",
+              "slide_title": "Domači med in čebelji izdelki",
+              "slide_title_color": "#ffffff",
+              "subheading": "Kostanjev, akacijev, lipov, gozdni, ajdov in drugi medovi ter cvetni prah. Vse iz lastne pridelave, polnjeno doma.",
+              "subheading_color": "#ffffff",
+              "button_label": "V trgovino",
+              "button_link": "shopify://collections/all",
+              "stylebtns": "btn-theme",
+              "bg_button": "#c99a5c",
+              "color_button": "#ffffff",
+              "bg_button_hover": "#ffffff",
+              "color_button_hover": "#222222",
+              "button_label_2": "",
+              "button_link_2": "",
+              "stylebtns_2": "btn-outline",
+              "bg_button_2": "#ffffff",
+              "color_button_2": "#ffffff",
+              "bg_button_hover_2": "#ffffff",
+              "color_button_hover_2": "#222222"
+            }
+          },
+          "slide_semen": {
+            "type": "image",
+            "settings": {
+              "enable_video": false,
+              "video_hosted": "",
+              "image": "shopify://shop_images/semen-cebelnjak-vrt.webp",
+              "image_mobile": "shopify://shop_images/semen-cebelnjak-vrt-mobile.webp",
+              "alignment": "center center",
+              "text_alignment": "center center",
+              "bgwrap": "#f5efe3",
+              "show_overlay": true,
+              "gradient_overlay": true,
+              "bg_overlay": "#000000",
+              "opacity_overlay": 0.4,
               "slide_toptitle": "Čebelarstvo in apiturizem Šemen · od leta 1982",
               "margin_title": 1.5,
               "slide_toptitle_color": "#f3dca4",
@@ -513,10 +549,49 @@
               "bg_button_hover_2": "#ffffff",
               "color_button_hover_2": "#222222"
             }
+          },
+          "slide_apiturizem": {
+            "type": "image",
+            "settings": {
+              "enable_video": false,
+              "video_hosted": "",
+              "image": "shopify://shop_images/semen-apiturizem-degustacija.jpg",
+              "image_mobile": "shopify://shop_images/semen-apiturizem-degustacija.jpg",
+              "alignment": "center center",
+              "text_alignment": "center center",
+              "bgwrap": "#f5efe3",
+              "show_overlay": true,
+              "gradient_overlay": true,
+              "bg_overlay": "#000000",
+              "opacity_overlay": 0.4,
+              "slide_toptitle": "Apiturizem",
+              "margin_title": 1.5,
+              "slide_toptitle_color": "#f3dca4",
+              "slide_title": "Doživite mir ob čebelah",
+              "slide_title_color": "#ffffff",
+              "subheading": "Degustacija medu, sprostitev ob brenčanju čebel in spoznavanje čebelarstva v našem poslikanem čebelnjaku.",
+              "subheading_color": "#ffffff",
+              "button_label": "Več o apiturizmu",
+              "button_link": "/pages/apiturizem",
+              "stylebtns": "btn-theme",
+              "bg_button": "#c99a5c",
+              "color_button": "#ffffff",
+              "bg_button_hover": "#ffffff",
+              "color_button_hover": "#222222",
+              "button_label_2": "Rezervirajte obisk",
+              "button_link_2": "/pages/kontakt",
+              "stylebtns_2": "btn-outline",
+              "bg_button_2": "#ffffff",
+              "color_button_2": "#ffffff",
+              "bg_button_hover_2": "#ffffff",
+              "color_button_hover_2": "#222222"
+            }
           }
         },
         "block_order": [
-          "slide_semen"
+          "slide_izdelki",
+          "slide_semen",
+          "slide_apiturizem"
         ],
         "settings": {
           "enable_slideshow": true,
@@ -525,17 +600,17 @@
           "slideshow_height_mobile": "500",
           "setwidth": "container",
           "slideshow_mobile": true,
-          "autorotate": false,
-          "autorotate_speed": 5,
+          "autorotate": true,
+          "autorotate_speed": 7,
           "anim_slideshow": "fade",
-          "e_arrow": false,
+          "e_arrow": true,
           "color_arrow": "#ffffff",
-          "bg_arrow": "#ffffff",
-          "opacity_arrow": 0.2,
-          "e_dot": false,
+          "bg_arrow": "#000000",
+          "opacity_arrow": 0.3,
+          "e_dot": true,
           "slide_dot": "square",
           "color_dot_nav": "#ffffff",
-          "color_dot_active": "#ffffff"
+          "color_dot_active": "#c99a5c"
         }
       },
       "s_team_member": {
@@ -2288,8 +2363,7 @@
             "type": "color",
             "settings": {
               "name_color": "Blue / Red",
-              "name_color_hex": "#601b1e",
-              "image_color": "shopify://shop_images/blue-red.webp"
+              "name_color_hex": "#601b1e"
             }
           },
           "color_FXXRwc": {
@@ -2422,8 +2496,7 @@
             "type": "color",
             "settings": {
               "name_color": "Steel",
-              "name_color_hex": "#000000",
-              "image_color": "shopify://shop_images/steel.jpg"
+              "name_color_hex": "#000000"
             }
           }
         },
