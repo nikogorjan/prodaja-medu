@@ -14,9 +14,9 @@
       bottom:0;
       left: 0;
       {%- if section.settings.gradient_overlay -%}
-        background:linear-gradient(180deg, rgb({{ hex2rgb_hex.red }}, {{ hex2rgb_hex.green }}, {{ hex2rgb_hex.blue }}, 0) 0%, rgb({{ hex2rgb_hex.red }}, {{ hex2rgb_hex.green }}, {{ hex2rgb_hex.blue }},{{ section.settings.opacity_overlay }}) 100%);
+        background:linear-gradient(180deg, rgba({{ hex2rgb_hex.red }}, {{ hex2rgb_hex.green }}, {{ hex2rgb_hex.blue }}, 0) 20%, rgba({{ hex2rgb_hex.red }}, {{ hex2rgb_hex.green }}, {{ hex2rgb_hex.blue }}, {{ section.settings.opacity_overlay }}) 100%);
       {%- else -%}
-        background-color: rgb({{ hex2rgb_hex.red }}, {{ hex2rgb_hex.green }}, {{ hex2rgb_hex.blue }}, {{ section.settings.opacity_overlay }});
+        background-color: rgba({{ hex2rgb_hex.red }}, {{ hex2rgb_hex.green }}, {{ hex2rgb_hex.blue }}, {{ section.settings.opacity_overlay }});
       {%- endif -%}
       opacity: 1;
       z-index: 1;
