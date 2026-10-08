@@ -238,21 +238,21 @@
         "template--20258838741312__0a081843-18cc-4628-a950-350c7308b356-heading-1": {
           "type": "heading",
           "settings": {
-            "title": "Doživite apiturizem",
+            "title": "Dan ob Muri",
             "size_text": "h2"
           }
         },
         "template--20258838741312__0a081843-18cc-4628-a950-350c7308b356-paragraph-1": {
           "type": "paragraph",
           "settings": {
-            "subtext": "Umirite se ob brenčanju čebel, vdihnite vonj medu in voska ter spoznajte svet čebeljih družin od blizu. Doživetje za vse, ki iščejo mir v naravi."
+            "subtext": "Obisk čebelnjaka dopolnite z izletom. Reka Mura je 500 m stran, do nje vodijo poti skozi gozd in mrtvice. V Gornji Bistrici, 2 km naprej, vozi brod, ob vikendih tam strežejo mürske ribe. Terme Banovci, Moravske Toplice in Lendava so oddaljene 4 do 15 km."
           }
         },
         "0c9bcfdc-8196-4783-bd27-25bd7010548e": {
           "type": "button",
           "settings": {
-            "button": "Več o apiturizmu",
-            "link": "/pages/apiturizem",
+            "button": "Načrtujte obisk",
+            "link": "/pages/kontakt",
             "style_btn": "btn-outline btn-outline-white"
           }
         }
@@ -289,11 +289,11 @@
           "type": "text_block",
           "settings": {
             "bgtext": "rgba(0,0,0,0)",
-            "subtitle": "Apiterapija",
-            "title": "Dihajte z čebelami",
+            "subtitle": "Prostor za oddih",
+            "title": "Dve ležišči, postelja pod streho in pogled na ribnik",
             "size_text": "h2",
             "text": "",
-            "answer_content": "<p>V našem čebelnjaku za apiterapijo 40 čebeljih družin ustvarja zrak, kakršnega ni mogoče ponarediti: topel, prepojen z vonjem medu, voska in propolisa. Skozi odprtine v panjih prehaja v prostor, kjer se uležete, zaprete oči in preprosto dihate. Intenzivnost uravnavamo po vaši želji, čebele pa vas pri tem nikoli ne motijo, slišite in vonjate jih skozi steno.</p><p>Na voljo sta dve ležišči in dva udobna sedeža, v zgornji etaži pa postelja za dve osebi s pogledom na park in ribnik. Obisk traja uro ali dve; po želji ga dopolnimo z degustacijo naših medov in svežim cvetnim prahom naravnost iz panja.</p><p>Za vse, ki iščejo mir, sprostitev in stik z naravo. Obisk po predhodnem dogovoru, za posameznike, pare, družine in manjše skupine.</p>",
+            "answer_content": "<p>V pritličju sta dve ležišči in dva udobna sedeža, v zgornji etaži pa postelja za dve osebi s pogledom na park in ribnik. Obisk traja uro ali dve; po želji ga dopolnimo z degustacijo naših medov in svežim cvetnim prahom naravnost iz panja.</p><p>Za vse, ki iščejo mir, sprostitev in stik z naravo. Obisk po predhodnem dogovoru, za posameznike, pare, družine in manjše skupine.</p>",
             "button": "Rezervirajte obisk",
             "link": "/pages/kontakt",
             "style_btn": "btn-theme",
@@ -843,6 +843,60 @@
         "marginsection": "0px 0px 0px 0px",
         "marginmobile": "0px 0px 0px 0px"
       }
+    },
+    "apiterapija_semen": {
+      "type": "image-content-6",
+      "blocks": {
+        "prostori_text": {
+          "type": "text_block",
+          "settings": {
+            "bgtext": "rgba(0,0,0,0)",
+            "subtitle": "Apiterapija",
+            "title": "Dihajte z čebelami",
+            "size_text": "h2",
+            "text": "",
+            "answer_content": "<p>V našem čebelnjaku za apiterapijo 40 čebeljih družin ustvarja zrak, kakršnega ni mogoče ponarediti: topel, prepojen z vonjem medu, voska in propolisa. Skozi odprtine v panjih prehaja v prostor, kjer se uležete, zaprete oči in preprosto dihate.</p><p>Intenzivnost uravnavamo po vaši želji. Čebele vas pri tem nikoli ne motijo: slišite in vonjate jih skozi steno, srečate pa jih ne.</p>",
+            "button": "Več o apiterapiji",
+            "link": "/pages/apiturizem",
+            "style_btn": "btn-underline",
+            "align": "left",
+            "enable_padding_left": true,
+            "enable_padding_right": false
+          }
+        },
+        "prostori_image": {
+          "type": "image_block",
+          "settings": {
+            "style_content": "default",
+            "w_image": 40,
+            "pos_image": 88,
+            "e_image": "left",
+            "image": "shopify://shop_images/semen-poslikan-cebelnjak.png",
+            "image2": "",
+            "enable_video": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "text_circle": "",
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "prostori_image",
+        "prostori_text"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "size": "50-50",
+        "enable_padding": true,
+        "align_center": true,
+        "paddingsection": "90px 0px 90px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
     }
   },
   "order": [
@@ -853,6 +907,7 @@
     "pridelava_semen",
     "stevilke_semen",
     "90256253-4427-4c0f-a280-c9d024bc8dcc",
+    "apiterapija_semen",
     "prostori_semen",
     "0a081843-18cc-4628-a950-350c7308b356",
     "ea256325-7ebc-4ad1-9d79-25dc551f1f31",

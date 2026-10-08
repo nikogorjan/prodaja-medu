@@ -496,4 +496,12 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     /* Čebelarstvo Šemen: ikone v vrstici prednosti enako tanke kot ikone v glavi (tema sili 2px) */
     .section-service .iconx8 svg, .customstyle .iconx8 svg, .service-1 .iconx8 svg, .service-2 .iconx8 svg { stroke-width: 1.15px !important; fill: none !important; }
     .service-1 .iconx8 svg *, .service-2 .iconx8 svg * { stroke-width: inherit; fill: none; vector-effect: non-scaling-stroke; }
+    /* Čebelarstvo Šemen: sekcija Kje nas najdete – temna plošča z naslovom in naslovom, fotografija v ozadju */
+    .map-section .map-section__content { background-color: #2b2420 !important; color: #cfc4b4; padding: 48px 44px !important; text-align: left !important; }
+    .map-section .map-section__content h2, .map-section .map-section__content .h2, .map-section .map-section__content h3 { color: #ffffff; margin-bottom: 20px; }
+    .map-section .map-section__content p { color: #cfc4b4; margin: 0 0 12px; line-height: 1.7; }
+    .map-section .map-section__content p strong { color: #ffffff; font-weight: 600; display: block; margin-bottom: 4px; }
+    .map-section .map-section__content .btn, .map-section .map-section__content a.btn-theme, .map-section .map-section__content .map-section__link { background: #c99a5c; border-color: #c99a5c; color: #ffffff; margin-top: 12px; }
+    .map-section .map-section__image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(43,36,32,.35), rgba(43,36,32,0) 60%); pointer-events: none; }
+    @media only screen and (min-width: 990px) { .map-section .map-section__content-wrapper { flex-basis: 40%; } .map-section .map-section__content { margin: 80px 0 !important; } }
 </style>
