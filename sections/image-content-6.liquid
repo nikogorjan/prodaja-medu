@@ -160,7 +160,7 @@
                             </div>
                           </div>
                         {%- endif -%}
-                          {%- if block.settings.image2 != blank or request.design_mode -%}<div class="image-content-6-2" >
+                          {%- if block.settings.image2 != blank -%}<div class="image-content-6-2" >
                             {%- if block.settings.image2 != blank -%}
                           <div class="image-content__image-container image-content-2" data-aos="{{ section.settings.animation }}" data-aos-duration="1000">
                               <div class="image-content__image-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image2.aspect_ratio | times: 100 }}%;">
@@ -187,11 +187,7 @@
                               >
                               </div>
                             </div>
-                            {%- elsif request.design_mode -%}
-                              <div class="image-content__image">
-                              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                              </div>
-                        {%- endif -%}
+                                                    {%- endif -%}
                         </div>{%- endif -%}
                     </div>
                     
