@@ -502,8 +502,6 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     .map-section .map-section__content p { color: #cfc4b4; margin: 0 0 12px; line-height: 1.7; }
     .map-section .map-section__content p strong { color: #ffffff; font-weight: 600; display: block; margin-bottom: 4px; }
     .map-section .map-section__content .btn, .map-section .map-section__content a.btn-theme, .map-section .map-section__content .map-section__link { background: #c99a5c; border-color: #c99a5c; color: #ffffff; margin-top: 12px; }
-    .map-section .map-section__image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(43,36,32,.35), rgba(43,36,32,0) 60%); pointer-events: none; }
-    @media only screen and (min-width: 990px) { .map-section .map-section__content-wrapper { flex-basis: 40%; } .map-section .map-section__content { margin: 80px 0 !important; } }
     /* Mobilna glava: več prostora med ikonami */
     @media (max-width: 999px) {
     }
@@ -527,4 +525,12 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     .site-header .site-header__search-wrap, .site-header .header__search, .site-header .modal__toggle-open.site-header__link { display: none !important; }
     /* Pogosta vprašanja: odgovor se ne razteza pod ikono +/- */
     .card-faqs .collapse .card-body { padding-right: 48px !important; }
+    /* Kje nas najdete: deljena postavitev – levo temno polje, desno fotografija v polni višini (nič je ne prekriva) */
+    @media only screen and (min-width: 750px) {
+      .map-section { min-height: 520px; }
+      .map-section .map-section__background-wrapper { left: 42% !important; width: 58% !important; }
+      .map-section .map-section__content-wrapper { flex: 0 0 42% !important; max-width: 42%; }
+      .map-section .map-section__content { margin: 0 !important; min-height: 520px; height: 100%; padding: 56px 48px !important; }
+      .map-section .map-section__wrapper, .map-section .map-section__container { padding-left: 0 !important; margin-left: 0 !important; }
+    }
 </style>
