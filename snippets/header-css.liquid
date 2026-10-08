@@ -533,4 +533,11 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
       .map-section .map-section__content { margin: 0 !important; min-height: 520px; height: 100%; padding: 56px 40px 56px max(40px, calc((100vw - var(--g-container, 1200px)) / 2 + 20px)) !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: flex-start !important; }
       .map-section .map-section__wrapper, .map-section .map-section__container { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
     }
+    /* Čebelarstvo Šemen: seznami v besedilu objav in strani – oznake znotraj stolpca, zamaknjeno besedilo */
+    .rte ul, .rte ol { margin: 0 0 1.25em 0; padding-left: 1.5em; list-style-position: outside; }
+    .rte ul { list-style-type: disc; }
+    .rte ol { list-style-type: decimal; }
+    .rte li { margin: 0 0 .45em 0; padding-left: .2em; }
+    .rte li > p { margin: 0; }
+    .rte ul ul, .rte ol ol, .rte ul ol, .rte ol ul { margin: .35em 0 .5em; }
 </style>
