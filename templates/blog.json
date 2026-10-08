@@ -15,21 +15,21 @@
         "d5010d0b-0b25-4222-b337-1cc65375f775": {
           "type": "post",
           "settings": {
-            "article": "news\/get-a-fresh-start-to-the-new-year",
+            "article": "news/get-a-fresh-start-to-the-new-year",
             "subheading": "Featured post"
           }
         },
         "f88c8cbd-2f60-4198-8d5e-5c8d6d96e013": {
           "type": "post",
           "settings": {
-            "article": "news\/matching-mom-daughter-suit",
+            "article": "news/matching-mom-daughter-suit",
             "subheading": "Featured post"
           }
         },
         "9a00793d-a77c-4b88-8c07-4739f4123d74": {
           "type": "post",
           "settings": {
-            "article": "news\/master-bathroom-reveal",
+            "article": "news/master-bathroom-reveal",
             "subheading": "Featured post"
           }
         }
@@ -39,6 +39,7 @@
         "f88c8cbd-2f60-4198-8d5e-5c8d6d96e013",
         "9a00793d-a77c-4b88-8c07-4739f4123d74"
       ],
+      "disabled": true,
       "settings": {
         "animation": "fade",
         "setwidth": "container",

@@ -130,7 +130,7 @@
             "w_image": 40,
             "pos_image": 88,
             "e_image": "left",
-            "image": "shopify://shop_images/semen-cebele-poslikava.webp",
+            "image": "shopify://shop_images/New_Project.webp",
             "enable_video": false,
             "overlay_color": "#000000",
             "overlay_opacity": 0,
@@ -179,7 +179,7 @@
         "korak_1": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/semen-cebelnjak-vrt.webp",
+            "image": "shopify://shop_images/New_Project_2.webp",
             "season": "Pomlad in poletje",
             "title": "Paša po Sloveniji",
             "text": "Čebele vozimo tja, kjer cveti: spomladi na akacijo, poleti na lipo in kostanj, v gozdove po mano za gozdni in hojev med. Tako nastane sortni med z jasnim okusom."
@@ -197,7 +197,7 @@
         "korak_3": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/semen-med-polica.png",
+            "image": "shopify://shop_images/New_Project_1.webp",
             "season": "Po vsaki paši",
             "title": "Hladno točenje",
             "text": "Med iztočimo brez segrevanja in ga le precedimo, da ohrani encime, cvetni prah in aromo. Zato naš med sčasoma kristalizira, kar je znak pristnosti."
@@ -314,19 +314,7 @@
         "marginsection": "0px 0px 0px 0px",
         "bgsection": "#ffffff",
         "setwidth": "full",
-        "bgborder": "#201B17",
-        "wborder": "1px"
-      }
-    },
-    "line_3i3f9f": {
-      "type": "line",
-      "settings": {
-        "animation": "fade",
-        "paddingsection": "0px 0px 0px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "bgsection": "#ffffff",
-        "setwidth": "full",
-        "bgborder": "#201B17",
+        "bgborder": "#201b17",
         "wborder": "1px"
       }
     },
@@ -378,6 +366,18 @@
         "paddingmobile": "40px 0px 40px 0px",
         "marginsection": "0px 0px 0px 0px",
         "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "line_3i3f9f": {
+      "type": "line",
+      "settings": {
+        "animation": "fade",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "bgsection": "#ffffff",
+        "setwidth": "full",
+        "bgborder": "#201b17",
+        "wborder": "1px"
       }
     },
     "apiterapija_semen": {
@@ -499,7 +499,7 @@
         "template--20258838741312__0a081843-18cc-4628-a950-350c7308b356-paragraph-1": {
           "type": "paragraph",
           "settings": {
-            "subtext": "Obisk čebelnjaka dopolnite z izletom. Reka Mura je 500 m stran, do nje vodijo poti skozi gozd in mrtvice. V Gornji Bistrici, 2 km naprej, vozi brod, ob vikendih tam strežejo mürske ribe. Terme Banovci, Moravske Toplice in Lendava so oddaljene 4 do 15 km."
+            "subtext": "Obisk čebelnjaka dopolnite z izletom. Reka Mura je 500 m stran, do nje vodijo poti skozi gozd in mrtvice. Terme Banovci, Moravske Toplice in Lendava so oddaljene 4 do 15 km."
           }
         },
         "0c9bcfdc-8196-4783-bd27-25bd7010548e": {
@@ -521,7 +521,7 @@
         "setwidth": "full",
         "bgsection": "#ffffff",
         "parrallax_enable": true,
-        "image": "shopify://shop_images/semen-cebele-poslikava.webp",
+        "image": "shopify://shop_images/1.webp",
         "height_section": "450",
         "height_section_mobile": "350",
         "align": "center",
