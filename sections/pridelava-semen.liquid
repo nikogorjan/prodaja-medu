@@ -1,0 +1,119 @@
+{%- comment -%}
+  Pridelava (Čebelarstvo Šemen): koraki od paše do kozarca.
+  Štirje koraki kot visoke fotografije z velikimi obrisanimi številkami, stopničasto zamaknjeni,
+  brez povezovalne črte; na telefonu vodoravno drsenje. Ozadje: komaj viden vzorec satovja.
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign accent = section.settings.accent
+  assign steps = section.blocks | where: 'type', 'step'
+-%}
+<style>
+  .ps-{{ sid }} { position: relative; overflow: hidden; background: {{ section.settings.bgsection }}; padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; }
+  .ps-{{ sid }} .ps-hex { position: absolute; inset: 0; pointer-events: none; opacity: {{ section.settings.pattern_opacity | divided_by: 100.0 }}; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><path d='M28 1l27 15.5v31L28 63 1 47.5v-31L28 1zm0 48l27 15.5v31L28 97 1 80.5v-31L28 49z' fill='none' stroke='{{ accent | replace: '#', '%23' }}' stroke-width='1'/></svg>"); background-size: 56px 97px; }
+  .ps-{{ sid }} .ps-head { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
+  .ps-{{ sid }} .ps-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: {{ accent }}; }
+  .ps-{{ sid }} .ps-eyebrow::before { content: ""; width: 36px; height: 1px; background: {{ accent }}; }
+  .ps-{{ sid }} .ps-title { margin: 8px 0 0; }
+  .ps-{{ sid }} .ps-intro { color: #5c6978; max-width: 46ch; margin: 0; }
+  .ps-{{ sid }} .ps-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; align-items: start; }
+  .ps-{{ sid }} .ps-step { position: relative; }
+  .ps-{{ sid }} .ps-step:nth-child(2) { margin-top: 72px; }
+  .ps-{{ sid }} .ps-step:nth-child(3) { margin-top: 24px; }
+  .ps-{{ sid }} .ps-step:nth-child(4) { margin-top: 96px; }
+  .ps-{{ sid }} .ps-media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #e9e1d2; }
+  .ps-{{ sid }} .ps-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.2,.6,.2,1); }
+  .ps-{{ sid }} .ps-step:hover .ps-media img { transform: scale(1.05); }
+  .ps-{{ sid }} .ps-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.35) 100%); }
+  .ps-{{ sid }} .ps-num { position: absolute; z-index: 2; left: 12px; bottom: -10px; font-size: 112px; line-height: 1; font-weight: 700; letter-spacing: -.03em; color: transparent; -webkit-text-stroke: 1.5px #ffffff; text-stroke: 1.5px #ffffff; font-family: var(--g-p-font_family, inherit); }
+  .ps-{{ sid }} .ps-season { position: absolute; z-index: 2; top: 16px; left: 16px; padding: 6px 10px; background: {{ accent }}; color: #fff; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+  .ps-{{ sid }} .ps-body { padding-top: 24px; }
+  .ps-{{ sid }} .ps-step-title { margin: 0 0 8px; font-size: 20px; line-height: 1.25; }
+  .ps-{{ sid }} .ps-step-text { color: #5c6978; margin: 0; }
+  .ps-{{ sid }} .ps-rule { width: 32px; height: 2px; background: {{ accent }}; margin: 0 0 14px; transition: width .4s; }
+  .ps-{{ sid }} .ps-step:hover .ps-rule { width: 64px; }
+  .ps-{{ sid }} .ps-foot { margin-top: 56px; text-align: center; }
+  @media (min-width: 990px) {
+    .ps-{{ sid }} .ps-head { grid-template-columns: 1.1fr 1fr; align-items: end; }
+    .ps-{{ sid }} .ps-intro { justify-self: end; text-align: right; }
+  }
+  @media (max-width: 989px) {
+    .ps-{{ sid }} .ps-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin: 0 -15px; padding: 0 15px 12px; scrollbar-width: none; }
+    .ps-{{ sid }} .ps-grid::-webkit-scrollbar { display: none; }
+    .ps-{{ sid }} .ps-step { flex: 0 0 72%; scroll-snap-align: start; margin-top: 0 !important; }
+    .ps-{{ sid }} .ps-num { font-size: 88px; }
+    .ps-{{ sid }} .ps-head { margin-bottom: 28px; }
+  }
+</style>
+
+<section class="ps-{{ sid }}">
+  <div class="ps-hex" aria-hidden="true"></div>
+  <div class="{{ section.settings.setwidth }}">
+    <div class="ps-head">
+      <div>
+        {%- if section.settings.title_top != blank -%}<span class="ps-eyebrow">{{ section.settings.title_top | escape }}</span>{%- endif -%}
+        {%- if section.settings.title != blank -%}<h2 class="ps-title h2">{{ section.settings.title | escape }}</h2>{%- endif -%}
+      </div>
+      {%- if section.settings.des != blank -%}<p class="ps-intro">{{ section.settings.des }}</p>{%- endif -%}
+    </div>
+
+    <div class="ps-grid">
+      {%- for block in steps -%}
+        <article class="ps-step" {{ block.shopify_attributes }} data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 120 }}">
+          <div class="ps-media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1200', sizes: '(min-width: 990px) 25vw, 72vw', alt: block.settings.title }}
+            {%- endif -%}
+            {%- if block.settings.season != blank -%}<span class="ps-season">{{ block.settings.season | escape }}</span>{%- endif -%}
+            <span class="ps-num" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          </div>
+          <div class="ps-body">
+            <div class="ps-rule"></div>
+            {%- if block.settings.title != blank -%}<h3 class="ps-step-title">{{ block.settings.title | escape }}</h3>{%- endif -%}
+            {%- if block.settings.text != blank -%}<p class="ps-step-text">{{ block.settings.text }}</p>{%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.button != blank -%}
+      <div class="ps-foot"><a class="{{ section.settings.style_btn }}" href="{{ section.settings.link }}">{{ section.settings.button | escape }}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pridelava (Šemen)",
+  "tag": "section",
+  "class": "section-pridelava",
+  "settings": [
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "color", "id": "bgsection", "label": "Ozadje", "default": "#f7f3ea" },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "range", "id": "pattern_opacity", "label": "Vidnost vzorca satovja", "min": 0, "max": 30, "step": 2, "unit": "%", "default": 8 },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov", "default": "Pridelava" },
+    { "type": "text", "id": "title", "label": "Naslov", "default": "Kako nastane naš med" },
+    { "type": "textarea", "id": "des", "label": "Uvod", "default": "Od paše do kozarca v štirih korakih." },
+    { "type": "text", "id": "button", "label": "Gumb" },
+    { "type": "url", "id": "link", "label": "Povezava gumba" },
+    { "type": "select", "id": "style_btn", "label": "Slog gumba", "default": "btn-underline", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline", "label": "Obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "range", "id": "padding_top", "label": "Odmik zgoraj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Odmik spodaj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Korak",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Fotografija (pokončna, 4:5)" },
+        { "type": "text", "id": "season", "label": "Oznaka (npr. Pomlad)" },
+        { "type": "text", "id": "title", "label": "Naslov", "default": "Naslov koraka" },
+        { "type": "textarea", "id": "text", "label": "Besedilo" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [ { "name": "Pridelava (Šemen)", "blocks": [ { "type": "step" }, { "type": "step" }, { "type": "step" }, { "type": "step" } ] } ]
+}
+{% endschema %}

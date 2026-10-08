@@ -619,54 +619,42 @@
       }
     },
     "pridelava_semen": {
-      "type": "timeline",
+      "type": "pridelava-semen",
       "blocks": {
         "korak_1": {
-          "type": "time",
+          "type": "step",
           "settings": {
             "image": "shopify://shop_images/semen-cebelnjak-vrt.webp",
-            "bg": "#c99a5c",
+            "season": "Pomlad in poletje",
             "title": "Paša po Sloveniji",
-            "description": "Čebele vozimo tja, kjer cveti: spomladi na akacijo, poleti na lipo in kostanj, v gozdove po mano za gozdni in hojev med. Tako nastane sortni med z jasnim okusom.",
-            "time": "Pomlad in poletje",
-            "year": "1",
-            "link": ""
+            "text": "Čebele vozimo tja, kjer cveti: spomladi na akacijo, poleti na lipo in kostanj, v gozdove po mano za gozdni in hojev med. Tako nastane sortni med z jasnim okusom."
           }
         },
         "korak_2": {
-          "type": "time",
+          "type": "step",
           "settings": {
             "image": "shopify://shop_images/semen-cebele-poslikava.webp",
-            "bg": "#c99a5c",
+            "season": "Pokrito satje",
             "title": "Čebele dozorijo med",
-            "description": "Nektar in mano čebele v panju zgostijo in pokrijejo z voskom. Sate odvzamemo šele, ko je med zrel, kar je pogoj za dolgo obstojnost.",
-            "time": "Ko je satje pokrito",
-            "year": "2",
-            "link": ""
+            "text": "Nektar in mano čebele v panju zgostijo in pokrijejo z voskom. Sate odvzamemo šele, ko je med zrel, kar je pogoj za dolgo obstojnost."
           }
         },
         "korak_3": {
-          "type": "time",
+          "type": "step",
           "settings": {
             "image": "shopify://shop_images/semen-med-polica.png",
-            "bg": "#c99a5c",
+            "season": "Po vsaki paši",
             "title": "Hladno točenje",
-            "description": "Med iztočimo brez segrevanja in ga le precedimo, da ohrani encime, cvetni prah in aromo. Zato naš med sčasoma kristalizira, kar je znak pristnosti.",
-            "time": "Po vsaki paši",
-            "year": "3",
-            "link": ""
+            "text": "Med iztočimo brez segrevanja in ga le precedimo, da ohrani encime, cvetni prah in aromo. Zato naš med sčasoma kristalizira, kar je znak pristnosti."
           }
         },
         "korak_4": {
-          "type": "time",
+          "type": "step",
           "settings": {
             "image": "shopify://shop_images/gasilska.webp",
-            "bg": "#c99a5c",
+            "season": "Majhne serije",
             "title": "Polnjenje doma",
-            "description": "Med polnimo v kozarce po 450 g in 900 g v majhnih serijah, vsak kozarec ročno zapremo in označimo. Nato je pripravljen za vašo mizo ali kot darilo.",
-            "time": "V majhnih serijah",
-            "year": "4",
-            "link": ""
+            "text": "Med polnimo v kozarce po 450 g in 900 g v majhnih serijah, vsak kozarec ročno zapremo in označimo. Nato je pripravljen za vašo mizo ali kot darilo."
           }
         }
       },
@@ -677,22 +665,18 @@
         "korak_4"
       ],
       "settings": {
-        "animation": "fade-up",
         "setwidth": "container",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px",
         "bgsection": "#f7f3ea",
+        "accent": "#c99a5c",
+        "pattern_opacity": 8,
         "title_top": "Pridelava",
         "title": "Kako nastane naš med",
-        "des": "Od paše do kozarca v štirih korakih.",
-        "align-heading": "center",
-        "border": "#e3d8c3",
-        "caption-bg": "#ffffff",
-        "title_color": "#222222",
-        "button-text": "Več",
+        "des": "Čebele vozimo na najboljše paše po Sloveniji, med točimo hladno in ga polnimo doma, v majhnih serijah. Štirje koraki, ki jih ne preskočimo.",
+        "button": "Oglejte si naš med",
+        "link": "shopify://collections/all",
         "style_btn": "btn-underline",
-        "paddingsection": "80px 0px 80px 0px",
-        "paddingmobile": "40px 0px 40px 0px"
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     },
     "stevilke_semen": {
