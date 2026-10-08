@@ -1916,5 +1916,15 @@
     .site-header .col-menu, .site-header .col-menu .nav-bar, .site-header .col-menu .site-nav, .site-header .col-menu .site-nav > .site-nav__item { display: flex !important; align-items: stretch !important; height: auto; }
     .site-header .col-menu .site-nav > .site-nav__item > .site-nav__link { display: flex !important; align-items: center; height: 100%; }
   }
+  /* Čebelarstvo Šemen: mobilna glava – logotip levo, hamburger skrajno desno, brez iskanja; meni se odpre z desne */
+  @media (max-width: 999px) {
+    .site-header .col-logo { order: 1 !important; flex: 0 0 auto !important; justify-content: flex-start !important; }
+    .site-header .col-bottom__right { order: 2 !important; margin-left: auto !important; flex: 0 0 auto !important; }
+    .site-header .toggle-menu-mobile { order: 3 !important; flex: 0 0 auto !important; margin-left: 12px; }
+    .site-header .toggle-menu-mobile .modal__toggle-search-mobile { display: none !important; }
+    .site-header .toggle-menu-mobile .site-header__link { padding-right: 0; }
+  }
+  .drawer--right { right: -350px; }
+  .js-drawer-open-right .drawer--right { transform: translateX(-350px); }
 </style>
   

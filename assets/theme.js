@@ -1486,7 +1486,7 @@ theme.HeaderSection = (function() {
     var $container = (this.$container = $(container));
     var sectionId = $container.attr('data-section-id');
     var stickyId = $container.attr('data-sticky');
-    theme.NavDrawer = new theme.Drawers('NavDrawer', 'left');
+    theme.NavDrawer = new theme.Drawers('NavDrawer', 'right');
     this.selectors = {
       headerID : '.section-' + sectionId,
       typeHeader : stickyId ,
