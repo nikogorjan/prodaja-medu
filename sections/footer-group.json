@@ -75,14 +75,14 @@
         "1567410176792": {
           "type": "menu",
           "settings": {
-            "link_list": "info",
+            "link_list": "",
             "width": "16%"
           }
         },
         "a28fc3cc-c984-485b-af97-07168b85bea3": {
           "type": "menu",
           "settings": {
-            "link_list": "collections",
+            "link_list": "main-menu",
             "width": "16%"
           }
         },

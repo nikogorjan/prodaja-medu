@@ -258,6 +258,7 @@
         "logo": "shopify://shop_images/semen-logo.png",
         "logo_white": "shopify://shop_images/semen-logo.png",
         "logo_max_width": 65,
+        "logo_padding": 12,
         "enable_transparent": false,
         "hover_transparent": false,
         "enable_white": false,
@@ -276,7 +277,7 @@
         "menudroptext": "#6c747b",
         "menudropbg": "#ffffff",
         "menudropborder": "#f1f1f1",
-        "main_linklist": "",
+        "main_linklist": "main-menu",
         "font_family_menu": "--g-font-2",
         "font_sizemenu": "14px",
         "font_weight": "500",
@@ -303,8 +304,7 @@
         "icon_wishlist": "icon",
         "icon_login": "icon",
         "e_link_login": "link",
-        "icon_search": "icon",
-        "logo_padding": 12
+        "icon_search": "icon"
       }
     },
     "store-messages": {
