@@ -12,8 +12,7 @@
   .ps-{{ sid }} { position: relative; overflow: hidden; background: {{ section.settings.bgsection }}; padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; }
   .ps-{{ sid }} .ps-hex { position: absolute; inset: 0; pointer-events: none; opacity: {{ section.settings.pattern_opacity | divided_by: 100.0 }}; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><path d='M28 1l27 15.5v31L28 63 1 47.5v-31L28 1zm0 48l27 15.5v31L28 97 1 80.5v-31L28 49z' fill='none' stroke='{{ accent | replace: '#', '%23' }}' stroke-width='1'/></svg>"); background-size: 56px 97px; }
   .ps-{{ sid }} .ps-head { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
-  .ps-{{ sid }} .ps-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: {{ accent }}; }
-  .ps-{{ sid }} .ps-eyebrow::before { content: ""; width: 36px; height: 1px; background: {{ accent }}; }
+  .ps-{{ sid }} .ps-eyebrow { display: inline-block; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: {{ accent }}; }
   .ps-{{ sid }} .ps-title { margin: 8px 0 0; }
   .ps-{{ sid }} .ps-intro { color: #5c6978; max-width: 46ch; margin: 0; }
   .ps-{{ sid }} .ps-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; align-items: start; }
