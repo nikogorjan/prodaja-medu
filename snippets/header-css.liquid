@@ -477,4 +477,12 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     .image-content-6 .image-content__image-container, .image-content-6 .image-content__image-wrapper { overflow: hidden; }
     .image-content-6 .image-content__image-wrapper img { transform: scale(1.045) !important; transform-origin: center; }
     .image-content-6 .image-content__image-wrapper img.scale-in:not(.lazyloaded) { transform: scale(1.1) !important; }
+    /* Čebelarstvo Šemen: fotografija koraka v časovnici (kvadratna ploščica namesto majhne ikone) */
+    .or-timeline__img:has(.or-timeline__photo) { height: 64px; min-width: 64px; width: 64px; padding: 0; overflow: hidden; border: 0; left: -2px; }
+    .or-timeline__img img.or-timeline__photo { width: 100% !important; height: 100% !important; object-fit: cover; position: static !important; margin: 0 !important; left: auto; top: auto; display: block; }
+    .or-timeline__block:has(.or-timeline__photo) .or-timeline__content { margin-left: 84px; }
+    @media only screen and (min-width: 1170px) {
+      .or-timeline__img:has(.or-timeline__photo) { height: 96px; min-width: 96px; width: 96px; left: 50%; margin-left: -48px; }
+      .or-timeline__block:has(.or-timeline__photo) .or-timeline__content { margin-left: 0; }
+    }
 </style>
