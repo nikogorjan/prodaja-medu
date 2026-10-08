@@ -25,7 +25,6 @@
   .ps-{{ sid }} .ps-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.2,.6,.2,1); }
   .ps-{{ sid }} .ps-step:hover .ps-media img { transform: scale(1.05); }
   .ps-{{ sid }} .ps-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.35) 100%); }
-  .ps-{{ sid }} .ps-num { position: absolute; z-index: 2; left: 12px; bottom: -10px; font-size: 112px; line-height: 1; font-weight: 700; letter-spacing: -.03em; color: transparent; -webkit-text-stroke: 1.5px #ffffff; text-stroke: 1.5px #ffffff; font-family: var(--g-p-font_family, inherit); }
   .ps-{{ sid }} .ps-season { position: absolute; z-index: 2; top: 16px; left: 16px; padding: 6px 10px; background: {{ accent }}; color: #fff; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
   .ps-{{ sid }} .ps-body { padding-top: 24px; }
   .ps-{{ sid }} .ps-step-title { margin: 0 0 8px; font-size: 20px; line-height: 1.25; }
@@ -41,7 +40,6 @@
     .ps-{{ sid }} .ps-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin: 0 -15px; padding: 0 15px 12px; scrollbar-width: none; }
     .ps-{{ sid }} .ps-grid::-webkit-scrollbar { display: none; }
     .ps-{{ sid }} .ps-step { flex: 0 0 72%; scroll-snap-align: start; margin-top: 0 !important; }
-    .ps-{{ sid }} .ps-num { font-size: 88px; }
     .ps-{{ sid }} .ps-head { margin-bottom: 28px; }
   }
 </style>
@@ -65,7 +63,6 @@
               {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1200', sizes: '(min-width: 990px) 25vw, 72vw', alt: block.settings.title }}
             {%- endif -%}
             {%- if block.settings.season != blank -%}<span class="ps-season">{{ block.settings.season | escape }}</span>{%- endif -%}
-            <span class="ps-num" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
           </div>
           <div class="ps-body">
             <div class="ps-rule"></div>

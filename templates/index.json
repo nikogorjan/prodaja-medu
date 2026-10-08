@@ -96,49 +96,6 @@
         "wborder": "1px"
       }
     },
-    "16601928830ceb6d9f": {
-      "type": "product-list-swiper",
-      "settings": {
-        "animation": "fade-up",
-        "setwidth": "container",
-        "e_size": "auto",
-        "e_repeat": "no-repeat",
-        "e_position": "center center",
-        "bgsection": "#ffffff",
-        "title_color": "rgba(0,0,0,0)",
-        "title_top": "Izbrano",
-        "title": "Izbrani izdelki",
-        "des": "Med in čebelji izdelki iz lastne pridelave.",
-        "align-heading": "center",
-        "collection": "frontpage",
-        "limit": 8,
-        "perviewDesktop": 4,
-        "spaceBetween": 30,
-        "nowrap": false,
-        "arrows": true,
-        "scrollbar": false,
-        "buttonall": "Vsi izdelki",
-        "buttonall_link": "shopify://collections/all",
-        "style_btn": "btn-theme",
-        "enable_first_banner": false,
-        "width_banner": 30,
-        "subtitle_banner": "Sub Title",
-        "title_banner": "Title Banner",
-        "size_text": "h2",
-        "des_banner": "Protection from the",
-        "pos_banner": "mid-center",
-        "button_banner": "Vsi izdelki",
-        "link_banner": "",
-        "style_btn_banner": "btn-underline btn-underline-white",
-        "text_banner_color": "#ffffff",
-        "overlay_banner": "#000000",
-        "opacity_banner": 0.2,
-        "paddingsection": "88px 0px 88px 0px",
-        "paddingmobile": "32px 0px 40px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
-      }
-    },
     "662cf23c-2a28-41c4-9bd8-b6517c99ba49": {
       "type": "image-content-6",
       "blocks": {
@@ -915,16 +872,40 @@
         "paddingsection": "80px 0px 80px 0px",
         "paddingmobile": "60px 0px 60px 0px"
       }
+    },
+    "izdelki_semen": {
+      "type": "featured-products",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "Izbrano",
+        "title": "Izbrani izdelki",
+        "des": "Med in čebelji izdelki iz lastne pridelave.",
+        "align-heading": "center",
+        "collection": "frontpage",
+        "enable_creative": false,
+        "padding": true,
+        "colgrid": "col-lg-3",
+        "rows": 8,
+        "txtbutton": "Vsi izdelki",
+        "urlbtn": "shopify://collections/all",
+        "style_btn": "btn-theme",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
     }
   },
   "order": [
     "16485444103c52f5e9",
     "70da4000-c1cf-4928-8203-f21c081874c6",
+    "izdelki_semen",
     "druzina_semen",
     "pridelava_semen",
     "stevilke_semen",
     "90256253-4427-4c0f-a280-c9d024bc8dcc",
-    "16601928830ceb6d9f",
     "662cf23c-2a28-41c4-9bd8-b6517c99ba49",
     "prostori_semen",
     "0a081843-18cc-4628-a950-350c7308b356",
