@@ -472,4 +472,8 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
       border-radius: 0 !important;
     }
     :root { --card-corner-radius: 0px; }
+    /* Čebelarstvo Šemen: fotografije stranke imajo v datoteki vgrajene prozorne zaobljene vogale (9 px). Dokler niso zamenjane, jih v sekcijah slika+besedilo rahlo povečamo in obrežemo, da so robovi ostri. */
+    .image-content-6 .image-content__image-wrapper { overflow: hidden; }
+    .image-content-6 .image-content__image-wrapper img { transform: scale(1.045) !important; transform-origin: center; }
+    .image-content-6 .image-content__image-wrapper img.scale-in:not(.lazyloaded) { transform: scale(1.1) !important; }
 </style>
