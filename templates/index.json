@@ -61,7 +61,7 @@
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
-        "bgsection": "#ffffff",
+        "bgsection": "#F7F3EA",
         "title_top": "",
         "title": "",
         "des": "",
@@ -94,6 +94,102 @@
         "setwidth": "full",
         "bgborder": "#dce2ec",
         "wborder": "1px"
+      }
+    },
+    "16601928830ceb6d9f": {
+      "type": "product-list-swiper",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_position": "center center",
+        "bgsection": "#ffffff",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "Izbrano",
+        "title": "Izbrani izdelki",
+        "des": "Med in čebelji izdelki iz lastne pridelave.",
+        "align-heading": "center",
+        "collection": "frontpage",
+        "limit": 8,
+        "perviewDesktop": 4,
+        "spaceBetween": 30,
+        "nowrap": false,
+        "arrows": true,
+        "scrollbar": false,
+        "buttonall": "Vsi izdelki",
+        "buttonall_link": "shopify://collections/all",
+        "style_btn": "btn-theme",
+        "enable_first_banner": false,
+        "width_banner": 30,
+        "subtitle_banner": "Sub Title",
+        "title_banner": "Title Banner",
+        "size_text": "h2",
+        "des_banner": "Protection from the",
+        "pos_banner": "mid-center",
+        "button_banner": "Vsi izdelki",
+        "link_banner": "",
+        "style_btn_banner": "btn-underline btn-underline-white",
+        "text_banner_color": "#ffffff",
+        "overlay_banner": "#000000",
+        "opacity_banner": 0.2,
+        "paddingsection": "88px 0px 88px 0px",
+        "paddingmobile": "32px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "662cf23c-2a28-41c4-9bd8-b6517c99ba49": {
+      "type": "image-content-6",
+      "blocks": {
+        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-0": {
+          "type": "image_block",
+          "settings": {
+            "style_content": "default",
+            "w_image": 40,
+            "pos_image": 88,
+            "e_image": "right",
+            "image": "shopify://shop_images/semen-poslikan-cebelnjak.png",
+            "enable_video": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "text_circle": "",
+            "video_url": ""
+          }
+        },
+        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-1": {
+          "type": "text_block",
+          "settings": {
+            "bgtext": "rgba(0,0,0,0)",
+            "subtitle": "Poslikan čebelnjak",
+            "title": "Čebelnjak, ki pripoveduje zgodbo",
+            "size_text": "h2",
+            "text": "",
+            "answer_content": "<p>Pročelje našega čebelnjaka krasijo poslikave, ki nadaljujejo tradicijo slovenskih panjskih končnic. Za njimi, v urejenem vrtu, živijo naše čebelje družine. Tu nastaja med, tu pa vas tudi z veseljem sprejmemo na obisk.</p>",
+            "button": "Obiščite nas",
+            "link": "/pages/kontakt",
+            "style_btn": "btn-theme",
+            "align": "left",
+            "enable_padding_left": true,
+            "enable_padding_right": false
+          }
+        }
+      },
+      "block_order": [
+        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-0",
+        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-1"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f7f3ea",
+        "size": "50-50",
+        "enable_padding": true,
+        "align_center": true,
+        "paddingsection": "90px 0px 90px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
       }
     },
     "8f7efc88-8555-4d5d-984d-bfed30a488ff": {
@@ -219,49 +315,6 @@
         "marginmobile": "0px 0px 0px 0px"
       }
     },
-    "16601928830ceb6d9f": {
-      "type": "product-list-swiper",
-      "settings": {
-        "animation": "fade-up",
-        "setwidth": "container",
-        "e_size": "auto",
-        "e_repeat": "no-repeat",
-        "e_position": "center center",
-        "bgsection": "#ffffff",
-        "title_color": "rgba(0,0,0,0)",
-        "title_top": "Izbrano",
-        "title": "Izbrani izdelki",
-        "des": "Med in čebelji izdelki iz lastne pridelave.",
-        "align-heading": "center",
-        "collection": "frontpage",
-        "limit": 8,
-        "perviewDesktop": 4,
-        "spaceBetween": 30,
-        "nowrap": false,
-        "arrows": true,
-        "scrollbar": false,
-        "buttonall": "Vsi izdelki",
-        "buttonall_link": "shopify://collections/all",
-        "style_btn": "btn-theme",
-        "enable_first_banner": false,
-        "width_banner": 30,
-        "subtitle_banner": "Sub Title",
-        "title_banner": "Title Banner",
-        "size_text": "h2",
-        "des_banner": "Protection from the",
-        "pos_banner": "mid-center",
-        "button_banner": "Vsi izdelki",
-        "link_banner": "",
-        "style_btn_banner": "btn-underline btn-underline-white",
-        "text_banner_color": "#ffffff",
-        "overlay_banner": "#000000",
-        "opacity_banner": 0.2,
-        "paddingsection": "88px 0px 88px 0px",
-        "paddingmobile": "32px 0px 40px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
-      }
-    },
     "9a4f05f1-ae72-47ea-a1c9-11ad0d6cf46e": {
       "type": "line",
       "settings": {
@@ -272,133 +325,6 @@
         "setwidth": "full",
         "bgborder": "#dddddd",
         "wborder": "1px"
-      }
-    },
-    "ea256325-7ebc-4ad1-9d79-25dc551f1f31": {
-      "type": "grid-banner",
-      "blocks": {
-        "template--19541121335616__ea256325-7ebc-4ad1-9d79-25dc551f1f31-168751421229c70d7f-0": {
-          "type": "banner",
-          "settings": {
-            "width": "6",
-            "enable_height_banner": true,
-            "promo_banner_height": 480,
-            "promo_banner_height_mobile": 360,
-            "image": "shopify://shop_images/semen-med-polica.png",
-            "subtitle": "Iz našega čebelnjaka",
-            "title": "Med in čebelji izdelki",
-            "size_text": "h3",
-            "description": "",
-            "bg_color": "#ffffff",
-            "colordef": "#ffffff",
-            "opacity_bg": 0,
-            "style_btn": "btn-theme btn-white",
-            "button_text": "V trgovino",
-            "button_link": "shopify://collections/all",
-            "vertical": "bottom",
-            "horizontal": "center",
-            "text_align": "center"
-          }
-        },
-        "template--19541121335616__ea256325-7ebc-4ad1-9d79-25dc551f1f31-168751421229c70d7f-1": {
-          "type": "banner",
-          "settings": {
-            "width": "6",
-            "enable_height_banner": true,
-            "promo_banner_height": 480,
-            "promo_banner_height_mobile": 360,
-            "image": "shopify://shop_images/semen-apiturizem-sprostitev.png",
-            "subtitle": "Doživetje",
-            "title": "Apiturizem",
-            "size_text": "h3",
-            "description": "",
-            "bg_color": "#ffffff",
-            "colordef": "#ffffff",
-            "opacity_bg": 0,
-            "style_btn": "btn-theme btn-white",
-            "button_text": "Več o doživetjih",
-            "button_link": "/pages/apiturizem",
-            "vertical": "bottom",
-            "horizontal": "center",
-            "text_align": "center"
-          }
-        }
-      },
-      "block_order": [
-        "template--19541121335616__ea256325-7ebc-4ad1-9d79-25dc551f1f31-168751421229c70d7f-0",
-        "template--19541121335616__ea256325-7ebc-4ad1-9d79-25dc551f1f31-168751421229c70d7f-1"
-      ],
-      "settings": {
-        "animation": "fade-up",
-        "setwidth": "container",
-        "bgsection": "#ffffff",
-        "title_top": "Kaj ponujamo",
-        "title": "Med, izdelki in doživetja",
-        "des": "",
-        "align-heading": "center",
-        "no_gutter": false,
-        "gutter_padding": 30,
-        "show_overlay": true,
-        "gradient_overlay": true,
-        "bg_overlay": "#000000",
-        "opacity_overlay": 0.3,
-        "paddingsection": "80px 0px 80px 0px",
-        "paddingmobile": "40px 0px 40px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
-      }
-    },
-    "662cf23c-2a28-41c4-9bd8-b6517c99ba49": {
-      "type": "image-content-6",
-      "blocks": {
-        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-0": {
-          "type": "image_block",
-          "settings": {
-            "style_content": "default",
-            "w_image": 40,
-            "pos_image": 88,
-            "e_image": "right",
-            "image": "shopify://shop_images/semen-poslikan-cebelnjak.png",
-            "enable_video": false,
-            "overlay_color": "#000000",
-            "overlay_opacity": 0,
-            "text_circle": "",
-            "video_url": ""
-          }
-        },
-        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-1": {
-          "type": "text_block",
-          "settings": {
-            "bgtext": "rgba(0,0,0,0)",
-            "subtitle": "Poslikan čebelnjak",
-            "title": "Čebelnjak, ki pripoveduje zgodbo",
-            "size_text": "h2",
-            "text": "",
-            "answer_content": "<p>Pročelje našega čebelnjaka krasijo poslikave, ki nadaljujejo tradicijo slovenskih panjskih končnic. Za njimi, v urejenem vrtu, živijo naše čebelje družine. Tu nastaja med, tu pa vas tudi z veseljem sprejmemo na obisk.</p>",
-            "button": "Obiščite nas",
-            "link": "/pages/kontakt",
-            "style_btn": "btn-theme",
-            "align": "left",
-            "enable_padding_left": true,
-            "enable_padding_right": false
-          }
-        }
-      },
-      "block_order": [
-        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-0",
-        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-1"
-      ],
-      "settings": {
-        "animation": "fade-up",
-        "setwidth": "container",
-        "bgsection": "#f7f3ea",
-        "size": "50-50",
-        "enable_padding": true,
-        "align_center": true,
-        "paddingsection": "90px 0px 90px 0px",
-        "paddingmobile": "40px 0px 40px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
       }
     },
     "0a081843-18cc-4628-a950-350c7308b356": {
@@ -492,6 +418,7 @@
         "prostori_text",
         "prostori_image"
       ],
+      "disabled": true,
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
@@ -529,19 +456,127 @@
         "marginsection": "0px 0px 0px 0px",
         "marginmobile": "0px 0px 0px 0px"
       }
+    },
+    "ea256325-7ebc-4ad1-9d79-25dc551f1f31": {
+      "type": "grid-banner",
+      "blocks": {
+        "template--19541121335616__ea256325-7ebc-4ad1-9d79-25dc551f1f31-168751421229c70d7f-0": {
+          "type": "banner",
+          "settings": {
+            "width": "6",
+            "enable_height_banner": true,
+            "promo_banner_height": 480,
+            "promo_banner_height_mobile": 360,
+            "image": "shopify://shop_images/semen-med-polica.png",
+            "subtitle": "Iz našega čebelnjaka",
+            "title": "Med in čebelji izdelki",
+            "size_text": "h3",
+            "description": "",
+            "bg_color": "#ffffff",
+            "colordef": "#ffffff",
+            "opacity_bg": 0,
+            "style_btn": "btn-theme btn-white",
+            "button_text": "V trgovino",
+            "button_link": "shopify://collections/all",
+            "vertical": "bottom",
+            "horizontal": "center",
+            "text_align": "center"
+          }
+        },
+        "template--19541121335616__ea256325-7ebc-4ad1-9d79-25dc551f1f31-168751421229c70d7f-1": {
+          "type": "banner",
+          "settings": {
+            "width": "6",
+            "enable_height_banner": true,
+            "promo_banner_height": 480,
+            "promo_banner_height_mobile": 360,
+            "image": "shopify://shop_images/semen-apiturizem-sprostitev.png",
+            "subtitle": "Doživetje",
+            "title": "Apiturizem",
+            "size_text": "h3",
+            "description": "",
+            "bg_color": "#ffffff",
+            "colordef": "#ffffff",
+            "opacity_bg": 0,
+            "style_btn": "btn-theme btn-white",
+            "button_text": "Več o doživetjih",
+            "button_link": "/pages/apiturizem",
+            "vertical": "bottom",
+            "horizontal": "center",
+            "text_align": "center"
+          }
+        }
+      },
+      "block_order": [
+        "template--19541121335616__ea256325-7ebc-4ad1-9d79-25dc551f1f31-168751421229c70d7f-0",
+        "template--19541121335616__ea256325-7ebc-4ad1-9d79-25dc551f1f31-168751421229c70d7f-1"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "Kaj ponujamo",
+        "title": "Med, izdelki in doživetja",
+        "des": "",
+        "align-heading": "center",
+        "no_gutter": false,
+        "gutter_padding": 30,
+        "show_overlay": true,
+        "gradient_overlay": true,
+        "bg_overlay": "#000000",
+        "opacity_overlay": 0.3,
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "novice_semen": {
+      "type": "featured-articles",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "Iz čebelnjaka",
+        "title": "Novice in nasveti",
+        "des": "O medu, čebelah in dogajanju v našem čebelnjaku.",
+        "align-heading": "center",
+        "blog": "novice",
+        "item_style": "blog-1",
+        "enable_btn_blog": true,
+        "enable_btn_line": true,
+        "enable_date": true,
+        "enable_tag": false,
+        "enable_comment": false,
+        "enable_short": true,
+        "image_size": "landscape",
+        "gutter_padding": 30,
+        "arrows": true,
+        "draggable": true,
+        "dots": false,
+        "infinite": false,
+        "rows": "1",
+        "limit": 3,
+        "show": 3,
+        "paddingsection": "80px 0px 60px 0px",
+        "paddingmobile": "40px 0px 20px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
     }
   },
   "order": [
     "16485444103c52f5e9",
     "70da4000-c1cf-4928-8203-f21c081874c6",
     "16601928830ceb6d9f",
+    "662cf23c-2a28-41c4-9bd8-b6517c99ba49",
     "8f7efc88-8555-4d5d-984d-bfed30a488ff",
     "90256253-4427-4c0f-a280-c9d024bc8dcc",
-    "ea256325-7ebc-4ad1-9d79-25dc551f1f31",
     "9a4f05f1-ae72-47ea-a1c9-11ad0d6cf46e",
-    "662cf23c-2a28-41c4-9bd8-b6517c99ba49",
     "0a081843-18cc-4628-a950-350c7308b356",
     "prostori_semen",
-    "16609007639672b3d5"
+    "novice_semen",
+    "16609007639672b3d5",
+    "ea256325-7ebc-4ad1-9d79-25dc551f1f31"
   ]
 }
