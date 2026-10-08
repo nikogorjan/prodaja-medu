@@ -504,14 +504,16 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     .map-section .map-section__content .btn, .map-section .map-section__content a.btn-theme, .map-section .map-section__content .map-section__link { background: #c99a5c; border-color: #c99a5c; color: #ffffff; margin-top: 12px; }
     .map-section .map-section__image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(43,36,32,.35), rgba(43,36,32,0) 60%); pointer-events: none; }
     @media only screen and (min-width: 990px) { .map-section .map-section__content-wrapper { flex-basis: 40%; } .map-section .map-section__content { margin: 80px 0 !important; } }
-    /* Čebelarstvo Šemen: ikone prednosti na beli ploščici */
-    .service-1 .iconx8 { display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; flex: 0 0 60px; background: #ffffff; border: 1px solid #e8dfcf; box-shadow: 0 2px 10px rgba(43,36,32,.06); }
-    .service-1 .iconx8 svg { width: 28px !important; height: 28px !important; }
     /* Mobilna glava: več prostora med ikonami */
     @media (max-width: 999px) {
-      .site-header .col-bottom__right .site-header__link, .site-header .col-bottom__right > a, .site-header .col-bottom__right .header--acount { margin-left: 14px; }
-      .site-header .toggle-menu-mobile { margin-left: 22px; }
     }
     /* Števci: številke se preštejejo, ko sekcija pride v pogled */
     [id$="__stevilke_semen"] .service-1 h2, [id$="__stevilke_semen"] .service-1 .h2 { font-variant-numeric: tabular-nums; }
+    /* Mobilna glava: enak razmik med vsemi ikonami (seznam želja, košarica, meni) */
+    @media (max-width: 999px) {
+      .site-header .col-bottom__right .site-header__link, .site-header .col-bottom__right .header--acount, .site-header .col-bottom__right .js-wishlist-link { margin: 0 0 0 18px !important; padding: 0 !important; }
+      .site-header .col-bottom__right .site-header__link:first-child { margin-left: 0 !important; }
+      .site-header .toggle-menu-mobile { margin-left: 18px !important; }
+      .site-header .toggle-menu-mobile .site-header__link { padding: 0 !important; }
+    }
 </style>

@@ -299,7 +299,7 @@
         "enable_image": true,
         "enable_name": false,
         "enable_language_selector": false,
-        "icon_cart": "icon-text",
+        "icon_cart": "icon",
         "svg_cart": "cart-6",
         "icon_wishlist": "icon",
         "icon_login": "icon",
