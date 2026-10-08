@@ -517,8 +517,11 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
       .site-header .toggle-menu-mobile .site-header__link { padding: 0 !important; }
     }
     /* Čebelarstvo Šemen: v mreži pasic nastavitev bloka "Opacity Background" ne riše več okvirja za besedilom, ampak preliv od spodaj navzgor čez pasico (barva = "Background Description") */
-    .banner-theme figcaption .bg-des { top: auto !important; bottom: 0 !important; left: 0 !important; width: 100% !important; height: 320% !important; opacity: var(--g-figcaption-op) !important; background-color: transparent !important; background-image: linear-gradient(to top, var(--g-figcaption-des) 0%, var(--g-figcaption-des) 18%, transparent 100%); pointer-events: none; }
-    .banner-theme figcaption .bg-des::before { display: none !important; }
+    .banner-theme .bg-des { display: none !important; }
+    .banner-theme { position: relative; overflow: hidden; }
+    .banner-theme::after { content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top, var(--g-figcaption-des) 0%, transparent 65%); opacity: var(--g-figcaption-op); }
+    .banner-theme .banner-overlay { z-index: 1; }
+    .banner-theme figcaption { z-index: 2; }
     .banner-theme, .banner-theme .img-grid-banner { overflow: hidden; }
     /* Iskanje skrito tudi v namizni glavi */
     .site-header .site-header__search-wrap, .site-header .header__search, .site-header .modal__toggle-open.site-header__link { display: none !important; }
