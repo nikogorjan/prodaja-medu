@@ -18,7 +18,7 @@
             "bgblock": "rgba(0,0,0,0)",
             "title": "Dostava po Sloveniji",
             "description": "Pošljemo na vaš naslov ali pripravimo za osebni prevzem",
-            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 7.5h10v8H3zM13 10.5h4l3 3v2h-7z\"/><circle cx=\"7\" cy=\"17.5\" r=\"1.6\"/><circle cx=\"16.5\" cy=\"17.5\" r=\"1.6\"/></svg>"
+            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 7.5h10v8H3zM13 10.5h4l3 3v2h-7z\"/><circle cx=\"7\" cy=\"17.5\" r=\"1.6\"/><circle cx=\"16.5\" cy=\"17.5\" r=\"1.6\"/></svg>"
           }
         },
         "8fb6874d-8c42-405c-9da3-134f7a8a0c73": {
@@ -27,7 +27,7 @@
             "bgblock": "rgba(0,0,0,0)",
             "title": "Lastna pridelava",
             "description": "Med in čebelji izdelki iz našega čebelnjaka",
-            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5l7 4v8l-7 4-7-4v-8l7-4z\"/><path d=\"M12 7.5l3.5 2v4L12 15.5l-3.5-2v-4l3.5-2z\"/></svg>"
+            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5l7 4v8l-7 4-7-4v-8l7-4z\"/><path d=\"M12 7.5l3.5 2v4L12 15.5l-3.5-2v-4l3.5-2z\"/></svg>"
           }
         },
         "16485444103c52f5e9-1": {
@@ -36,7 +36,7 @@
             "bgblock": "rgba(0,0,0,0)",
             "title": "Skrbno pakirano",
             "description": "Vsak kozarec zapakiramo ročno in z občutkom",
-            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 9.5h16v10H4z\"/><path d=\"M4 9.5l2.5-4h11l2.5 4M12 5.5v14M4 13h16\"/></svg>"
+            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 9.5h16v10H4z\"/><path d=\"M4 9.5l2.5-4h11l2.5 4M12 5.5v14M4 13h16\"/></svg>"
           }
         },
         "16485444103c52f5e9-2": {
@@ -45,7 +45,7 @@
             "bgblock": "rgba(0,0,0,0)",
             "title": "Tradicija od leta 1982",
             "description": "Več kot 40 let izkušenj in ljubezni do čebel",
-            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"9\" r=\"5\"/><path d=\"M9 13.5L7.5 20l4.5-2.2 4.5 2.2L15 13.5\"/></svg>"
+            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"9\" r=\"5\"/><path d=\"M9 13.5L7.5 20l4.5-2.2 4.5 2.2L15 13.5\"/></svg>"
           }
         }
       },
@@ -70,7 +70,7 @@
         "iconcolor": "#222222",
         "titlecolor": "#222222",
         "subcolor": "#5c6978",
-        "size": 32,
+        "size": 30,
         "service_heading": "h6",
         "layout": "style-1",
         "enable_carousel": false,
@@ -94,59 +94,6 @@
         "setwidth": "full",
         "bgborder": "#dce2ec",
         "wborder": "1px"
-      }
-    },
-    "662cf23c-2a28-41c4-9bd8-b6517c99ba49": {
-      "type": "image-content-6",
-      "blocks": {
-        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-0": {
-          "type": "image_block",
-          "settings": {
-            "style_content": "default",
-            "w_image": 40,
-            "pos_image": 88,
-            "e_image": "right",
-            "image": "shopify://shop_images/semen-poslikan-cebelnjak.png",
-            "enable_video": false,
-            "overlay_color": "#000000",
-            "overlay_opacity": 0,
-            "text_circle": "",
-            "video_url": ""
-          }
-        },
-        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-1": {
-          "type": "text_block",
-          "settings": {
-            "bgtext": "rgba(0,0,0,0)",
-            "subtitle": "Poslikan čebelnjak",
-            "title": "Čebelnjak, ki pripoveduje zgodbo",
-            "size_text": "h2",
-            "text": "",
-            "answer_content": "<p>Pročelje našega čebelnjaka krasijo poslikave, ki nadaljujejo tradicijo slovenskih panjskih končnic. Za njimi, v urejenem vrtu, živijo naše čebelje družine. Tu nastaja med, tu pa vas tudi z veseljem sprejmemo na obisk.</p>",
-            "button": "Obiščite nas",
-            "link": "/pages/kontakt",
-            "style_btn": "btn-theme",
-            "align": "left",
-            "enable_padding_left": true,
-            "enable_padding_right": false
-          }
-        }
-      },
-      "block_order": [
-        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-0",
-        "template--19541121335616__662cf23c-2a28-41c4-9bd8-b6517c99ba49-1687424839f6967066-1"
-      ],
-      "settings": {
-        "animation": "fade-up",
-        "setwidth": "container",
-        "bgsection": "#f7f3ea",
-        "size": "50-50",
-        "enable_padding": true,
-        "align_center": true,
-        "paddingsection": "90px 0px 90px 0px",
-        "paddingmobile": "40px 0px 40px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
       }
     },
     "8f7efc88-8555-4d5d-984d-bfed30a488ff": {
@@ -343,10 +290,10 @@
           "settings": {
             "bgtext": "rgba(0,0,0,0)",
             "subtitle": "Apiterapija",
-            "title": "Čebelnjak, v katerem dihate z čebelami",
+            "title": "Dihajte z čebelami",
             "size_text": "h2",
             "text": "",
-            "answer_content": "<p>V čebelnjaku za apiterapijo je 40 prirejenih panjev. Skozi okrogle odprtine v prostor prehaja aerosol iz panjev, njegovo intenzivnost pa uravnavamo z odpiranjem in zapiranjem odprtin. Na voljo sta dve ležišči in dva udobna sedeža, v zgornji etaži pa postelja za dve osebi s pogledom na park in ribnik.</p><p>Vse to ob šumenju čebel in pristnem vonju panjev. Po želji poskusite tudi svež cvetni prah naravnost iz panja.</p>",
+            "answer_content": "<p>V našem čebelnjaku za apiterapijo 40 čebeljih družin ustvarja zrak, kakršnega ni mogoče ponarediti: topel, prepojen z vonjem medu, voska in propolisa. Skozi odprtine v panjih prehaja v prostor, kjer se uležete, zaprete oči in preprosto dihate. Intenzivnost uravnavamo po vaši želji, čebele pa vas pri tem nikoli ne motijo, slišite in vonjate jih skozi steno.</p><p>Na voljo sta dve ležišči in dva udobna sedeža, v zgornji etaži pa postelja za dve osebi s pogledom na park in ribnik. Obisk traja uro ali dve; po želji ga dopolnimo z degustacijo naših medov in svežim cvetnim prahom naravnost iz panja.</p><p>Za vse, ki iščejo mir, sprostitev in stik z naravo. Obisk po predhodnem dogovoru, za posameznike, pare, družine in manjše skupine.</p>",
             "button": "Rezervirajte obisk",
             "link": "/pages/kontakt",
             "style_btn": "btn-theme",
@@ -361,7 +308,7 @@
             "style_content": "default",
             "w_image": 40,
             "pos_image": 88,
-            "e_image": "left",
+            "e_image": "right",
             "image": "shopify://shop_images/semen-apiturizem-soba.webp",
             "image2": "",
             "enable_video": false,
@@ -379,7 +326,7 @@
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
-        "bgsection": "#ffffff",
+        "bgsection": "#f7f3ea",
         "size": "50-50",
         "enable_padding": true,
         "align_center": true,
@@ -906,7 +853,6 @@
     "pridelava_semen",
     "stevilke_semen",
     "90256253-4427-4c0f-a280-c9d024bc8dcc",
-    "662cf23c-2a28-41c4-9bd8-b6517c99ba49",
     "prostori_semen",
     "0a081843-18cc-4628-a950-350c7308b356",
     "ea256325-7ebc-4ad1-9d79-25dc551f1f31",
