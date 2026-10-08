@@ -306,6 +306,30 @@
         "marginmobile": "0px 0px 0px 0px"
       }
     },
+    "line_FJRLJP": {
+      "type": "line",
+      "settings": {
+        "animation": "fade",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "bgsection": "#ffffff",
+        "setwidth": "full",
+        "bgborder": "#201B17",
+        "wborder": "1px"
+      }
+    },
+    "line_3i3f9f": {
+      "type": "line",
+      "settings": {
+        "animation": "fade",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "bgsection": "#ffffff",
+        "setwidth": "full",
+        "bgborder": "#201B17",
+        "wborder": "1px"
+      }
+    },
     "90256253-4427-4c0f-a280-c9d024bc8dcc": {
       "type": "scrolling-text",
       "blocks": {
@@ -350,7 +374,7 @@
         "background": "#2b2420",
         "gradient_bg": "",
         "text": "#c99a5c",
-        "paddingsection": "0px 0px 24px 0px",
+        "paddingsection": "24px 0px 24px 0px",
         "paddingmobile": "40px 0px 40px 0px",
         "marginsection": "0px 0px 0px 0px",
         "marginmobile": "0px 0px 0px 0px"
@@ -399,7 +423,7 @@
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
-        "bgsection": "#F7F3EA",
+        "bgsection": "#f7f3ea",
         "size": "50-50",
         "enable_padding": true,
         "align_center": true,
@@ -527,9 +551,9 @@
             "title": "Med in čebelji izdelki",
             "size_text": "h3",
             "description": "",
-            "bg_color": "#ffffff",
+            "bg_color": "#000000",
             "colordef": "#ffffff",
-            "opacity_bg": 0,
+            "opacity_bg": 0.7,
             "style_btn": "btn-theme btn-white",
             "button_text": "V trgovino",
             "button_link": "shopify://collections/all",
@@ -550,9 +574,9 @@
             "title": "Apiturizem",
             "size_text": "h3",
             "description": "",
-            "bg_color": "#ffffff",
+            "bg_color": "#000000",
             "colordef": "#ffffff",
-            "opacity_bg": 0,
+            "opacity_bg": 0.7,
             "style_btn": "btn-theme btn-white",
             "button_text": "Več o doživetjih",
             "button_link": "/pages/apiturizem",
@@ -576,7 +600,7 @@
         "align-heading": "center",
         "no_gutter": false,
         "gutter_padding": 30,
-        "show_overlay": true,
+        "show_overlay": false,
         "gradient_overlay": true,
         "bg_overlay": "#000000",
         "opacity_overlay": 0.7,
@@ -897,7 +921,9 @@
     "druzina_semen",
     "pridelava_semen",
     "stevilke_semen",
+    "line_FJRLJP",
     "90256253-4427-4c0f-a280-c9d024bc8dcc",
+    "line_3i3f9f",
     "apiterapija_semen",
     "prostori_semen",
     "0a081843-18cc-4628-a950-350c7308b356",
