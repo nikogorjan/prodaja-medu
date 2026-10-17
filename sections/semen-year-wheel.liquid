@@ -1,0 +1,282 @@
+{%- comment -%}
+  Čebelarjevo leto (Čebelarstvo Šemen): kolo leta kot ura.
+  Zunanji obroč so meseci (bloki "Mesec", obarvani po letnem času), notranji obroči so paše (bloki "Paša")
+  kot letnice v deblu. Kazalec se zavrti na izbrani mesec; ob nalaganju na današnjega.
+  Plošča ob kolesu pove, kaj ta mesec počnejo čebele in kaj čebelar, ter katere paše takrat tečejo.
+  Geometrija brez trigonometrije: loki so krogi s stroke-dasharray, zasukani s transform.
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign months = section.blocks | where: 'type', 'month'
+  assign forages = section.blocks | where: 'type', 'forage'
+  if s.scheme == 'cream'
+    assign bg = '#f7f3ea'
+  else
+    assign bg = '#ffffff'
+  endif
+  assign tau = 6.2831853
+  assign r_month = 262
+  assign c_month = r_month | times: tau
+  assign seg_len = c_month | divided_by: 12 | minus: 5
+  assign seg_gap_deg = 5 | divided_by: c_month | times: 180
+  assign month_count = months.size | at_least: 1
+  assign step_deg = 360.0 | divided_by: month_count
+-%}
+<style>
+  .yw-{{ sid }} { --yw-accent: {{ s.accent }}; display: block; position: relative; background: {{ bg }}; padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  .yw-{{ sid }} .yw-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 36px; }
+  .yw-{{ sid }} .yw-eyebrow { display: block; color: var(--yw-accent) !important; }
+  .yw-{{ sid }} .yw-title { margin: 6px 0 0; text-wrap: balance; }
+  .yw-{{ sid }} .yw-intro { margin: 0; max-width: 52ch; color: #5c6978; }
+  .yw-{{ sid }} .yw-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; align-items: center; }
+
+  /* kolo */
+  .yw-{{ sid }} .yw-wheel { position: relative; width: 100%; max-width: 580px; margin: 0 auto; aspect-ratio: 1; }
+  .yw-{{ sid }} .yw-wheel svg { display: block; width: 100% !important; height: 100% !important; overflow: visible; fill: none; }
+  .yw-{{ sid }} .yw-seg { fill: none; stroke-width: 34; opacity: .28; cursor: pointer; pointer-events: stroke; transition: opacity .4s, stroke-width .4s; }
+  .yw-{{ sid }} .yw-seg:hover { opacity: .55; }
+  .yw-{{ sid }} .yw-seg.is-active { opacity: 1; stroke-width: 40; }
+  .yw-{{ sid }} .yw-label { font-family: var(--g-font-2); font-size: 12px; font-weight: 600; letter-spacing: .14em; fill: #2b2420; cursor: pointer; text-transform: uppercase; transition: fill .4s; }
+  .yw-{{ sid }} .yw-label.is-active { fill: #ffffff; }
+  .yw-{{ sid }} .yw-track { fill: none; stroke: rgba(34,34,34,.07); stroke-width: 8; }
+  .yw-{{ sid }} .yw-ring { fill: none; stroke-width: 8; stroke-linecap: butt; opacity: .3; transition: opacity .45s, stroke-width .45s; }
+  .yw-{{ sid }} .yw-ring.is-on { opacity: 1; stroke-width: 10; }
+  .yw-{{ sid }} .yw-needle { transform-box: view-box; transform-origin: 50% 50%; transition: transform 1s cubic-bezier(.3,1.4,.4,1); }
+  .yw-{{ sid }} .yw-needle line { stroke: #2b2420; stroke-width: 2; }
+  .yw-{{ sid }} .yw-needle path { fill: var(--yw-accent); stroke: none; }
+  .yw-{{ sid }} .yw-today { transform-box: view-box; transform-origin: 50% 50%; }
+  .yw-{{ sid }} .yw-today circle { fill: var(--yw-accent); stroke: {{ bg }}; stroke-width: 3; }
+  .yw-{{ sid }} .yw-center { position: absolute; top: 50%; left: 50%; width: 34%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: #2b2420; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #ffffff; box-shadow: 0 18px 40px -18px rgba(43,36,32,.55); }
+  .yw-{{ sid }} .yw-center-num { font-family: var(--g-font-1); font-size: clamp(28px, 4.2vw, 52px); font-weight: 700; line-height: 1; color: var(--yw-accent); }
+  .yw-{{ sid }} .yw-center-name { margin-top: 6px; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: #cfc4b4; }
+
+  /* plošča */
+  .yw-{{ sid }} .yw-panel { position: relative; }
+  .yw-{{ sid }} .yw-month { display: none; }
+  .yw-{{ sid }} .yw-month.is-active { display: block; animation: yw-in-{{ sid }} .55s cubic-bezier(.2,.6,.2,1) both; }
+  @keyframes yw-in-{{ sid }} { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+  .yw-{{ sid }} .yw-season { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--m-color); }
+  .yw-{{ sid }} .yw-month-name { margin: 12px 0 26px; font-size: clamp(40px, 5.6vw, 72px); line-height: 1; letter-spacing: -.01em; color: #2b2420; text-transform: none; }
+  .yw-{{ sid }} .yw-rows { margin: 0; padding: 0; list-style: none; }
+  .yw-{{ sid }} .yw-row { display: grid; grid-template-columns: 34px 1fr; gap: 0 14px; padding: 18px 0; border-top: 1px solid rgba(34,34,34,.1); margin: 0; }
+  .yw-{{ sid }} .yw-row .semen-icon { grid-row: span 2; color: var(--m-color); margin-top: 2px; }
+  .yw-{{ sid }} .yw-row-label { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #5c6978; }
+  .yw-{{ sid }} .yw-row-text { margin-top: 4px; font-size: 15px; line-height: 1.6; color: #2b2420; }
+  .yw-{{ sid }} .yw-honeys { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; min-height: 30px; }
+  .yw-{{ sid }} .yw-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 8px; border: 1px solid rgba(34,34,34,.12); font-size: 12px; color: #2b2420; background: #ffffff; }
+  .yw-{{ sid }} .yw-chip i { width: 12px; height: 14px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: var(--chip); }
+  .yw-{{ sid }} .yw-chip[hidden] { display: none; }
+  .yw-{{ sid }} .yw-rest { font-size: 13px; color: #5c6978; }
+  .yw-{{ sid }} .yw-rest[hidden] { display: none; }
+  .yw-{{ sid }} .yw-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(34,34,34,.1); }
+  .yw-{{ sid }} .yw-nav button { display: inline-flex; align-items: center; gap: 10px; padding: 0; border: 0; background: none; cursor: pointer; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #2b2420; transition: color .3s; }
+  .yw-{{ sid }} .yw-nav button:hover { color: var(--yw-accent); }
+  .yw-{{ sid }} .yw-nav button span { font-size: 16px; letter-spacing: 0; }
+  .yw-{{ sid }} .yw-note { margin: 18px 0 0; font-size: 12px; color: #5c6978; }
+  @media (max-width: 749px) { .yw-{{ sid }} .yw-label { font-size: 17px; letter-spacing: .08em; } }
+  @media (prefers-reduced-motion: reduce) { .yw-{{ sid }} .yw-needle { transition: none; } .yw-{{ sid }} .yw-month.is-active { animation: none; } }
+  @media (min-width: 990px) {
+    .yw-{{ sid }} { padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+    .yw-{{ sid }} .yw-head { grid-template-columns: 1.1fr 1fr; align-items: end; margin-bottom: 56px; }
+    .yw-{{ sid }} .yw-intro { justify-self: end; text-align: right; }
+    .yw-{{ sid }} .yw-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 72px; }
+  }
+</style>
+
+<semen-year-wheel class="yw-{{ sid }}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %} data-step="{{ step_deg }}">
+  <div class="{{ s.setwidth }}">
+    {%- if s.title_top != blank or s.title != blank or s.des != blank -%}
+      <div class="yw-head" data-aos="fade-up">
+        <div>
+          {%- if s.title_top != blank -%}<span class="subtop yw-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
+          {%- if s.title != blank -%}<h2 class="h2 yw-title">{{ s.title | escape }}</h2>{%- endif -%}
+        </div>
+        {%- if s.des != blank -%}<p class="yw-intro">{{ s.des | escape }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="yw-grid">
+      <div class="yw-wheel" data-aos="fade-up">
+        <svg viewBox="0 0 600 600" role="img" aria-label="{{ s.title | escape }}">
+          {%- comment -%} paše kot letnice {%- endcomment -%}
+          {%- for block in forages -%}
+            {%- liquid
+              assign b = block.settings
+              assign r = forloop.index0 | times: 14 | minus: 214 | abs
+              assign c = r | times: tau
+              assign first = b.start
+              assign last = b.end | at_least: first
+              assign arc = last | minus: first | plus: 1 | times: c | divided_by: 24.0
+              assign rot = first | minus: 1 | times: 15 | minus: 90
+            -%}
+            <circle class="yw-track" cx="300" cy="300" r="{{ r }}"></circle>
+            <circle class="yw-ring" cx="300" cy="300" r="{{ r }}" stroke="{{ b.color }}" stroke-dasharray="{{ arc }} {{ c }}" transform="rotate({{ rot }} 300 300)" data-from="{{ first }}" data-to="{{ last }}" data-i="{{ forloop.index }}"><title>{{ b.name | escape }}: {{ b.period | escape }}</title></circle>
+          {%- endfor -%}
+
+          {%- comment -%} meseci {%- endcomment -%}
+          {%- for block in months -%}
+            {%- liquid
+              assign rot = forloop.index0 | times: step_deg | minus: 90 | plus: seg_gap_deg
+              assign mid = forloop.index0 | plus: 0.5 | times: step_deg
+              assign label_y = 300 | minus: r_month | plus: 4
+            -%}
+            <circle class="yw-seg{% if forloop.first %} is-active{% endif %}" cx="300" cy="300" r="{{ r_month }}" stroke="{{ block.settings.color }}" stroke-dasharray="{{ seg_len }} {{ c_month }}" transform="rotate({{ rot }} 300 300)" data-m="{{ forloop.index }}" {{ block.shopify_attributes }}><title>{{ block.settings.name | escape }}</title></circle>
+            <g transform="rotate({{ mid }} 300 300)">
+              <text class="yw-label{% if forloop.first %} is-active{% endif %}" data-m="{{ forloop.index }}" x="300" y="{{ label_y }}" text-anchor="middle" transform="rotate({{ mid | times: -1 }} 300 {{ label_y | minus: 4 }})">{{ block.settings.short | escape }}</text>
+            </g>
+          {%- endfor -%}
+
+          <g class="yw-today" hidden>
+            <circle cx="300" cy="6" r="6"><title>{{ s.today_label | escape }}</title></circle>
+          </g>
+          <g class="yw-needle" style="transform: rotate({{ step_deg | divided_by: 2 }}deg);">
+            <line x1="300" y1="300" x2="300" y2="62"></line>
+            <path d="M300 52l8 4.6v9.2L300 70.4l-8-4.6v-9.2z"></path>
+          </g>
+        </svg>
+        <div class="yw-center" aria-hidden="true">
+          <span class="yw-center-num">{{ months.first.settings.short | escape }}</span>
+          <span class="yw-center-name">{{ s.center_label | escape }}</span>
+        </div>
+      </div>
+
+      <div class="yw-panel" aria-live="polite">
+        {%- for block in months -%}
+          {%- assign b = block.settings -%}
+          <article class="yw-month{% if forloop.first %} is-active{% endif %}" data-m="{{ forloop.index }}" style="--m-color: {{ b.color }}">
+            <span class="yw-season">{{ b.season | escape }}</span>
+            <h3 class="h2 yw-month-name">{{ b.name | escape }}</h3>
+            <ul class="yw-rows" role="list">
+              <li class="yw-row">{%- render 'semen-icon', icon: 'bee', size: 26 -%}<span class="yw-row-label">{{ s.label_bees | escape }}</span><span class="yw-row-text">{{ b.bees | escape }}</span></li>
+              <li class="yw-row">{%- render 'semen-icon', icon: 'hive', size: 26 -%}<span class="yw-row-label">{{ s.label_work | escape }}</span><span class="yw-row-text">{{ b.work | escape }}</span></li>
+              <li class="yw-row">{%- render 'semen-icon', icon: 'flower', size: 26 -%}<span class="yw-row-label">{{ s.label_forage | escape }}</span>
+                <span class="yw-honeys">
+                  {%- for f in forages -%}
+                    <span class="yw-chip" data-i="{{ forloop.index }}" data-from="{{ f.settings.start }}" data-to="{{ f.settings.end }}" style="--chip: {{ f.settings.color }}" hidden><i></i>{{ f.settings.name | escape }}</span>
+                  {%- endfor -%}
+                  <span class="yw-rest">{{ s.no_forage | escape }}</span>
+                </span>
+              </li>
+            </ul>
+          </article>
+        {%- endfor -%}
+        <div class="yw-nav">
+          <button type="button" data-dir="-1"><span aria-hidden="true">←</span>{{ s.prev_label | escape }}</button>
+          <button type="button" data-dir="1">{{ s.next_label | escape }}<span aria-hidden="true">→</span></button>
+        </div>
+        {%- if s.note != blank -%}<p class="yw-note">{{ s.note | escape }}</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</semen-year-wheel>
+
+<script>
+  if (!customElements.get('semen-year-wheel')) {
+    customElements.define('semen-year-wheel', class extends HTMLElement {
+      connectedCallback() {
+        this.panels = Array.from(this.querySelectorAll('.yw-month'));
+        this.count = this.panels.length;
+        if (!this.count) return;
+        this.step = parseFloat(this.dataset.step) || 30;
+        this.turns = 0;
+        this.querySelectorAll('.yw-seg, .yw-label').forEach((el) => el.addEventListener('click', () => this.select(+el.dataset.m)));
+        this.querySelectorAll('.yw-nav button').forEach((btn) => btn.addEventListener('click', () => {
+          const next = ((this.current - 1 + +btn.dataset.dir + this.count) % this.count) + 1;
+          this.select(next, +btn.dataset.dir);
+        }));
+        const now = new Date();
+        const today = this.querySelector('.yw-today');
+        if (today && this.count === 12) {
+          const deg = (now.getMonth() + (now.getDate() - 1) / 31) * 30;
+          today.style.transform = 'rotate(' + deg + 'deg)';
+          today.removeAttribute('hidden');
+        }
+        this.select(this.count === 12 ? now.getMonth() + 1 : 1);
+      }
+      select(m, dir) {
+        const prev = this.current;
+        this.current = m;
+        // kazalec se vrti vedno v smeri premika (čez december naprej, ne nazaj)
+        if (prev && dir === 1 && m < prev) this.turns += 1;
+        if (prev && dir === -1 && m > prev) this.turns -= 1;
+        const deg = (m - 0.5) * this.step + this.turns * 360;
+        const needle = this.querySelector('.yw-needle');
+        if (needle) needle.style.transform = 'rotate(' + deg + 'deg)';
+        this.querySelectorAll('.yw-seg, .yw-label').forEach((el) => el.classList.toggle('is-active', +el.dataset.m === m));
+        this.panels.forEach((p) => p.classList.toggle('is-active', +p.dataset.m === m));
+        const label = this.querySelector('.yw-label[data-m="' + m + '"]');
+        const num = this.querySelector('.yw-center-num');
+        if (num && label) num.textContent = label.textContent;
+        // paše, ki tečejo v tem mesecu (polovici meseca 2m-1 in 2m)
+        const a = 2 * m - 1, b = 2 * m;
+        const on = (el) => +el.dataset.from <= b && +el.dataset.to >= a;
+        this.querySelectorAll('.yw-ring').forEach((ring) => ring.classList.toggle('is-on', on(ring)));
+        const panel = this.panels.find((p) => +p.dataset.m === m);
+        if (panel) {
+          let any = false;
+          panel.querySelectorAll('.yw-chip').forEach((chip) => { const v = on(chip); chip.hidden = !v; any = any || v; });
+          const rest = panel.querySelector('.yw-rest');
+          if (rest) rest.hidden = any;
+        }
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Čebelarjevo leto (Šemen)",
+  "tag": "section",
+  "class": "section-semen-year",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Ozadje", "default": "white", "options": [ { "value": "white", "label": "Belo" }, { "value": "cream", "label": "Kremno" } ] },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)" },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov", "default": "Leto v čebelnjaku" },
+    { "type": "text", "id": "title", "label": "Naslov (H2)", "default": "Čebelarjevo leto" },
+    { "type": "textarea", "id": "des", "label": "Uvod" },
+    { "type": "header", "content": "Oznake" },
+    { "type": "text", "id": "center_label", "label": "Napis v sredini kolesa", "default": "Ta mesec" },
+    { "type": "text", "id": "today_label", "label": "Oznaka današnjega dne", "default": "Danes" },
+    { "type": "text", "id": "label_bees", "label": "Oznaka: čebele", "default": "Čebele" },
+    { "type": "text", "id": "label_work", "label": "Oznaka: delo v čebelnjaku", "default": "V čebelnjaku" },
+    { "type": "text", "id": "label_forage", "label": "Oznaka: paša", "default": "Paša ta mesec" },
+    { "type": "text", "id": "no_forage", "label": "Besedilo, ko ni paše", "default": "Ni paše, čebele počivajo." },
+    { "type": "text", "id": "prev_label", "label": "Gumb nazaj", "default": "Prejšnji mesec" },
+    { "type": "text", "id": "next_label", "label": "Gumb naprej", "default": "Naslednji mesec" },
+    { "type": "text", "id": "note", "label": "Opomba" },
+    { "type": "range", "id": "padding_top", "label": "Odmik zgoraj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Odmik spodaj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "month",
+      "name": "Mesec",
+      "limit": 12,
+      "settings": [
+        { "type": "text", "id": "name", "label": "Ime", "default": "Januar" },
+        { "type": "text", "id": "short", "label": "Kratko ime na kolesu", "default": "jan" },
+        { "type": "text", "id": "season", "label": "Letni čas", "default": "Zima" },
+        { "type": "color", "id": "color", "label": "Barva", "default": "#9fb3bd" },
+        { "type": "textarea", "id": "bees", "label": "Kaj počnejo čebele" },
+        { "type": "textarea", "id": "work", "label": "Kaj počnemo v čebelnjaku" }
+      ]
+    },
+    {
+      "type": "forage",
+      "name": "Paša",
+      "limit": 7,
+      "settings": [
+        { "type": "text", "id": "name", "label": "Ime", "default": "Akacija" },
+        { "type": "text", "id": "period", "label": "Obdobje (besedilo)", "default": "druga polovica maja" },
+        { "type": "range", "id": "start", "label": "Začetek (polovica meseca)", "info": "1 = začetek januarja, 2 = konec januarja … 24 = konec decembra", "min": 1, "max": 24, "step": 1, "default": 10 },
+        { "type": "range", "id": "end", "label": "Konec (polovica meseca)", "min": 1, "max": 24, "step": 1, "default": 11 },
+        { "type": "color", "id": "color", "label": "Barva", "default": "#f3e3a0" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Čebelarjevo leto (Šemen)", "blocks": [ { "type": "month" }, { "type": "forage" } ] } ]
+}
+{% endschema %}

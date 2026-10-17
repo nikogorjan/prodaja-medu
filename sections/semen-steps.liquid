@@ -1,0 +1,131 @@
+{%- comment -%}
+  Koraki (Čebelarstvo Šemen): oštevilčen potek (npr. kako poteka obisk). Velike zlate številke, povezane s tanko črto;
+  na telefonu koraki drug pod drugim z navpično črto. Pod koraki neobvezen gumb in telefonska številka.
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign steps = section.blocks | where: 'type', 'step'
+  if s.scheme == 'dark'
+    assign bg = '#2b2420'
+  elsif s.scheme == 'cream'
+    assign bg = '#f7f3ea'
+  else
+    assign bg = '#ffffff'
+  endif
+-%}
+<style>
+  .st-{{ sid }} { --st-accent: {{ s.accent }}; --st-line: {% if s.scheme == 'dark' %}rgba(255,255,255,.16){% else %}rgba(34,34,34,.14){% endif %}; background: {{ bg }}; padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  .st-{{ sid }} .st-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 44px; }
+  .st-{{ sid }} .st-eyebrow { display: block; color: var(--st-accent) !important; }
+  .st-{{ sid }} .st-title { margin: 6px 0 0; text-wrap: balance; }
+  .st-{{ sid }} .st-intro { margin: 0; max-width: 50ch; color: #5c6978; }
+  .st-{{ sid }} .st-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; counter-reset: st; }
+  .st-{{ sid }} .st-step { position: relative; margin: 0; padding: 0 0 34px 76px; }
+  .st-{{ sid }} .st-step::before { content: ""; position: absolute; left: 27px; top: 64px; bottom: 8px; width: 1px; background: var(--st-line); }
+  .st-{{ sid }} .st-step:last-child { padding-bottom: 0; }
+  .st-{{ sid }} .st-step:last-child::before { display: none; }
+  .st-{{ sid }} .st-num { position: absolute; left: 0; top: -6px; width: 56px; font-family: var(--g-font-1); font-size: 52px; font-weight: 700; line-height: 1; color: var(--st-accent); text-align: center; font-variant-numeric: tabular-nums; }
+  .st-{{ sid }} .st-line { display: none; }
+  .st-{{ sid }} .st-meta { display: inline-block; margin-bottom: 10px; font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--st-accent); }
+  .st-{{ sid }} .st-step-title { margin: 0 0 8px; font-size: 20px; line-height: 1.3; }
+  .st-{{ sid }} .st-step-text { margin: 0; color: #5c6978; font-size: 14px; line-height: 1.7; }
+  .st-{{ sid }} .st-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 32px; margin-top: 52px; text-align: center; }
+  .st-{{ sid }} .st-phone { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: #5c6978; }
+  .st-{{ sid }} .st-phone a { color: var(--g-color-heading); font-weight: 600; text-decoration: none; }
+  .st-{{ sid }} .st-phone .semen-icon { color: var(--st-accent); }
+  {%- if s.scheme == 'dark' -%}
+  .st-{{ sid }} .st-title, .st-{{ sid }} .st-step-title, .st-{{ sid }} .st-phone a { color: #ffffff; }
+  .st-{{ sid }} .st-intro, .st-{{ sid }} .st-step-text, .st-{{ sid }} .st-phone { color: #cfc4b4; }
+  .st-{{ sid }} .btn-underline { color: #ffffff !important; }
+  .st-{{ sid }} .btn-underline:before { background: var(--st-accent); }
+  {%- endif -%}
+  @media (min-width: 990px) {
+    .st-{{ sid }} { padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+    .st-{{ sid }} .st-head { grid-template-columns: 1.1fr 1fr; align-items: end; margin-bottom: 64px; }
+    .st-{{ sid }} .st-intro { justify-self: end; text-align: right; }
+    .st-{{ sid }} .st-list { grid-template-columns: repeat({{ steps.size | at_least: 1 }}, minmax(0, 1fr)); gap: 0 32px; }
+    .st-{{ sid }} .st-step { padding: 0; }
+    .st-{{ sid }} .st-step::before { display: none; }
+    .st-{{ sid }} .st-top { display: flex; align-items: center; gap: 18px; margin-bottom: 26px; }
+    .st-{{ sid }} .st-num { position: static; width: auto; font-size: 64px; text-align: left; }
+    .st-{{ sid }} .st-line { display: block; flex: 1 1 auto; height: 1px; background: var(--st-line); }
+    .st-{{ sid }} .st-step:last-child .st-line { display: none; }
+  }
+</style>
+
+<section class="st-{{ sid }}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="{{ s.setwidth }}">
+    {%- if s.title_top != blank or s.title != blank or s.des != blank -%}
+      <div class="st-head" data-aos="fade-up">
+        <div>
+          {%- if s.title_top != blank -%}<span class="subtop st-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
+          {%- if s.title != blank -%}<h2 class="h2 st-title">{{ s.title | escape }}</h2>{%- endif -%}
+        </div>
+        {%- if s.des != blank -%}<p class="st-intro">{{ s.des | escape }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ol class="st-list">
+      {%- for block in steps -%}
+        <li class="st-step" {{ block.shopify_attributes }} data-aos="fade-up" data-aos-delay="{{ forloop.index0 | times: 120 }}">
+          <div class="st-top">
+            <span class="st-num" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+            <span class="st-line" aria-hidden="true"></span>
+          </div>
+          {%- if block.settings.meta != blank -%}<span class="st-meta">{{ block.settings.meta | escape }}</span>{%- endif -%}
+          <h3 class="st-step-title">{{ block.settings.title | escape }}</h3>
+          {%- if block.settings.text != blank -%}<p class="st-step-text">{{ block.settings.text | escape }}</p>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+
+    {%- if s.button != blank or s.phone != blank -%}
+      <div class="st-foot" data-aos="fade-up">
+        {%- if s.button != blank -%}<a class="btn {{ s.style_btn }}" href="{{ s.link | default: '#' }}">{{ s.button | escape }}</a>{%- endif -%}
+        {%- if s.phone != blank -%}
+          <span class="st-phone">{%- render 'semen-icon', icon: 'phone', size: 20 -%}<span>{{ s.phone_label | escape }} <a href="tel:{{ s.phone | remove: ' ' | remove: '/' | remove: '-' }}">{{ s.phone | escape }}</a></span></span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Koraki (Šemen)",
+  "tag": "section",
+  "class": "section-semen-steps",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "dark", "options": [ { "value": "white", "label": "Bela" }, { "value": "cream", "label": "Kremna" }, { "value": "dark", "label": "Temna" } ] },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)", "info": "Npr. obisk – nato povezava #obisk skoči na to sekcijo." },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov", "default": "Obisk" },
+    { "type": "text", "id": "title", "label": "Naslov (H2)", "default": "Kako poteka obisk" },
+    { "type": "textarea", "id": "des", "label": "Uvod" },
+    { "type": "header", "content": "Pod koraki" },
+    { "type": "text", "id": "button", "label": "Gumb" },
+    { "type": "url", "id": "link", "label": "Povezava gumba" },
+    { "type": "select", "id": "style_btn", "label": "Slog gumba", "default": "btn-theme", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline btn-outline-white", "label": "Bela obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "text", "id": "phone_label", "label": "Besedilo pred telefonom", "default": "ali pokličite" },
+    { "type": "text", "id": "phone", "label": "Telefon" },
+    { "type": "header", "content": "Odmiki" },
+    { "type": "range", "id": "padding_top", "label": "Odmik zgoraj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Odmik spodaj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Korak",
+      "settings": [
+        { "type": "text", "id": "meta", "label": "Oznaka (neobvezno, npr. 1–2 uri)" },
+        { "type": "text", "id": "title", "label": "Naslov", "default": "Naslov koraka" },
+        { "type": "textarea", "id": "text", "label": "Besedilo" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [ { "name": "Koraki (Šemen)", "blocks": [ { "type": "step" }, { "type": "step" }, { "type": "step" }, { "type": "step" } ] } ]
+}
+{% endschema %}

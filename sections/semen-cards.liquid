@@ -1,0 +1,220 @@
+{%- comment -%}
+  Kartice (Čebelarstvo Šemen): mreža kartic z ikono ali fotografijo, oznako, naslovom, besedilom in povezavo.
+  Uporaba: vrednote, ponudba doživetij, letni časi, okolica, bližnjice za kontakt.
+  Glava je lahko "deljena" (naslov levo, uvod desno, kot Pridelava) ali "na sredini" (kot ostale sekcije domače strani).
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign cards = section.blocks | where: 'type', 'card'
+  assign cols = s.columns | plus: 0
+  case s.scheme
+    when 'dark'
+      assign bg = '#2b2420'
+    when 'cream'
+      assign bg = '#f7f3ea'
+    else
+      assign bg = '#ffffff'
+  endcase
+-%}
+<style>
+  .sc-{{ sid }} { --sc-accent: {{ s.accent }}; position: relative; overflow: hidden; background: {{ bg }}; padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  {%- if s.pattern -%}
+  .sc-{{ sid }} .sc-hex { position: absolute; inset: 0; pointer-events: none; opacity: .08; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><path d='M28 1l27 15.5v31L28 63 1 47.5v-31L28 1zm0 48l27 15.5v31L28 97 1 80.5v-31L28 49z' fill='none' stroke='{{ s.accent | replace: '#', '%23' }}' stroke-width='1'/></svg>"); background-size: 56px 97px; }
+  {%- endif -%}
+  .sc-{{ sid }} .container, .sc-{{ sid }} .container-fluid { position: relative; }
+  .sc-{{ sid }} .sc-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 40px; }
+  .sc-{{ sid }} .sc-head--center { text-align: center; justify-items: center; }
+  .sc-{{ sid }} .sc-eyebrow { display: block; }
+  .sc-{{ sid }} .sc-title { margin: 6px 0 0; text-wrap: balance; }
+  .sc-{{ sid }} .sc-intro { margin: 0; max-width: 52ch; color: #5c6978; }
+  .sc-{{ sid }} .sc-intro p { margin: 0 0 10px; color: inherit; font-size: inherit; line-height: inherit; }
+  .sc-{{ sid }} .sc-intro p:last-child { margin: 0; }
+  .sc-{{ sid }} .sc-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; margin: 0; padding: 0; list-style: none; }
+  .sc-{{ sid }} .sc-card { position: relative; display: flex; flex-direction: column; margin: 0; }
+  .sc-{{ sid }} .sc-card--box { padding: 30px 28px 32px; background: {% if s.scheme == 'cream' %}#ffffff{% else %}#fbf8f2{% endif %}; border: 1px solid #ece4d4; transition: border-color .35s, transform .35s; }
+  .sc-{{ sid }} .sc-card--box:hover { border-color: var(--sc-accent); transform: translateY(-3px); }
+  .sc-{{ sid }} .sc-card--line { padding: 0 0 8px; }
+  .sc-{{ sid }} .sc-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+  .sc-{{ sid }} .sc-icon { display: inline-flex; color: var(--sc-accent); }
+  .sc-{{ sid }} .sc-label { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--sc-accent); line-height: 1.4; }
+  .sc-{{ sid }} .sc-top--label-only .sc-label { padding: 6px 10px; background: var(--sc-accent); color: #ffffff; }
+  .sc-{{ sid }} .sc-media { position: relative; overflow: hidden; aspect-ratio: 4 / 3; margin: -31px -29px 26px; background: #e9e1d2; }
+  .sc-{{ sid }} .sc-card--line .sc-media { margin: 0 0 22px; }
+  .sc-{{ sid }} .sc-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(var(--sc-zoom, 1)); transition: transform .8s cubic-bezier(.2,.6,.2,1); }
+  .sc-{{ sid }} .sc-card:hover .sc-media img { transform: scale(calc(var(--sc-zoom, 1) + .04)); }
+  .sc-{{ sid }} .sc-media .sc-label { position: absolute; top: 14px; left: 14px; z-index: 2; padding: 6px 10px; background: var(--sc-accent); color: #ffffff; }
+  .sc-{{ sid }} .sc-rule { width: 32px; height: 2px; background: var(--sc-accent); margin: 0 0 16px; transition: width .4s; }
+  .sc-{{ sid }} .sc-card:hover .sc-rule { width: 56px; }
+  .sc-{{ sid }} .sc-card-title { margin: 0 0 10px; font-size: 20px; line-height: 1.3; }
+  .sc-{{ sid }} .sc-card-text { color: #5c6978; font-size: 14px; line-height: 1.7; }
+  .sc-{{ sid }} .sc-card-text p { margin: 0 0 8px; color: inherit; font-size: inherit; line-height: inherit; }
+  .sc-{{ sid }} .sc-card-text p:last-child { margin: 0; }
+  .sc-{{ sid }} .sc-card-text a { color: inherit; }
+  .sc-{{ sid }} .sc-card-link { margin-top: auto; padding-top: 18px; }
+  .sc-{{ sid }} .sc-card-link .btn-underline { font-size: 11px; }
+  .sc-{{ sid }} .sc-foot { margin-top: 48px; text-align: center; }
+  {%- if s.scheme == 'dark' -%}
+  .sc-{{ sid }} .sc-title, .sc-{{ sid }} .sc-card-title { color: #ffffff; }
+  .sc-{{ sid }} .sc-eyebrow { color: var(--sc-accent) !important; }
+  .sc-{{ sid }} .sc-intro, .sc-{{ sid }} .sc-card-text { color: #cfc4b4; }
+  .sc-{{ sid }} .sc-card--box { background: rgba(255,255,255,.035); border-color: rgba(255,255,255,.1); }
+  .sc-{{ sid }} .sc-media { background: #3a312b; }
+  .sc-{{ sid }} .btn-underline { color: #ffffff !important; }
+  .sc-{{ sid }} .btn-underline:before { background: var(--sc-accent); }
+  {%- elsif s.pattern -%}
+  .sc-{{ sid }} .sc-eyebrow { color: var(--sc-accent) !important; }
+  {%- endif -%}
+  @media (min-width: 750px) {
+    .sc-{{ sid }} .sc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  }
+  @media (min-width: 990px) {
+    .sc-{{ sid }} { padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+    .sc-{{ sid }} .sc-head { margin-bottom: 56px; }
+    .sc-{{ sid }} .sc-head--split { grid-template-columns: 1.1fr 1fr; align-items: end; }
+    .sc-{{ sid }} .sc-head--split .sc-intro { justify-self: end; text-align: right; }
+    .sc-{{ sid }} .sc-grid { grid-template-columns: repeat({{ s.columns }}, minmax(0, 1fr)); gap: {% if s.card_style == 'line' %}40px 36px{% else %}28px{% endif %}; }
+  }
+</style>
+
+<section class="sc-{{ sid }}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  {%- if s.pattern -%}<div class="sc-hex" aria-hidden="true"></div>{%- endif -%}
+  <div class="{{ s.setwidth }}">
+    {%- if s.title_top != blank or s.title != blank or s.des != blank -%}
+      <div class="sc-head sc-head--{{ s.heading_layout }}" data-aos="fade-up">
+        <div>
+          {%- if s.title_top != blank -%}<span class="subtop sc-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
+          {%- if s.title != blank -%}
+            {%- if s.heading_layout == 'center' -%}
+              <h2 class="h3 section-title-1 sc-title"><span>{{ s.title | escape }}</span></h2>
+            {%- else -%}
+              <h2 class="h2 sc-title">{{ s.title | escape }}</h2>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+        {%- if s.des != blank -%}<div class="sc-intro">{{ s.des }}</div>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ul class="sc-grid" role="list">
+      {%- for block in cards -%}
+        {%- liquid
+          assign b = block.settings
+          assign has_media = false
+          if b.image != blank
+            assign has_media = true
+          endif
+        -%}
+        <li class="sc-card sc-card--{{ s.card_style }}" {{ block.shopify_attributes }} data-aos="fade-up" data-aos-delay="{{ forloop.index0 | modulo: cols | times: 100 }}">
+          {%- if has_media -%}
+            <div class="sc-media"{% if b.image.src contains '.png' %} style="--sc-zoom: 1.04"{% endif %}>
+              {%- assign img_alt = b.image.alt | default: b.title -%}
+              {{ b.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw', alt: img_alt }}
+              {%- if b.label != blank -%}<span class="sc-label">{{ b.label | escape }}</span>{%- endif -%}
+            </div>
+          {%- elsif b.icon != 'none' or b.label != blank -%}
+            <div class="sc-top{% if b.icon == 'none' %} sc-top--label-only{% endif %}">
+              {%- if b.icon != 'none' -%}<span class="sc-icon">{%- render 'semen-icon', icon: b.icon, size: s.icon_size -%}</span>{%- endif -%}
+              {%- if b.label != blank -%}<span class="sc-label">{{ b.label | escape }}</span>{%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- if s.card_style == 'line' -%}<div class="sc-rule" aria-hidden="true"></div>{%- endif -%}
+          {%- if b.title != blank -%}<h3 class="sc-card-title">{{ b.title | escape }}</h3>{%- endif -%}
+          {%- if b.text != blank -%}<div class="sc-card-text">{{ b.text }}</div>{%- endif -%}
+          {%- if b.link_label != blank and b.link != blank -%}
+            <div class="sc-card-link"><a class="btn btn-underline" href="{{ b.link }}">{{ b.link_label | escape }}</a></div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if s.button != blank -%}
+      <div class="sc-foot"><a class="btn {{ s.style_btn }}" href="{{ s.link | default: '#' }}">{{ s.button | escape }}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kartice (Šemen)",
+  "tag": "section",
+  "class": "section-semen-cards",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "cream", "options": [ { "value": "white", "label": "Bela" }, { "value": "cream", "label": "Kremna" }, { "value": "dark", "label": "Temna" } ] },
+    { "type": "checkbox", "id": "pattern", "label": "Vzorec satovja v ozadju", "default": false },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)", "info": "Npr. ponudba – nato povezava #ponudba skoči na to sekcijo." },
+    { "type": "header", "content": "Glava" },
+    { "type": "select", "id": "heading_layout", "label": "Postavitev glave", "default": "split", "options": [ { "value": "split", "label": "Naslov levo, uvod desno" }, { "value": "center", "label": "Na sredini" } ] },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov", "default": "Nadnaslov" },
+    { "type": "text", "id": "title", "label": "Naslov (H2)", "default": "Naslov sekcije" },
+    { "type": "richtext", "id": "des", "label": "Uvod" },
+    { "type": "header", "content": "Kartice" },
+    { "type": "select", "id": "columns", "label": "Stolpcev na računalniku", "default": "3", "options": [ { "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" } ] },
+    { "type": "select", "id": "card_style", "label": "Slog kartic", "default": "box", "options": [ { "value": "box", "label": "Okvir" }, { "value": "line", "label": "Brez okvirja, zlata črta" } ] },
+    { "type": "range", "id": "icon_size", "label": "Velikost ikon", "min": 24, "max": 48, "step": 4, "unit": "px", "default": 36 },
+    { "type": "text", "id": "button", "label": "Gumb pod karticami" },
+    { "type": "url", "id": "link", "label": "Povezava gumba" },
+    { "type": "select", "id": "style_btn", "label": "Slog gumba", "default": "btn-underline", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline", "label": "Obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "header", "content": "Odmiki" },
+    { "type": "range", "id": "padding_top", "label": "Odmik zgoraj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Odmik spodaj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Kartica",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ikona", "default": "hive", "options": [
+          { "value": "none", "label": "Brez ikone" },
+          { "value": "hive", "label": "Satje" },
+          { "value": "bee", "label": "Čebela" },
+          { "value": "jar", "label": "Kozarec medu" },
+          { "value": "dipper", "label": "Žlica za med" },
+          { "value": "drop", "label": "Kapljica" },
+          { "value": "frame", "label": "Okvir s satjem" },
+          { "value": "pollen", "label": "Cvetni prah" },
+          { "value": "flower", "label": "Cvet" },
+          { "value": "sprout", "label": "Pomlad (poganjek)" },
+          { "value": "sun", "label": "Poletje (sonce)" },
+          { "value": "leaf", "label": "Jesen (list)" },
+          { "value": "snow", "label": "Zima (snežinka)" },
+          { "value": "tree", "label": "Drevo, gozd" },
+          { "value": "air", "label": "Zrak, dihanje" },
+          { "value": "bed", "label": "Počitek" },
+          { "value": "thermo", "label": "Toplota, hladno točenje" },
+          { "value": "palette", "label": "Poslikava" },
+          { "value": "clock", "label": "Ura" },
+          { "value": "calendar", "label": "Koledar" },
+          { "value": "people", "label": "Ljudje, skupine" },
+          { "value": "heart", "label": "Srce" },
+          { "value": "shield", "label": "Varnost" },
+          { "value": "award", "label": "Priznanje, tradicija" },
+          { "value": "gift", "label": "Darilo" },
+          { "value": "bag", "label": "Nakup" },
+          { "value": "truck", "label": "Dostava" },
+          { "value": "phone", "label": "Telefon" },
+          { "value": "mobile", "label": "Mobitel" },
+          { "value": "mail", "label": "E-pošta" },
+          { "value": "pin", "label": "Lokacija" },
+          { "value": "home", "label": "Hiša, sedež" },
+          { "value": "map", "label": "Zemljevid" },
+          { "value": "route", "label": "Pot" },
+          { "value": "water", "label": "Reka, voda" },
+          { "value": "spa", "label": "Terme" },
+          { "value": "bike", "label": "Kolo" },
+          { "value": "check", "label": "Kljukica" }
+        ] },
+        { "type": "image_picker", "id": "image", "label": "Fotografija (namesto ikone)" },
+        { "type": "text", "id": "label", "label": "Oznaka (npr. Pomlad, 500 m)" },
+        { "type": "text", "id": "title", "label": "Naslov", "default": "Naslov kartice" },
+        { "type": "richtext", "id": "text", "label": "Besedilo", "default": "<p>Kratko besedilo kartice.</p>" },
+        { "type": "text", "id": "link_label", "label": "Besedilo povezave" },
+        { "type": "url", "id": "link", "label": "Povezava" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Kartice (Šemen)", "blocks": [ { "type": "card" }, { "type": "card" }, { "type": "card" } ] } ]
+}
+{% endschema %}

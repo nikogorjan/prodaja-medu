@@ -1,0 +1,665 @@
+{
+  "sections": {
+    "uvod": {
+      "type": "semen-page-hero",
+      "blocks": {
+        "dejstvo_1": {
+          "type": "fact",
+          "settings": {
+            "label": "Od leta",
+            "value": "1982"
+          }
+        },
+        "dejstvo_2": {
+          "type": "fact",
+          "settings": {
+            "label": "Čebelje družine",
+            "value": "700"
+          }
+        },
+        "dejstvo_3": {
+          "type": "fact",
+          "settings": {
+            "label": "Čebelnjak",
+            "value": "Melinci ob Muri"
+          }
+        }
+      },
+      "block_order": [
+        "dejstvo_1",
+        "dejstvo_2",
+        "dejstvo_3"
+      ],
+      "settings": {
+        "layout": "split",
+        "image": "shopify://shop_images/New_Project.webp",
+        "image_position": "center center",
+        "panel_width": 46,
+        "height": 600,
+        "height_mobile": 520,
+        "overlay": 80,
+        "bgsection": "#2b2420",
+        "accent": "#c99a5c",
+        "show_breadcrumb": true,
+        "breadcrumb_label": "O nas",
+        "title_top": "Družina Šemen",
+        "title": "Čebelarji iz Prekmurja",
+        "text": "<p>Čebelarimo od leta 1982. Danes skrbimo za približno 700 čebeljih družin, med točimo in polnimo doma, v poslikanem čebelnjaku na Melincih ob Muri pa sprejemamo obiskovalce.</p>",
+        "button": "V trgovino",
+        "link": "shopify://collections/all",
+        "style_btn": "btn-theme",
+        "button_2": "Obiščite čebelnjak",
+        "link_2": "/pages/apiturizem",
+        "style_btn_2": "btn-underline"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "zgodba": {
+      "type": "semen-split",
+      "blocks": {
+        "citat": {
+          "type": "quote",
+          "settings": {
+            "quote": "Med odvzamemo šele, ko ga čebele same pokrijejo z voskom. Hitreje ne gre in tudi ne sme.",
+            "author": ""
+          }
+        }
+      },
+      "block_order": [
+        "citat"
+      ],
+      "settings": {
+        "scheme": "white",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "zgodba",
+        "image": "shopify://shop_images/New_Project_2.webp",
+        "image_side": "left",
+        "ratio": "portrait",
+        "image_position": "center center",
+        "image_width": 46,
+        "caption": "Čebele na poti na pašo",
+        "title_top": "Naša zgodba",
+        "title": "Od nekaj panjev do 700 čebeljih družin",
+        "text": "<p>Začelo se je leta 1982, z nekaj panji in veliko radovednosti. Iz ljubezni do čebel je zraslo družinsko čebelarstvo, ki ga vodimo še danes.</p><p>Večina naših družin živi v slovenskih AŽ panjih. V prevoznih čebelnjakih jih vozimo tja, kjer cveti: spomladi na akacijo, poleti na lipo in kostanj, v gozdove po mano za gozdni in hojev med. Tako nastane osem vrst sortnega medu, vsaka s svojim okusom in barvo.</p><p>Med točimo hladno in ga polnimo doma, v majhnih serijah. Poleg medu pridelujemo cvetni prah, propolis in vosek.</p>",
+        "button": "",
+        "link": "",
+        "style_btn": "btn-theme",
+        "button_2": "",
+        "link_2": "",
+        "style_btn_2": "btn-underline",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "stevilke_semen": {
+      "type": "service",
+      "blocks": {
+        "st_1": {
+          "type": "service",
+          "settings": {
+            "bgblock": "rgba(0,0,0,0)",
+            "title": "40+",
+            "description": "let družinske tradicije",
+            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" viewbox=\"0 0 24 24\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5L12 2.5z\"></path><path d=\"M12 7.5l3.9 2.25v4.5L12 16.5l-3.9-2.25v-4.5L12 7.5z\"></path></svg>"
+          }
+        },
+        "st_2": {
+          "type": "service",
+          "settings": {
+            "bgblock": "rgba(0,0,0,0)",
+            "title": "700",
+            "description": "čebeljih družin na pašah po Sloveniji",
+            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" viewbox=\"0 0 24 24\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5L12 2.5z\"></path><path d=\"M12 7.5l3.9 2.25v4.5L12 16.5l-3.9-2.25v-4.5L12 7.5z\"></path></svg>"
+          }
+        },
+        "st_3": {
+          "type": "service",
+          "settings": {
+            "bgblock": "rgba(0,0,0,0)",
+            "title": "8",
+            "description": "vrst sortnega medu iz lastne pridelave",
+            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" viewbox=\"0 0 24 24\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5L12 2.5z\"></path><path d=\"M12 7.5l3.9 2.25v4.5L12 16.5l-3.9-2.25v-4.5L12 7.5z\"></path></svg>"
+          }
+        },
+        "st_4": {
+          "type": "service",
+          "settings": {
+            "bgblock": "rgba(0,0,0,0)",
+            "title": "40",
+            "description": "panjev v čebelnjaku za apiterapijo",
+            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" viewbox=\"0 0 24 24\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5L12 2.5z\"></path><path d=\"M12 7.5l3.9 2.25v4.5L12 16.5l-3.9-2.25v-4.5L12 7.5z\"></path></svg>"
+          }
+        }
+      },
+      "block_order": [
+        "st_1",
+        "st_2",
+        "st_3",
+        "st_4"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#2b2420",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "paddingbox": "0px 0px 0px 0px",
+        "iconcolor": "#c99a5c",
+        "titlecolor": "#ffffff",
+        "subcolor": "#cfc4b4",
+        "size": 28,
+        "service_heading": "h2",
+        "layout": "style-1",
+        "enable_carousel": false,
+        "arrows": false,
+        "draggable": false,
+        "dots": false,
+        "infinite": false,
+        "paddingsection": "56px 0px 56px 0px",
+        "paddingmobile": "32px 0px 32px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "vrednote": {
+      "type": "semen-cards",
+      "blocks": {
+        "v1": {
+          "type": "card",
+          "settings": {
+            "icon": "bee",
+            "label": "",
+            "title": "Čebele na prvem mestu",
+            "text": "<p>Paše izbiramo po tem, kaj ustreza čebelam, ne po tem, kaj je najhitreje. Med odvzamemo šele, ko je zrel in pokrit z voskom.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "v2": {
+          "type": "card",
+          "settings": {
+            "icon": "thermo",
+            "label": "",
+            "title": "Hladno točenje",
+            "text": "<p>Med iztočimo brez segrevanja in ga le precedimo. Tako ohrani aromo, encime in cvetni prah, zato sčasoma naravno kristalizira.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "v3": {
+          "type": "card",
+          "settings": {
+            "icon": "jar",
+            "label": "",
+            "title": "Majhne serije, doma",
+            "text": "<p>Vsak kozarec napolnimo, zapremo in označimo doma. Zato vemo, s katere paše je med v vsakem kozarcu.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "v4": {
+          "type": "card",
+          "settings": {
+            "icon": "hive",
+            "label": "",
+            "title": "Odprta vrata čebelnjaka",
+            "text": "<p>Poslikan čebelnjak na Melincih je odprt za obiskovalce: za apiterapijo, degustacijo medu in pogovor o čebelah.</p>",
+            "link_label": "Več o apiturizmu",
+            "link": "/pages/apiturizem"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "settings": {
+        "scheme": "cream",
+        "pattern": true,
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "",
+        "heading_layout": "split",
+        "title_top": "Kaj nas vodi",
+        "title": "Štiri pravila našega čebelnjaka",
+        "des": "<p>Čebelarjenje je potrpežljivo delo. Nekaterih korakov ni mogoče pospešiti, zato jih ne preskočimo.</p>",
+        "columns": "4",
+        "card_style": "line",
+        "icon_size": 36,
+        "button": "",
+        "link": "",
+        "style_btn": "btn-underline",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "leto": {
+      "type": "semen-year-wheel",
+      "blocks": {
+        "m01": {
+          "type": "month",
+          "settings": {
+            "name": "Januar",
+            "short": "jan",
+            "season": "Zima",
+            "color": "#9fb3bd",
+            "bees": "Mirujejo v zimski gruči in se grejejo s tresenjem mišic. Matica ne zalega.",
+            "work": "Panjev ne odpiramo, le prisluhnemo jim. Popravljamo okvirje in pripravljamo opremo za novo sezono."
+          }
+        },
+        "m02": {
+          "type": "month",
+          "settings": {
+            "name": "Februar",
+            "short": "feb",
+            "season": "Zima",
+            "color": "#9fb3bd",
+            "bees": "Matica začne zalegati, v sredini gruče se segreje. Družina se počasi prebuja.",
+            "work": "Od zunaj preverjamo, ali imajo družine dovolj hrane, in čakamo na prve tople dni."
+          }
+        },
+        "m03": {
+          "type": "month",
+          "settings": {
+            "name": "Marec",
+            "short": "mar",
+            "season": "Pomlad",
+            "color": "#9bb068",
+            "bees": "Ob prvih toplih dneh opravijo pročiščevalni izlet in nosijo prvi cvetni prah z leske in vrbe.",
+            "work": "Prvi pregled družin na toplem, mirnem dnevu: kako so prezimile in kakšna je matica."
+          }
+        },
+        "m04": {
+          "type": "month",
+          "settings": {
+            "name": "April",
+            "short": "apr",
+            "season": "Pomlad",
+            "color": "#9bb068",
+            "bees": "Na sadnem drevju, regratu in oljni ogrščici družine hitro rastejo, vsak dan se izleže na stotine mladih čebel.",
+            "work": "Širimo gnezda, dodajamo satnice in pripravljamo panje za prvo pašo."
+          }
+        },
+        "m05": {
+          "type": "month",
+          "settings": {
+            "name": "Maj",
+            "short": "maj",
+            "season": "Pomlad",
+            "color": "#9bb068",
+            "bees": "Vrhunec razvoja. Družine so močne, v zraku je rojilni nagon.",
+            "work": "Pazimo, da se ne rojijo, in čebele odpeljemo na akacijo."
+          }
+        },
+        "m06": {
+          "type": "month",
+          "settings": {
+            "name": "Junij",
+            "short": "jun",
+            "season": "Poletje",
+            "color": "#e0a83a",
+            "bees": "Nabirajo nektar na lipi in kostanju, v gozdovih mano.",
+            "work": "Točimo akacijev med in panje selimo na nove paše."
+          }
+        },
+        "m07": {
+          "type": "month",
+          "settings": {
+            "name": "Julij",
+            "short": "jul",
+            "season": "Poletje",
+            "color": "#e0a83a",
+            "bees": "Najmočnejše družine leta, panj šteje več deset tisoč čebel.",
+            "work": "Točimo lipov in kostanjev med, čebele vozimo na sončnice."
+          }
+        },
+        "m08": {
+          "type": "month",
+          "settings": {
+            "name": "Avgust",
+            "short": "avg",
+            "season": "Poletje",
+            "color": "#e0a83a",
+            "bees": "Paše se končujejo, ajda še cveti. Družine začnejo zmanjševati zalego.",
+            "work": "Zadnja točenja, skrb za zdravje čebel in začetek priprave na zimo."
+          }
+        },
+        "m09": {
+          "type": "month",
+          "settings": {
+            "name": "September",
+            "short": "sep",
+            "season": "Jesen",
+            "color": "#c0703f",
+            "bees": "Vzgajajo zimske čebele, ki živijo več mesecev, ne le nekaj tednov.",
+            "work": "Točimo ajdov med in poskrbimo, da imajo družine dovolj hrane za zimo."
+          }
+        },
+        "m10": {
+          "type": "month",
+          "settings": {
+            "name": "Oktober",
+            "short": "okt",
+            "season": "Jesen",
+            "color": "#c0703f",
+            "bees": "Zalega se zmanjšuje, družina se krči in umirja.",
+            "work": "Zadnji pregledi. Zožimo žrela panjev, da je v njih topleje in varneje."
+          }
+        },
+        "m11": {
+          "type": "month",
+          "settings": {
+            "name": "November",
+            "short": "nov",
+            "season": "Jesen",
+            "color": "#c0703f",
+            "bees": "Ob prvem mrazu se stisnejo v zimsko gručo.",
+            "work": "Med polnimo v kozarce in pripravljamo darilne pakete za praznike."
+          }
+        },
+        "m12": {
+          "type": "month",
+          "settings": {
+            "name": "December",
+            "short": "dec",
+            "season": "Zima",
+            "color": "#9fb3bd",
+            "bees": "Mirujejo v gruči, matica ne zalega.",
+            "work": "Zimska oskrba in počitek. Čebelnjak je tih, mi pa že načrtujemo pomlad."
+          }
+        },
+        "p1": {
+          "type": "forage",
+          "settings": {
+            "name": "Cvetlični med",
+            "period": "april–začetek maja",
+            "start": 7,
+            "end": 9,
+            "color": "#ecc95a"
+          }
+        },
+        "p2": {
+          "type": "forage",
+          "settings": {
+            "name": "Akacija",
+            "period": "druga polovica maja–začetek junija",
+            "start": 10,
+            "end": 11,
+            "color": "#e8d27c"
+          }
+        },
+        "p3": {
+          "type": "forage",
+          "settings": {
+            "name": "Lipa",
+            "period": "druga polovica junija–začetek julija",
+            "start": 12,
+            "end": 13,
+            "color": "#c9b44f"
+          }
+        },
+        "p4": {
+          "type": "forage",
+          "settings": {
+            "name": "Kostanj",
+            "period": "druga polovica junija–julij",
+            "start": 12,
+            "end": 14,
+            "color": "#a8703a"
+          }
+        },
+        "p5": {
+          "type": "forage",
+          "settings": {
+            "name": "Gozdni in hojev med",
+            "period": "junij–avgust, odvisno od leta",
+            "start": 11,
+            "end": 16,
+            "color": "#7a5238"
+          }
+        },
+        "p6": {
+          "type": "forage",
+          "settings": {
+            "name": "Sončnica",
+            "period": "druga polovica julija–avgust",
+            "start": 14,
+            "end": 16,
+            "color": "#f1b52e"
+          }
+        },
+        "p7": {
+          "type": "forage",
+          "settings": {
+            "name": "Ajda",
+            "period": "konec avgusta–september",
+            "start": 16,
+            "end": 18,
+            "color": "#8a4a33"
+          }
+        }
+      },
+      "block_order": [
+        "m01",
+        "m02",
+        "m03",
+        "m04",
+        "m05",
+        "m06",
+        "m07",
+        "m08",
+        "m09",
+        "m10",
+        "m11",
+        "m12",
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6",
+        "p7"
+      ],
+      "settings": {
+        "scheme": "white",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "leto",
+        "title_top": "Leto v čebelnjaku",
+        "title": "Čebelarjevo leto",
+        "des": "Vsak mesec ima v čebelnjaku svoje delo. Zavrtite kolo in poglejte, kaj počnejo čebele, kaj počnemo mi in kateri med takrat nastaja.",
+        "center_label": "Ta mesec",
+        "today_label": "Danes",
+        "label_bees": "Čebele",
+        "label_work": "V čebelnjaku",
+        "label_forage": "Paša ta mesec",
+        "no_forage": "Ni paše, čebele počivajo.",
+        "prev_label": "Prejšnji",
+        "next_label": "Naslednji",
+        "note": "Obroči v kolesu so paše posameznih medov. Obdobja so okvirna in se vsako leto zamaknejo za teden ali dva.",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "poslikava": {
+      "type": "semen-split",
+      "blocks": {
+        "c1": {
+          "type": "check",
+          "settings": {
+            "text": "<strong>Poslikane stene</strong> v duhu slovenskih panjskih končnic"
+          }
+        },
+        "c2": {
+          "type": "check",
+          "settings": {
+            "text": "<strong>Urejen vrt</strong> s cvetjem, parkom in ribnikom"
+          }
+        },
+        "c3": {
+          "type": "check",
+          "settings": {
+            "text": "<strong>Prostor za apiterapijo</strong> s 40 čebeljimi družinami"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "scheme": "cream",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "",
+        "image": "shopify://shop_images/semen-cebele-poslikava.webp",
+        "image_side": "right",
+        "ratio": "portrait",
+        "image_position": "center center",
+        "image_width": 46,
+        "caption": "",
+        "title_top": "Poslikan čebelnjak",
+        "title": "Dediščina panjskih končnic",
+        "text": "<p>Slovenski čebelarji že več kot dvesto let krasijo panje s poslikanimi končnicami. Prizori iz vsakdanjega življenja, svetniki in šaljive zgodbe so ljudem pripovedovali zgodbe, barvita čela panjev pa so čebelam pomagala najti pravi dom.</p><p>Naš čebelnjak na Melincih to tradicijo nadaljuje v velikem: poslikave pokrivajo cele stene, za njimi pa v urejenem vrtu živijo naše čebele.</p>",
+        "button": "Več o apiturizmu",
+        "link": "/pages/apiturizem",
+        "style_btn": "btn-underline",
+        "button_2": "",
+        "link_2": "",
+        "style_btn_2": "btn-underline",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "galerija": {
+      "type": "semen-gallery",
+      "blocks": {
+        "g1": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/semen-cebelnjak-vrt.webp",
+            "size": "big",
+            "position": "center center",
+            "title": "Melinci",
+            "caption": "Poslikan čebelnjak in vrt"
+          }
+        },
+        "g2": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/New_Project_1.webp",
+            "size": "normal",
+            "position": "center center",
+            "title": "",
+            "caption": "Hladno točenje"
+          }
+        },
+        "g3": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/semen-apiturizem-soba.webp",
+            "size": "tall",
+            "position": "center center",
+            "title": "",
+            "caption": "Prostor za počitek pod streho"
+          }
+        },
+        "g4": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/semen-med-polica.png",
+            "size": "normal",
+            "position": "center center",
+            "title": "",
+            "caption": "Med in čebelji izdelki"
+          }
+        },
+        "g5": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/gasilska.webp",
+            "size": "wide",
+            "position": "center center",
+            "title": "",
+            "caption": "Sortni medovi in cvetni prah"
+          }
+        },
+        "g6": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/1.webp",
+            "size": "wide",
+            "position": "center center",
+            "title": "",
+            "caption": "Reka Mura, 500 m od čebelnjaka"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6"
+      ],
+      "settings": {
+        "scheme": "white",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "title_top": "Galerija",
+        "title": "Iz našega čebelnjaka",
+        "des": "",
+        "row_height": 250,
+        "button": "",
+        "link": "",
+        "style_btn": "btn-underline",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "poziv": {
+      "type": "semen-cta",
+      "settings": {
+        "scheme": "cream",
+        "image_position": "center center",
+        "overlay": 60,
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "align": "center",
+        "title_top": "Spoznajmo se",
+        "title": "Poskusite naš med ali nas obiščite",
+        "text": "<p>Med in čebelje izdelke pošljemo po vsej Sloveniji. Če ste v bližini, se oglasite v čebelnjaku na Melincih, po predhodnem dogovoru.</p>",
+        "button": "V trgovino",
+        "link": "shopify://collections/all",
+        "style_btn": "btn-theme",
+        "button_2": "Rezervirajte obisk",
+        "link_2": "/pages/apiturizem#povprasevanje",
+        "style_btn_2": "btn-underline",
+        "phone_label": "ali pokličite",
+        "phone": "031 787 235",
+        "padding": 100
+      }
+    }
+  },
+  "order": [
+    "uvod",
+    "main",
+    "zgodba",
+    "stevilke_semen",
+    "vrednote",
+    "leto",
+    "poslikava",
+    "galerija",
+    "poziv"
+  ]
+}

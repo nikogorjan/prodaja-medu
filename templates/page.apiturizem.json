@@ -1,0 +1,761 @@
+{
+  "sections": {
+    "uvod": {
+      "type": "semen-page-hero",
+      "blocks": {
+        "dejstvo_1": {
+          "type": "fact",
+          "settings": {
+            "label": "Trajanje",
+            "value": "1–2 uri"
+          }
+        },
+        "dejstvo_2": {
+          "type": "fact",
+          "settings": {
+            "label": "Obisk",
+            "value": "po dogovoru"
+          }
+        },
+        "dejstvo_3": {
+          "type": "fact",
+          "settings": {
+            "label": "Lokacija",
+            "value": "Melinci ob Muri"
+          }
+        }
+      },
+      "block_order": [
+        "dejstvo_1",
+        "dejstvo_2",
+        "dejstvo_3"
+      ],
+      "settings": {
+        "layout": "split",
+        "image": "shopify://shop_images/semen-apiturizem-soba.webp",
+        "image_position": "center center",
+        "panel_width": 46,
+        "height": 600,
+        "height_mobile": 520,
+        "overlay": 80,
+        "bgsection": "#2b2420",
+        "accent": "#c99a5c",
+        "show_breadcrumb": true,
+        "breadcrumb_label": "Apiturizem",
+        "title_top": "Apiturizem in apiterapija",
+        "title": "Dihajte z čebelami",
+        "text": "<p>V poslikanem čebelnjaku na Melincih ob Muri dihate zrak iz 40 panjev, poskusite naš med in spoznate življenje čebel od blizu. Obisk traja uro ali dve, vedno po predhodnem dogovoru.</p>",
+        "button": "Rezervirajte obisk",
+        "link": "/pages/apiturizem#povprasevanje",
+        "style_btn": "btn-theme",
+        "button_2": "Kaj vas čaka",
+        "link_2": "/pages/apiturizem#ponudba",
+        "style_btn_2": "btn-underline"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "kaj_je": {
+      "type": "semen-split",
+      "blocks": {
+        "citat": {
+          "type": "quote",
+          "settings": {
+            "quote": "Zrak v čebelnjaku je topel in diši po medu, vosku in propolisu. Mnogi obiskovalci pravijo, da jih brenčanje umiri že v nekaj minutah.",
+            "author": ""
+          }
+        }
+      },
+      "block_order": [
+        "citat"
+      ],
+      "settings": {
+        "scheme": "white",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "",
+        "image": "shopify://shop_images/semen-poslikan-cebelnjak.png",
+        "image_side": "left",
+        "ratio": "original",
+        "image_position": "center center",
+        "image_width": 50,
+        "caption": "Čebelnjak na Melincih",
+        "title_top": "Kaj je apiturizem",
+        "title": "Turizem, ki vas pripelje k čebelam",
+        "text": "<p>Apiturizem (iz latinske besede <em>apis</em>, čebela) združuje čebelarstvo, naravo in dobro počutje. Obiskovalci spoznajo življenje čebel in delo čebelarja, poskusijo čebelje pridelke in se umirijo v posebnem okolju čebelnjaka.</p><p>Slovenija je ena od zibelk apiturizma. Čebelarstvo je del naše dediščine, od kranjske sivke, avtohtone slovenske čebele, do poslikanih panjskih končnic. Pri nas ga doživite v čebelnjaku, ki ga krasijo velike poslikave.</p>",
+        "button": "",
+        "link": "",
+        "style_btn": "btn-theme",
+        "button_2": "",
+        "link_2": "",
+        "style_btn_2": "btn-underline",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "ponudba": {
+      "type": "semen-cards",
+      "blocks": {
+        "p1": {
+          "type": "card",
+          "settings": {
+            "icon": "air",
+            "label": "",
+            "title": "Apiterapija: zrak iz panjev",
+            "text": "<p>V čebelnjaku je 40 prirejenih panjev. Topel zrak z vonjem medu, voska in propolisa prihaja skozi okrogle odprtine v ležiščih, brez cevi in mask. Intenzivnost uravnavamo z odpiranjem odprtin.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "p2": {
+          "type": "card",
+          "settings": {
+            "icon": "bed",
+            "label": "",
+            "title": "Počitek ob brenčanju",
+            "text": "<p>V pritličju sta dve ležišči in dva udobna sedeža, v zgornji etaži postelja za dve osebi s pogledom na park in ribnik. Čebele slišite in vonjate, srečate pa jih ne.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "p3": {
+          "type": "card",
+          "settings": {
+            "icon": "dipper",
+            "label": "",
+            "title": "Degustacija medu",
+            "text": "<p>Poskusite naše sortne mede, od nežnega akacijevega do močnega kostanjevega in temnega gozdnega. Povemo vam, s katere paše je kateri in kako ga uporabiti.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "p4": {
+          "type": "card",
+          "settings": {
+            "icon": "pollen",
+            "label": "",
+            "title": "Svež cvetni prah",
+            "text": "<p>Po želji poskusite cvetni prah naravnost iz panja, ko je najbolj aromatičen. Spoznate tudi propolis in vosek ter njihovo tradicionalno uporabo.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "p5": {
+          "type": "card",
+          "settings": {
+            "icon": "frame",
+            "label": "",
+            "title": "Spoznavanje čebelarstva",
+            "text": "<p>Pokažemo vam, kako je urejen AŽ panj, kako živi čebelja družina in kako nastane med. Vprašanja so zaželena, tudi otroška.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "p6": {
+          "type": "card",
+          "settings": {
+            "icon": "bag",
+            "label": "",
+            "title": "Med in izdelki za domov",
+            "text": "<p>Kar vam je bilo všeč, kupite kar v čebelnjaku: med, cvetni prah, propolis in vosek. Lahko pa jih kadar koli naročite v spletni trgovini.</p>",
+            "link_label": "V trgovino",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6"
+      ],
+      "settings": {
+        "scheme": "cream",
+        "pattern": true,
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "ponudba",
+        "heading_layout": "split",
+        "title_top": "Ponudba",
+        "title": "Kaj vas čaka",
+        "des": "<p>Obisk prilagodimo vam: lahko je kratek postanek z degustacijo ali daljši počitek ob čebelah. Vse spodaj lahko združite.</p>",
+        "columns": "3",
+        "card_style": "box",
+        "icon_size": 36,
+        "button": "",
+        "link": "",
+        "style_btn": "btn-underline",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "obisk": {
+      "type": "semen-steps",
+      "blocks": {
+        "k1": {
+          "type": "step",
+          "settings": {
+            "meta": "Telefon ali obrazec",
+            "title": "Dogovor za termin",
+            "text": "Pokličite ali pišite in povejte, kdaj bi prišli in koliko vas bo. Skupaj izberemo termin in vsebino obiska."
+          }
+        },
+        "k2": {
+          "type": "step",
+          "settings": {
+            "meta": "Melinci ob Muri",
+            "title": "Sprejem v čebelnjaku",
+            "text": "Pričakamo vas pri čebelnjaku, pokažemo poslikave in vrt ter na kratko predstavimo, kako živijo čebele."
+          }
+        },
+        "k3": {
+          "type": "step",
+          "settings": {
+            "meta": "Uro ali dve",
+            "title": "Apiterapija in počitek",
+            "text": "Uležete se ali udobno sedete, zadihate in prisluhnete brenčanju. Intenzivnost zraka iz panjev prilagodimo vam."
+          }
+        },
+        "k4": {
+          "type": "step",
+          "settings": {
+            "meta": "Po želji",
+            "title": "Degustacija in med za domov",
+            "text": "Na koncu poskusite naše mede in cvetni prah. Kar vam je všeč, lahko odnesete domov."
+          }
+        }
+      },
+      "block_order": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "settings": {
+        "scheme": "dark",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "obisk",
+        "title_top": "Obisk",
+        "title": "Kako poteka obisk",
+        "des": "Obiski potekajo po predhodnem dogovoru, da si lahko vzamemo čas samo za vas.",
+        "button": "Rezervirajte obisk",
+        "link": "/pages/apiturizem#povprasevanje",
+        "style_btn": "btn-theme",
+        "phone_label": "ali pokličite",
+        "phone": "031 787 235",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "za_koga": {
+      "type": "semen-split",
+      "blocks": {
+        "c1": {
+          "type": "check",
+          "settings": {
+            "text": "<strong>Varno tudi za tiste, ki se čebel bojijo.</strong> Od čebel vas loči stena: slišite in vonjate jih, srečate pa ne."
+          }
+        },
+        "c2": {
+          "type": "check",
+          "settings": {
+            "text": "<strong>Za posameznike, pare in družine.</strong> Obisk prilagodimo starosti in željam."
+          }
+        },
+        "c3": {
+          "type": "check",
+          "settings": {
+            "text": "<strong>Za skupine po dogovoru.</strong> Za večjo skupino nas pokličite, da pripravimo termin in program."
+          }
+        },
+        "c4": {
+          "type": "check",
+          "settings": {
+            "text": "<strong>Alergija na čebelji pik?</strong> Sporočite nam jo ob rezervaciji, da obisk prilagodimo."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "scheme": "white",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "",
+        "image": "shopify://shop_images/semen-apiturizem-sprostitev.png",
+        "image_side": "right",
+        "ratio": "original",
+        "image_position": "center center",
+        "image_width": 50,
+        "caption": "",
+        "title_top": "Za koga",
+        "title": "Za vse, ki iščejo mir",
+        "text": "<p>Obiskujejo nas pari in posamezniki, ki si želijo nekaj ur zase, družine z otroki, ki prvič vidijo, kako živi čebelja družina, in skupine prijateljev. Radi pridejo tudi starejši, ki se spominjajo čebelnjakov iz otroštva.</p>",
+        "button": "",
+        "link": "",
+        "style_btn": "btn-theme",
+        "button_2": "",
+        "link_2": "",
+        "style_btn_2": "btn-underline",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "kdaj": {
+      "type": "semen-seasons",
+      "blocks": {
+        "pomlad": {
+          "type": "season",
+          "settings": {
+            "name": "Pomlad",
+            "months": "marec–maj",
+            "start_month": 3,
+            "end_month": 5,
+            "color": "#9bb068",
+            "icon": "sprout",
+            "headline": "Čebelnjak se prebuja",
+            "text": "Ob prvih toplih dneh čebele opravijo pročiščevalni izlet in začnejo nositi cvetni prah z leske, vrbe in regrata. Družine iz tedna v teden rastejo, maja pa se začne prva velika paša na akaciji.",
+            "hear": "Brenčanje, ki je vsak teden močnejše. Maja čebelnjak zveni kot en sam velik panj.",
+            "smell": "Svež vosek, cvetni prah in nežen cvetni vonj akacije.",
+            "taste": "Cvetlični med in svež cvetni prah naravnost iz panja.",
+            "best": "Apiterapijo od aprila naprej in opazovanje čebel, ki nosijo cvetni prah.",
+            "activity": 4
+          }
+        },
+        "poletje": {
+          "type": "season",
+          "settings": {
+            "name": "Poletje",
+            "months": "junij–avgust",
+            "start_month": 6,
+            "end_month": 8,
+            "color": "#e0a83a",
+            "icon": "sun",
+            "headline": "Vrhunec paše in točenja",
+            "text": "Čebele nabirajo nektar na lipi, kostanju in sončnicah, v gozdovih pa mano za gozdni in hojev med. Družina takrat šteje več deset tisoč čebel. Med točimo po vsaki paši.",
+            "hear": "Najmočnejše in najtoplejše brenčanje leta, ki ga začutite skoraj s celim telesom.",
+            "smell": "Med, propolis in topel vosek. Zrak v čebelnjaku je takrat najbolj nasičen.",
+            "taste": "Med te sezone: akacijev, lipov, kostanjev in sončnični.",
+            "best": "Apiterapijo pri največji intenzivnosti. Priporočamo dopoldanske termine, ko je zunaj še prijetno.",
+            "activity": 5
+          }
+        },
+        "jesen": {
+          "type": "season",
+          "settings": {
+            "name": "Jesen",
+            "months": "september–november",
+            "start_month": 9,
+            "end_month": 11,
+            "color": "#c0703f",
+            "icon": "leaf",
+            "headline": "Ajda, gozd in mir",
+            "text": "Zadnja paša je ajda, ki da temen med močnega okusa. Čebele nato zmanjšajo zalego, mi pa družine pregledamo in jih pripravimo na zimo. Čebelnjak se umiri.",
+            "hear": "Mehkejše, enakomerno brenčanje, kot nalašč za počitek.",
+            "smell": "Temnejši, začinjen vonj ajde in propolisa.",
+            "taste": "Ajdov, gozdni in hojev med.",
+            "best": "Sprostitev in degustacijo v miru. Septembra je čas tudi še za apiterapijo.",
+            "activity": 3
+          }
+        },
+        "zima": {
+          "type": "season",
+          "settings": {
+            "name": "Zima",
+            "months": "december–februar",
+            "start_month": 12,
+            "end_month": 2,
+            "color": "#9fb3bd",
+            "icon": "snow",
+            "headline": "Čebele v gruči",
+            "text": "Čebele se stisnejo v zimsko gručo in s tresenjem mišic grejejo njeno sredino. Panjev ne odpiramo, zato obisk prilagodimo: več pogovora, ogled poslikav in degustacija.",
+            "hear": "Komaj slišno šumenje iz panjev in tišina vrta.",
+            "smell": "Les, vosek in med.",
+            "taste": "Vse vrste medu iz letošnje pridelave. Kristaliziran med je znak pristnosti.",
+            "best": "Degustacijo in nakup daril. Za termin nas pokličite.",
+            "activity": 1
+          }
+        },
+        "pasa_cvetlicni": {
+          "type": "forage",
+          "settings": {
+            "name": "Cvetlični med",
+            "period": "april–začetek maja",
+            "start": 7,
+            "end": 9,
+            "color": "#ecc95a"
+          }
+        },
+        "pasa_akacija": {
+          "type": "forage",
+          "settings": {
+            "name": "Akacija",
+            "period": "druga polovica maja–začetek junija",
+            "start": 10,
+            "end": 11,
+            "color": "#f3e3a0"
+          }
+        },
+        "pasa_lipa": {
+          "type": "forage",
+          "settings": {
+            "name": "Lipa",
+            "period": "druga polovica junija–začetek julija",
+            "start": 12,
+            "end": 13,
+            "color": "#d9c463"
+          }
+        },
+        "pasa_kostanj": {
+          "type": "forage",
+          "settings": {
+            "name": "Kostanj",
+            "period": "druga polovica junija–julij",
+            "start": 12,
+            "end": 14,
+            "color": "#a8703a"
+          }
+        },
+        "pasa_gozd": {
+          "type": "forage",
+          "settings": {
+            "name": "Gozdni in hojev med",
+            "period": "junij–avgust, odvisno od leta",
+            "start": 11,
+            "end": 16,
+            "color": "#9a6a4a"
+          }
+        },
+        "pasa_soncnica": {
+          "type": "forage",
+          "settings": {
+            "name": "Sončnica",
+            "period": "druga polovica julija–avgust",
+            "start": 14,
+            "end": 16,
+            "color": "#f1b52e"
+          }
+        },
+        "pasa_ajda": {
+          "type": "forage",
+          "settings": {
+            "name": "Ajda",
+            "period": "konec avgusta–september",
+            "start": 16,
+            "end": 18,
+            "color": "#8a4a33"
+          }
+        }
+      },
+      "block_order": [
+        "pomlad",
+        "poletje",
+        "jesen",
+        "zima",
+        "pasa_cvetlicni",
+        "pasa_akacija",
+        "pasa_lipa",
+        "pasa_kostanj",
+        "pasa_gozd",
+        "pasa_soncnica",
+        "pasa_ajda"
+      ],
+      "settings": {
+        "scheme": "dark",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "koledar",
+        "title_top": "Čebelji koledar",
+        "title": "Kdaj nas obiščite",
+        "des": "Čebelnjak se spreminja z vsakim mesecem. Izberite letni čas in poglejte, kaj takrat cveti, kateri med točimo in kakšen je obisk pri nas.",
+        "wave_label": "Brenčanje",
+        "activity": "1,1.5,3,6,9,10,10,8,6,3,1.5,1",
+        "today_label": "Danes",
+        "now_label": "Zdaj",
+        "note": "Obdobja paš so okvirna. Vsako leto se zaradi vremena zamaknejo za teden ali dva.",
+        "label_hear": "Slišite",
+        "label_smell": "Vonjate",
+        "label_taste": "Poskusite",
+        "label_best": "Najboljše za",
+        "level_label": "Aktivnost čebel",
+        "button": "Rezervirajte obisk",
+        "link": "/pages/apiturizem#povprasevanje",
+        "style_btn": "btn-theme",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "okolica": {
+      "type": "semen-split",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "label": "Reka Mura",
+            "value": "500 m"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "label": "Brod v Gornji Bistrici",
+            "value": "2 km"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "label": "Terme Banovci",
+            "value": "4 km"
+          }
+        },
+        "f4": {
+          "type": "fact",
+          "settings": {
+            "label": "Murska Sobota",
+            "value": "12 km"
+          }
+        },
+        "f5": {
+          "type": "fact",
+          "settings": {
+            "label": "Moravske Toplice",
+            "value": "15 km"
+          }
+        },
+        "f6": {
+          "type": "fact",
+          "settings": {
+            "label": "Terme Lendava",
+            "value": "15 km"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6"
+      ],
+      "settings": {
+        "scheme": "white",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "",
+        "image": "shopify://shop_images/1.webp",
+        "image_side": "left",
+        "ratio": "square",
+        "image_position": "center center",
+        "image_width": 46,
+        "caption": "Reka Mura",
+        "title_top": "Okolica",
+        "title": "Dan ob Muri",
+        "text": "<p>Obisk čebelnjaka lahko dopolnite z izletom. Do reke Mure vodijo poti skozi gozd in mimo mrtvic, ravnina je kot nalašč za kolesarjenje in sprehode, v bližini pa so znane terme.</p>",
+        "button": "Načrtujte obisk",
+        "link": "/pages/apiturizem#povprasevanje",
+        "style_btn": "btn-underline",
+        "button_2": "",
+        "link_2": "",
+        "style_btn_2": "btn-underline",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "vprasanja": {
+      "type": "faq-accordion",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Ali je obisk varen, če se bojim čebel?",
+            "faq_des": "<p>Da. V čebelnjaku ste od čebel ločeni s steno: slišite in vonjate jih, srečate pa jih ne.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Sem alergičen na čebelji pik. Lahko pridem?",
+            "faq_des": "<p>Alergijo nam prosimo sporočite ob rezervaciji, da obisk prilagodimo. Če imate predpisano zdravilo za nujne primere, ga imejte pri sebi.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Koliko časa traja obisk?",
+            "faq_des": "<p>Običajno uro ali dve. Mogoč je krajši postanek z degustacijo ali daljši počitek v čebelnjaku, vse se dogovorimo vnaprej.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Ali je obisk primeren za otroke?",
+            "faq_des": "<p>Da. Otroci radi pogledajo, kako je urejen panj, in poskusijo različne vrste medu. Obisk prilagodimo njihovi starosti.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Ali sprejemate skupine?",
+            "faq_des": "<p>Da, po dogovoru. Za večjo skupino nas pokličite, da pripravimo termin in program.</p>"
+          }
+        },
+        "q6": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Koliko stane obisk?",
+            "faq_des": "<p>Cena je odvisna od števila oseb in vsebine obiska (apiterapija, degustacija, ogled). Pokličite ali pišite, pa vam pošljemo ponudbo.</p>"
+          }
+        },
+        "q7": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Ali apiterapija nadomešča zdravljenje?",
+            "faq_des": "<p>Ne. Počitek v čebelnjaku je prijeten in naraven način sprostitve, ne nadomešča pa zdravniške obravnave. Če imate zdravstvene težave, se pred obiskom posvetujte z zdravnikom.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f7f3ea",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "Pomoč",
+        "title": "Pogosta vprašanja o obisku",
+        "des": "Ne najdete odgovora? Pokličite nas na 031 787 235.",
+        "align-heading": "center",
+        "title_size": "h5",
+        "e_first_open": true,
+        "e_reverse": true,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "povprasevanje": {
+      "type": "semen-contact",
+      "blocks": {
+        "i1": {
+          "type": "item",
+          "settings": {
+            "icon": "mobile",
+            "label": "Mobitel",
+            "value": "031 787 235",
+            "link_type": "phone",
+            "url": "",
+            "note": ""
+          }
+        },
+        "i2": {
+          "type": "item",
+          "settings": {
+            "icon": "phone",
+            "label": "Telefon",
+            "value": "02 541 13 38",
+            "link_type": "phone",
+            "url": "",
+            "note": ""
+          }
+        },
+        "i3": {
+          "type": "item",
+          "settings": {
+            "icon": "mail",
+            "label": "E-pošta",
+            "value": "semen.stefan@gmail.com",
+            "link_type": "email",
+            "url": "",
+            "note": ""
+          }
+        },
+        "i4": {
+          "type": "item",
+          "settings": {
+            "icon": "pin",
+            "label": "Čebelnjak",
+            "value": "Melinci, 9231 Beltinci",
+            "link_type": "map",
+            "url": "",
+            "note": "Ob cesti med Melinci in Gornjo Bistrico, sledite tabli APITERAPIJA."
+          }
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4"
+      ],
+      "settings": {
+        "scheme": "white",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "povprasevanje",
+        "title_top": "Rezervacija",
+        "title": "Povpraševanje za obisk",
+        "des": "Izpolnite obrazec in odgovorili vam bomo s predlogom termina. Lahko pa nas preprosto pokličete.",
+        "panel_title": "Najhitreje po telefonu",
+        "panel_text": "<p>Obisk poteka po predhodnem dogovoru. Pokličite nas, pa se dogovorimo za termin, ki vam ustreza.</p>",
+        "form_title": "Pošljite povpraševanje",
+        "form_intro": "Sporočite želeni datum in število oseb. Če imate posebne želje, jih zapišite v sporočilo.",
+        "form_label": "Povpraševanje za obisk (Apiturizem)",
+        "show_topic": true,
+        "label_topic": "Kaj vas zanima",
+        "topics": "Apiterapija in počitek v čebelnjaku\nDegustacija medu\nObisk za skupino\nNekaj drugega",
+        "label_name": "Ime in priimek",
+        "label_email": "E-pošta",
+        "show_phone": true,
+        "label_phone": "Telefon",
+        "show_date": true,
+        "label_date": "Želeni datum obiska",
+        "show_persons": true,
+        "label_persons": "Število oseb",
+        "label_message": "Sporočilo",
+        "placeholder_message": "Npr. okvirna ura prihoda, starost otrok, posebne želje ali alergije.",
+        "consent": "Podatke iz obrazca uporabimo samo za odgovor na vaše povpraševanje.",
+        "privacy_label": "Politika zasebnosti",
+        "button_label": "Pošlji povpraševanje",
+        "success_message": "<p>Hvala za povpraševanje. Odgovorili vam bomo v najkrajšem možnem času in potrdili termin.</p>",
+        "padding_top": 96,
+        "padding_bottom": 104
+      }
+    }
+  },
+  "order": [
+    "uvod",
+    "main",
+    "kaj_je",
+    "ponudba",
+    "obisk",
+    "za_koga",
+    "kdaj",
+    "okolica",
+    "vprasanja",
+    "povprasevanje"
+  ]
+}

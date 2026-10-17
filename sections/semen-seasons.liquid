@@ -1,0 +1,389 @@
+{%- comment -%}
+  Čebelji koledar (Čebelarstvo Šemen): leto v čebelnjaku na enem grafu.
+  Zgoraj "brenčanje" kot zvočni val (aktivnost čebel po mesecih), pod njim pasovi paš po polovicah mesecev,
+  oznaka "danes" in zavihki letnih časov s podrobnostmi (kaj slišite, vonjate, poskusite, za kaj je obisk najboljši).
+  Bloki: "Letni čas" (zavihek + podrobnosti) in "Paša" (pas na grafu). Ob nalaganju se odpre letni čas, v katerem smo.
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign seasons = section.blocks | where: 'type', 'season'
+  assign forages = section.blocks | where: 'type', 'forage'
+  assign activity = s.activity | split: ','
+  assign wave = '0.55,0.95,0.7,1,0.62,0.86' | split: ','
+  assign months = 'jan,feb,mar,apr,maj,jun,jul,avg,sep,okt,nov,dec' | split: ','
+  if s.scheme == 'dark'
+    assign bg = '#2b2420'
+  else
+    assign bg = '#f7f3ea'
+  endif
+-%}
+<style>
+  .ss-{{ sid }} { --ss-accent: {{ s.accent }}; --ss-line: {% if s.scheme == 'dark' %}rgba(255,255,255,.1){% else %}rgba(34,34,34,.1){% endif %}; --ss-muted: {% if s.scheme == 'dark' %}#a99c8b{% else %}#5c6978{% endif %}; --ss-text: {% if s.scheme == 'dark' %}#cfc4b4{% else %}#4a4540{% endif %}; --ss-strong: {% if s.scheme == 'dark' %}#ffffff{% else %}#222222{% endif %}; display: block; position: relative; overflow: hidden; background: {{ bg }}; color: var(--ss-text); padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  .ss-{{ sid }} .ss-hex { position: absolute; inset: 0; pointer-events: none; opacity: .06; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><path d='M28 1l27 15.5v31L28 63 1 47.5v-31L28 1zm0 48l27 15.5v31L28 97 1 80.5v-31L28 49z' fill='none' stroke='{{ s.accent | replace: '#', '%23' }}' stroke-width='1'/></svg>"); background-size: 56px 97px; -webkit-mask-image: linear-gradient(180deg, #000, transparent 70%); mask-image: linear-gradient(180deg, #000, transparent 70%); }
+  .ss-{{ sid }} .container, .ss-{{ sid }} .container-fluid { position: relative; }
+  .ss-{{ sid }} .ss-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 36px; }
+  .ss-{{ sid }} .ss-eyebrow { display: block; color: var(--ss-accent) !important; }
+  .ss-{{ sid }} .ss-title { margin: 6px 0 0; color: var(--ss-strong); text-wrap: balance; }
+  .ss-{{ sid }} .ss-intro { margin: 0; max-width: 52ch; color: var(--ss-muted); }
+
+  /* zavihki */
+  .ss-{{ sid }} .ss-tabs { display: grid; grid-template-columns: repeat({{ seasons.size | at_least: 1 }}, minmax(0, 1fr)); border-bottom: 1px solid var(--ss-line); }
+  .ss-{{ sid }} .ss-tab { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px 12px 18px 0; margin: 0; border: 0; background: none; color: var(--ss-muted); text-align: left; cursor: pointer; transition: color .3s; font: inherit; }
+  .ss-{{ sid }} .ss-tab::after { content: ""; position: absolute; left: 0; right: 12px; bottom: -1px; height: 2px; background: var(--tab-color); transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2,.6,.2,1); }
+  .ss-{{ sid }} .ss-tab[aria-selected="true"] { color: var(--ss-strong); }
+  .ss-{{ sid }} .ss-tab[aria-selected="true"]::after { transform: scaleX(1); }
+  .ss-{{ sid }} .ss-tab:hover { color: var(--ss-strong); }
+  .ss-{{ sid }} .ss-tab:focus-visible { outline: 1px dashed var(--ss-accent); outline-offset: 4px; }
+  .ss-{{ sid }} .ss-tab-top { display: flex; align-items: center; gap: 10px; }
+  .ss-{{ sid }} .ss-tab .semen-icon { color: var(--tab-color); }
+  .ss-{{ sid }} .ss-tab-name { font-family: var(--g-font-1); font-size: 19px; line-height: 1.2; }
+  .ss-{{ sid }} .ss-tab-months { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; }
+  .ss-{{ sid }} .ss-now { display: inline-block; margin-left: 6px; padding: 2px 6px; background: var(--ss-accent); color: #fff; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; vertical-align: middle; }
+
+  /* graf */
+  .ss-{{ sid }} .ss-chart-wrap { margin-top: 28px; overflow-x: auto; scrollbar-width: thin; }
+  .ss-{{ sid }} .ss-chart { position: relative; min-width: 700px; display: grid; grid-template-columns: 156px 1fr; row-gap: 8px; padding: 26px 24px 22px; background: {% if s.scheme == 'dark' %}rgba(255,255,255,.025){% else %}#ffffff{% endif %}; border: 1px solid var(--ss-line); }
+  .ss-{{ sid }} .ss-row-label { align-self: center; padding-right: 16px; font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--ss-muted); line-height: 1.3; }
+  .ss-{{ sid }} .ss-track { position: relative; }
+  .ss-{{ sid }} .ss-tint { position: absolute; top: 0; bottom: 0; background: var(--tint); opacity: 0; transition: opacity .5s; pointer-events: none; }
+  .ss-{{ sid }} .ss-wave { position: relative; height: 110px; display: flex; align-items: center; gap: 2px; }
+  .ss-{{ sid }} .ss-bar { flex: 1 1 0; min-width: 1px; height: var(--h); background: {% if s.scheme == 'dark' %}rgba(255,255,255,.15){% else %}rgba(34,34,34,.13){% endif %}; border-radius: 0; transition: background-color .5s, transform .5s; transform-origin: center; }
+  .ss-{{ sid }} .ss-axis { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); border-top: 1px solid var(--ss-line); padding-top: 8px; }
+  .ss-{{ sid }} .ss-axis span { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ss-muted); text-align: center; transition: color .4s; }
+  .ss-{{ sid }} .ss-band-track { height: 22px; background-image: linear-gradient(90deg, var(--ss-line) 1px, transparent 1px); background-size: calc(100% / 12) 100%; }
+  .ss-{{ sid }} .ss-band { position: absolute; top: 5px; bottom: 5px; background: var(--band); opacity: .85; transition: opacity .4s, transform .4s; }
+  .ss-{{ sid }} .ss-band:hover { opacity: 1; transform: scaleY(1.35); }
+  .ss-{{ sid }} .ss-band-honey { align-self: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--ss-text); white-space: nowrap; }
+  .ss-{{ sid }} .ss-today { position: absolute; top: 14px; bottom: 14px; width: 0; border-left: 1px dashed var(--ss-accent); z-index: 3; pointer-events: none; }
+  .ss-{{ sid }} .ss-today span { position: absolute; top: -2px; left: 6px; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ss-accent); white-space: nowrap; }
+  .ss-{{ sid }} .ss-note { margin: 12px 0 0; font-size: 12px; color: var(--ss-muted); }
+
+  /* podrobnosti letnega časa */
+  .ss-{{ sid }} .ss-panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 40px; }
+  .ss-{{ sid }} .ss-panel[hidden] { display: none; }
+  .ss-{{ sid }} .ss-panel-big { display: block; font-family: var(--g-font-1); font-size: clamp(46px, 7vw, 96px); font-weight: 700; line-height: .95; color: var(--panel-color); letter-spacing: -.01em; }
+  .ss-{{ sid }} .ss-panel-months { display: block; margin: 12px 0 18px; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--panel-color); }
+  .ss-{{ sid }} .ss-panel-title { margin: 0 0 12px; color: var(--ss-strong); font-size: 24px; line-height: 1.25; }
+  .ss-{{ sid }} .ss-panel-text { margin: 0; max-width: 56ch; line-height: 1.75; color: var(--ss-text); }
+  .ss-{{ sid }} .ss-level { display: flex; align-items: center; gap: 10px; margin-top: 22px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ss-muted); }
+  .ss-{{ sid }} .ss-level i { display: inline-block; width: 14px; height: 16px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: var(--ss-line); }
+  .ss-{{ sid }} .ss-level i.on { background: var(--panel-color); }
+  .ss-{{ sid }} .ss-senses { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); }
+  .ss-{{ sid }} .ss-sense { display: grid; grid-template-columns: 30px 1fr; gap: 0 14px; padding: 16px 0; border-top: 1px solid var(--ss-line); margin: 0; }
+  .ss-{{ sid }} .ss-sense:last-child { border-bottom: 1px solid var(--ss-line); }
+  .ss-{{ sid }} .ss-sense .semen-icon { grid-row: span 2; color: var(--panel-color); margin-top: 2px; }
+  .ss-{{ sid }} .ss-sense-label { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--panel-color); }
+  .ss-{{ sid }} .ss-sense-value { margin-top: 3px; color: var(--ss-strong); font-size: 15px; line-height: 1.55; }
+  .ss-{{ sid }} .ss-panel-in { animation: ss-in-{{ sid }} .6s cubic-bezier(.2,.6,.2,1) both; }
+  @keyframes ss-in-{{ sid }} { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  {%- for block in seasons -%}
+    {%- assign n = forloop.index %}
+  .ss-{{ sid }}[data-active="{{ n }}"] .ss-bar[data-s="{{ n }}"] { background: {{ block.settings.color }}; }
+  .ss-{{ sid }}[data-active="{{ n }}"] .ss-tint[data-s="{{ n }}"] { opacity: .07; }
+  .ss-{{ sid }}[data-active="{{ n }}"] .ss-axis span[data-s="{{ n }}"] { color: var(--ss-strong); }
+  {%- endfor %}
+  @media (prefers-reduced-motion: reduce) { .ss-{{ sid }} .ss-panel-in { animation: none; } }
+  @media (max-width: 749px) {
+    .ss-{{ sid }} .ss-tabs { display: flex; overflow-x: auto; scrollbar-width: none; }
+    .ss-{{ sid }} .ss-tabs::-webkit-scrollbar { display: none; }
+    .ss-{{ sid }} .ss-tab { flex: 0 0 auto; padding-right: 22px; }
+    .ss-{{ sid }} .ss-tab-name { font-size: 17px; }
+    .ss-{{ sid }} .ss-chart { grid-template-columns: 112px 1fr; padding: 22px 16px 18px; }
+    .ss-{{ sid }} .ss-band-honey { font-size: 12px; white-space: normal; }
+    .ss-{{ sid }} .ss-row-label { position: sticky; left: -16px; z-index: 4; margin-left: -16px; padding-left: 16px; background: {% if s.scheme == 'dark' %}#2f2824{% else %}#ffffff{% endif %}; box-shadow: 8px 0 10px -6px rgba(0,0,0,.35); }
+  }
+  @media (min-width: 990px) {
+    .ss-{{ sid }} { padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+    .ss-{{ sid }} .ss-head { grid-template-columns: 1.1fr 1fr; align-items: end; margin-bottom: 48px; }
+    .ss-{{ sid }} .ss-intro { justify-self: end; text-align: right; }
+    .ss-{{ sid }} .ss-panel { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; margin-top: 56px; align-items: start; }
+  }
+</style>
+
+<semen-seasons class="ss-{{ sid }}" data-active="1"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="ss-hex" aria-hidden="true"></div>
+  <div class="{{ s.setwidth }}">
+    {%- if s.title_top != blank or s.title != blank or s.des != blank -%}
+      <div class="ss-head" data-aos="fade-up">
+        <div>
+          {%- if s.title_top != blank -%}<span class="subtop ss-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
+          {%- if s.title != blank -%}<h2 class="h2 ss-title">{{ s.title | escape }}</h2>{%- endif -%}
+        </div>
+        {%- if s.des != blank -%}<p class="ss-intro">{{ s.des | escape }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="ss-tabs" role="tablist" aria-label="{{ s.title | escape }}">
+      {%- for block in seasons -%}
+        {%- assign b = block.settings -%}
+        <button type="button" class="ss-tab" role="tab" id="SsTab-{{ sid }}-{{ forloop.index }}" aria-controls="SsPanel-{{ sid }}-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}" data-s="{{ forloop.index }}" data-start="{{ b.start_month }}" data-end="{{ b.end_month }}" style="--tab-color: {{ b.color }}" {{ block.shopify_attributes }}>
+          <span class="ss-tab-top">{%- render 'semen-icon', icon: b.icon, size: 22 -%}<span class="ss-tab-name">{{ b.name | escape }}</span></span>
+          <span class="ss-tab-months">{{ b.months | escape }}<span class="ss-now" hidden>{{ s.now_label | escape }}</span></span>
+        </button>
+      {%- endfor -%}
+    </div>
+
+    <div class="ss-chart-wrap">
+      <div class="ss-chart">
+        {%- comment -%} sezonsko obarvanje v ozadju grafa {%- endcomment -%}
+        <div class="ss-row-label" style="grid-row: 1;">{{ s.wave_label | escape }}</div>
+        <div class="ss-track" style="grid-row: 1 / span {{ forages.size | plus: 2 }}; grid-column: 2;">
+          {%- for block in seasons -%}
+            {%- liquid
+              assign a = block.settings.start_month
+              assign z = block.settings.end_month
+            -%}
+            {%- if a <= z -%}
+              {%- assign span = z | minus: a | plus: 1 -%}
+              <span class="ss-tint" data-s="{{ forloop.index }}" style="--tint: {{ block.settings.color }}; left: {{ a | minus: 1 | times: 100.0 | divided_by: 12 }}%; width: {{ span | times: 100.0 | divided_by: 12 }}%;"></span>
+            {%- else -%}
+              {%- assign span = 13 | minus: a -%}
+              <span class="ss-tint" data-s="{{ forloop.index }}" style="--tint: {{ block.settings.color }}; left: {{ a | minus: 1 | times: 100.0 | divided_by: 12 }}%; width: {{ span | times: 100.0 | divided_by: 12 }}%;"></span>
+              <span class="ss-tint" data-s="{{ forloop.index }}" style="--tint: {{ block.settings.color }}; left: 0%; width: {{ z | times: 100.0 | divided_by: 12 }}%;"></span>
+            {%- endif -%}
+          {%- endfor -%}
+          <span class="ss-today" hidden><span>{{ s.today_label | escape }}</span></span>
+        </div>
+
+        <div class="ss-wave" style="grid-row: 1; grid-column: 2;" aria-hidden="true">
+          {%- for m in (1..12) -%}
+            {%- liquid
+              assign idx = forloop.index0
+              assign level = activity[idx] | default: 0 | plus: 0
+              assign prev_i = idx | plus: 11 | modulo: 12
+              assign next_i = idx | plus: 1 | modulo: 12
+              assign level_prev = activity[prev_i] | default: 0 | plus: 0
+              assign level_next = activity[next_i] | default: 0 | plus: 0
+              assign season_n = 0
+              for block in seasons
+                assign a = block.settings.start_month
+                assign z = block.settings.end_month
+                if a <= z
+                  if m >= a and m <= z
+                    assign season_n = forloop.index
+                  endif
+                else
+                  if m >= a or m <= z
+                    assign season_n = forloop.index
+                  endif
+                endif
+              endfor
+            -%}
+            {%- for f in wave -%}
+              {%- liquid
+                # ovojnica vala se zvezno preliva v sosednja meseca
+                assign t = forloop.index0 | plus: 0.5 | divided_by: 6.0
+                if t < 0.5
+                  assign w = 0.5 | minus: t
+                  assign smooth = level_prev | minus: level | times: w | plus: level
+                else
+                  assign w = t | minus: 0.5
+                  assign smooth = level_next | minus: level | times: w | plus: level
+                endif
+                assign h = f | times: smooth | times: 10 | at_least: 4 | at_most: 100
+              -%}
+              <span class="ss-bar" data-s="{{ season_n }}" style="--h: {{ h }}%"></span>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+
+        <div class="ss-axis" style="grid-row: 2; grid-column: 2;">
+          {%- for label in months -%}
+            {%- liquid
+              assign m = forloop.index
+              assign season_n = 0
+              for block in seasons
+                assign a = block.settings.start_month
+                assign z = block.settings.end_month
+                if a <= z
+                  if m >= a and m <= z
+                    assign season_n = forloop.index
+                  endif
+                else
+                  if m >= a or m <= z
+                    assign season_n = forloop.index
+                  endif
+                endif
+              endfor
+            -%}
+            <span data-s="{{ season_n }}">{{ label }}</span>
+          {%- endfor -%}
+        </div>
+
+        {%- for block in forages -%}
+          {%- liquid
+            assign b = block.settings
+            assign row = forloop.index | plus: 2
+            assign first = b.start
+            assign last = b.end | at_least: first
+            assign left = first | minus: 1 | times: 100.0 | divided_by: 24
+            assign width = last | minus: first | plus: 1 | times: 100.0 | divided_by: 24
+          -%}
+          <div class="ss-row-label ss-band-honey" style="grid-row: {{ row }}; grid-column: 1;" {{ block.shopify_attributes }}>{{ b.name | escape }}</div>
+          <div class="ss-band-track" style="grid-row: {{ row }}; grid-column: 2; position: relative;">
+            <span class="ss-band" style="--band: {{ b.color }}; left: {{ left }}%; width: {{ width }}%;" title="{{ b.name | escape }}: {{ b.period | escape }}"></span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    {%- if s.note != blank -%}<p class="ss-note">{{ s.note | escape }}</p>{%- endif -%}
+
+    {%- for block in seasons -%}
+      {%- assign b = block.settings -%}
+      <div class="ss-panel" role="tabpanel" id="SsPanel-{{ sid }}-{{ forloop.index }}" aria-labelledby="SsTab-{{ sid }}-{{ forloop.index }}" data-s="{{ forloop.index }}" style="--panel-color: {{ b.color }}"{% unless forloop.first %} hidden{% endunless %}>
+        <div>
+          <span class="ss-panel-big" aria-hidden="true">{{ b.name | escape }}</span>
+          <span class="ss-panel-months">{{ b.months | escape }}</span>
+          <h3 class="ss-panel-title">{{ b.headline | escape }}</h3>
+          <p class="ss-panel-text">{{ b.text | escape }}</p>
+          <div class="ss-level" aria-label="{{ s.level_label | escape }}: {{ b.activity }} / 5">
+            <span>{{ s.level_label | escape }}</span>
+            <span aria-hidden="true">{%- for i in (1..5) -%}<i{% if i <= b.activity %} class="on"{% endif %}></i> {% endfor -%}</span>
+          </div>
+        </div>
+        <ul class="ss-senses" role="list">
+          {%- if b.hear != blank -%}<li class="ss-sense">{%- render 'semen-icon', icon: 'bee', size: 24 -%}<span class="ss-sense-label">{{ s.label_hear | escape }}</span><span class="ss-sense-value">{{ b.hear | escape }}</span></li>{%- endif -%}
+          {%- if b.smell != blank -%}<li class="ss-sense">{%- render 'semen-icon', icon: 'flower', size: 24 -%}<span class="ss-sense-label">{{ s.label_smell | escape }}</span><span class="ss-sense-value">{{ b.smell | escape }}</span></li>{%- endif -%}
+          {%- if b.taste != blank -%}<li class="ss-sense">{%- render 'semen-icon', icon: 'dipper', size: 24 -%}<span class="ss-sense-label">{{ s.label_taste | escape }}</span><span class="ss-sense-value">{{ b.taste | escape }}</span></li>{%- endif -%}
+          {%- if b.best != blank -%}<li class="ss-sense">{%- render 'semen-icon', icon: 'calendar', size: 24 -%}<span class="ss-sense-label">{{ s.label_best | escape }}</span><span class="ss-sense-value">{{ b.best | escape }}</span></li>{%- endif -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+
+    {%- if s.button != blank -%}
+      <div style="margin-top: 44px;"><a class="btn {{ s.style_btn }}" href="{{ s.link | default: '#' }}">{{ s.button | escape }}</a></div>
+    {%- endif -%}
+  </div>
+</semen-seasons>
+
+<script>
+  if (!customElements.get('semen-seasons')) {
+    customElements.define('semen-seasons', class extends HTMLElement {
+      connectedCallback() {
+        this.tabs = Array.from(this.querySelectorAll('[role="tab"]'));
+        this.panels = Array.from(this.querySelectorAll('[role="tabpanel"]'));
+        if (!this.tabs.length) return;
+        this.tabs.forEach((tab, i) => {
+          tab.addEventListener('click', () => this.select(tab.dataset.s, true));
+          tab.addEventListener('keydown', (e) => {
+            const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+            if (!step) return;
+            e.preventDefault();
+            const next = this.tabs[(i + step + this.tabs.length) % this.tabs.length];
+            next.focus();
+            this.select(next.dataset.s, true);
+          });
+        });
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        const today = this.querySelector('.ss-today');
+        if (today) {
+          today.style.left = ((now.getMonth() + (now.getDate() - 1) / 31) / 12 * 100).toFixed(2) + '%';
+          today.hidden = false;
+        }
+        const current = this.tabs.find((t) => {
+          const a = +t.dataset.start, z = +t.dataset.end;
+          return a <= z ? month >= a && month <= z : month >= a || month <= z;
+        });
+        if (current) current.querySelector('.ss-now')?.removeAttribute('hidden');
+        this.select((current || this.tabs[0]).dataset.s, false);
+      }
+      select(n, animate) {
+        this.dataset.active = n;
+        this.tabs.forEach((t) => {
+          const on = t.dataset.s === String(n);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+        });
+        this.panels.forEach((p) => {
+          const on = p.dataset.s === String(n);
+          p.hidden = !on;
+          p.classList.toggle('ss-panel-in', on && animate);
+        });
+        // na ozkih zaslonih pomakni graf in zavihke do izbranega letnega časa
+        const behavior = animate ? 'smooth' : 'auto';
+        const wrap = this.querySelector('.ss-chart-wrap');
+        const tint = this.querySelector('.ss-tint[data-s="' + n + '"]');
+        if (wrap && tint && wrap.scrollWidth > wrap.clientWidth) {
+          const x = tint.getBoundingClientRect().left - wrap.firstElementChild.getBoundingClientRect().left;
+          wrap.scrollTo({ left: Math.max(0, x - 130), behavior });
+        }
+        const list = this.querySelector('.ss-tabs');
+        const tab = this.tabs.find((t) => t.dataset.s === String(n));
+        if (list && tab && list.scrollWidth > list.clientWidth) {
+          list.scrollTo({ left: Math.max(0, tab.offsetLeft - list.offsetLeft - 20), behavior });
+        }
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Čebelji koledar (Šemen)",
+  "tag": "section",
+  "class": "section-semen-seasons",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "dark", "options": [ { "value": "dark", "label": "Temna" }, { "value": "cream", "label": "Kremna" } ] },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)" },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov", "default": "Letni časi" },
+    { "type": "text", "id": "title", "label": "Naslov (H2)", "default": "Čebelji koledar" },
+    { "type": "textarea", "id": "des", "label": "Uvod" },
+    { "type": "header", "content": "Graf" },
+    { "type": "text", "id": "wave_label", "label": "Oznaka vrstice z brenčanjem", "default": "Brenčanje" },
+    { "type": "text", "id": "activity", "label": "Aktivnost čebel po mesecih (0–10, jan–dec, ločeno z vejico)", "default": "1,1.5,3,6,9,10,10,8,6,3,1.5,1" },
+    { "type": "text", "id": "today_label", "label": "Oznaka današnjega dne", "default": "Danes" },
+    { "type": "text", "id": "now_label", "label": "Oznaka trenutnega letnega časa", "default": "Zdaj" },
+    { "type": "text", "id": "note", "label": "Opomba pod grafom" },
+    { "type": "header", "content": "Podrobnosti" },
+    { "type": "text", "id": "label_hear", "label": "Oznaka: slišite", "default": "Slišite" },
+    { "type": "text", "id": "label_smell", "label": "Oznaka: vonjate", "default": "Vonjate" },
+    { "type": "text", "id": "label_taste", "label": "Oznaka: poskusite", "default": "Poskusite" },
+    { "type": "text", "id": "label_best", "label": "Oznaka: najboljše za", "default": "Najboljše za" },
+    { "type": "text", "id": "level_label", "label": "Oznaka aktivnosti", "default": "Aktivnost čebel" },
+    { "type": "text", "id": "button", "label": "Gumb" },
+    { "type": "url", "id": "link", "label": "Povezava gumba" },
+    { "type": "select", "id": "style_btn", "label": "Slog gumba", "default": "btn-theme", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline btn-outline-white", "label": "Bela obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "range", "id": "padding_top", "label": "Odmik zgoraj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Odmik spodaj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "season",
+      "name": "Letni čas",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "name", "label": "Ime", "default": "Pomlad" },
+        { "type": "text", "id": "months", "label": "Meseci (besedilo)", "default": "marec–maj" },
+        { "type": "range", "id": "start_month", "label": "Prvi mesec", "min": 1, "max": 12, "step": 1, "default": 3 },
+        { "type": "range", "id": "end_month", "label": "Zadnji mesec", "min": 1, "max": 12, "step": 1, "default": 5 },
+        { "type": "color", "id": "color", "label": "Barva", "default": "#9bb068" },
+        { "type": "select", "id": "icon", "label": "Ikona", "default": "sprout", "options": [ { "value": "sprout", "label": "Poganjek" }, { "value": "sun", "label": "Sonce" }, { "value": "leaf", "label": "List" }, { "value": "snow", "label": "Snežinka" }, { "value": "flower", "label": "Cvet" }, { "value": "bee", "label": "Čebela" }, { "value": "hive", "label": "Satje" } ] },
+        { "type": "text", "id": "headline", "label": "Naslov", "default": "Čebelnjak se prebuja" },
+        { "type": "textarea", "id": "text", "label": "Besedilo" },
+        { "type": "text", "id": "hear", "label": "Slišite" },
+        { "type": "text", "id": "smell", "label": "Vonjate" },
+        { "type": "text", "id": "taste", "label": "Poskusite" },
+        { "type": "text", "id": "best", "label": "Najboljše za" },
+        { "type": "range", "id": "activity", "label": "Aktivnost čebel", "min": 1, "max": 5, "step": 1, "default": 3 }
+      ]
+    },
+    {
+      "type": "forage",
+      "name": "Paša",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Ime (npr. Akacija)", "default": "Akacija" },
+        { "type": "text", "id": "period", "label": "Obdobje (besedilo)", "default": "druga polovica maja" },
+        { "type": "range", "id": "start", "label": "Začetek (polovica meseca)", "info": "1 = začetek januarja, 2 = konec januarja, 3 = začetek februarja … 24 = konec decembra", "min": 1, "max": 24, "step": 1, "default": 10 },
+        { "type": "range", "id": "end", "label": "Konec (polovica meseca)", "min": 1, "max": 24, "step": 1, "default": 11 },
+        { "type": "color", "id": "color", "label": "Barva", "default": "#f0dc8a" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Čebelji koledar (Šemen)", "blocks": [ { "type": "season" }, { "type": "forage" } ] } ]
+}
+{% endschema %}

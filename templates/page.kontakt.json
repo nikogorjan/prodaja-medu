@@ -1,0 +1,156 @@
+{
+  "sections": {
+    "uvod": {
+      "type": "semen-page-hero",
+      "blocks": {
+        "dejstvo_1": { "type": "fact", "settings": { "label": "Mobitel", "value": "031 787 235" } },
+        "dejstvo_2": { "type": "fact", "settings": { "label": "Telefon", "value": "02 541 13 38" } },
+        "dejstvo_3": { "type": "fact", "settings": { "label": "Obisk", "value": "po dogovoru" } }
+      },
+      "block_order": ["dejstvo_1", "dejstvo_2", "dejstvo_3"],
+      "settings": {
+        "layout": "split",
+        "image": "shopify://shop_images/gasilska.webp",
+        "image_position": "center center",
+        "panel_width": 46,
+        "height": 520,
+        "height_mobile": 520,
+        "overlay": 80,
+        "bgsection": "#2b2420",
+        "accent": "#c99a5c",
+        "show_breadcrumb": true,
+        "breadcrumb_label": "Kontakt",
+        "title_top": "Kontakt",
+        "title": "Pišite ali pokličite",
+        "text": "<p>Za naročila medu, darilne pakete, obisk čebelnjaka ali vprašanje o čebelah. Z veseljem vam odgovorimo.</p>",
+        "button": "Pošljite sporočilo",
+        "link": "/pages/kontakt#sporocilo",
+        "style_btn": "btn-theme",
+        "button_2": "Kako do nas",
+        "link_2": "/pages/kontakt#pot",
+        "style_btn_2": "btn-underline"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "kontakt": {
+      "type": "semen-contact",
+      "blocks": {
+        "i1": { "type": "item", "settings": { "icon": "mobile", "label": "Mobitel", "value": "031 787 235", "link_type": "phone", "url": "", "note": "" } },
+        "i2": { "type": "item", "settings": { "icon": "phone", "label": "Telefon", "value": "02 541 13 38", "link_type": "phone", "url": "", "note": "" } },
+        "i3": { "type": "item", "settings": { "icon": "mail", "label": "E-pošta", "value": "semen.stefan@gmail.com", "link_type": "email", "url": "", "note": "" } },
+        "i4": { "type": "item", "settings": { "icon": "home", "label": "Sedež", "value": "Lipa 145 A, 9231 Beltinci", "link_type": "map", "url": "", "note": "Šemen Štefan s.p., prodaja medu" } },
+        "i5": { "type": "item", "settings": { "icon": "hive", "label": "Čebelnjak in apiturizem", "value": "Melinci, 9231 Beltinci", "link_type": "map", "url": "", "note": "Obisk po predhodnem dogovoru." } }
+      },
+      "block_order": ["i1", "i2", "i3", "i4", "i5"],
+      "settings": {
+        "scheme": "cream",
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "sporocilo",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "panel_title": "Kontaktni podatki",
+        "panel_text": "<p>Najhitreje nas ujamete po telefonu. Če ne dvignemo, smo verjetno pri čebelah, pokličemo vas nazaj.</p>",
+        "form_title": "Pošljite sporočilo",
+        "form_intro": "Izberite zadevo in nam napišite, kako vam lahko pomagamo. Odgovorili vam bomo v najkrajšem možnem času.",
+        "form_label": "Kontaktni obrazec (Kontakt)",
+        "show_topic": true,
+        "label_topic": "Zadeva",
+        "topics": "Naročilo medu in izdelkov\nObisk čebelnjaka in apiterapija\nDarilni paketi in poslovna darila\nDrugo vprašanje",
+        "label_name": "Ime in priimek",
+        "label_email": "E-pošta",
+        "show_phone": true,
+        "label_phone": "Telefon",
+        "show_date": false,
+        "label_date": "Želeni datum obiska",
+        "show_persons": false,
+        "label_persons": "Število oseb",
+        "label_message": "Sporočilo",
+        "placeholder_message": "Kako vam lahko pomagamo?",
+        "consent": "Podatke iz obrazca uporabimo samo za odgovor na vaše sporočilo.",
+        "privacy_label": "Politika zasebnosti",
+        "button_label": "Pošlji sporočilo",
+        "success_message": "<p>Hvala za sporočilo. Odgovorili vam bomo v najkrajšem možnem času.</p>",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "pot": {
+      "type": "map",
+      "settings": {
+        "heading": "Kako do nas",
+        "address": "<p><strong>Čebelnjak in apiturizem Šemen</strong><br>Melinci, 9231 Beltinci<br>12 km od Murske Sobote, 500 m od reke Mure</p><p>Čebelnjak stoji ob cesti med Melinci in Gornjo Bistrico. Sledite tabli APITERAPIJA, do čebelnjaka je še približno 300 metrov.</p>",
+        "map_address": "Melinci, 9231 Beltinci, Slovenija",
+        "button_text": "Navodila za pot",
+        "show_pin": true,
+        "anchor": "pot",
+        "api_key": "",
+        "map_code": "<iframe src=\"https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1sMelinci,+9231+Beltinci,+Slovenija!6i13\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\" title=\"Zemljevid: Melinci, 9231 Beltinci\"></iframe>",
+        "background_image_position": "center center"
+      }
+    },
+    "bliznjice": {
+      "type": "semen-cards",
+      "blocks": {
+        "b1": {
+          "type": "card",
+          "settings": {
+            "icon": "truck",
+            "label": "",
+            "title": "Naročila in dostava",
+            "text": "<p>Pošiljamo po vsej Sloveniji, naročilo odpošljemo v 1–3 delovnih dneh. Po dogovoru je mogoč tudi osebni prevzem.</p>",
+            "link_label": "V trgovino",
+            "link": "shopify://collections/all"
+          }
+        },
+        "b2": {
+          "type": "card",
+          "settings": {
+            "icon": "air",
+            "label": "",
+            "title": "Obisk čebelnjaka",
+            "text": "<p>Apiterapija, degustacija medu in spoznavanje čebel na Melincih ob Muri, po predhodnem dogovoru.</p>",
+            "link_label": "Več o apiturizmu",
+            "link": "/pages/apiturizem"
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "icon": "gift",
+            "label": "",
+            "title": "Darilni paketi",
+            "text": "<p>Sestavite svojo kombinacijo medov in čebeljih izdelkov, mi jo lepo zapakiramo. Za poslovna darila nas pokličite.</p>",
+            "link_label": "Pišite nam",
+            "link": "/pages/kontakt#sporocilo"
+          }
+        }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {
+        "scheme": "white",
+        "pattern": false,
+        "accent": "#c99a5c",
+        "setwidth": "container",
+        "anchor": "",
+        "heading_layout": "center",
+        "title_top": "Hitre povezave",
+        "title": "Kako vam lahko pomagamo",
+        "des": "",
+        "columns": "3",
+        "card_style": "box",
+        "icon_size": 36,
+        "button": "",
+        "link": "",
+        "style_btn": "btn-underline",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["uvod", "main", "kontakt", "pot", "bliznjice"]
+}

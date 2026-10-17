@@ -1,0 +1,301 @@
+{%- comment -%}
+  Kontaktni obrazec (Čebelarstvo Šemen): temna plošča s kontaktnimi podatki (bloki) levo, Shopifyjev kontaktni obrazec desno.
+  Obrazec ima neobvezna polja za zadevo (seznam iz nastavitve), želeni datum obiska in število oseb, zato ga lahko
+  uporabimo tudi kot povpraševanje za obisk čebelnjaka. Sporočila pridejo na e-pošto trgovine (Nastavitve › Obvestila).
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign items = section.blocks | where: 'type', 'item'
+  assign form_id = 'ContactForm-' | append: sid
+  assign topics = s.topics | newline_to_br | split: '<br />'
+  if s.scheme == 'cream'
+    assign bg = '#f7f3ea'
+  else
+    assign bg = '#ffffff'
+  endif
+-%}
+<style>
+  .sct-{{ sid }} { --sct-accent: {{ s.accent }}; background: {{ bg }}; padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  .sct-{{ sid }} .sct-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 36px; }
+  .sct-{{ sid }} .sct-eyebrow { display: block; }
+  .sct-{{ sid }} .sct-title { margin: 6px 0 0; text-wrap: balance; }
+  .sct-{{ sid }} .sct-intro { margin: 0; max-width: 52ch; color: #5c6978; }
+  .sct-{{ sid }} .sct-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .sct-{{ sid }} .sct-panel { position: relative; overflow: hidden; background: #2b2420; color: #cfc4b4; padding: 36px 24px; }
+  .sct-{{ sid }} .sct-panel > * { position: relative; z-index: 1; }
+  .sct-{{ sid }} .sct-panel::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; opacity: .14; pointer-events: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><path d='M28 1l27 15.5v31L28 63 1 47.5v-31L28 1zm0 48l27 15.5v31L28 97 1 80.5v-31L28 49z' fill='none' stroke='{{ s.accent | replace: '#', '%23' }}' stroke-width='1'/></svg>"); background-size: 56px 97px; -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 100%); mask-image: linear-gradient(to top, #000 0%, transparent 100%); }
+  .sct-{{ sid }} .sct-panel-title { margin: 0 0 12px; color: #ffffff; font-size: 24px; line-height: 1.25; }
+  .sct-{{ sid }} .sct-panel-text { font-size: 14px; line-height: 1.7; }
+  .sct-{{ sid }} .sct-panel-text p { margin: 0 0 10px; color: inherit; font-size: inherit; line-height: inherit; }
+  .sct-{{ sid }} .sct-panel-text a { color: #ffffff; }
+  .sct-{{ sid }} .sct-items { list-style: none; margin: 28px 0 0; padding: 0; }
+  .sct-{{ sid }} .sct-item { display: flex; gap: 16px; align-items: flex-start; margin: 0; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.1); }
+  .sct-{{ sid }} .sct-item:last-child { border-bottom: 1px solid rgba(255,255,255,.1); }
+  .sct-{{ sid }} .sct-item .semen-icon { flex: 0 0 auto; color: var(--sct-accent); margin-top: 2px; }
+  .sct-{{ sid }} .sct-item-label { display: block; font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--sct-accent); line-height: 1.5; }
+  .sct-{{ sid }} .sct-item-value { display: block; margin-top: 2px; font-family: var(--g-font-1); font-size: 17px; line-height: 1.4; color: #ffffff; text-decoration: none; word-break: break-word; }
+  .sct-{{ sid }} a.sct-item-value { transition: color .3s; }
+  .sct-{{ sid }} a.sct-item-value:hover { color: var(--sct-accent); }
+  .sct-{{ sid }} .sct-item-note { display: block; margin-top: 2px; font-size: 13px; line-height: 1.55; color: #a99c8b; }
+  .sct-{{ sid }} .sct-form-wrap { background: #ffffff; border: 1px solid #ece4d4; padding: 32px 22px 36px; }
+  .sct-{{ sid }} .sct-form-title { margin: 0 0 8px; font-size: 24px; line-height: 1.25; }
+  .sct-{{ sid }} .sct-form-intro { margin: 0 0 24px; color: #5c6978; font-size: 14px; line-height: 1.7; }
+  .sct-{{ sid }} .sct-fields { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .sct-{{ sid }} .sct-field { display: flex; flex-direction: column; gap: 7px; margin: 0; }
+  .sct-{{ sid }} .sct-field label { margin: 0; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--g-color-heading); }
+  .sct-{{ sid }} .sct-field label span { color: var(--sct-accent); }
+  .sct-{{ sid }} .sct-field input, .sct-{{ sid }} .sct-field select, .sct-{{ sid }} .sct-field textarea { width: 100%; height: auto; min-height: 50px; margin: 0; padding: 13px 16px; border: 1px solid #ddd3c2; border-radius: 0; background: #fdfbf7; color: var(--g-color-heading); font-family: var(--g-font-2); font-size: 15px; line-height: 1.5; box-shadow: none; transition: border-color .25s, background-color .25s; -webkit-appearance: none; appearance: none; }
+  .sct-{{ sid }} .sct-field select { padding-right: 44px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5l5 5 5-5' fill='none' stroke='%23222' stroke-width='1.2'/></svg>"); background-repeat: no-repeat; background-position: right 16px center; }
+  .sct-{{ sid }} .sct-field textarea { min-height: 150px; resize: vertical; }
+  .sct-{{ sid }} .sct-field input:focus, .sct-{{ sid }} .sct-field select:focus, .sct-{{ sid }} .sct-field textarea:focus { outline: none; border-color: var(--sct-accent); background-color: #ffffff; }
+  .sct-{{ sid }} .sct-field input[aria-invalid="true"] { border-color: #bb5237; }
+  .sct-{{ sid }} .sct-consent { margin: 2px 0 0; font-size: 12px; line-height: 1.6; color: #5c6978; }
+  .sct-{{ sid }} .sct-consent a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .sct-{{ sid }} .sct-submit { margin-top: 6px; }
+  .sct-{{ sid }} .sct-submit .btn { width: 100%; }
+  .sct-{{ sid }} .sct-status { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 22px; padding: 16px 18px; border-left: 2px solid var(--sct-accent); background: #f7f3ea; color: var(--g-color-heading); font-size: 14px; line-height: 1.6; }
+  .sct-{{ sid }} .sct-status .semen-icon { flex: 0 0 auto; color: var(--sct-accent); }
+  .sct-{{ sid }} .sct-status--error { border-left-color: #bb5237; }
+  .sct-{{ sid }} .sct-status ul { margin: 6px 0 0; padding-left: 18px; }
+  .sct-{{ sid }} .sct-status a { color: inherit; }
+  @media (min-width: 750px) {
+    .sct-{{ sid }} .sct-fields--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sct-{{ sid }} .sct-submit .btn { width: auto; min-width: 220px; }
+    .sct-{{ sid }} .sct-form-wrap { padding: 44px 44px 48px; }
+    .sct-{{ sid }} .sct-panel { padding: 44px; }
+  }
+  @media (min-width: 990px) {
+    .sct-{{ sid }} { padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+    .sct-{{ sid }} .sct-head { grid-template-columns: 1.1fr 1fr; align-items: end; margin-bottom: 48px; }
+    .sct-{{ sid }} .sct-intro { justify-self: end; text-align: right; }
+    .sct-{{ sid }} .sct-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+    .sct-{{ sid }} .sct-panel { padding: 52px 48px; }
+    .sct-{{ sid }} .sct-form-wrap { border-left: 0; padding: 52px 56px 56px; }
+  }
+</style>
+
+<section class="sct-{{ sid }}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="{{ s.setwidth }}">
+    {%- if s.title_top != blank or s.title != blank or s.des != blank -%}
+      <div class="sct-head" data-aos="fade-up">
+        <div>
+          {%- if s.title_top != blank -%}<span class="subtop sct-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
+          {%- if s.title != blank -%}<h2 class="h2 sct-title">{{ s.title | escape }}</h2>{%- endif -%}
+        </div>
+        {%- if s.des != blank -%}<p class="sct-intro">{{ s.des | escape }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="sct-grid" data-aos="fade-up">
+      <aside class="sct-panel">
+        {%- if s.panel_title != blank -%}<h3 class="sct-panel-title">{{ s.panel_title | escape }}</h3>{%- endif -%}
+        {%- if s.panel_text != blank -%}<div class="sct-panel-text">{{ s.panel_text }}</div>{%- endif -%}
+        {%- if items.size > 0 -%}
+          <ul class="sct-items" role="list">
+            {%- for block in items -%}
+              {%- liquid
+                assign b = block.settings
+                assign href = blank
+                case b.link_type
+                  when 'phone'
+                    assign digits = b.value | remove: ' ' | remove: '/' | remove: '-' | remove: '(' | remove: ')' | remove: '.'
+                    assign first = digits | slice: 0
+                    if first == '0'
+                      assign rest = digits | remove_first: '0'
+                      assign href = 'tel:+386' | append: rest
+                    else
+                      assign href = 'tel:' | append: digits
+                    endif
+                  when 'email'
+                    assign href = 'mailto:' | append: b.value
+                  when 'map'
+                    assign q = b.value | url_encode
+                    assign href = 'https://www.google.com/maps/search/?api=1&query=' | append: q
+                  when 'url'
+                    assign href = b.url
+                endcase
+              -%}
+              <li class="sct-item" {{ block.shopify_attributes }}>
+                {%- render 'semen-icon', icon: b.icon, size: 24 -%}
+                <div>
+                  {%- if b.label != blank -%}<span class="sct-item-label">{{ b.label | escape }}</span>{%- endif -%}
+                  {%- if href != blank -%}
+                    <a class="sct-item-value" href="{{ href }}"{% if b.link_type == 'map' or b.link_type == 'url' %} target="_blank" rel="noopener"{% endif %}>{{ b.value | escape }}</a>
+                  {%- else -%}
+                    <span class="sct-item-value">{{ b.value | escape }}</span>
+                  {%- endif -%}
+                  {%- if b.note != blank -%}<span class="sct-item-note">{{ b.note | escape }}</span>{%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </aside>
+
+      <div class="sct-form-wrap">
+        {%- if s.form_title != blank -%}<h3 class="sct-form-title">{{ s.form_title | escape }}</h3>{%- endif -%}
+        {%- if s.form_intro != blank -%}<p class="sct-form-intro">{{ s.form_intro | escape }}</p>{%- endif -%}
+
+        {%- form 'contact', id: form_id -%}
+          {%- if form.posted_successfully? -%}
+            <div class="sct-status" role="status" tabindex="-1" autofocus>
+              {%- render 'semen-icon', icon: 'check', size: 20 -%}
+              <div>{{ s.success_message }}</div>
+            </div>
+          {%- elsif form.errors -%}
+            <div class="sct-status sct-status--error" role="alert" tabindex="-1" autofocus>
+              <div>
+                {{ 'contact.form.post_error' | t }}
+                <ul>
+                  {%- for field in form.errors -%}
+                    <li><a href="#{{ form_id }}-{{ field }}">{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[Obrazec]" value="{{ s.form_label | escape }}">
+
+          <div class="sct-fields">
+            {%- if s.show_topic and topics.size > 0 -%}
+              <div class="sct-field">
+                <label for="{{ form_id }}-topic">{{ s.label_topic | escape }}</label>
+                <select id="{{ form_id }}-topic" name="contact[Zadeva]">
+                  {%- for topic in topics -%}
+                    {%- assign t = topic | strip -%}
+                    {%- if t != blank -%}<option value="{{ t | escape }}">{{ t | escape }}</option>{%- endif -%}
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endif -%}
+
+            <div class="sct-fields sct-fields--2">
+              <div class="sct-field">
+                <label for="{{ form_id }}-name">{{ s.label_name | escape }} <span aria-hidden="true">*</span></label>
+                <input type="text" id="{{ form_id }}-name" name="contact[name]" autocomplete="name" required value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+              </div>
+              <div class="sct-field">
+                <label for="{{ form_id }}-email">{{ s.label_email | escape }} <span aria-hidden="true">*</span></label>
+                <input type="email" id="{{ form_id }}-email" name="contact[email]" autocomplete="email" spellcheck="false" autocapitalize="off" required value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"{% if form.errors contains 'email' %} aria-invalid="true"{% endif %}>
+              </div>
+            </div>
+
+            {%- if s.show_phone -%}
+              <div class="sct-field">
+                <label for="{{ form_id }}-phone">{{ s.label_phone | escape }}</label>
+                <input type="tel" id="{{ form_id }}-phone" name="contact[phone]" autocomplete="tel" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+              </div>
+            {%- endif -%}
+
+            {%- if s.show_date or s.show_persons -%}
+              <div class="sct-fields{% if s.show_date and s.show_persons %} sct-fields--2{% endif %}">
+                {%- if s.show_date -%}
+                  <div class="sct-field">
+                    <label for="{{ form_id }}-date">{{ s.label_date | escape }}</label>
+                    <input type="date" id="{{ form_id }}-date" name="contact[{{ s.label_date | escape }}]" min="{{ 'now' | date: '%Y-%m-%d' }}">
+                  </div>
+                {%- endif -%}
+                {%- if s.show_persons -%}
+                  <div class="sct-field">
+                    <label for="{{ form_id }}-persons">{{ s.label_persons | escape }}</label>
+                    <input type="number" id="{{ form_id }}-persons" name="contact[{{ s.label_persons | escape }}]" min="1" max="99" inputmode="numeric">
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            <div class="sct-field">
+              <label for="{{ form_id }}-body">{{ s.label_message | escape }}</label>
+              <textarea id="{{ form_id }}-body" name="contact[body]" rows="6" placeholder="{{ s.placeholder_message | escape }}">{{ form.body }}</textarea>
+            </div>
+
+            {%- if s.consent != blank -%}
+              <p class="sct-consent">
+                {{ s.consent | escape }}{% if shop.privacy_policy %} <a href="{{ shop.privacy_policy.url }}">{{ s.privacy_label | escape }}</a>{% endif %}
+              </p>
+            {%- endif -%}
+
+            <div class="sct-submit">
+              <button type="submit" class="btn btn-theme">{{ s.button_label | escape }}</button>
+            </div>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kontaktni obrazec (Šemen)",
+  "tag": "section",
+  "class": "section-semen-contact",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Ozadje sekcije", "default": "cream", "options": [ { "value": "white", "label": "Belo" }, { "value": "cream", "label": "Kremno" } ] },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)", "info": "Npr. povprasevanje – nato povezava #povprasevanje skoči na to sekcijo." },
+    { "type": "header", "content": "Glava (neobvezno)" },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov" },
+    { "type": "text", "id": "title", "label": "Naslov (H2)" },
+    { "type": "textarea", "id": "des", "label": "Uvod" },
+    { "type": "header", "content": "Temna plošča" },
+    { "type": "text", "id": "panel_title", "label": "Naslov plošče", "default": "Kontaktni podatki" },
+    { "type": "richtext", "id": "panel_text", "label": "Besedilo plošče" },
+    { "type": "header", "content": "Obrazec" },
+    { "type": "text", "id": "form_title", "label": "Naslov obrazca", "default": "Pošljite sporočilo" },
+    { "type": "textarea", "id": "form_intro", "label": "Uvod obrazca" },
+    { "type": "text", "id": "form_label", "label": "Ime obrazca v e-pošti", "info": "Pokaže se v sporočilu, ki ga prejmete, da veste, s katere strani je prišlo.", "default": "Kontaktni obrazec" },
+    { "type": "checkbox", "id": "show_topic", "label": "Pokaži izbiro zadeve", "default": true },
+    { "type": "text", "id": "label_topic", "label": "Oznaka: zadeva", "default": "Zadeva" },
+    { "type": "textarea", "id": "topics", "label": "Možnosti zadeve (vsaka v svoji vrstici)", "default": "Naročilo medu in izdelkov\nObisk čebelnjaka in apiterapija\nDarilni paketi in poslovna darila\nDrugo vprašanje" },
+    { "type": "text", "id": "label_name", "label": "Oznaka: ime", "default": "Ime in priimek" },
+    { "type": "text", "id": "label_email", "label": "Oznaka: e-pošta", "default": "E-pošta" },
+    { "type": "checkbox", "id": "show_phone", "label": "Pokaži polje za telefon", "default": true },
+    { "type": "text", "id": "label_phone", "label": "Oznaka: telefon", "default": "Telefon" },
+    { "type": "checkbox", "id": "show_date", "label": "Pokaži polje za datum obiska", "default": false },
+    { "type": "text", "id": "label_date", "label": "Oznaka: datum", "default": "Želeni datum obiska" },
+    { "type": "checkbox", "id": "show_persons", "label": "Pokaži polje za število oseb", "default": false },
+    { "type": "text", "id": "label_persons", "label": "Oznaka: število oseb", "default": "Število oseb" },
+    { "type": "text", "id": "label_message", "label": "Oznaka: sporočilo", "default": "Sporočilo" },
+    { "type": "text", "id": "placeholder_message", "label": "Namig v polju za sporočilo" },
+    { "type": "text", "id": "consent", "label": "Opomba o zasebnosti", "default": "Podatke iz obrazca uporabimo samo za odgovor na vaše sporočilo." },
+    { "type": "text", "id": "privacy_label", "label": "Besedilo povezave na politiko zasebnosti", "default": "Politika zasebnosti" },
+    { "type": "text", "id": "button_label", "label": "Gumb", "default": "Pošlji sporočilo" },
+    { "type": "richtext", "id": "success_message", "label": "Sporočilo po oddaji", "default": "<p>Hvala za sporočilo. Odgovorili vam bomo v najkrajšem možnem času.</p>" },
+    { "type": "header", "content": "Odmiki" },
+    { "type": "range", "id": "padding_top", "label": "Odmik zgoraj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Odmik spodaj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Kontaktni podatek",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ikona", "default": "phone", "options": [
+          { "value": "phone", "label": "Telefon" },
+          { "value": "mobile", "label": "Mobitel" },
+          { "value": "mail", "label": "E-pošta" },
+          { "value": "pin", "label": "Lokacija" },
+          { "value": "home", "label": "Hiša, sedež" },
+          { "value": "hive", "label": "Satje" },
+          { "value": "clock", "label": "Ura" },
+          { "value": "calendar", "label": "Koledar" },
+          { "value": "route", "label": "Pot" },
+          { "value": "map", "label": "Zemljevid" },
+          { "value": "truck", "label": "Dostava" },
+          { "value": "gift", "label": "Darilo" }
+        ] },
+        { "type": "text", "id": "label", "label": "Oznaka", "default": "Telefon" },
+        { "type": "text", "id": "value", "label": "Vrednost", "default": "031 787 235" },
+        { "type": "select", "id": "link_type", "label": "Povezava", "default": "phone", "options": [ { "value": "none", "label": "Brez" }, { "value": "phone", "label": "Klic na številko" }, { "value": "email", "label": "E-pošta" }, { "value": "map", "label": "Google Zemljevidi (iskanje naslova)" }, { "value": "url", "label": "Poljubna povezava" } ] },
+        { "type": "url", "id": "url", "label": "Poljubna povezava" },
+        { "type": "text", "id": "note", "label": "Opomba (neobvezno)" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Kontaktni obrazec (Šemen)", "blocks": [ { "type": "item" } ] } ]
+}
+{% endschema %}

@@ -25,6 +25,12 @@
     assign showBreadcrumb = true
   endif
 
+  # Čebelarstvo Šemen: te strani imajo drobtinice v svojem uvodu (sekcija semen-page-hero)
+  assign semen_hero_templates = 'o-nas,apiturizem,kontakt' | split: ','
+  if semen_hero_templates contains template.suffix
+    assign showBreadcrumb = false
+  endif
+
 -%}
 {%- if settings.enable_breadcrumb and showBreadcrumb -%}
 {% unless template == 'index' or template == 'cart' or template contains 'collection' or template contains blog_page or template contains article_page or template contains product_page or template contains customer_page %}

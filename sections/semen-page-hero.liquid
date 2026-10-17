@@ -1,0 +1,162 @@
+{%- comment -%}
+  Uvod strani (Čebelarstvo Šemen): naslovni del podstrani z drobtinicami, nadnaslovom, naslovom H1, uvodom in gumboma.
+  "Deljena" postavitev: temna plošča levo, fotografija desno v polni višini (kot Kje nas najdete na domači strani).
+  "Čez vso širino": fotografija v ozadju s temnim prelivom z leve.
+  Bloki "Podatek" izpišejo vrstico kratkih podatkov pod gumboma (npr. Od leta | 1982).
+  Na teh straneh nadomesti belo vrstico z drobtinicami iz teme (snippets/breadcrumb.liquid).
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign facts = section.blocks | where: 'type', 'fact'
+  assign crumb = page.title | default: s.breadcrumb_label
+  assign layout = s.layout
+  assign align_pad = 'max(20px, calc((100vw - ' | append: settings.container | append: 'px) / 2 + 15px))'
+-%}
+<style>
+  .sph-{{ sid }} { --sph-accent: {{ s.accent }}; position: relative; background: {{ s.bgsection }}; color: #cfc4b4; overflow: hidden; }
+  .sph-{{ sid }} .sph-media { position: relative; overflow: hidden; background: #3a312b; aspect-ratio: 16 / 11; }
+  .sph-{{ sid }} .sph-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{ s.image_position }}; display: block; }
+  .sph-{{ sid }} .sph-panel { position: relative; z-index: 2; padding: 36px 20px 44px; }
+  .sph-{{ sid }} .sph-inner { max-width: 620px; }
+  .sph-{{ sid }} .sph-crumbs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 26px; font-size: 13px; line-height: 20px; color: rgba(255,255,255,.55); }
+  .sph-{{ sid }} .sph-crumbs a { color: rgba(255,255,255,.85); text-decoration: none; transition: color .3s; }
+  .sph-{{ sid }} .sph-crumbs a:hover { color: var(--sph-accent); }
+  .sph-{{ sid }} .sph-eyebrow { display: block; margin-bottom: 12px; color: var(--sph-accent) !important; }
+  .sph-{{ sid }} .sph-title { color: #ffffff; margin: 0 0 20px; text-wrap: balance; font-size: clamp(30px, 3.4vw + 6px, var(--g-h1-font-size)); line-height: 1.12; }
+  .sph-{{ sid }} .sph-text { margin: 0; max-width: 54ch; font-size: 16px; line-height: 1.75; color: #cfc4b4; }
+  .sph-{{ sid }} .sph-text p { margin: 0 0 12px; color: inherit; font-size: inherit; line-height: inherit; }
+  .sph-{{ sid }} .sph-text p:last-child { margin-bottom: 0; }
+  .sph-{{ sid }} .sph-text a { color: #ffffff; }
+  .sph-{{ sid }} .sph-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 32px; margin-top: 32px; }
+  .sph-{{ sid }} .sph-actions .btn-underline { color: #ffffff !important; }
+  .sph-{{ sid }} .sph-actions .btn-underline:before { background: var(--sph-accent); }
+  .sph-{{ sid }} .sph-actions .btn-underline:hover { color: var(--sph-accent) !important; }
+  .sph-{{ sid }} .sph-facts { display: flex; flex-wrap: wrap; gap: 18px 0; margin: 40px 0 0; padding: 24px 0 0; border-top: 1px solid rgba(255,255,255,.12); }
+  .sph-{{ sid }} .sph-fact { margin: 0; padding: 0 26px; border-left: 1px solid rgba(255,255,255,.12); }
+  .sph-{{ sid }} .sph-fact:first-child { padding-left: 0; border-left: 0; }
+  .sph-{{ sid }} .sph-fact dt { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--sph-accent); line-height: 1.4; }
+  .sph-{{ sid }} .sph-fact dd { margin: 6px 0 0; font-family: var(--g-font-1); font-size: 17px; line-height: 1.3; color: #ffffff; }
+  .sph-{{ sid }}.sph--cover .sph-media { position: absolute; inset: 0; aspect-ratio: auto; }
+  .sph-{{ sid }}.sph--cover .sph-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(32,27,23,{{ s.overlay | divided_by: 100.0 }}) 0%, rgba(32,27,23,{{ s.overlay | divided_by: 160.0 }}) 50%, rgba(32,27,23,.1) 100%), linear-gradient(0deg, rgba(32,27,23,.55) 0%, rgba(32,27,23,0) 45%); }
+  .sph-{{ sid }}.sph--cover { display: flex; align-items: flex-end; min-height: {{ s.height_mobile }}px; }
+  .sph-{{ sid }}.sph--cover .sph-panel { width: 100%; padding-top: 96px; }
+  @media (min-width: 990px) {
+    .sph-{{ sid }}.sph--split { display: grid; grid-template-columns: {{ s.panel_width }}% 1fr; min-height: {{ s.height }}px; }
+    .sph-{{ sid }}.sph--split .sph-media { order: 2; aspect-ratio: auto; height: 100%; }
+    .sph-{{ sid }}.sph--split .sph-panel { order: 1; display: flex; align-items: center; padding: 72px 64px 72px {{ align_pad }}; }
+    .sph-{{ sid }}.sph--cover { align-items: center; min-height: {{ s.height }}px; }
+    .sph-{{ sid }}.sph--cover .sph-panel { padding: 112px {{ align_pad }} 88px; }
+  }
+  @media (max-width: 989px) {
+    {%- if s.image_mobile != blank -%}
+    .sph-{{ sid }} .sph-media .sph-img--desktop { display: none; }
+    {%- endif -%}
+    .sph-{{ sid }} .sph-facts { display: grid; grid-template-columns: repeat({% if facts.size > 2 %}3{% else %}2{% endif %}, minmax(0, 1fr)); gap: 0 14px; margin-top: 32px; padding-top: 20px; }
+    .sph-{{ sid }} .sph-fact { padding: 0; border-left: 0; }
+    .sph-{{ sid }} .sph-fact dd { font-size: 15px; }
+  }
+  @media (min-width: 990px) {
+    .sph-{{ sid }} .sph-media .sph-img--mobile { display: none; }
+  }
+</style>
+
+<section class="sph-{{ sid }} sph--{{ layout }}" aria-labelledby="SemenHeroTitle-{{ sid }}">
+  <div class="sph-media">
+    {%- if s.image != blank -%}
+      {%- liquid
+        if layout == 'split'
+          assign media_vw = 100 | minus: s.panel_width
+          assign img_sizes = '(min-width: 990px) ' | append: media_vw | append: 'vw, 100vw'
+        else
+          assign img_sizes = '100vw'
+        endif
+        assign img_alt = s.image.alt | default: s.title
+      -%}
+      {{ s.image | image_url: width: 2400 | image_tag: class: 'sph-img--desktop', loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200, 1600, 2000, 2400', sizes: img_sizes, alt: img_alt }}
+      {%- if s.image_mobile != blank -%}
+        {{ s.image_mobile | image_url: width: 1200 | image_tag: class: 'sph-img--mobile', loading: 'eager', widths: '600, 900, 1200', sizes: '100vw', alt: img_alt }}
+      {%- endif -%}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+
+  <div class="sph-panel">
+    <div class="sph-inner">
+      {%- if s.show_breadcrumb -%}
+        <nav class="sph-crumbs" aria-label="Drobtinice">
+          <a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{{ crumb | escape }}</span>
+        </nav>
+      {%- endif -%}
+      {%- if s.title_top != blank -%}<span class="subtop sph-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
+      <h1 class="h1 sph-title" id="SemenHeroTitle-{{ sid }}">{{ s.title | escape }}</h1>
+      {%- if s.text != blank -%}<div class="sph-text">{{ s.text }}</div>{%- endif -%}
+
+      {%- if s.button != blank or s.button_2 != blank -%}
+        <div class="sph-actions">
+          {%- if s.button != blank -%}<a class="btn {{ s.style_btn }}" href="{{ s.link | default: '#' }}">{{ s.button | escape }}</a>{%- endif -%}
+          {%- if s.button_2 != blank -%}<a class="btn {{ s.style_btn_2 }}" href="{{ s.link_2 | default: '#' }}">{{ s.button_2 | escape }}</a>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if facts.size > 0 -%}
+        <dl class="sph-facts">
+          {%- for block in facts -%}
+            <div class="sph-fact" {{ block.shopify_attributes }}>
+              <dt>{{ block.settings.label | escape }}</dt>
+              <dd>{{ block.settings.value | escape }}</dd>
+            </div>
+          {%- endfor -%}
+        </dl>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Uvod strani (Šemen)",
+  "tag": "section",
+  "class": "section-semen-hero",
+  "settings": [
+    { "type": "select", "id": "layout", "label": "Postavitev", "default": "split", "options": [ { "value": "split", "label": "Deljena: besedilo levo, fotografija desno" }, { "value": "cover", "label": "Fotografija čez vso širino" } ] },
+    { "type": "image_picker", "id": "image", "label": "Fotografija" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Fotografija za telefon (neobvezno)" },
+    { "type": "select", "id": "image_position", "label": "Izrez fotografije", "default": "center center", "options": [ { "value": "center top", "label": "Zgoraj" }, { "value": "center center", "label": "Sredina" }, { "value": "center bottom", "label": "Spodaj" }, { "value": "left center", "label": "Levo" }, { "value": "right center", "label": "Desno" } ] },
+    { "type": "range", "id": "panel_width", "label": "Širina besedilne plošče (deljena postavitev)", "min": 36, "max": 60, "step": 2, "unit": "%", "default": 46 },
+    { "type": "range", "id": "height", "label": "Najmanjša višina na računalniku", "min": 360, "max": 800, "step": 20, "unit": "px", "default": 580 },
+    { "type": "range", "id": "height_mobile", "label": "Najmanjša višina na telefonu (fotografija čez vso širino)", "min": 320, "max": 700, "step": 20, "unit": "px", "default": 520 },
+    { "type": "range", "id": "overlay", "label": "Temnost preliva (fotografija čez vso širino)", "min": 30, "max": 95, "step": 5, "unit": "%", "default": 80 },
+    { "type": "color", "id": "bgsection", "label": "Barva plošče", "default": "#2b2420" },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "header", "content": "Besedilo" },
+    { "type": "checkbox", "id": "show_breadcrumb", "label": "Pokaži drobtinice (Domov / stran)", "default": true },
+    { "type": "text", "id": "breadcrumb_label", "label": "Ime strani v drobtinicah", "info": "Uporabi se le, če stran nima naslova (npr. v predogledu).", "default": "O nas" },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov", "default": "Družina Šemen" },
+    { "type": "text", "id": "title", "label": "Naslov (H1)", "default": "Čebelarimo od leta 1982" },
+    { "type": "richtext", "id": "text", "label": "Uvod", "default": "<p>Kratek uvod v stran: kdo smo in kaj vas čaka.</p>" },
+    { "type": "header", "content": "Gumba" },
+    { "type": "text", "id": "button", "label": "Prvi gumb" },
+    { "type": "url", "id": "link", "label": "Povezava prvega gumba", "info": "Za skok na sekcijo iste strani vpišite #ime-sidra, npr. #povprasevanje." },
+    { "type": "select", "id": "style_btn", "label": "Slog prvega gumba", "default": "btn-theme", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline btn-outline-white", "label": "Bela obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "text", "id": "button_2", "label": "Drugi gumb" },
+    { "type": "url", "id": "link_2", "label": "Povezava drugega gumba" },
+    { "type": "select", "id": "style_btn_2", "label": "Slog drugega gumba", "default": "btn-underline", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline btn-outline-white", "label": "Bela obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Podatek",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Oznaka", "default": "Od leta" },
+        { "type": "text", "id": "value", "label": "Vrednost", "default": "1982" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Uvod strani (Šemen)" } ]
+}
+{% endschema %}

@@ -1,0 +1,92 @@
+{%- comment -%}
+  Poziv k dejanju (Čebelarstvo Šemen): zaključni pas s fotografijo v ozadju (ali enobarvnim ozadjem),
+  nadnaslovom, naslovom, besedilom, dvema gumboma in neobvezno telefonsko številko.
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign light = false
+  if s.scheme == 'cream' and s.image == blank
+    assign light = true
+  endif
+-%}
+<style>
+  .scta-{{ sid }} { --scta-accent: {{ s.accent }}; position: relative; overflow: hidden; background: {% if s.scheme == 'cream' %}#f7f3ea{% else %}#2b2420{% endif %}; color: #cfc4b4; padding: {{ s.padding | times: 0.6 | round }}px 0; text-align: {{ s.align }}; }
+  .scta-{{ sid }} .scta-bg { position: absolute; inset: 0; }
+  .scta-{{ sid }} .scta-bg img { width: 100%; height: 100%; object-fit: cover; object-position: {{ s.image_position }}; display: block; }
+  .scta-{{ sid }} .scta-bg::after { content: ""; position: absolute; inset: 0; background: rgba(32,27,23,{{ s.overlay | divided_by: 100.0 }}); }
+  .scta-{{ sid }} .container, .scta-{{ sid }} .container-fluid { position: relative; z-index: 2; }
+  .scta-{{ sid }} .scta-inner { max-width: 760px; {% if s.align == 'center' %}margin: 0 auto;{% endif %} }
+  .scta-{{ sid }} .scta-eyebrow { display: block; margin-bottom: 10px; color: var(--scta-accent) !important; }
+  .scta-{{ sid }} .scta-title { margin: 0 0 16px; color: #ffffff; text-wrap: balance; }
+  .scta-{{ sid }} .scta-text { margin: 0; font-size: 16px; line-height: 1.75; }
+  .scta-{{ sid }} .scta-text p { margin: 0; color: inherit; font-size: inherit; line-height: inherit; }
+  .scta-{{ sid }} .scta-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: {% if s.align == 'center' %}center{% else %}flex-start{% endif %}; gap: 16px 28px; margin-top: 32px; }
+  .scta-{{ sid }} .scta-actions .btn-underline { color: #ffffff !important; }
+  .scta-{{ sid }} .scta-actions .btn-underline:before { background: var(--scta-accent); }
+  .scta-{{ sid }} .scta-phone { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font-size: 14px; }
+  .scta-{{ sid }} .scta-phone a { color: #ffffff; font-weight: 600; text-decoration: none; letter-spacing: .02em; }
+  .scta-{{ sid }} .scta-phone .semen-icon { color: var(--scta-accent); }
+  {%- if light -%}
+  .scta-{{ sid }} { color: #5c6978; }
+  .scta-{{ sid }} .scta-title, .scta-{{ sid }} .scta-phone a { color: var(--g-color-heading); }
+  .scta-{{ sid }} .scta-actions .btn-underline { color: var(--g-btn-outline-color) !important; }
+  {%- endif -%}
+  @media (min-width: 990px) {
+    .scta-{{ sid }} { padding: {{ s.padding }}px 0; }
+  }
+</style>
+
+<section class="scta-{{ sid }}">
+  {%- if s.image != blank -%}
+    <div class="scta-bg" aria-hidden="true">
+      {{ s.image | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', alt: '' }}
+    </div>
+  {%- endif -%}
+  <div class="{{ s.setwidth }}">
+    <div class="scta-inner" data-aos="fade-up">
+      {%- if s.title_top != blank -%}<span class="subtop scta-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
+      {%- if s.title != blank -%}<h2 class="h2 scta-title">{{ s.title | escape }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<div class="scta-text">{{ s.text }}</div>{%- endif -%}
+      {%- if s.button != blank or s.button_2 != blank -%}
+        <div class="scta-actions">
+          {%- if s.button != blank -%}<a class="btn {{ s.style_btn }}" href="{{ s.link | default: '#' }}">{{ s.button | escape }}</a>{%- endif -%}
+          {%- if s.button_2 != blank -%}<a class="btn {{ s.style_btn_2 }}" href="{{ s.link_2 | default: '#' }}">{{ s.button_2 | escape }}</a>{%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if s.phone != blank -%}
+        <div><span class="scta-phone">{%- render 'semen-icon', icon: 'phone', size: 20 -%}<span>{{ s.phone_label | escape }} <a href="tel:{{ s.phone | remove: ' ' | remove: '/' | remove: '-' }}">{{ s.phone | escape }}</a></span></span></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Poziv k dejanju (Šemen)",
+  "tag": "section",
+  "class": "section-semen-cta",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Ozadje brez fotografije", "default": "dark", "options": [ { "value": "dark", "label": "Temno" }, { "value": "cream", "label": "Kremno" } ] },
+    { "type": "image_picker", "id": "image", "label": "Fotografija v ozadju (neobvezno)" },
+    { "type": "select", "id": "image_position", "label": "Izrez fotografije", "default": "center center", "options": [ { "value": "center top", "label": "Zgoraj" }, { "value": "center center", "label": "Sredina" }, { "value": "center bottom", "label": "Spodaj" } ] },
+    { "type": "range", "id": "overlay", "label": "Temnost čez fotografijo", "min": 20, "max": 90, "step": 5, "unit": "%", "default": 60 },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "select", "id": "align", "label": "Poravnava", "default": "center", "options": [ { "value": "center", "label": "Na sredini" }, { "value": "left", "label": "Levo" } ] },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov", "default": "Obiščite nas" },
+    { "type": "text", "id": "title", "label": "Naslov (H2)", "default": "Poskusite naš med" },
+    { "type": "richtext", "id": "text", "label": "Besedilo" },
+    { "type": "text", "id": "button", "label": "Prvi gumb" },
+    { "type": "url", "id": "link", "label": "Povezava prvega gumba" },
+    { "type": "select", "id": "style_btn", "label": "Slog prvega gumba", "default": "btn-theme", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline btn-outline-white", "label": "Bela obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "text", "id": "button_2", "label": "Drugi gumb" },
+    { "type": "url", "id": "link_2", "label": "Povezava drugega gumba" },
+    { "type": "select", "id": "style_btn_2", "label": "Slog drugega gumba", "default": "btn-outline btn-outline-white", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline btn-outline-white", "label": "Bela obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "text", "id": "phone_label", "label": "Besedilo pred telefonom", "default": "ali pokličite" },
+    { "type": "text", "id": "phone", "label": "Telefon (neobvezno)" },
+    { "type": "range", "id": "padding", "label": "Odmik zgoraj in spodaj", "min": 40, "max": 180, "step": 10, "unit": "px", "default": 110 }
+  ],
+  "presets": [ { "name": "Poziv k dejanju (Šemen)" } ]
+}
+{% endschema %}

@@ -152,6 +152,9 @@
 </style>
 
 
+{%- if section.settings.anchor != blank -%}
+  <span id="{{ section.settings.anchor | handleize }}" style="display: block; scroll-margin-top: 90px;"></span>
+{%- endif -%}
 <div id="MapSection--{{ section.id }}"
      class="map-section
            {% if display_map %}map-section--display-map{% endif %}
@@ -255,6 +258,12 @@
       "type": "checkbox",
       "label": "Show pin",
       "default": true
+    },
+    {
+      "id": "anchor",
+      "type": "text",
+      "label": "Sidro (neobvezno)",
+      "info": "Npr. pot – nato povezava #pot skoči na to sekcijo."
     },
     {
       "type": "header",

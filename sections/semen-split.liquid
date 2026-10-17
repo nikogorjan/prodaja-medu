@@ -1,0 +1,177 @@
+{%- comment -%}
+  Slika in besedilo (Čebelarstvo Šemen): fotografija na eni strani, nadnaslov, naslov H2 in besedilo na drugi.
+  Bloki pod besedilom: "Alineja" (seznam s kljukicami), "Podatek" (oznaka + vrednost v dveh stolpcih)
+  in "Citat" (poudarjen stavek z zlato črto). Barvne sheme: bela, kremna, temna – kot pasovi na domači strani.
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign checks = section.blocks | where: 'type', 'check'
+  assign facts = section.blocks | where: 'type', 'fact'
+  assign quotes = section.blocks | where: 'type', 'quote'
+  assign text_w = 100 | minus: s.image_width
+  case s.scheme
+    when 'dark'
+      assign bg = '#2b2420'
+    when 'cream'
+      assign bg = '#f7f3ea'
+    else
+      assign bg = '#ffffff'
+  endcase
+  case s.ratio
+    when 'portrait'
+      assign ratio = '4 / 5'
+    when 'square'
+      assign ratio = '1 / 1'
+    when 'landscape'
+      assign ratio = '3 / 2'
+    else
+      if s.image != blank
+        assign ratio = s.image.aspect_ratio
+      else
+        assign ratio = '4 / 5'
+      endif
+  endcase
+-%}
+<style>
+  .ssp-{{ sid }} { --ssp-accent: {{ s.accent }}; background: {{ bg }}; padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  .ssp-{{ sid }} .ssp-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: center; }
+  .ssp-{{ sid }} .ssp-media { position: relative; overflow: hidden; aspect-ratio: {{ ratio }}; background: #e9e1d2; margin: 0; }
+  .ssp-{{ sid }} .ssp-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{ s.image_position }}; display: block; transform: scale(var(--ssp-zoom, 1)); transition: transform .9s cubic-bezier(.2,.6,.2,1); }
+  .ssp-{{ sid }} .ssp-media:hover img { transform: scale(calc(var(--ssp-zoom, 1) + .03)); }
+  .ssp-{{ sid }} .ssp-media figcaption { position: absolute; left: 0; bottom: 0; z-index: 2; padding: 8px 12px; background: var(--ssp-accent); color: #ffffff; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+  .ssp-{{ sid }} .ssp-eyebrow { display: block; margin-bottom: 10px; }
+  .ssp-{{ sid }} .ssp-title { margin: 0 0 20px; text-wrap: balance; }
+  .ssp-{{ sid }} .ssp-text { color: rgba(34,34,34,.82); }
+  .ssp-{{ sid }} .ssp-text p { margin: 0 0 14px; color: inherit; }
+  .ssp-{{ sid }} .ssp-text p:last-child { margin-bottom: 0; }
+  .ssp-{{ sid }} .ssp-checks { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 12px; }
+  .ssp-{{ sid }} .ssp-checks li { display: flex; align-items: flex-start; gap: 12px; margin: 0; line-height: 1.6; }
+  .ssp-{{ sid }} .ssp-checks .semen-icon { flex: 0 0 auto; margin-top: 2px; color: var(--ssp-accent); }
+  .ssp-{{ sid }} .ssp-checks strong { color: var(--g-color-heading); font-weight: 600; }
+  .ssp-{{ sid }} .ssp-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin: 28px 0 0; }
+  .ssp-{{ sid }} .ssp-fact { margin: 0; padding: 14px 0; border-top: 1px solid rgba(34,34,34,.12); }
+  .ssp-{{ sid }} .ssp-fact dt { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ssp-accent); line-height: 1.5; }
+  .ssp-{{ sid }} .ssp-fact dd { margin: 4px 0 0; font-family: var(--g-font-1); font-size: 18px; line-height: 1.3; color: var(--g-color-heading); }
+  .ssp-{{ sid }} .ssp-quote { margin: 28px 0 0; padding: 2px 0 2px 22px; border: 0; border-left: 2px solid var(--ssp-accent); background: none; text-align: left; }
+  .ssp-{{ sid }} .ssp-quote p { margin: 0; text-wrap: pretty; font-family: var(--g-font-1); font-size: 19px; line-height: 1.5; color: var(--g-color-heading); }
+  .ssp-{{ sid }} .ssp-quote cite { display: block; margin-top: 10px; font-style: normal; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ssp-accent); }
+  .ssp-{{ sid }} .ssp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 32px; margin-top: 34px; }
+  {%- if s.scheme == 'dark' -%}
+  .ssp-{{ sid }} { color: #cfc4b4; }
+  .ssp-{{ sid }} .ssp-title, .ssp-{{ sid }} .ssp-quote p, .ssp-{{ sid }} .ssp-fact dd, .ssp-{{ sid }} .ssp-checks strong { color: #ffffff; }
+  .ssp-{{ sid }} .ssp-eyebrow { color: var(--ssp-accent) !important; }
+  .ssp-{{ sid }} .ssp-text, .ssp-{{ sid }} .ssp-checks li { color: #cfc4b4; }
+  .ssp-{{ sid }} .ssp-text a { color: #ffffff; }
+  .ssp-{{ sid }} .ssp-fact { border-top-color: rgba(255,255,255,.12); }
+  .ssp-{{ sid }} .ssp-media { background: #3a312b; }
+  .ssp-{{ sid }} .ssp-actions .btn-underline { color: #ffffff !important; }
+  .ssp-{{ sid }} .ssp-actions .btn-underline:before { background: var(--ssp-accent); }
+  {%- endif -%}
+  @media (min-width: 990px) {
+    .ssp-{{ sid }} { padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+    .ssp-{{ sid }} .ssp-grid { grid-template-columns: minmax(0, {{ s.image_width }}fr) minmax(0, {{ text_w }}fr); gap: 0; }
+    .ssp-{{ sid }} .ssp-body { padding-left: 72px; }
+    .ssp-{{ sid }}.ssp--right .ssp-media { order: 2; }
+    .ssp-{{ sid }}.ssp--right .ssp-body { order: 1; padding-left: 0; padding-right: 72px; }
+  }
+</style>
+
+<section class="ssp-{{ sid }} ssp--{{ s.image_side }}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="{{ s.setwidth }}">
+    <div class="ssp-grid">
+      <figure class="ssp-media" data-aos="fade-up"{% if s.image.src contains '.png' %} style="--ssp-zoom: 1.03"{% endif %}>
+        {%- if s.image != blank -%}
+          {%- liquid
+            assign img_px = s.image_width | times: 12
+            assign img_sizes = '(min-width: 1200px) ' | append: img_px | append: 'px, (min-width: 990px) ' | append: s.image_width | append: 'vw, 100vw'
+            assign img_alt = s.image.alt | default: s.title
+          -%}
+          {{ s.image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1000, 1200, 1600', sizes: img_sizes, alt: img_alt }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+        {%- if s.caption != blank -%}<figcaption>{{ s.caption | escape }}</figcaption>{%- endif -%}
+      </figure>
+
+      <div class="ssp-body" data-aos="fade-up" data-aos-delay="120">
+        {%- if s.title_top != blank -%}<span class="subtop ssp-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
+        {%- if s.title != blank -%}<h2 class="h2 ssp-title">{{ s.title | escape }}</h2>{%- endif -%}
+        {%- if s.text != blank -%}<div class="rte ssp-text">{{ s.text }}</div>{%- endif -%}
+
+        {%- if checks.size > 0 -%}
+          <ul class="ssp-checks">
+            {%- for block in checks -%}
+              <li {{ block.shopify_attributes }}>{%- render 'semen-icon', icon: 'check', size: 18 -%}<span>{{ block.settings.text }}</span></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if facts.size > 0 -%}
+          <dl class="ssp-facts">
+            {%- for block in facts -%}
+              <div class="ssp-fact" {{ block.shopify_attributes }}>
+                <dt>{{ block.settings.label | escape }}</dt>
+                <dd>{{ block.settings.value | escape }}</dd>
+              </div>
+            {%- endfor -%}
+          </dl>
+        {%- endif -%}
+
+        {%- for block in quotes -%}
+          <blockquote class="ssp-quote" {{ block.shopify_attributes }}>
+            <p>{{ block.settings.quote | escape }}</p>
+            {%- if block.settings.author != blank -%}<cite>{{ block.settings.author | escape }}</cite>{%- endif -%}
+          </blockquote>
+        {%- endfor -%}
+
+        {%- if s.button != blank or s.button_2 != blank -%}
+          <div class="ssp-actions">
+            {%- if s.button != blank -%}<a class="btn {{ s.style_btn }}" href="{{ s.link | default: '#' }}">{{ s.button | escape }}</a>{%- endif -%}
+            {%- if s.button_2 != blank -%}<a class="btn {{ s.style_btn_2 }}" href="{{ s.link_2 | default: '#' }}">{{ s.button_2 | escape }}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Slika in besedilo (Šemen)",
+  "tag": "section",
+  "class": "section-semen-split",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "white", "options": [ { "value": "white", "label": "Bela" }, { "value": "cream", "label": "Kremna" }, { "value": "dark", "label": "Temna" } ] },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)", "info": "Npr. ponudba – nato povezava #ponudba skoči na to sekcijo." },
+    { "type": "header", "content": "Fotografija" },
+    { "type": "image_picker", "id": "image", "label": "Fotografija" },
+    { "type": "select", "id": "image_side", "label": "Stran fotografije", "default": "left", "options": [ { "value": "left", "label": "Levo" }, { "value": "right", "label": "Desno" } ] },
+    { "type": "select", "id": "ratio", "label": "Razmerje fotografije", "default": "portrait", "options": [ { "value": "portrait", "label": "Pokončno 4:5" }, { "value": "square", "label": "Kvadrat" }, { "value": "landscape", "label": "Ležeče 3:2" }, { "value": "original", "label": "Izvirno" } ] },
+    { "type": "select", "id": "image_position", "label": "Izrez fotografije", "default": "center center", "options": [ { "value": "center top", "label": "Zgoraj" }, { "value": "center center", "label": "Sredina" }, { "value": "center bottom", "label": "Spodaj" }, { "value": "left center", "label": "Levo" }, { "value": "right center", "label": "Desno" } ] },
+    { "type": "range", "id": "image_width", "label": "Širina fotografije", "min": 36, "max": 60, "step": 2, "unit": "%", "default": 50 },
+    { "type": "text", "id": "caption", "label": "Oznaka na fotografiji (neobvezno)" },
+    { "type": "header", "content": "Besedilo" },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov", "default": "Nadnaslov" },
+    { "type": "text", "id": "title", "label": "Naslov (H2)", "default": "Naslov sekcije" },
+    { "type": "richtext", "id": "text", "label": "Besedilo", "default": "<p>Besedilo sekcije.</p>" },
+    { "type": "text", "id": "button", "label": "Prvi gumb" },
+    { "type": "url", "id": "link", "label": "Povezava prvega gumba" },
+    { "type": "select", "id": "style_btn", "label": "Slog prvega gumba", "default": "btn-theme", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline", "label": "Obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "text", "id": "button_2", "label": "Drugi gumb" },
+    { "type": "url", "id": "link_2", "label": "Povezava drugega gumba" },
+    { "type": "select", "id": "style_btn_2", "label": "Slog drugega gumba", "default": "btn-underline", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline", "label": "Obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "header", "content": "Odmiki" },
+    { "type": "range", "id": "padding_top", "label": "Odmik zgoraj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Odmik spodaj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    { "type": "check", "name": "Alineja", "settings": [ { "type": "inline_richtext", "id": "text", "label": "Besedilo", "default": "<strong>Poudarek.</strong> Kratka razlaga." } ] },
+    { "type": "fact", "name": "Podatek", "settings": [ { "type": "text", "id": "label", "label": "Oznaka", "default": "Oznaka" }, { "type": "text", "id": "value", "label": "Vrednost", "default": "Vrednost" } ] },
+    { "type": "quote", "name": "Citat", "limit": 2, "settings": [ { "type": "textarea", "id": "quote", "label": "Citat", "default": "Poudarjen stavek." }, { "type": "text", "id": "author", "label": "Avtor (neobvezno)" } ] }
+  ],
+  "presets": [ { "name": "Slika in besedilo (Šemen)" } ]
+}
+{% endschema %}
