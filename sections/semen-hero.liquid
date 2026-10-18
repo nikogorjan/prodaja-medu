@@ -1,0 +1,257 @@
+{%- comment -%}
+  Naslovna slika (Čebelarstvo Šemen): slideshow, oblikovan tako, da je lep tudi pri nižji višini.
+  Fotografija čez vso širino s temnim prelivom z leve (na telefonu od spodaj), besedilo poravnano z vsebino strani,
+  spodaj števec slidov s progresnimi črtami in puščice. Samodejno menjavanje se ustavi ob miški, fokusu
+  in pri "zmanjšaj gibanje"; na telefonu se slide da potegniti s prstom. Prvi naslov je H1.
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign slides = section.blocks | where: 'type', 'slide'
+  assign align_pad = 'max(20px, calc((100vw - ' | append: settings.container | append: 'px) / 2 + 15px))'
+-%}
+<style>
+  .shero-{{ sid }} { --sh-accent: {{ s.accent }}; --sh-speed: {{ s.speed }}s; position: relative; display: block; overflow: hidden; background: #2b2420; color: #e9e1d2; height: {{ s.height_mobile }}px; }
+  .shero-{{ sid }} .sh-slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 1s cubic-bezier(.4,0,.2,1), visibility 0s linear 1s; }
+  .shero-{{ sid }} .sh-slide.is-active { opacity: 1; visibility: visible; transition: opacity 1s cubic-bezier(.4,0,.2,1); z-index: 1; }
+  .shero-{{ sid }} .sh-media { position: absolute; inset: 0; overflow: hidden; }
+  .shero-{{ sid }} .sh-media img { position: absolute; inset: 0; width: 100% !important; height: 100% !important; object-fit: cover; object-position: var(--sh-pos, center center); transform: scale(1.06); transition: transform calc(var(--sh-speed) + 2s) linear; }
+  .shero-{{ sid }} .sh-slide.is-active .sh-media img { transform: scale(1); }
+  .shero-{{ sid }} .sh-media .sh-img--mobile { display: none; }
+  .shero-{{ sid }} .sh-shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(32,27,23,var(--sh-shade)) 0%, rgba(32,27,23,calc(var(--sh-shade) * .55)) 45%, rgba(32,27,23,.12) 100%); }
+  .shero-{{ sid }} .sh-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 20px 96px; }
+  .shero-{{ sid }} .sh-inner { max-width: 600px; }
+  .shero-{{ sid }}.sh--center .sh-inner { margin: 0 auto; text-align: center; }
+  .shero-{{ sid }} .sh-eyebrow { display: block; margin: 0 0 12px; font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--sh-accent); }
+  .shero-{{ sid }} .sh-title { margin: 0; color: #ffffff; font-size: clamp(28px, 3.1vw + 10px, {{ s.title_size }}px); line-height: 1.08; text-wrap: balance; text-shadow: 0 2px 28px rgba(0,0,0,.35); {% unless s.uppercase %}text-transform: none;{% endunless %} }
+  .shero-{{ sid }} .sh-text { margin: 16px 0 0; max-width: 46ch; font-size: 15px; line-height: 1.7; color: #e9e1d2; text-shadow: 0 1px 14px rgba(0,0,0,.4); }
+  .shero-{{ sid }}.sh--center .sh-text { margin-left: auto; margin-right: auto; }
+  .shero-{{ sid }} .sh-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; margin-top: 26px; }
+  .shero-{{ sid }}.sh--center .sh-actions { justify-content: center; }
+  .shero-{{ sid }} .sh-actions .btn-underline { color: #ffffff !important; }
+  .shero-{{ sid }} .sh-actions .btn-underline:before { background: var(--sh-accent); }
+  .shero-{{ sid }} .sh-actions .btn-underline:hover { color: var(--sh-accent) !important; }
+  /* besedilo prihaja v pogled postopoma */
+  .shero-{{ sid }} .sh-anim { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .9s cubic-bezier(.2,.6,.2,1); }
+  .shero-{{ sid }} .sh-slide.is-active .sh-anim { opacity: 1; transform: none; }
+  .shero-{{ sid }} .sh-slide.is-active .sh-anim:nth-child(2) { transition-delay: .12s; }
+  .shero-{{ sid }} .sh-slide.is-active .sh-anim:nth-child(3) { transition-delay: .24s; }
+  .shero-{{ sid }} .sh-slide.is-active .sh-anim:nth-child(4) { transition-delay: .36s; }
+  /* spodnja vrstica: števec, progresne črte, puščice */
+  .shero-{{ sid }} .sh-bar { position: absolute; z-index: 3; left: 20px; right: 20px; bottom: 26px; display: flex; align-items: center; gap: 18px; }
+  .shero-{{ sid }} .sh-count { font-family: var(--g-font-1); font-size: 13px; letter-spacing: .12em; color: #ffffff; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .shero-{{ sid }} .sh-count span { color: rgba(255,255,255,.55); }
+  .shero-{{ sid }} .sh-dots { display: flex; flex: 1 1 auto; gap: 8px; max-width: 260px; }
+  .shero-{{ sid }} .sh-dot { position: relative; flex: 1 1 0; height: 22px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .shero-{{ sid }} .sh-dot::before, .shero-{{ sid }} .sh-dot::after { content: ""; position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: rgba(255,255,255,.3); }
+  .shero-{{ sid }} .sh-dot::after { background: var(--sh-accent); transform: scaleX(0); transform-origin: left; }
+  .shero-{{ sid }} .sh-dot.is-done::after { transform: scaleX(1); }
+  .shero-{{ sid }} .sh-dot.is-active::after { animation: sh-fill-{{ sid }} var(--sh-speed) linear forwards; }
+  .shero-{{ sid }}.is-paused .sh-dot.is-active::after, .shero-{{ sid }}.no-autoplay .sh-dot.is-active::after { animation: none; transform: scaleX(1); }
+  @keyframes sh-fill-{{ sid }} { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .shero-{{ sid }} .sh-arrows { display: flex; gap: 8px; margin-left: auto; }
+  .shero-{{ sid }} .sh-arrow { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 1px solid rgba(255,255,255,.45); background: rgba(32,27,23,.25); color: #ffffff; cursor: pointer; transition: background .3s, border-color .3s; }
+  .shero-{{ sid }} .sh-arrow:hover { background: var(--sh-accent); border-color: var(--sh-accent); }
+  .shero-{{ sid }} .sh-arrow svg { width: 18px !important; height: 18px !important; fill: none; stroke: currentColor; stroke-width: 1.4; }
+  .shero-{{ sid }} .sh-dot:focus-visible, .shero-{{ sid }} .sh-arrow:focus-visible { outline: 1px dashed var(--sh-accent); outline-offset: 3px; }
+  @media (max-width: 749px) {
+    {%- for block in slides -%}{%- if block.settings.image_mobile != blank %}
+    .shero-{{ sid }} .sh-slide--{{ block.id }} .sh-img--desktop { display: none; }
+    .shero-{{ sid }} .sh-slide--{{ block.id }} .sh-img--mobile { display: block; }
+    {%- endif -%}{%- endfor %}
+    .shero-{{ sid }} .sh-arrows { display: none; }
+    .shero-{{ sid }} .sh-dots { max-width: none; }
+  }
+  @media (min-width: 750px) {
+    .shero-{{ sid }} { height: {{ s.height }}px; }
+    .shero-{{ sid }} .sh-shade { background: linear-gradient(90deg, rgba(32,27,23,var(--sh-shade)) 0%, rgba(32,27,23,calc(var(--sh-shade) * .92)) 30%, rgba(32,27,23,calc(var(--sh-shade) * .55)) 52%, rgba(32,27,23,calc(var(--sh-shade) * .1)) 78%, rgba(32,27,23,0) 100%), linear-gradient(0deg, rgba(32,27,23,.5) 0%, rgba(32,27,23,0) 34%); }
+    .shero-{{ sid }}.sh--center .sh-shade { background: radial-gradient(ellipse at center, rgba(32,27,23,calc(var(--sh-shade) * .85)) 0%, rgba(32,27,23,calc(var(--sh-shade) * .45)) 60%, rgba(32,27,23,.2) 100%); }
+    .shero-{{ sid }} .sh-content { justify-content: center; padding: 0 {{ align_pad }} 56px; }
+    .shero-{{ sid }} .sh-text { font-size: 16px; }
+    .shero-{{ sid }} .sh-bar { left: {{ align_pad }}; right: {{ align_pad }}; bottom: 30px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shero-{{ sid }} .sh-media img, .shero-{{ sid }} .sh-slide, .shero-{{ sid }} .sh-anim { transition: none !important; transform: none !important; }
+  }
+</style>
+
+<semen-hero class="shero-{{ sid }} sh--{{ s.align }}{% unless s.autoplay %} no-autoplay{% endunless %}" data-autoplay="{{ s.autoplay }}" data-speed="{{ s.speed | times: 1000 }}" role="region" aria-roledescription="carousel" aria-label="{{ s.label | escape }}">
+  {%- for block in slides -%}
+    {%- liquid
+      assign b = block.settings
+      assign img_alt = b.image.alt | default: b.title
+      if forloop.first
+        assign loading = 'eager'
+        assign priority = 'high'
+      else
+        assign loading = 'lazy'
+        assign priority = 'auto'
+      endif
+    -%}
+    <div class="sh-slide sh-slide--{{ block.id }}{% if forloop.first %} is-active{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} / {{ slides.size }}"{% unless forloop.first %} aria-hidden="true"{% endunless %} style="--sh-pos: {{ b.image_position }}; --sh-shade: {{ b.shade | divided_by: 100.0 }};" {{ block.shopify_attributes }}>
+      <div class="sh-media">
+        {%- if b.image != blank -%}
+          {{ b.image | image_url: width: 2400 | image_tag: class: 'sh-img--desktop', loading: loading, fetchpriority: priority, widths: '750, 1100, 1500, 1920, 2400', sizes: '100vw', alt: img_alt }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+        {%- if b.image_mobile != blank -%}
+          {{ b.image_mobile | image_url: width: 1200 | image_tag: class: 'sh-img--mobile', loading: loading, widths: '500, 750, 1000, 1200', sizes: '100vw', alt: img_alt }}
+        {%- endif -%}
+      </div>
+      <div class="sh-shade" aria-hidden="true"></div>
+      <div class="sh-content">
+        <div class="sh-inner">
+          {%- if b.eyebrow != blank -%}<span class="sh-eyebrow sh-anim">{{ b.eyebrow | escape }}</span>{%- endif -%}
+          {%- if forloop.first -%}
+            <h1 class="h1 sh-title sh-anim">{{ b.title | escape }}</h1>
+          {%- else -%}
+            <h2 class="h1 sh-title sh-anim">{{ b.title | escape }}</h2>
+          {%- endif -%}
+          {%- if b.text != blank -%}<p class="sh-text sh-anim">{{ b.text | escape }}</p>{%- endif -%}
+          {%- if b.button != blank or b.button_2 != blank -%}
+            <div class="sh-actions sh-anim">
+              {%- if b.button != blank -%}<a class="btn btn-theme" href="{{ b.link | default: '#' }}"{% unless forloop.first %} tabindex="-1"{% endunless %}>{{ b.button | escape }}</a>{%- endif -%}
+              {%- if b.button_2 != blank -%}<a class="btn btn-underline" href="{{ b.link_2 | default: '#' }}"{% unless forloop.first %} tabindex="-1"{% endunless %}>{{ b.button_2 | escape }}</a>{%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+
+  {%- if slides.size > 1 -%}
+    <div class="sh-bar">
+      <span class="sh-count" aria-hidden="true"><b class="sh-current">01</b> <span>/ {% if slides.size < 10 %}0{% endif %}{{ slides.size }}</span></span>
+      <div class="sh-dots">
+        {%- for block in slides -%}
+          <button type="button" class="sh-dot{% if forloop.first %} is-active{% endif %}" data-i="{{ forloop.index0 }}" aria-label="{{ s.label_slide | escape }} {{ forloop.index }}"></button>
+        {%- endfor -%}
+      </div>
+      <div class="sh-arrows">
+        <button type="button" class="sh-arrow" data-dir="-1" aria-label="{{ s.label_prev | escape }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="sh-arrow" data-dir="1" aria-label="{{ s.label_next | escape }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+  {%- endif -%}
+</semen-hero>
+
+<script>
+  if (!customElements.get('semen-hero')) {
+    customElements.define('semen-hero', class extends HTMLElement {
+      connectedCallback() {
+        this.slides = Array.from(this.querySelectorAll('.sh-slide'));
+        this.dots = Array.from(this.querySelectorAll('.sh-dot'));
+        this.index = 0;
+        if (this.slides.length < 2) return;
+        this.speed = parseInt(this.dataset.speed, 10) || 7000;
+        this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.autoplay = this.dataset.autoplay === 'true' && !this.reduced;
+        if (!this.autoplay) this.classList.add('no-autoplay');
+        this.dots.forEach((d) => d.addEventListener('click', () => this.go(+d.dataset.i, true)));
+        this.querySelectorAll('.sh-arrow').forEach((a) => a.addEventListener('click', () => this.go(this.index + +a.dataset.dir, true)));
+        ['mouseenter', 'focusin'].forEach((e) => this.addEventListener(e, () => this.pause(true)));
+        ['mouseleave', 'focusout'].forEach((e) => this.addEventListener(e, () => this.pause(false)));
+        let x0 = null;
+        this.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+        this.addEventListener('touchend', (e) => {
+          if (x0 === null) return;
+          const dx = e.changedTouches[0].clientX - x0;
+          if (Math.abs(dx) > 40) this.go(this.index + (dx < 0 ? 1 : -1), true);
+          x0 = null;
+        });
+        document.addEventListener('shopify:block:select', (e) => {
+          const i = this.slides.findIndex((s) => s.contains(e.target));
+          if (i > -1) { this.go(i, true); this.pause(true); }
+        });
+        this.schedule();
+      }
+      disconnectedCallback() { clearTimeout(this.timer); }
+      schedule() {
+        clearTimeout(this.timer);
+        if (this.autoplay && !this.paused) this.timer = setTimeout(() => this.go(this.index + 1), this.speed);
+      }
+      pause(on) {
+        this.paused = on;
+        this.classList.toggle('is-paused', on);
+        if (!on) this.restartDot();
+        this.schedule();
+      }
+      restartDot() {
+        const d = this.dots[this.index];
+        if (!d) return;
+        d.classList.remove('is-active'); void d.offsetWidth; d.classList.add('is-active');
+      }
+      go(i, user) {
+        const n = this.slides.length;
+        i = (i + n) % n;
+        this.slides.forEach((s, k) => {
+          const on = k === i;
+          s.classList.toggle('is-active', on);
+          s.setAttribute('aria-hidden', on ? 'false' : 'true');
+          s.querySelectorAll('a').forEach((a) => { a.tabIndex = on ? 0 : -1; });
+        });
+        this.dots.forEach((d, k) => { d.classList.toggle('is-active', k === i); d.classList.toggle('is-done', k < i); });
+        this.index = i;
+        const cur = this.querySelector('.sh-current');
+        if (cur) cur.textContent = String(i + 1).padStart(2, '0');
+        this.restartDot();
+        this.schedule();
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Naslovna slika (Šemen)",
+  "tag": "section",
+  "class": "section-semen-hero",
+  "settings": [
+    { "type": "range", "id": "height", "label": "Višina na računalniku", "min": 360, "max": 800, "step": 20, "unit": "px", "default": 540 },
+    { "type": "range", "id": "height_mobile", "label": "Višina na telefonu", "min": 360, "max": 720, "step": 20, "unit": "px", "default": 520 },
+    { "type": "select", "id": "align", "label": "Poravnava besedila", "default": "left", "options": [ { "value": "left", "label": "Levo (temen preliv z leve)" }, { "value": "center", "label": "Na sredini" } ] },
+    { "type": "range", "id": "title_size", "label": "Največja velikost naslova", "min": 36, "max": 72, "step": 2, "unit": "px", "default": 56 },
+    { "type": "checkbox", "id": "uppercase", "label": "Naslov z velikimi črkami", "default": true },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "header", "content": "Menjavanje" },
+    { "type": "checkbox", "id": "autoplay", "label": "Samodejno menjavanje", "default": true },
+    { "type": "range", "id": "speed", "label": "Čas na slidu", "min": 4, "max": 12, "step": 1, "unit": "s", "default": 7 },
+    { "type": "header", "content": "Besedila za bralnike zaslona" },
+    { "type": "text", "id": "label", "label": "Ime vrtiljaka", "default": "Izpostavljeno" },
+    { "type": "text", "id": "label_slide", "label": "Gumb za slide", "default": "Pokaži slide" },
+    { "type": "text", "id": "label_prev", "label": "Puščica nazaj", "default": "Prejšnji slide" },
+    { "type": "text", "id": "label_next", "label": "Puščica naprej", "default": "Naslednji slide" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 5,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Fotografija (ležeča, vsaj 2000 px)" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Fotografija za telefon (neobvezno, pokončna)" },
+        { "type": "select", "id": "image_position", "label": "Izrez fotografije", "default": "center center", "options": [ { "value": "center top", "label": "Zgoraj" }, { "value": "center center", "label": "Sredina" }, { "value": "center bottom", "label": "Spodaj" }, { "value": "left center", "label": "Levo" }, { "value": "right center", "label": "Desno" } ] },
+        { "type": "range", "id": "shade", "label": "Temnost preliva", "min": 30, "max": 95, "step": 5, "unit": "%", "default": 80 },
+        { "type": "text", "id": "eyebrow", "label": "Nadnaslov", "default": "Iz našega čebelnjaka" },
+        { "type": "text", "id": "title", "label": "Naslov", "default": "Domači med in čebelji izdelki" },
+        { "type": "textarea", "id": "text", "label": "Opis", "default": "Osem vrst sortnega medu, cvetni prah in propolis. Hladno točeno, doma napolnjeno, poslano po vsej Sloveniji." },
+        { "type": "text", "id": "button", "label": "Prvi gumb", "default": "V trgovino" },
+        { "type": "url", "id": "link", "label": "Povezava prvega gumba", "default": "/collections/all" },
+        { "type": "text", "id": "button_2", "label": "Drugi gumb", "default": "Naša zgodba" },
+        { "type": "url", "id": "link_2", "label": "Povezava drugega gumba" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Naslovna slika (Šemen)",
+      "blocks": [
+        { "type": "slide", "settings": { "eyebrow": "Iz našega čebelnjaka", "title": "Domači med in čebelji izdelki", "text": "Osem vrst sortnega medu, cvetni prah in propolis. Hladno točeno, doma napolnjeno, poslano po vsej Sloveniji.", "button": "V trgovino", "link": "/collections/all", "button_2": "Kako nastane naš med", "link_2": "/pages/o-nas" } },
+        { "type": "slide", "settings": { "eyebrow": "Apiturizem", "title": "Doživite mir ob čebelah", "text": "Dihajte zrak iz 40 panjev v poslikanem čebelnjaku na Melincih ob Muri. Obisk po predhodnem dogovoru.", "button": "O apiturizmu", "link": "/pages/apiturizem", "button_2": "Rezervirajte obisk", "link_2": "/pages/apiturizem#povprasevanje" } },
+        { "type": "slide", "settings": { "eyebrow": "Od leta 1982", "title": "Med iz našega čebelnjaka", "text": "Družina Šemen skrbi za približno 700 čebeljih družin, ki jih vozimo na najboljše paše po Sloveniji.", "button": "Vsi izdelki", "link": "/collections/all", "button_2": "Naša zgodba", "link_2": "/pages/o-nas" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

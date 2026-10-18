@@ -20,17 +20,52 @@
     }
   {%- endif -%}
 {%- endstyle -%}
+{%- comment -%}
+  Čebelarstvo Šemen: vir izdelkov je lahko samodejen (Shopifyjeva priporočila, naložijo se z JS),
+  izbrana kolekcija ali ročno izbrani izdelki (izrišejo se takoj). Če samodejnih priporočil še ni
+  (nova trgovina), se pokažejo izdelki iz izbrane kolekcije. Trenutni izdelek se nikoli ne pokaže.
+{%- endcomment -%}
+{%- liquid
+  assign source = section.settings.source
+  assign max_items = section.settings.products_to_show
+  assign items = empty
+  if source == 'products' and section.settings.product_list.size > 0
+    assign items = section.settings.product_list
+  elsif source == 'collection' and section.settings.collection != blank
+    assign items = section.settings.collection.products
+  elsif recommendations.performed
+    if recommendations.products_count > 0
+      assign items = recommendations.products
+    elsif section.settings.collection != blank
+      assign items = section.settings.collection.products
+    endif
+  endif
+  assign shown = 0
+  for item in items
+    if item.id != product.id and shown < max_items
+      assign shown = shown | plus: 1
+    endif
+  endfor
+  if source == 'auto'
+    assign render_mode = 'auto'
+  else
+    assign render_mode = 'static'
+  endif
+-%}
 <div class="section-{{ section.id }}-padding" data-aos="{{ section.settings.animation }}" >
   <div class="{{ section.settings.setwidth }}">
-    <product-recommendations class="product-recommendations   isolate product-recommendations--loaded" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}">
-      {% if recommendations.performed and recommendations.products_count > 0 %}
+    <product-recommendations class="product-recommendations   isolate product-recommendations--loaded" data-mode="{{ render_mode }}" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show | plus: 1 }}">
+      {% if shown > 0 %}
         <h2 class="product-recommendations__heading mb-5 text-{{ section.settings.heading_align }} {{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
-        <div class="swiper-container swipercol-{{ section.id }} product-grid" 
-          data-id="{{ section.id }}"  
+        <div class="swiper-container swipercol-{{ section.id }} product-grid"
+          data-id="{{ section.id }}"
           data-perview-desktop="{{ section.settings.perviewDesktop }}"
           data-space-between="{{ section.settings.spaceBetween }}" role="list">
           <div class="swiper-wrapper">
-            {% for recommendation in recommendations.products %}
+            {%- assign count = 0 -%}
+            {% for recommendation in items %}
+              {%- if recommendation.id == product.id or count >= max_items -%}{%- continue -%}{%- endif -%}
+              {%- assign count = count | plus: 1 -%}
               <div class="grid__item swiper-slide" >
                 {%- render 'product-card', product: recommendation -%}
               </div>
@@ -38,7 +73,7 @@
               {%- if section.settings.scrollbar -%}
               <div class="swiper-scrollbar"></div>
               {%- endif -%}
-            
+
           </div>
           {%- if section.settings.arrows -%}
             <div class="swiper-button-prev"></div>
@@ -55,6 +90,11 @@
 class ProductRecommendations extends HTMLElement {
     constructor() {
       super();
+
+      if (this.dataset.mode === 'static') {
+        this.whenSwiperReady(() => this.initSwiper());
+        return;
+      }
 
       const handleIntersection = (entries, observer) => {
         if (!entries[0].isIntersecting) return;
@@ -73,61 +113,10 @@ class ProductRecommendations extends HTMLElement {
 
             if (html.querySelector('.grid__item')) {
               this.classList.add('product-recommendations--loaded');
-              const swiperContainer = this.querySelector('.swiper-container');
-              const getID = swiperContainer.getAttribute("data-id");
-              const swiperID = this.querySelector(`.swipercol-${getID}`);
-              const spaceBetween = parseInt(swiperContainer.getAttribute('data-space-between'), 10);
-              const perviewDesktop = swiperContainer.getAttribute('data-perview-desktop');
-              if (swiperContainer) {
-                new Swiper(swiperContainer, {
-                  slidesPerView: "auto",
-                  freeMode: false,
-                  autoHeight: true,
-                  calculateHeight:true,
-                  freeModeSticky: true,
-                  centeredSlides: false,
-                  grabCursor: true,
-                  watchSlidesVisibility: true,
-                  watchSlidesProgress: true,
-                  preloadImages: true,
-                  updateOnImagesReady: true,
-                  spaceBetween: spaceBetween,
-                  observer: true,
-                  observeParents: true,
-                  parallax:true,
-                  a11y: true,
-                  keyboard: {
-                    enabled: true,
-                  },
-                  breakpoints: {
-                    320: {
-                      slidesPerView: 2,
-                      spaceBetween: 20
-                    },
-                    576: {
-                      slidesPerView: 2,
-                    },
-                    768: {
-                      slidesPerView: 3,
-                    },
-                    992: {
-                      slidesPerView: perviewDesktop,
-                    }
-                  },
-                  scrollbar: {
-                    el: this.querySelector(".swiper-scrollbar"),
-                  },
-                  navigation: {
-                    nextEl: this.querySelector(".swiper-button-next"),
-                    prevEl: this.querySelector(".swiper-button-prev"),
-                  },
-                });
-              } else {
-                console.error('No element with class "swiper-container" found.');
-              }
+              this.whenSwiperReady(() => this.initSwiper());
             }
-            jdgm.customizeBadges();
-            if (window.SPR && theme.review ) {
+            if (window.jdgm && jdgm.customizeBadges) jdgm.customizeBadges();
+            if (window.SPR && window.theme && theme.review ) {
               if ($('.shopify-product-reviews-badge').length > 0) {
                 return window.SPR.registerCallbacks(), window.SPR.initRatingHandler(), window.SPR.initDomEls(), window.SPR.loadProducts(), window.SPR.loadBadges();
               };
@@ -139,6 +128,62 @@ class ProductRecommendations extends HTMLElement {
       }
 
       new IntersectionObserver(handleIntersection.bind(this), {rootMargin: '0px 0px 500px 0px'}).observe(this);
+    }
+
+    whenSwiperReady(callback, tries = 0) {
+      if (window.Swiper) return callback();
+      if (tries > 100) return;
+      setTimeout(() => this.whenSwiperReady(callback, tries + 1), 100);
+    }
+
+    initSwiper() {
+      const swiperContainer = this.querySelector('.swiper-container');
+      if (!swiperContainer || swiperContainer.swiper) return;
+      const spaceBetween = parseInt(swiperContainer.getAttribute('data-space-between'), 10);
+      const perviewDesktop = swiperContainer.getAttribute('data-perview-desktop');
+      new Swiper(swiperContainer, {
+        slidesPerView: "auto",
+        freeMode: false,
+        autoHeight: true,
+        calculateHeight:true,
+        freeModeSticky: true,
+        centeredSlides: false,
+        grabCursor: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+        preloadImages: true,
+        updateOnImagesReady: true,
+        spaceBetween: spaceBetween,
+        observer: true,
+        observeParents: true,
+        parallax:true,
+        a11y: true,
+        keyboard: {
+          enabled: true,
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          576: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          992: {
+            slidesPerView: perviewDesktop,
+          }
+        },
+        scrollbar: {
+          el: this.querySelector(".swiper-scrollbar"),
+        },
+        navigation: {
+          nextEl: this.querySelector(".swiper-button-next"),
+          prevEl: this.querySelector(".swiper-button-prev"),
+        },
+      });
     }
   }
 
@@ -340,6 +385,30 @@ class ProductRecommendations extends HTMLElement {
       ],
       "default": "center",
       "label": "Heading align"
+    },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Vir izdelkov",
+      "default": "auto",
+      "options": [
+        { "value": "auto", "label": "Samodejno (Shopifyjeva priporočila)" },
+        { "value": "collection", "label": "Izdelki iz izbrane kolekcije" },
+        { "value": "products", "label": "Ročno izbrani izdelki" }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Kolekcija",
+      "info": "Pri viru »Samodejno« se pokaže, dokler Shopify še nima priporočil (nova trgovina)."
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Izdelki",
+      "limit": 12,
+      "info": "Velja pri viru »Ročno izbrani izdelki«. Trenutni izdelek se ne pokaže."
     },
     {
       "type": "range",
