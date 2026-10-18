@@ -1,0 +1,410 @@
+{%- comment -%}
+  Obljuba kakovosti (Čebelarstvo Šemen): zakaj je naš med kakovosten, v eni sekciji.
+  Velika fotografija z okroglim pečatom (besedilo v krogu, polna pisava), na drugi strani nadnaslov, naslov,
+  uvod, stebri kakovosti (bloki "Steber"), neobvezen okvir z nasvetom (kristalizacija), gumba
+  in neobvezna vrstica nagrad (bloki "Nagrada": ikona, naziv, leto).
+  Postavitev "anatomija": kozarec v šestkotniku na sredini, stebri levo in desno z zlatimi povezovalnimi črtami.
+  Neobvezno: satni zgornji rob (mehak prehod iz sekcije nad njo) in rahel vzorec satja ob robovih.
+  Na dnu je trak z znaki kakovosti (bloki "Nagrada") in partnerji (bloki "Partner": logotip v sivih tonih,
+  ob miški v barvi; brez logotipa se izpiše ime). Partnerji so ločeni od obljub, ker niso znak kakovosti medu.
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+  assign pillars = section.blocks | where: 'type', 'pillar'
+  assign awards = section.blocks | where: 'type', 'award'
+  assign partners = section.blocks | where: 'type', 'partner'
+  case s.scheme
+    when 'white'
+      assign bg = '#ffffff'
+    when 'cream'
+      assign bg = '#f7f3ea'
+    else
+      assign bg = '#2b2420'
+  endcase
+-%}
+<style>
+  .sq-{{ sid }} { --sq-accent: {{ s.accent }}; {% if s.scheme != 'dark' %}--sq-title: #222222; --sq-text: #4a4540; --sq-muted: #5c6978; --sq-line: rgba(34,34,34,.12); --sq-note: {% if s.scheme == 'white' %}#f7f3ea{% else %}#ffffff{% endif %};{% else %}--sq-title: #ffffff; --sq-text: #cfc4b4; --sq-muted: #a99c8b; --sq-line: rgba(255,255,255,.12); --sq-note: rgba(201,154,92,.1);{% endif %} position: relative; overflow: hidden; background: {{ bg }}; color: var(--sq-text); padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  .sq-{{ sid }}.sq--edge { overflow: visible; }
+  .sq-{{ sid }} .sq-edge { position: absolute; left: 0; right: 0; top: -14px; height: 15px; z-index: 2; pointer-events: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='15' viewBox='0 0 32 15'><path d='M0 15V8L8 3.4L16 8L24 3.4L32 8V15Z' fill='{{ bg | replace: '#', '%23' }}'/></svg>"); background-repeat: repeat-x; background-size: 32px 15px; }
+  .sq-{{ sid }} .sq-pattern { position: absolute; inset: 0; overflow: hidden; pointer-events: none; opacity: .11; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><path d='M28 1l27 15.5v31L28 63 1 47.5v-31L28 1zm0 48l27 15.5v31L28 97 1 80.5v-31L28 49z' fill='none' stroke='{{ s.accent | replace: '#', '%23' }}' stroke-width='1'/></svg>"); background-size: 56px 97px; -webkit-mask-image: radial-gradient(ellipse 72% 68% at 50% 52%, transparent 38%, #000 100%); mask-image: radial-gradient(ellipse 72% 68% at 50% 52%, transparent 38%, #000 100%); }
+  .sq-{{ sid }} .sq-wrap { position: relative; z-index: 1; }
+  .sq-{{ sid }} .sq-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 56px; align-items: center; }
+  .sq-{{ sid }} .sq-visual { position: relative; }
+  .sq-{{ sid }} .sq-media { position: relative; overflow: hidden; aspect-ratio: 4 / 3; margin: 0; background: #3a312b; }
+  .sq-{{ sid }} .sq-media img { position: absolute; inset: 0; width: 100% !important; height: 100% !important; object-fit: cover; object-position: {{ s.image_position }}; display: block; transition: transform 1.2s cubic-bezier(.2,.6,.2,1); }
+  .sq-{{ sid }} .sq-visual:hover .sq-media img { transform: scale(1.03); }
+  .sq-{{ sid }} .sq-seal { position: absolute; right: 14px; bottom: -44px; width: 116px; height: 116px; z-index: 2; filter: drop-shadow(0 14px 24px rgba(0,0,0,.35)); }
+  .sq-{{ sid }} .sq-seal svg { display: block; width: 100% !important; height: 100% !important; fill: none; overflow: visible; }
+  .sq-{{ sid }} .sq-seal-ring { transform-box: view-box; transform-origin: 50% 50%; animation: sq-spin-{{ sid }} 40s linear infinite; }
+  .sq-{{ sid }} .sq-seal-text { font-family: var(--g-font-2); font-size: 12.5px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; fill: #2b2420; }
+  .sq-{{ sid }} .sq-seal-small { font-family: var(--g-font-2); font-size: 10px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; fill: var(--sq-accent); }
+  .sq-{{ sid }} .sq-seal-big { font-family: var(--g-font-1); font-size: 40px; font-weight: 700; fill: #ffffff; }
+  @keyframes sq-spin-{{ sid }} { to { transform: rotate(360deg); } }
+  .sq-{{ sid }} .sq-eyebrow { display: block; margin-bottom: 10px; color: var(--sq-accent) !important; }
+  .sq-{{ sid }} .sq-title { margin: 0 0 18px; color: var(--sq-title); text-wrap: balance; }
+  .sq-{{ sid }} .sq-intro { max-width: 56ch; color: var(--sq-text); }
+  .sq-{{ sid }} .sq-intro p { margin: 0 0 12px; color: inherit; font-size: 15px; line-height: 1.75; }
+  .sq-{{ sid }} .sq-intro p:last-child { margin-bottom: 0; }
+  .sq-{{ sid }} .sq-pillars { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 36px; }
+  .sq-{{ sid }} .sq-pillar { display: grid; grid-template-columns: 34px 1fr; gap: 4px 16px; align-content: start; margin: 0; padding: 20px 0; border-top: 1px solid var(--sq-line); }
+  .sq-{{ sid }} .sq-pillar .semen-icon { grid-row: span 2; color: var(--sq-accent); margin-top: 1px; }
+  .sq-{{ sid }} .sq-pillar-title { margin: 0; color: var(--sq-title); font-size: 18px; line-height: 1.3; }
+  .sq-{{ sid }} .sq-pillar-text { margin: 0; color: var(--sq-text); font-size: 14px; line-height: 1.65; }
+  .sq-{{ sid }} .sq-note { display: grid; grid-template-columns: 28px 1fr; gap: 2px 14px; margin-top: 8px; padding: 18px 20px; background: var(--sq-note); border-left: 2px solid var(--sq-accent); }
+  .sq-{{ sid }} .sq-note .semen-icon { grid-row: span 2; color: var(--sq-accent); margin-top: 1px; }
+  .sq-{{ sid }} .sq-note-title { margin: 0; color: var(--sq-title); font-size: 15px; font-weight: 600; line-height: 1.4; }
+  .sq-{{ sid }} .sq-note-text { margin: 0; color: var(--sq-text); font-size: 14px; line-height: 1.65; }
+  .sq-{{ sid }} .sq-cred { display: grid; gap: 26px; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--sq-line); }
+  .sq-{{ sid }} .sq-partners-label { display: block; margin-bottom: 14px; font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--sq-muted); }
+  .sq-{{ sid }} .sq-partners-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; }
+  .sq-{{ sid }} .sq-partner { margin: 0; }
+  .sq-{{ sid }} .sq-partner a { display: inline-flex; text-decoration: none; }
+  .sq-{{ sid }} .sq-partner img { display: block; width: auto !important; height: 50px !important; max-width: 140px; object-fit: contain; filter: grayscale(1); opacity: .8; mix-blend-mode: multiply; transition: filter .35s, opacity .35s; }
+  .sq-{{ sid }} .sq-partner:hover img, .sq-{{ sid }} .sq-partner a:focus-visible img { filter: none; opacity: 1; }
+  .sq-{{ sid }} .sq-partner-name { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--sq-muted); transition: color .3s; }
+  .sq-{{ sid }} .sq-partner a:hover .sq-partner-name { color: var(--sq-title); }
+  @media (min-width: 750px) {
+    .sq-{{ sid }} .sq-cred--both { grid-template-columns: auto minmax(0, 1fr); gap: 0 36px; align-items: center; }
+    .sq-{{ sid }} .sq-cred--both .sq-partners { padding-left: 36px; border-left: 1px solid var(--sq-line); }
+  }
+  .sq-{{ sid }} .sq-awards-label { display: block; margin-bottom: 14px; font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--sq-muted); }
+  .sq-{{ sid }} .sq-awards-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 18px 26px; }
+  .sq-{{ sid }} .sq-award { display: flex; align-items: center; gap: 12px; margin: 0; }
+  .sq-{{ sid }} .sq-award img { width: 56px !important; height: 56px !important; object-fit: contain; display: block; }
+  .sq-{{ sid }} .sq-award-name { display: block; color: var(--sq-title); font-size: 13px; font-weight: 600; line-height: 1.35; }
+  .sq-{{ sid }} .sq-award-year { display: block; color: var(--sq-muted); font-size: 12px; }
+  .sq-{{ sid }} .sq-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 30px; margin-top: 34px; }
+  {%- if s.scheme == 'dark' -%}
+  .sq-{{ sid }} .sq-actions .btn-underline { color: #ffffff !important; }
+  .sq-{{ sid }} .sq-actions .btn-underline:before { background: var(--sq-accent); }
+  .sq-{{ sid }} .sq-actions .btn-underline:hover { color: var(--sq-accent) !important; }
+  {%- endif -%}
+  @media (min-width: 750px) {
+    .sq-{{ sid }} .sq-pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sq-{{ sid }} .sq-seal { width: 148px; height: 148px; right: 24px; bottom: -56px; }
+  }
+  @media (min-width: 990px) {
+    .sq-{{ sid }} { padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+    .sq-{{ sid }} .sq-grid { grid-template-columns: minmax(0, 44fr) minmax(0, 56fr); gap: 88px; }
+    .sq-{{ sid }}.sq--right .sq-grid { grid-template-columns: minmax(0, 56fr) minmax(0, 44fr); }
+    .sq-{{ sid }}.sq--right .sq-visual { order: 2; }
+    .sq-{{ sid }} .sq-media { aspect-ratio: 4 / 5; }
+    .sq-{{ sid }} .sq-seal { right: -52px; bottom: 56px; }
+    .sq-{{ sid }}.sq--right .sq-seal { right: auto; left: -52px; }
+  }
+  /* postavitev "anatomija" */
+  .sq-{{ sid }}.sq--anatomy .sq-head { max-width: 720px; margin: 0 auto 36px; text-align: center; }
+  .sq-{{ sid }}.sq--anatomy .sq-intro { margin: 0 auto; }
+  .sq-{{ sid }} .sq-anat { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .sq-{{ sid }} .sq-center { position: relative; order: -1; width: min(76%, 320px); margin: 0 auto 36px; }
+  .sq-{{ sid }} .sq-hex-halo { position: absolute; z-index: 0; inset: -14px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: linear-gradient(160deg, rgba(201,154,92,.5) 0%, rgba(201,154,92,.08) 100%); }
+  .sq-{{ sid }} .sq-hex { position: relative; z-index: 1; margin: 0; aspect-ratio: 0.866; overflow: hidden; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: #ede1d1; }
+  .sq-{{ sid }} .sq-hex img { position: absolute; inset: 0; width: 100% !important; height: 100% !important; object-fit: cover; object-position: {{ s.image_position }}; display: block; transition: transform 1.2s cubic-bezier(.2,.6,.2,1); }
+  .sq-{{ sid }} .sq-center:hover .sq-hex img { transform: scale(1.04); }
+  .sq-{{ sid }} .sq-center .sq-seal { left: -14px; right: auto; bottom: 6%; width: 104px; height: 104px; }
+  .sq-{{ sid }} .sq-side { list-style: none; margin: 0; padding: 0; display: grid; }
+  .sq-{{ sid }} .sq-ap { position: relative; display: grid; grid-template-columns: 34px 1fr; gap: 4px 16px; align-content: start; margin: 0; padding: 18px 0; border-top: 1px solid var(--sq-line); }
+  .sq-{{ sid }} .sq-ap .semen-icon { grid-row: span 2; color: var(--sq-accent); margin-top: 1px; }
+  .sq-{{ sid }} .sq-foot { max-width: 720px; margin: 32px auto 0; }
+  .sq-{{ sid }}.sq--anatomy .sq-actions { justify-content: center; }
+  .sq-{{ sid }}.sq--anatomy .sq-cred { justify-content: center; text-align: center; }
+  .sq-{{ sid }}.sq--anatomy .sq-awards-list, .sq-{{ sid }}.sq--anatomy .sq-partners-list { justify-content: center; }
+  .sq-{{ sid }}.sq--anatomy .sq-cred--both { text-align: left; }
+  .sq-{{ sid }}.sq--anatomy .sq-cred--both .sq-awards-list, .sq-{{ sid }}.sq--anatomy .sq-cred--both .sq-partners-list { justify-content: flex-start; }
+  @media (min-width: 750px) and (max-width: 989px) {
+    .sq-{{ sid }} .sq-anat { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+    .sq-{{ sid }} .sq-center { grid-column: 1 / -1; }
+  }
+  @media (min-width: 990px) {
+    .sq-{{ sid }}.sq--anatomy .sq-head { margin-bottom: 64px; }
+    .sq-{{ sid }} .sq-anat { grid-template-columns: minmax(0, 1fr) minmax(300px, 380px) minmax(0, 1fr); gap: 0 76px; align-items: center; }
+    .sq-{{ sid }} .sq-center { order: 0; width: 100%; margin: 0; }
+    .sq-{{ sid }} .sq-center .sq-seal { left: -54px; right: auto; bottom: 5%; width: 150px; height: 150px; }
+    .sq-{{ sid }} .sq-side { gap: 48px; }
+    .sq-{{ sid }} .sq-ap { display: block; padding: 0; border-top: 0; }
+    .sq-{{ sid }} .sq-ap .semen-icon { display: block; margin: 0 0 14px; }
+    .sq-{{ sid }} .sq-ap .sq-pillar-title { margin-bottom: 8px; }
+    .sq-{{ sid }} .sq-side--left .sq-ap { text-align: right; }
+    .sq-{{ sid }} .sq-side--left .sq-ap .semen-icon { margin-left: auto; }
+    .sq-{{ sid }} .sq-ap::after { content: ""; position: absolute; top: 15px; width: 46px; height: 1px; background: var(--sq-accent); opacity: .75; }
+    .sq-{{ sid }} .sq-ap::before { content: ""; position: absolute; top: 12px; width: 7px; height: 7px; border-radius: 50%; background: var(--sq-accent); }
+    .sq-{{ sid }} .sq-side--left .sq-ap::after { right: -62px; }
+    .sq-{{ sid }} .sq-side--left .sq-ap::before { right: -69px; }
+    .sq-{{ sid }} .sq-side--right .sq-ap::after { left: -62px; }
+    .sq-{{ sid }} .sq-side--right .sq-ap::before { left: -69px; }
+    .sq-{{ sid }} .sq-foot { margin-top: 64px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .sq-{{ sid }} .sq-seal-ring { animation: none; } }
+</style>
+
+{%- capture sq_seal -%}
+  {%- if s.show_seal -%}
+    <div class="sq-seal" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <defs><path id="SqRing-{{ sid }}" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+        <circle cx="100" cy="100" r="98" fill="{{ s.accent }}"/>
+        <g class="sq-seal-ring">
+          <text class="sq-seal-text"><textPath href="#SqRing-{{ sid }}" startOffset="0" textLength="458" lengthAdjust="spacing">{{ s.seal_ring | escape }}</textPath></text>
+        </g>
+        {%- if s.seal_image != blank -%}
+          <defs><clipPath id="SqSealClip-{{ sid }}"><circle cx="100" cy="100" r="55"/></clipPath></defs>
+          <circle cx="100" cy="100" r="58" fill="#ffffff"/>
+          <image href="{{ s.seal_image | image_url: width: 300 }}" x="45" y="45" width="110" height="110" preserveAspectRatio="xMidYMid meet" clip-path="url(#SqSealClip-{{ sid }})"/>
+          <circle cx="100" cy="100" r="58" fill="none" stroke="#2b2420" stroke-opacity=".18" stroke-width="1.5"/>
+        {%- else -%}
+          <circle cx="100" cy="100" r="56" fill="#2b2420"/>
+          <path d="M100 58l6.9 4v8l-6.9 4-6.9-4v-8z" fill="{{ s.accent }}"/>
+          <text class="sq-seal-small" x="100" y="94" text-anchor="middle">{{ s.seal_small | escape }}</text>
+          <text class="sq-seal-big" x="100" y="132" text-anchor="middle">{{ s.seal_big | escape }}</text>
+        {%- endif -%}
+      </svg>
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture sq_head -%}
+  {%- if s.title_top != blank -%}<span class="subtop sq-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
+  {%- if s.title != blank -%}<h2 class="h2 sq-title">{{ s.title | escape }}</h2>{%- endif -%}
+  {%- if s.text != blank -%}<div class="sq-intro">{{ s.text }}</div>{%- endif -%}
+{%- endcapture -%}
+
+{%- capture sq_extras -%}
+  {%- if s.note_title != blank or s.note_text != blank -%}
+    <div class="sq-note">
+      {%- render 'semen-icon', icon: 'drop', size: 24 -%}
+      {%- if s.note_title != blank -%}<p class="sq-note-title">{{ s.note_title | escape }}</p>{%- endif -%}
+      {%- if s.note_text != blank -%}<p class="sq-note-text">{{ s.note_text | escape }}</p>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if s.button != blank or s.button_2 != blank -%}
+    <div class="sq-actions">
+      {%- if s.button != blank -%}<a class="btn btn-theme" href="{{ s.link | default: '#' }}">{{ s.button | escape }}</a>{%- endif -%}
+      {%- if s.button_2 != blank -%}<a class="btn btn-underline" href="{{ s.link_2 | default: '#' }}">{{ s.button_2 | escape }}</a>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if awards.size > 0 or partners.size > 0 -%}
+    <div class="sq-cred{% if awards.size > 0 and partners.size > 0 %} sq-cred--both{% endif %}">
+      {%- if awards.size > 0 -%}
+        <div class="sq-awards">
+          {%- if s.awards_label != blank -%}<span class="sq-awards-label">{{ s.awards_label | escape }}</span>{%- endif -%}
+          <ul class="sq-awards-list" role="list">
+            {%- for block in awards -%}
+              <li class="sq-award" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  {%- assign award_alt = block.settings.name | append: ' ' | append: block.settings.year | strip -%}
+                  {{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', width: 56, height: 56, alt: award_alt }}
+                {%- endif -%}
+                <span>
+                  <span class="sq-award-name">{{ block.settings.name | escape }}</span>
+                  {%- if block.settings.year != blank -%}<span class="sq-award-year">{{ block.settings.year | escape }}</span>{%- endif -%}
+                </span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      {%- if partners.size > 0 -%}
+        <div class="sq-partners">
+          {%- if s.partners_label != blank -%}<span class="sq-partners-label">{{ s.partners_label | escape }}</span>{%- endif -%}
+          <ul class="sq-partners-list" role="list">
+            {%- for block in partners -%}
+              {%- liquid
+                assign pb = block.settings
+                capture partner_inner
+                  if pb.image != blank
+                    echo pb.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: pb.name
+                  else
+                    assign safe_name = pb.name | escape
+                    echo '<span class="sq-partner-name">' | append: safe_name | append: '</span>'
+                  endif
+                endcapture
+              -%}
+              <li class="sq-partner" {{ block.shopify_attributes }}>
+                {%- if pb.link != blank -%}
+                  <a href="{{ pb.link }}" target="_blank" rel="noopener" title="{{ pb.name | escape }}">{{ partner_inner }}</a>
+                {%- else -%}
+                  {{ partner_inner }}
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- liquid
+  assign img_alt = s.image.alt | default: s.title
+  assign half = pillars.size | plus: 1 | divided_by: 2
+-%}
+<section class="sq-{{ sid }} sq--{{ s.layout }} sq--{{ s.image_side }}{% if s.edge %} sq--edge{% endif %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  {%- if s.edge -%}<div class="sq-edge" aria-hidden="true"></div>{%- endif -%}
+  {%- if s.pattern -%}<div class="sq-pattern" aria-hidden="true"></div>{%- endif -%}
+  <div class="{{ s.setwidth }} sq-wrap">
+    {%- if s.layout == 'anatomy' -%}
+      <div class="sq-head" data-aos="fade-up">{{ sq_head }}</div>
+      <div class="sq-anat">
+        <ul class="sq-side sq-side--left" role="list">
+          {%- for block in pillars limit: half -%}
+            <li class="sq-ap" {{ block.shopify_attributes }} data-aos="fade-right" data-aos-delay="{{ forloop.index0 | times: 120 }}">
+              {%- render 'semen-icon', icon: block.settings.icon, size: 30 -%}
+              <h3 class="sq-pillar-title">{{ block.settings.title | escape }}</h3>
+              <p class="sq-pillar-text">{{ block.settings.text | escape }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="sq-center" data-aos="zoom-in">
+          <div class="sq-hex-halo" aria-hidden="true"></div>
+          <figure class="sq-hex">
+            {%- if s.image != blank -%}
+              {{ s.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1000', sizes: '(min-width: 990px) 380px, 76vw', alt: img_alt }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </figure>
+          {{ sq_seal }}
+        </div>
+        <ul class="sq-side sq-side--right" role="list">
+          {%- for block in pillars offset: half -%}
+            <li class="sq-ap" {{ block.shopify_attributes }} data-aos="fade-left" data-aos-delay="{{ forloop.index0 | times: 120 }}">
+              {%- render 'semen-icon', icon: block.settings.icon, size: 30 -%}
+              <h3 class="sq-pillar-title">{{ block.settings.title | escape }}</h3>
+              <p class="sq-pillar-text">{{ block.settings.text | escape }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="sq-foot" data-aos="fade-up">{{ sq_extras }}</div>
+    {%- else -%}
+      <div class="sq-grid">
+        <div class="sq-visual" data-aos="fade-up">
+          <figure class="sq-media">
+            {%- if s.image != blank -%}
+              {{ s.image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '500, 750, 1000, 1300, 1600', sizes: '(min-width: 990px) 44vw, 100vw', alt: img_alt }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </figure>
+          {{ sq_seal }}
+        </div>
+
+        <div class="sq-body" data-aos="fade-up" data-aos-delay="120">
+          {{ sq_head }}
+          {%- if pillars.size > 0 -%}
+            <ul class="sq-pillars" role="list">
+              {%- for block in pillars -%}
+                <li class="sq-pillar" {{ block.shopify_attributes }}>
+                  {%- render 'semen-icon', icon: block.settings.icon, size: 30 -%}
+                  <h3 class="sq-pillar-title">{{ block.settings.title | escape }}</h3>
+                  <p class="sq-pillar-text">{{ block.settings.text | escape }}</p>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          {{ sq_extras }}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Obljuba kakovosti (Šemen)",
+  "tag": "section",
+  "class": "section-semen-quality",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "white", "options": [ { "value": "white", "label": "Bela" }, { "value": "cream", "label": "Kremna" }, { "value": "dark", "label": "Temna" } ] },
+    { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)" },
+    { "type": "header", "content": "Fotografija in pečat" },
+    { "type": "image_picker", "id": "image", "label": "Fotografija (pokončna)" },
+    { "type": "select", "id": "layout", "label": "Postavitev", "default": "split", "options": [ { "value": "split", "label": "Fotografija ob besedilu" }, { "value": "anatomy", "label": "Kozarec na sredini, obljube okoli" } ] },
+    { "type": "select", "id": "image_side", "label": "Stran fotografije (postavitev ob besedilu)", "default": "left", "options": [ { "value": "left", "label": "Levo" }, { "value": "right", "label": "Desno" } ] },
+    { "type": "checkbox", "id": "edge", "label": "Satni rob zgoraj (mehak prehod iz sekcije nad njo)", "default": false },
+    { "type": "checkbox", "id": "pattern", "label": "Rahel vzorec satja ob robovih", "default": false },
+    { "type": "select", "id": "image_position", "label": "Izrez fotografije", "default": "center center", "options": [ { "value": "center top", "label": "Zgoraj" }, { "value": "center center", "label": "Sredina" }, { "value": "center bottom", "label": "Spodaj" } ] },
+    { "type": "checkbox", "id": "show_seal", "label": "Pokaži pečat", "default": true },
+    { "type": "image_picker", "id": "seal_image", "label": "Pečat: znak v sredini (neobvezno)", "info": "Npr. znak kakovosti. Če je izbran, nadomesti napis in letnico v sredini; letnico lahko vpišete v besedilo v krogu." },
+    { "type": "text", "id": "seal_ring", "label": "Pečat: besedilo v krogu", "default": "Čebelarstvo Šemen • Domači med • " },
+    { "type": "text", "id": "seal_small", "label": "Pečat: mali napis", "default": "od leta" },
+    { "type": "text", "id": "seal_big", "label": "Pečat: veliki napis", "default": "1982" },
+    { "type": "header", "content": "Besedilo" },
+    { "type": "text", "id": "title_top", "label": "Nadnaslov", "default": "Naša obljuba" },
+    { "type": "text", "id": "title", "label": "Naslov (H2)", "default": "Med, kakršen mora biti" },
+    { "type": "richtext", "id": "text", "label": "Uvod", "default": "<p>Pri nas ni bližnjic. Vsak kozarec nastane v našem čebelnjaku in gre skozi naše roke, od paše do pokrovčka.</p>" },
+    { "type": "text", "id": "note_title", "label": "Nasvet: naslov", "default": "Se je med strdil?" },
+    { "type": "textarea", "id": "note_text", "label": "Nasvet: besedilo", "default": "To je dober znak. Kristalizacija je naraven proces pristnega, nepregretega medu. V topli vodni kopeli do 40 °C se med znova utekočini." },
+    { "type": "text", "id": "awards_label", "label": "Naslov znakov kakovosti in nagrad", "default": "Prejete nagrade" },
+    { "type": "text", "id": "partners_label", "label": "Naslov partnerjev", "default": "Sodelujemo z" },
+    { "type": "text", "id": "button", "label": "Prvi gumb", "default": "Oglejte si naš med" },
+    { "type": "url", "id": "link", "label": "Povezava prvega gumba", "default": "/collections/all" },
+    { "type": "text", "id": "button_2", "label": "Drugi gumb", "default": "Naša zgodba" },
+    { "type": "url", "id": "link_2", "label": "Povezava drugega gumba" },
+    { "type": "header", "content": "Odmiki" },
+    { "type": "range", "id": "padding_top", "label": "Odmik zgoraj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 104 },
+    { "type": "range", "id": "padding_bottom", "label": "Odmik spodaj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 104 }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Steber kakovosti",
+      "limit": 6,
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ikona", "default": "hive", "options": [
+          { "value": "frame", "label": "Okvir s satjem" },
+          { "value": "hive", "label": "Satje" },
+          { "value": "thermo", "label": "Toplota, hladno točenje" },
+          { "value": "pin", "label": "Lokacija, izvor" },
+          { "value": "flower", "label": "Cvet" },
+          { "value": "jar", "label": "Kozarec medu" },
+          { "value": "dipper", "label": "Žlica za med" },
+          { "value": "drop", "label": "Kapljica" },
+          { "value": "bee", "label": "Čebela" },
+          { "value": "award", "label": "Priznanje" },
+          { "value": "shield", "label": "Varnost, zaupanje" },
+          { "value": "heart", "label": "Srce" }
+        ] },
+        { "type": "text", "id": "title", "label": "Naslov", "default": "Zrel med" },
+        { "type": "textarea", "id": "text", "label": "Besedilo", "default": "Satje odvzamemo šele, ko ga čebele same pokrijejo z voskom." }
+      ]
+    },
+    {
+      "type": "award",
+      "name": "Nagrada",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Ikona ali logotip (kvadrat, prozorno ozadje)" },
+        { "type": "text", "id": "name", "label": "Naziv", "default": "Zlato priznanje" },
+        { "type": "text", "id": "year", "label": "Leto ali ocenjevanje" }
+      ]
+    },
+    {
+      "type": "partner",
+      "name": "Partner",
+      "limit": 8,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logotip (prozorno ozadje, vsaj 300 px)" },
+        { "type": "text", "id": "name", "label": "Ime (pokaže se, dokler ni logotipa)", "default": "Partner" },
+        { "type": "url", "id": "link", "label": "Povezava (neobvezno)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Obljuba kakovosti (Šemen)",
+      "blocks": [
+        { "type": "pillar", "settings": { "icon": "frame", "title": "Zrel med", "text": "Satje odvzamemo šele, ko ga čebele same pokrijejo z voskom. Tak med je gost, aromatičen in dolgo obstojen." } },
+        { "type": "pillar", "settings": { "icon": "thermo", "title": "Hladno točen", "text": "Med iztočimo brez segrevanja in ga le precedimo. Tako ohrani aromo, encime in cvetni prah." } },
+        { "type": "pillar", "settings": { "icon": "pin", "title": "Znan izvor", "text": "Sortni med z naših paš po Sloveniji: akacija, lipa, kostanj, ajda, gozd. Vemo, kje so bile čebele." } },
+        { "type": "pillar", "settings": { "icon": "jar", "title": "Majhne serije", "text": "Med polnimo doma, v majhnih serijah. Vsak kozarec ročno zapremo in označimo." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

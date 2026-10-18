@@ -11,6 +11,7 @@
     }
   }
   .product-recommendations .product-card .product-countdown{display:none !important;}
+  product-recommendations { display: block; }
   {%- if section.settings.nowrap -%}
     .section-{{ section.id }}-padding{
       overflow:hidden;
@@ -96,38 +97,50 @@ class ProductRecommendations extends HTMLElement {
         return;
       }
 
+      // Med nalaganjem se postavitev premakne, zato brskalnik včasih v enem klicu sporoči več
+      // stanj (najprej "ni vidno", nato "vidno"). Gledamo vsa, ne le prvega, sicer se priporočila
+      // ob osvežitvi pomaknjene strani ne naložijo.
       const handleIntersection = (entries, observer) => {
-        if (!entries[0].isIntersecting) return;
-        observer.unobserve(this);
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        observer.disconnect();
+        this.load();
+      };
 
-        fetch(this.dataset.url)
-          .then(response => response.text())
-          .then(text => {
-            const html = document.createElement('div');
-            html.innerHTML = text;
-            const recommendations = html.querySelector('product-recommendations');
+      new IntersectionObserver(handleIntersection, {rootMargin: '0px 0px 500px 0px'}).observe(this);
+    }
 
-            if (recommendations && recommendations.innerHTML.trim().length) {
-              this.innerHTML = recommendations.innerHTML;
-            }
+    load() {
+      if (this.loading) return;
+      this.loading = true;
 
-            if (html.querySelector('.grid__item')) {
-              this.classList.add('product-recommendations--loaded');
-              this.whenSwiperReady(() => this.initSwiper());
-            }
-            if (window.jdgm && jdgm.customizeBadges) jdgm.customizeBadges();
-            if (window.SPR && window.theme && theme.review ) {
-              if ($('.shopify-product-reviews-badge').length > 0) {
-                return window.SPR.registerCallbacks(), window.SPR.initRatingHandler(), window.SPR.initDomEls(), window.SPR.loadProducts(), window.SPR.loadBadges();
-              };
-            }
-          })
-          .catch(e => {
-            console.error(e);
-          });
-      }
+      fetch(this.dataset.url)
+        .then(response => response.text())
+        .then(text => {
+          // DOMParser ne zažene elementov iz odgovora, zato ne nastane še en nevidni nalagalnik.
+          const html = new DOMParser().parseFromString(text, 'text/html');
+          const recommendations = html.querySelector('product-recommendations');
 
-      new IntersectionObserver(handleIntersection.bind(this), {rootMargin: '0px 0px 500px 0px'}).observe(this);
+          if (recommendations && recommendations.innerHTML.trim().length) {
+            this.innerHTML = recommendations.innerHTML;
+          }
+
+          if (this.querySelector('.grid__item')) {
+            this.classList.add('product-recommendations--loaded');
+            this.whenSwiperReady(() => this.initSwiper());
+          }
+          // Stran je zdaj višja; animacije ob drsenju naj preračunajo položaje.
+          if (window.AOS && AOS.refresh) AOS.refresh();
+          if (window.jdgm && jdgm.customizeBadges) jdgm.customizeBadges();
+          if (window.SPR && window.theme && theme.review ) {
+            if ($('.shopify-product-reviews-badge').length > 0) {
+              return window.SPR.registerCallbacks(), window.SPR.initRatingHandler(), window.SPR.initDomEls(), window.SPR.loadProducts(), window.SPR.loadBadges();
+            };
+          }
+        })
+        .catch(e => {
+          this.loading = false;
+          console.error(e);
+        });
     }
 
     whenSwiperReady(callback, tries = 0) {
