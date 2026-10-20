@@ -1,4 +1,10 @@
-<style>.page-title{margin-bottom:40px;}.main-content{padding:0;}.content-block--page ul,.content-block--page ol{padding-left:1rem;}</style>
+<style>.page-title{margin-bottom:40px;}.main-content{padding:0;}.content-block--page ul,.content-block--page ol{padding-left:1rem;}
+  /* naslovi poglavij v besedilu strani (pravne strani): več prostora nad naslovom kot pod njim */
+  .content-block--page h2,.content-block--page h3{margin-top:56px;margin-bottom:14px;}
+  .content-block--page h4{margin-top:36px;margin-bottom:10px;}
+  .content-block--page > :first-child{margin-top:0;}
+  @media (max-width:749px){.content-block--page h2,.content-block--page h3{margin-top:40px;}}
+</style>
 <div class="container">
   <!-- <h1 class="text-center page-title">{{ page.title }}</h1> -->
   <div class="content-block--page {% if page.content != blank %} py-5 {% endif %}">

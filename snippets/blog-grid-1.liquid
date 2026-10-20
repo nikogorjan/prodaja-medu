@@ -32,9 +32,19 @@
         {%- if enable_date -%}
           <p class="blog__meta">
             <time datetime="{{ article.published_at }}">
-              <span class="meta-b">{{ article.published_at | date: "%b" }}</span>
-              <span class="meta-d">{{ article.published_at | date: "%d" }}</span>
-              <span class="meta-y">{{ article.published_at | date: "%Y" }}</span>
+              {%- if request.locale.iso_code == 'sl' -%}
+                {%- liquid
+                  assign sl_months = 'jan.,feb.,mar.,apr.,maj,jun.,jul.,avg.,sep.,okt.,nov.,dec.' | split: ','
+                  assign month_index = article.published_at | date: '%m' | plus: 0 | minus: 1
+                -%}
+                <span class="meta-d">{{ article.published_at | date: "%d" | plus: 0 }}.</span>
+                <span class="meta-b">{{ sl_months[month_index] }}</span>
+                <span class="meta-y">{{ article.published_at | date: "%Y" }}</span>
+              {%- else -%}
+                <span class="meta-b">{{ article.published_at | date: "%b" }}</span>
+                <span class="meta-d">{{ article.published_at | date: "%d" }}</span>
+                <span class="meta-y">{{ article.published_at | date: "%Y" }}</span>
+              {%- endif -%}
             </time>
           </p>
         {%- endif -%}

@@ -5,19 +5,26 @@
 {%- liquid
   assign sid = section.id
   assign s = section.settings
+  comment
+    Nova podoba nima temnih pasov: temna shema se izriše kot topel svetel pas.
+  endcomment
+  assign scheme = s.scheme
+  if settings.semen_design and scheme == 'dark'
+    assign scheme = 'cream'
+  endif
   assign light = false
-  if s.scheme == 'cream' and s.image == blank
+  if scheme == 'cream' and s.image == blank
     assign light = true
   endif
 -%}
 <style>
-  .scta-{{ sid }} { --scta-accent: {{ s.accent }}; position: relative; overflow: hidden; background: {% if s.scheme == 'cream' %}#f7f3ea{% else %}#2b2420{% endif %}; color: #cfc4b4; padding: {{ s.padding | times: 0.6 | round }}px 0; text-align: {{ s.align }}; }
+  .scta-{{ sid }} { --scta-accent: {{ s.accent }}; --scta-accent-ink: {% if scheme == 'dark' or s.image != blank %}{{ s.accent }}{% else %}{{ s.accent | color_darken: 22 }}{% endif %}; position: relative; overflow: hidden; background: {% if scheme == 'cream' %}var(--s-plate, #f7f3ea){% else %}var(--s-dark, #2b2420){% endif %}; color: var(--s-on-dark-muted, #cfc4b4); padding: {{ s.padding | times: 0.6 | round }}px 0; text-align: {{ s.align }}; }
   .scta-{{ sid }} .scta-bg { position: absolute; inset: 0; }
   .scta-{{ sid }} .scta-bg img { width: 100%; height: 100%; object-fit: cover; object-position: {{ s.image_position }}; display: block; }
   .scta-{{ sid }} .scta-bg::after { content: ""; position: absolute; inset: 0; background: rgba(32,27,23,{{ s.overlay | divided_by: 100.0 }}); }
   .scta-{{ sid }} .container, .scta-{{ sid }} .container-fluid { position: relative; z-index: 2; }
   .scta-{{ sid }} .scta-inner { max-width: 760px; {% if s.align == 'center' %}margin: 0 auto;{% endif %} }
-  .scta-{{ sid }} .scta-eyebrow { display: block; margin-bottom: 10px; color: var(--scta-accent) !important; }
+  .scta-{{ sid }} .scta-eyebrow { display: block; margin-bottom: 10px; color: var(--scta-accent-ink) !important; }
   .scta-{{ sid }} .scta-title { margin: 0 0 16px; color: #ffffff; text-wrap: balance; }
   .scta-{{ sid }} .scta-text { margin: 0; font-size: 16px; line-height: 1.75; }
   .scta-{{ sid }} .scta-text p { margin: 0; color: inherit; font-size: inherit; line-height: inherit; }
@@ -26,9 +33,9 @@
   .scta-{{ sid }} .scta-actions .btn-underline:before { background: var(--scta-accent); }
   .scta-{{ sid }} .scta-phone { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font-size: 14px; }
   .scta-{{ sid }} .scta-phone a { color: #ffffff; font-weight: 600; text-decoration: none; letter-spacing: .02em; }
-  .scta-{{ sid }} .scta-phone .semen-icon { color: var(--scta-accent); }
+  .scta-{{ sid }} .scta-phone .semen-icon { color: var(--scta-accent-ink); }
   {%- if light -%}
-  .scta-{{ sid }} { color: #5c6978; }
+  .scta-{{ sid }} { color: var(--s-muted, #5c6978); }
   .scta-{{ sid }} .scta-title, .scta-{{ sid }} .scta-phone a { color: var(--g-color-heading); }
   .scta-{{ sid }} .scta-actions .btn-underline { color: var(--g-btn-outline-color) !important; }
   {%- endif -%}
@@ -46,7 +53,7 @@
   <div class="{{ s.setwidth }}">
     <div class="scta-inner" data-aos="fade-up">
       {%- if s.title_top != blank -%}<span class="subtop scta-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
-      {%- if s.title != blank -%}<h2 class="h2 scta-title">{{ s.title | escape }}</h2>{%- endif -%}
+      {%- if s.title != blank -%}<h2 class="h2 scta-title">{% render 'semen-em', text: s.title %}</h2>{%- endif -%}
       {%- if s.text != blank -%}<div class="scta-text">{{ s.text }}</div>{%- endif -%}
       {%- if s.button != blank or s.button_2 != blank -%}
         <div class="scta-actions">
@@ -67,7 +74,7 @@
   "tag": "section",
   "class": "section-semen-cta",
   "settings": [
-    { "type": "select", "id": "scheme", "label": "Ozadje brez fotografije", "default": "dark", "options": [ { "value": "dark", "label": "Temno" }, { "value": "cream", "label": "Kremno" } ] },
+    { "type": "select", "id": "scheme", "label": "Ozadje brez fotografije", "default": "dark", "options": [ { "value": "dark", "label": "Gozdno zeleno (temno)" }, { "value": "cream", "label": "Pšenično (toplo)" } , { "value": "tint", "label": "Medena (svetel pas)" } ] },
     { "type": "image_picker", "id": "image", "label": "Fotografija v ozadju (neobvezno)" },
     { "type": "select", "id": "image_position", "label": "Izrez fotografije", "default": "center center", "options": [ { "value": "center top", "label": "Zgoraj" }, { "value": "center center", "label": "Sredina" }, { "value": "center bottom", "label": "Spodaj" } ] },
     { "type": "range", "id": "overlay", "label": "Temnost čez fotografijo", "min": 20, "max": 90, "step": 5, "unit": "%", "default": 60 },

@@ -1,0 +1,323 @@
+{%- comment -%}
+  Čebelarstvo Šemen · nova podoba (oktober 2026). Svetla plast barv čez temo Molding:
+  kremna osnova, topli pšenični in medeni pasovi, svetla noga, skoraj črni gumbi z zlatim prehodom,
+  zlata le kot okras. Temnih pasov ni. Pisave, velikosti in debeline ostanejo iz nastavitev teme (Typography).
+  1. barvni žetoni --s-* iz nastavitev "Šemen · Nova podoba",
+  2. preusmeritev barvnih spremenljivk teme (ozadje, besedilo, gumbi, glava, noga) na žetone,
+  3. pravila, ki nekdaj temne ali bele sekcije teme (družina, številke, izdelki, drseči napis, drobtinice,
+     noga, lepljiva košarica, obvestilo o piškotkih) izrišejo v kremni podobi ne glede na staro vsebino.
+  Ko je podoba izklopljena, se nič od tega ne izpiše; sekcije Šemen uporabljajo var(--s-…, stara barva)
+  in se same vrnejo na prejšnje barve. Pravila za sekcije imajo predpono "body", da premagajo
+  <style> bloke sekcij, ki so v dokumentu za glavo.
+{%- endcomment -%}
+{%- if settings.semen_design -%}
+{%- liquid
+  assign c_bg = settings.semen_c_bg | default: '#faf7f0'
+  assign c_tint = settings.semen_c_tint | default: '#f6edd3'
+  assign c_plate = settings.semen_c_plate | default: '#f3ebda'
+  assign c_footer = settings.semen_c_footer | default: '#f3ebda'
+  assign c_dark = settings.semen_c_dark | default: '#2b2825'
+  assign c_ink = settings.semen_c_ink | default: '#252320'
+  assign c_text = settings.semen_c_text | default: '#3f3b35'
+  assign c_muted = settings.semen_c_muted | default: '#67625a'
+  assign c_accent = settings.semen_c_accent | default: '#252320'
+  assign c_gold = settings.semen_c_gold | default: '#c99a5c'
+  assign c_gold_ink = c_gold | color_darken: 22
+  assign c_dark_2 = c_dark | color_lighten: 6
+  assign c_rule_solid = c_ink | color_mix: c_bg, 12
+  assign c_rule_footer = c_ink | color_mix: c_footer, 9
+  assign bg_r = c_bg | color_extract: 'red'
+  assign bg_g = c_bg | color_extract: 'green'
+  assign bg_b = c_bg | color_extract: 'blue'
+  assign ink_r = c_ink | color_extract: 'red'
+  assign ink_g = c_ink | color_extract: 'green'
+  assign ink_b = c_ink | color_extract: 'blue'
+  assign text_r = c_text | color_extract: 'red'
+  assign text_g = c_text | color_extract: 'green'
+  assign text_b = c_text | color_extract: 'blue'
+-%}
+<style>
+  :root {
+    --s-bg: {{ c_bg }};
+    --s-card: {{ c_bg }};
+    --s-tint: {{ c_tint }};
+    --s-plate: {{ c_plate }};
+    --s-footer: {{ c_footer }};
+    --s-dark: {{ c_dark }};
+    --s-dark-2: {{ c_dark_2 }};
+    --s-ink: {{ c_ink }};
+    --s-text: {{ c_text }};
+    --s-muted: {{ c_muted }};
+    --s-accent: {{ c_accent }};
+    --s-gold: {{ c_gold }};
+    --s-gold-ink: {{ c_gold_ink }};
+    --s-on-dark: #f3eee4;
+    --s-on-dark-muted: #cfc6b8;
+    --s-rule: rgba({{ ink_r }}, {{ ink_g }}, {{ ink_b }}, .12);
+    --s-rule-strong: rgba({{ ink_r }}, {{ ink_g }}, {{ ink_b }}, .22);
+    --s-rule-solid: {{ c_rule_solid }};
+    --s-rule-footer: {{ c_rule_footer }};
+    --s-field: #8f8879;
+    --s-ease: cubic-bezier(.2, .6, .2, 1);
+    --s-arch: 999px 999px 0 0;
+    --s-pattern: 0;
+    /* barve medu od akacije do ajde */
+    --s-honey-spectrum: linear-gradient(90deg, #f3e6b3 0%, #f1c95c 17%, #e6b452 31%, #d8963c 46%, #b9722d 61%, #8f4f22 75%, #63361c 88%, #3a2115 100%);
+
+    /* barvne spremenljivke teme (pisave in velikosti ostanejo iz nastavitev teme) */
+    --color-body: var(--s-bg);
+    --color-content: var(--s-bg);
+    --color-background: {{ c_bg | color_extract: 'red' }}, {{ c_bg | color_extract: 'green' }}, {{ c_bg | color_extract: 'blue' }};
+    --color-body-text: var(--s-text);
+    --color-body-text-rgb: {{ text_r }}, {{ text_g }}, {{ text_b }};
+    --color-original-rgb: {{ text_r }}, {{ text_g }}, {{ text_b }};
+    --color-foreground: {{ text_r }}, {{ text_g }}, {{ text_b }};
+    --color-accent: var(--s-gold-ink);
+    --color-border: 226, 219, 205;
+    --g-color-heading: var(--s-ink);
+    --g-color-heading-rgb: {{ ink_r }}, {{ ink_g }}, {{ ink_b }};
+    --g-color-carousel: var(--s-ink);
+    --g-main: var(--s-gold);
+    --g-main-2: var(--s-gold-ink);
+    --g-cta-button: var(--s-accent);
+    --g-cta-text: var(--s-bg);
+    --g-btn-outline-color: var(--s-ink);
+    --g-btn-hover-color: var(--s-ink);
+    --g-bg-tooltip: var(--s-ink);
+    --g-input-bg: transparent;
+    --g-input-border: var(--s-field);
+    --g-font-color-subtop: var(--s-gold-ink);
+    --anim-transition: var(--s-ease);
+
+    /* Kje nas najdete (pravila v header-css) */
+    --s-map-bg: var(--s-plate);
+    --s-map-text: var(--s-text);
+    --s-map-title: var(--s-ink);
+    --s-map-btn: var(--s-accent);
+    --s-map-btn-text: var(--s-bg);
+
+    /* temni naslovni del fotografije: nevtralen, ne rjav */
+    --sh-shade-rgb: 20, 18, 16;
+  }
+
+  /* glava: barve iz te podobe ne glede na nastavitve glave */
+  body {
+    --header-background: #ffffff;
+    --header-text: var(--s-ink);
+    --header-linkcolor: var(--s-ink);
+    --header-linkhover: var(--s-gold-ink);
+    --header-color-indicator: var(--s-gold);
+    --header-menucolor: var(--s-ink);
+    --header-menuhover: var(--s-gold-ink);
+  }
+
+  /* svetle plošče namesto temnih: uvod podstrani (deljena postavitev), kontaktna plošča, sredina kolesa leta */
+  body .sph--split, body .sct-panel, body .yw-center {
+    --s-panel-bg: var(--s-plate);
+    --s-panel-title: var(--s-ink);
+    --s-panel-text: var(--s-text);
+    --s-panel-faint: rgba({{ ink_r }}, {{ ink_g }}, {{ ink_b }}, .55);
+    --s-panel-link: var(--s-ink);
+    --s-panel-rule: var(--s-rule);
+    --s-panel-label: var(--s-gold-ink);
+    --s-panel-media: var(--s-plate);
+  }
+  body .yw-center { --s-panel-bg: var(--s-bg); box-shadow: inset 0 0 0 1px var(--s-gold); }
+
+  /* ---------- osnova: kremna stran brez belih pasov ---------- */
+  html, body { background-color: var(--s-bg); }
+  body .page-container, body .page-element { background-color: var(--s-bg) !important; }
+  body { color: var(--s-text); }
+  ::selection { background: rgba({{ c_gold | color_extract: 'red' }}, {{ c_gold | color_extract: 'green' }}, {{ c_gold | color_extract: 'blue' }}, .32); color: var(--s-ink); }
+  :focus-visible { outline: 2px solid var(--s-ink); outline-offset: 2px; }
+  .rte a:not(.btn), .rte-setting a:not(.btn) { color: var(--s-gold-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .rte a:not(.btn):hover, .rte-setting a:not(.btn):hover { color: var(--s-ink); }
+  hr { border-top-color: var(--s-rule); }
+  /* drobtinice: brez belega pasu */
+  body .g-breadcrumb { background: transparent !important; border-top-color: var(--s-rule) !important; }
+  /* vnosna polja: prozorna, na kremni podlagi kremna */
+  body input[type="email"], body input[type="text"], body input[type="tel"], body input[type="search"], body input[type="number"], body input[type="date"], body textarea, body select, body .form-control { background-color: transparent !important; }
+  body .newsletter .form-control, body .newsletter input, body [class*="newsletter"] .input-group, body [class*="newsletter"] .input-group * { background-color: transparent !important; }
+  /* nadnaslovi so v bronasti, brez črte pred njimi */
+
+  /* ---------- gumbi: skoraj črni, ob prehodu zlati ---------- */
+  .btn-theme { background-color: var(--s-accent); border-color: var(--s-accent); color: var(--s-bg); }
+  .btn-theme:hover { color: var(--s-ink) !important; border-color: var(--s-gold) !important; }
+  .btn-theme:focus:not(:hover) { color: var(--s-bg); }
+  .btn-underline { color: var(--s-ink) !important; }
+  .btn-underline:before { background: var(--s-gold); }
+  .btn-underline:after { background: var(--s-gold-ink); }
+  .btn-underline:hover { color: var(--s-gold-ink) !important; }
+  .btn-outline { border: 1px solid var(--s-ink); background: transparent; color: var(--s-ink); }
+  .btn-outline:hover { background: var(--s-ink); border-color: var(--s-ink); color: var(--s-bg); }
+
+  /* ---------- glava ---------- */
+  .section-header { border-bottom: 1px solid rgba({{ ink_r }}, {{ ink_g }}, {{ ink_b }}, .08); }
+  body .site-header { background-color: #ffffff; }
+  body .site-nav__link, body .site-nav__title { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--s-ink); }
+  body .site-nav__link:hover .site-nav__title, body .site-nav__item:hover .site-nav__title { color: var(--s-gold-ink); }
+  body .site-header__cart-indicator { background: var(--s-gold) !important; color: var(--s-ink) !important; }
+
+  /* ---------- naslovi sekcij teme ---------- */
+  body .section-block > .font-family-2.txt-body-70, body .container > .font-family-2.txt-body-70 { max-width: 58ch; margin-left: auto; margin-right: auto; color: var(--s-muted); }
+
+  /* ---------- kartice izdelkov ---------- */
+  body .product-card__image-wr { background: var(--s-plate); }
+  body .product-card__image img { transition: transform 1.4s var(--s-ease), opacity .4s; }
+  body .product-card:hover .product-card__image img { transform: scale(1.035); }
+  body .product-card__type { display: none !important; }
+  body .product-card__price, body .product-card__price span { color: var(--s-muted); font-variant-numeric: lining-nums tabular-nums; }
+  body .product-card__overlay .btn-theme { background: rgba(255, 255, 255, .94); border-color: transparent; color: var(--s-ink); }
+  /* domača stran: izdelki na kremni podlagi in lestvica barv medu pod naslovom */
+  body [id$="__izdelki_semen"] [class*="customstyle"] { background-color: var(--s-bg) !important; }
+  body [id$="__izdelki_semen"] .section-title-1::after { content: ""; display: block; width: min(320px, 64%); height: 3px; margin: 26px auto 0; background: var(--s-honey-spectrum); }
+
+  /* ---------- slika + besedilo (tema); družina je vedno svetla ---------- */
+  body [id$="__druzina_semen"] [class*="customstyle"] { background-color: var(--s-bg) !important; }
+  body [id$="__druzina_semen"] .h2, body [id$="__druzina_semen"] h2 { color: var(--s-ink) !important; }
+  body [id$="__druzina_semen"] p, body [id$="__druzina_semen"] .rte-setting { color: var(--s-text) !important; }
+  body [id$="__druzina_semen"] .image-content__image-container,
+  body [id$="__druzina_semen"] .image-content__image-wrapper,
+  body [id$="__prostori_semen"] .image-content__image-container,
+  body [id$="__prostori_semen"] .image-content__image-wrapper { border-radius: var(--s-arch) !important; overflow: hidden; }
+
+  /* ---------- številke: svetla vrstica med tankimi črtami, na istem ozadju kot družina ---------- */
+  body [id$="__stevilke_semen"] [class*="customstyle"] { background-color: var(--s-bg) !important; }
+  body [id$="__stevilke_semen"] .services-wrapper { border-top: 1px solid var(--s-rule); border-bottom: 1px solid var(--s-rule); padding: 40px 0 34px; }
+  body [id$="__stevilke_semen"] .iconx8 { display: none !important; }
+  body [id$="__stevilke_semen"] .services-item { text-align: center; }
+  body [id$="__stevilke_semen"] .service-1, body [id$="__stevilke_semen"] .service-1 .media-body, body [id$="__stevilke_semen"] .service-1 .media-body > * { display: block; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; text-align: center !important; }
+  body [id$="__stevilke_semen"] .service-1 .h2 { margin: 0 0 6px !important; color: var(--s-ink) !important; }
+  body [id$="__stevilke_semen"] .media-body > div, body [id$="__stevilke_semen"] .media-body p { max-width: 22ch; margin: 0 auto; color: var(--s-muted) !important; }
+  @media (min-width: 992px) {
+    body [id$="__stevilke_semen"] .services-item + .services-item { border-left: 1px solid var(--s-rule); }
+  }
+  @media (max-width: 991px) {
+    body [id$="__stevilke_semen"] .services-slider { display: grid !important; grid-template-columns: 1fr 1fr; row-gap: 30px; margin: 0; }
+    body [id$="__stevilke_semen"] .services-item { max-width: none; width: auto; margin-bottom: 0 !important; padding: 0 8px; }
+    body [id$="__stevilke_semen"] .services-item:nth-child(even) { border-left: 1px solid var(--s-rule); }
+  }
+
+  /* ---------- drseči napis (če je prikazan): svetel ---------- */
+  body .scroling-section { background: var(--s-plate) !important; border-top: 1px solid var(--s-rule); border-bottom: 1px solid var(--s-rule); }
+  body .scroling-section .h2, body .scroling-section .h2 * { color: var(--s-gold-ink) !important; -webkit-text-stroke: 0 !important; }
+
+  /* ---------- mreža pasic (ploščice s fotografijo) ---------- */
+  body .banner-theme .h3, body .banner-theme h3 { color: #ffffff; }
+  body .banner-theme .subtop { color: #efdcb6; }
+  body .banner-theme .btn-theme.btn-white { background: transparent; border: 1px solid rgba(255, 255, 255, .78); color: #ffffff; }
+  body .banner-theme .btn-theme.btn-white:before { background: var(--s-bg); }
+  body .banner-theme .btn-theme.btn-white:hover { color: var(--s-ink) !important; border-color: var(--s-bg) !important; }
+
+  /* ---------- pogosta vprašanja ---------- */
+  body .card-faqs { border-color: var(--s-rule) !important; }
+  body .card-faqs .card-body p { color: var(--s-text); }
+
+  /* ---------- novice ---------- */
+  body .blog__item .blog__meta { background: var(--s-bg) !important; color: var(--s-ink) !important; }
+  body .blog__item .blog__meta span { padding: 0 2px !important; border: 0 !important; }
+  body .blog__item .blog__meta span::before, body .blog__item .blog__meta span::after { display: none !important; }
+  body .blog__item .blog__content hr { width: 36px; margin: 18px 0; border: 0; border-top: 1px solid var(--s-gold); opacity: 1; }
+  body .blog__item .article__photo-wrapper img { transition: transform 1.4s var(--s-ease); }
+  body .blog__item:hover .article__photo-wrapper img { transform: scale(1.035); }
+
+  /* ---------- noga: svetla, s svetlimi črtami ---------- */
+  body .site-footer {
+    --footer-bg: var(--s-footer);
+    --footer-text: var(--s-text);
+    --footer-title: var(--s-gold-ink);
+    --footer-text-hover: var(--s-gold-ink);
+    --footer-head-border: var(--s-rule-footer);
+    --bottom-copy-border: var(--s-rule-footer);
+    --color-footer-text-rgb: {{ text_r }}, {{ text_g }}, {{ text_b }};
+    --color-body-text: var(--s-text);
+    background-color: var(--s-footer) !important;
+    color: var(--s-text) !important;
+    border-top: 0;
+  }
+  body .site-footer .site-footer__section-title { color: var(--s-gold-ink) !important; }
+  body .site-footer a, body .site-footer .site-footer__list-item a { color: var(--s-ink) !important; transition: color .25s; }
+  body .site-footer a:hover, body .site-footer .site-footer__list-item a:hover { color: var(--s-gold-ink) !important; }
+  body .site-footer p, body .site-footer .rte p, body .site-footer .rte { color: var(--s-text) !important; }
+  body .site-footer .footer-email .form-group label, body .site-footer .form-group label { background-color: var(--s-footer) !important; color: var(--s-muted) !important; }
+  body .site-footer .footer__newsletter .form-control { border: 0 !important; border-bottom: 1px solid var(--s-rule-strong) !important; border-radius: 0; padding-left: 0 !important; color: var(--s-ink) !important; }
+  body .site-footer .footer__newsletter .form-control::placeholder { color: var(--s-muted); }
+  body .site-footer .footer__newsletter .form-control:focus { border-bottom-color: var(--s-gold) !important; box-shadow: none; }
+  body .site-footer .btn-theme { background: var(--s-accent) !important; border-color: var(--s-accent) !important; color: var(--s-bg) !important; }
+  body .site-footer .btn-theme span { color: inherit !important; }
+  body .site-footer .btn-theme:before { background: var(--s-gold); }
+  body .site-footer .btn-theme:hover, body .site-footer .btn-theme:hover span { color: var(--s-ink) !important; border-color: var(--s-gold) !important; }
+  body .site-footer .social-icons a, body .site-footer .social-icons svg { color: var(--s-ink) !important; fill: currentColor; }
+  body .site-footer .social-icons a:hover { color: var(--s-gold-ink) !important; }
+
+  /* ---------- lepljiva vrstica "Dodaj v košarico" na strani izdelka: kremna kot stran ---------- */
+  body .sticky-cart-wr {
+    --sticky-cart-mix: var(--s-bg);
+    --sticky-cart-text: {{ ink_r }}, {{ ink_g }}, {{ ink_b }};
+    --sticky-cart-bg: var(--s-accent);
+    --sticky-cart-cl: var(--s-bg);
+    --sticky-cart-cl-hover: var(--s-ink);
+    background: var(--s-bg) !important;
+    border-top: 1px solid var(--s-rule-solid);
+    box-shadow: 0 -12px 30px -24px rgba({{ ink_r }}, {{ ink_g }}, {{ ink_b }}, .5);
+  }
+
+  /* ---------- predal košarice: kremen ---------- */
+  body .mini-cart-content, body .mini-cart-header, body .js-mini-cart-content, body .mini-cart-footer,
+  body .js-note-cart, body .boxgift, body .block-addon__box--wrap { background-color: var(--s-bg) !important; }
+  body .drawer-crossell { background-color: var(--s-plate) !important; border-inline-end-color: var(--s-rule-solid) !important; }
+  body .mini-cart-footer .border-bottom, body .mini-cart-header { border-color: var(--s-rule-solid) !important; }
+  body .mini-cart-content.overlay:before { background-color: rgba({{ bg_r }}, {{ bg_g }}, {{ bg_b }}, .8); }
+
+  /* ---------- naslovna slika (semen-hero) ---------- */
+  body [class*="shero-"] .sh-eyebrow { color: #ead2a2; }
+  body [class*="shero-"] .sh-text { color: #f3eee4; }
+  body [class*="shero-"] .sh-actions .btn-theme { background: var(--s-bg); border-color: var(--s-bg); color: var(--s-ink); }
+  body [class*="shero-"] .sh-actions .btn-theme:before { background: var(--s-gold); }
+  body [class*="shero-"] .sh-actions .btn-theme:hover { color: var(--s-ink) !important; border-color: var(--s-gold) !important; }
+  body [class*="shero-"] .sh-arrow { border-color: rgba(255, 255, 255, .38); background: transparent; }
+  body [class*="shero-"] .sh-arrow:hover { background: rgba(255, 255, 255, .12); border-color: #ffffff; }
+  body [class*="shero-"] .sh-trust { box-shadow: 0 34px 60px -42px rgba({{ ink_r }}, {{ ink_g }}, {{ ink_b }}, .55), 0 1px 0 var(--s-rule); }
+  body [class*="shero-"] .sh-trust-item { border-color: var(--s-rule) !important; }
+  body [class*="shero-"] .sh-trust-title { color: var(--s-ink); }
+  body [class*="shero-"] .sh-trust-text { color: var(--s-muted); }
+
+  /* ---------- pridelava: oznaka letnega časa na dnu obokane fotografije ---------- */
+  body .ps-season { top: auto !important; bottom: 18px; left: 50% !important; transform: translateX(-50%); white-space: nowrap; }
+
+  /* ---------- citat v sekciji Slika in besedilo: brez velikega narekovaja teme (lebdel je v kotu strani) ---------- */
+  body .ssp-quote { position: relative; }
+  body .ssp-quote::before { content: none !important; display: none !important; }
+
+  /* ---------- obvestilo o piškotkih (tema): kremna kartica ---------- */
+  body .js-cookie-policy {
+    --color-body-text-rgb: {{ ink_r }}, {{ ink_g }}, {{ ink_b }};
+    --g-color-heading: var(--s-ink);
+    --g-font-color-subtop: var(--s-gold-ink);
+    background: var(--s-bg) !important;
+    color: var(--s-text) !important;
+    border: 1px solid var(--s-rule-solid);
+    box-shadow: 0 30px 60px -36px rgba({{ ink_r }}, {{ ink_g }}, {{ ink_b }}, .45);
+  }
+  body .js-cookie-policy p, body .js-cookie-policy div { color: var(--s-text); }
+  body .js-cookie-policy a { color: var(--s-ink) !important; }
+  body .js-cookie-policy .js-btn-ok { background: var(--s-accent) !important; border: 1px solid var(--s-accent) !important; color: var(--s-bg) !important; }
+  body .js-cookie-policy .js-btn-decline { background: transparent !important; border: 1px solid var(--s-ink) !important; color: var(--s-ink) !important; }
+  body .js-cookie-policy .btn:before { background: var(--s-gold) !important; }
+  body .js-cookie-policy .btn:hover { color: var(--s-ink) !important; border-color: var(--s-gold) !important; }
+
+  /* ---------- brez satovja ---------- */
+  body .sq-edge, body .sq-pattern, body .ps-hex, body .sc-hex, body .ss-hex { display: none !important; }
+  body [class*="sct-"] .sct-panel::after { display: none !important; }
+
+  /* ---------- gibanje: krajše in mehkejše ---------- */
+  body [data-aos="fade-up"] { transform: translate3d(0, 18px, 0); }
+  body [data-aos="zoom-in"] { transform: scale(.97); }
+  body [data-aos].aos-animate { transform: none; }
+  body [data-aos] { transition-timing-function: var(--s-ease) !important; }
+  @media (prefers-reduced-motion: reduce) {
+    body [data-aos] { transform: none !important; transition: opacity .01s !important; }
+    body .product-card__image img, body .blog__item .article__photo-wrapper img { transition: none; }
+  }
+</style>
+{%- endif -%}

@@ -6,17 +6,26 @@
 {%- liquid
   assign sid = section.id
   assign s = section.settings
+  comment
+    Nova podoba nima temnih pasov: temna shema se izriše kot topel svetel pas.
+  endcomment
+  assign scheme = s.scheme
+  if settings.semen_design and scheme == 'dark'
+    assign scheme = 'cream'
+  endif
   assign checks = section.blocks | where: 'type', 'check'
   assign facts = section.blocks | where: 'type', 'fact'
   assign quotes = section.blocks | where: 'type', 'quote'
   assign text_w = 100 | minus: s.image_width
-  case s.scheme
+  case scheme
     when 'dark'
-      assign bg = '#2b2420'
+      assign bg = 'var(--s-dark, #2b2420)'
+    when 'tint'
+      assign bg = 'var(--s-tint, #edf0e3)'
     when 'cream'
-      assign bg = '#f7f3ea'
+      assign bg = 'var(--s-plate, #f7f3ea)'
     else
-      assign bg = '#ffffff'
+      assign bg = 'var(--s-bg, #ffffff)'
   endcase
   case s.ratio
     when 'portrait'
@@ -34,12 +43,13 @@
   endcase
 -%}
 <style>
-  .ssp-{{ sid }} { --ssp-accent: {{ s.accent }}; background: {{ bg }}; padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  .ssp-{{ sid }} { --ssp-accent: {{ s.accent }}; --ssp-accent-ink: {% if scheme == 'dark' %}{{ s.accent }}{% else %}{{ s.accent | color_darken: 22 }}{% endif %}; background: {{ bg }}; padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
   .ssp-{{ sid }} .ssp-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: center; }
-  .ssp-{{ sid }} .ssp-media { position: relative; overflow: hidden; aspect-ratio: {{ ratio }}; background: #e9e1d2; margin: 0; }
+  .ssp-{{ sid }} .ssp-media { position: relative; overflow: hidden; aspect-ratio: {{ ratio }}; background: var(--s-plate, #e9e1d2); margin: 0; }
+  .ssp-{{ sid }}.ssp--arch .ssp-media { border-radius: 999px 999px 0 0; }
   .ssp-{{ sid }} .ssp-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{ s.image_position }}; display: block; transform: scale(var(--ssp-zoom, 1)); transition: transform .9s cubic-bezier(.2,.6,.2,1); }
   .ssp-{{ sid }} .ssp-media:hover img { transform: scale(calc(var(--ssp-zoom, 1) + .03)); }
-  .ssp-{{ sid }} .ssp-media figcaption { position: absolute; left: 0; bottom: 0; z-index: 2; padding: 8px 12px; background: var(--ssp-accent); color: #ffffff; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+  .ssp-{{ sid }} .ssp-media figcaption { position: absolute; left: 0; bottom: 0; z-index: 2; padding: 8px 12px; background: var(--s-bg, var(--ssp-accent)); color: var(--s-ink, #ffffff); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
   .ssp-{{ sid }} .ssp-eyebrow { display: block; margin-bottom: 10px; }
   .ssp-{{ sid }} .ssp-title { margin: 0 0 20px; text-wrap: balance; }
   .ssp-{{ sid }} .ssp-text { color: rgba(34,34,34,.82); }
@@ -47,24 +57,24 @@
   .ssp-{{ sid }} .ssp-text p:last-child { margin-bottom: 0; }
   .ssp-{{ sid }} .ssp-checks { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 12px; }
   .ssp-{{ sid }} .ssp-checks li { display: flex; align-items: flex-start; gap: 12px; margin: 0; line-height: 1.6; }
-  .ssp-{{ sid }} .ssp-checks .semen-icon { flex: 0 0 auto; margin-top: 2px; color: var(--ssp-accent); }
+  .ssp-{{ sid }} .ssp-checks .semen-icon { flex: 0 0 auto; margin-top: 2px; color: var(--ssp-accent-ink); }
   .ssp-{{ sid }} .ssp-checks strong { color: var(--g-color-heading); font-weight: 600; }
   .ssp-{{ sid }} .ssp-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin: 28px 0 0; }
   .ssp-{{ sid }} .ssp-fact { margin: 0; padding: 14px 0; border-top: 1px solid rgba(34,34,34,.12); }
-  .ssp-{{ sid }} .ssp-fact dt { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ssp-accent); line-height: 1.5; }
-  .ssp-{{ sid }} .ssp-fact dd { margin: 4px 0 0; font-family: var(--g-font-1); font-size: 18px; line-height: 1.3; color: var(--g-color-heading); }
+  .ssp-{{ sid }} .ssp-fact dt { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ssp-accent-ink); line-height: 1.5; }
+  .ssp-{{ sid }} .ssp-fact dd { margin: 4px 0 0; font-family: var(--g-font-1); font-size: 19px; line-height: 1.3; color: var(--g-color-heading); }
   .ssp-{{ sid }} .ssp-quote { margin: 28px 0 0; padding: 2px 0 2px 22px; border: 0; border-left: 2px solid var(--ssp-accent); background: none; text-align: left; }
   .ssp-{{ sid }} .ssp-quote p { margin: 0; text-wrap: pretty; font-family: var(--g-font-1); font-size: 19px; line-height: 1.5; color: var(--g-color-heading); }
-  .ssp-{{ sid }} .ssp-quote cite { display: block; margin-top: 10px; font-style: normal; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ssp-accent); }
+  .ssp-{{ sid }} .ssp-quote cite { display: block; margin-top: 10px; font-style: normal; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ssp-accent-ink); }
   .ssp-{{ sid }} .ssp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 32px; margin-top: 34px; }
-  {%- if s.scheme == 'dark' -%}
-  .ssp-{{ sid }} { color: #cfc4b4; }
+  {%- if scheme == 'dark' -%}
+  .ssp-{{ sid }} { color: var(--s-on-dark-muted, #cfc4b4); }
   .ssp-{{ sid }} .ssp-title, .ssp-{{ sid }} .ssp-quote p, .ssp-{{ sid }} .ssp-fact dd, .ssp-{{ sid }} .ssp-checks strong { color: #ffffff; }
-  .ssp-{{ sid }} .ssp-eyebrow { color: var(--ssp-accent) !important; }
-  .ssp-{{ sid }} .ssp-text, .ssp-{{ sid }} .ssp-checks li { color: #cfc4b4; }
+  .ssp-{{ sid }} .ssp-eyebrow { color: var(--ssp-accent-ink) !important; }
+  .ssp-{{ sid }} .ssp-text, .ssp-{{ sid }} .ssp-checks li { color: var(--s-on-dark-muted, #cfc4b4); }
   .ssp-{{ sid }} .ssp-text a { color: #ffffff; }
   .ssp-{{ sid }} .ssp-fact { border-top-color: rgba(255,255,255,.12); }
-  .ssp-{{ sid }} .ssp-media { background: #3a312b; }
+  .ssp-{{ sid }} .ssp-media { background: var(--s-dark-2, #3a312b); }
   .ssp-{{ sid }} .ssp-actions .btn-underline { color: #ffffff !important; }
   .ssp-{{ sid }} .ssp-actions .btn-underline:before { background: var(--ssp-accent); }
   {%- endif -%}
@@ -77,7 +87,7 @@
   }
 </style>
 
-<section class="ssp-{{ sid }} ssp--{{ s.image_side }}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+<section class="ssp-{{ sid }} ssp--{{ s.image_side }}{% if s.shape == 'arch' %} ssp--arch{% endif %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
   <div class="{{ s.setwidth }}">
     <div class="ssp-grid">
       <figure class="ssp-media" data-aos="fade-up"{% if s.image.src contains '.png' %} style="--ssp-zoom: 1.03"{% endif %}>
@@ -96,7 +106,7 @@
 
       <div class="ssp-body" data-aos="fade-up" data-aos-delay="120">
         {%- if s.title_top != blank -%}<span class="subtop ssp-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
-        {%- if s.title != blank -%}<h2 class="h2 ssp-title">{{ s.title | escape }}</h2>{%- endif -%}
+        {%- if s.title != blank -%}<h2 class="h2 ssp-title">{% render 'semen-em', text: s.title %}</h2>{%- endif -%}
         {%- if s.text != blank -%}<div class="rte ssp-text">{{ s.text }}</div>{%- endif -%}
 
         {%- if checks.size > 0 -%}
@@ -142,13 +152,14 @@
   "tag": "section",
   "class": "section-semen-split",
   "settings": [
-    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "white", "options": [ { "value": "white", "label": "Bela" }, { "value": "cream", "label": "Kremna" }, { "value": "dark", "label": "Temna" } ] },
+    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "white", "options": [ { "value": "white", "label": "Slonokoščena (osnovna)" }, { "value": "cream", "label": "Pšenična (topla)" }, { "value": "dark", "label": "Gozdno zelena (temna)" } , { "value": "tint", "label": "Medena (svetel pas)" } ] },
     { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
     { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
     { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)", "info": "Npr. ponudba – nato povezava #ponudba skoči na to sekcijo." },
     { "type": "header", "content": "Fotografija" },
     { "type": "image_picker", "id": "image", "label": "Fotografija" },
     { "type": "select", "id": "image_side", "label": "Stran fotografije", "default": "left", "options": [ { "value": "left", "label": "Levo" }, { "value": "right", "label": "Desno" } ] },
+    { "type": "select", "id": "shape", "label": "Oblika fotografije", "default": "rect", "options": [ { "value": "rect", "label": "Pravokotnik" }, { "value": "arch", "label": "Obok" } ] },
     { "type": "select", "id": "ratio", "label": "Razmerje fotografije", "default": "portrait", "options": [ { "value": "portrait", "label": "Pokončno 4:5" }, { "value": "square", "label": "Kvadrat" }, { "value": "landscape", "label": "Ležeče 3:2" }, { "value": "original", "label": "Izvirno" } ] },
     { "type": "select", "id": "image_position", "label": "Izrez fotografije", "default": "center center", "options": [ { "value": "center top", "label": "Zgoraj" }, { "value": "center center", "label": "Sredina" }, { "value": "center bottom", "label": "Spodaj" }, { "value": "left center", "label": "Levo" }, { "value": "right center", "label": "Desno" } ] },
     { "type": "range", "id": "image_width", "label": "Širina fotografije", "min": 36, "max": 60, "step": 2, "unit": "%", "default": 50 },

@@ -485,11 +485,13 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
       .or-timeline__img:has(.or-timeline__photo) { height: 96px; min-width: 96px; width: 96px; left: 50%; margin-left: -48px; }
       .or-timeline__block:has(.or-timeline__photo) .or-timeline__content { margin-left: 0; }
     }
-    /* Čebelarstvo Šemen: sekcije na temnem ozadju (družina) – svetlo besedilo */
+    /* Čebelarstvo Šemen: sekcije na temnem ozadju (družina) – svetlo besedilo; z novo podobo je sekcija svetla */
+    {%- unless settings.semen_design -%}
     [id$="__druzina_semen"] h2, [id$="__druzina_semen"] h3, [id$="__druzina_semen"] .h2 { color: #ffffff !important; }
     [id$="__druzina_semen"] p, [id$="__druzina_semen"] .rte, [id$="__druzina_semen"] .txt-body { color: #cfc4b4; }
     [id$="__druzina_semen"] .subtop { color: #c99a5c !important; }
     [id$="__druzina_semen"] .btn-underline { color: #ffffff !important; border-bottom-color: #c99a5c !important; }
+    {%- endunless -%}
     /* Zemljevid: besedilo poravnano levo */
     .map-section__content, .map-section__content-wrapper { text-align: left !important; align-items: flex-start !important; }
     .map-section__content-wrapper .h2, .map-section__content-wrapper h2, .map-section__content-wrapper p { text-align: left; }
@@ -497,11 +499,11 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     .section-service .iconx8 svg, .customstyle .iconx8 svg, .service-1 .iconx8 svg, .service-2 .iconx8 svg { stroke-width: 1.15px !important; fill: none !important; }
     .service-1 .iconx8 svg *, .service-2 .iconx8 svg * { stroke-width: inherit; fill: none; vector-effect: non-scaling-stroke; }
     /* Čebelarstvo Šemen: sekcija Kje nas najdete – temna plošča z naslovom in naslovom, fotografija v ozadju */
-    .map-section .map-section__content { background-color: #2b2420 !important; color: #cfc4b4; padding: 48px 44px !important; text-align: left !important; }
-    .map-section .map-section__content h2, .map-section .map-section__content .h2, .map-section .map-section__content h3 { color: #ffffff; margin-bottom: 20px; }
-    .map-section .map-section__content p { color: #cfc4b4; margin: 0 0 12px; line-height: 1.7; }
-    .map-section .map-section__content p strong { color: #ffffff; font-weight: 600; display: block; margin-bottom: 4px; }
-    .map-section .map-section__content .btn, .map-section .map-section__content a.btn-theme, .map-section .map-section__content .map-section__link { background: #c99a5c; border-color: #c99a5c; color: #ffffff; margin-top: 12px; }
+    .map-section .map-section__content { background-color: var(--s-map-bg, #2b2420) !important; color: var(--s-map-text, #cfc4b4); padding: 48px 44px !important; text-align: left !important; }
+    .map-section .map-section__content h2, .map-section .map-section__content .h2, .map-section .map-section__content h3 { color: var(--s-map-title, #ffffff); margin-bottom: 20px; }
+    .map-section .map-section__content p { color: var(--s-map-text, #cfc4b4); margin: 0 0 12px; line-height: 1.7; }
+    .map-section .map-section__content p strong { color: var(--s-map-title, #ffffff); font-weight: 600; display: block; margin-bottom: 4px; }
+    .map-section .map-section__content .btn, .map-section .map-section__content a.btn-theme, .map-section .map-section__content .map-section__link { background: var(--s-map-btn, #c99a5c); border-color: var(--s-map-btn, #c99a5c); color: var(--s-map-btn-text, #ffffff); margin-top: 12px; }
     /* Mobilna glava: več prostora med ikonami */
     @media (max-width: 999px) {
     }
@@ -547,4 +549,9 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     @media only screen and (max-width: 749px) {
       .map-section .map-section__iframe { height: 360px; }
     }
+    /* Noga se vedno dotika dna zaslona, tudi na kratkih straneh: vsebina (main) zapolni prazen prostor */
+    body.body-theme { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
+    body.body-theme > .page-container { flex: 1 0 auto; display: flex; flex-direction: column; }
+    body.body-theme > .page-container > .main-content { flex: 1 0 auto; }
 </style>
+{%- render 'semen-design' -%}

@@ -8,6 +8,92 @@
     "theme_support_email": "oranthemes@gmail.com"
   },
   {
+    "name": "Šemen · Nova podoba",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Svetla, elegantna podoba trgovine: kremna osnova, topli pšenični in medeni pasovi, svetla noga, skoraj črni gumbi in zlata le kot okras. Temnih pasov ni: sekcije s temnim ozadjem se izrišejo svetlo. Pisave ostanejo tiste iz Typography. Ko podobo izklopite, se vrne prejšnji videz."
+      },
+      {
+        "type": "checkbox",
+        "id": "semen_design",
+        "label": "Uporabi novo podobo",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Ozadja"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_bg",
+        "label": "Ozadje strani (slonokoščena)",
+        "default": "#faf7f0"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_tint",
+        "label": "Svetel medeni pas",
+        "info": "Za en poudarjen pas na strani, na primer obisk čebelnjaka.",
+        "default": "#f6edd3"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_plate",
+        "label": "Topel pas in podlaga izdelkov (pšenična)",
+        "default": "#f3ebda"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_footer",
+        "label": "Noga",
+        "default": "#f3ebda"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_dark",
+        "label": "Temni drobni elementi (pečat, kolo leta)",
+        "default": "#2b2825"
+      },
+      {
+        "type": "header",
+        "content": "Besedilo in poudarki"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_ink",
+        "label": "Naslovi",
+        "default": "#252320"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_text",
+        "label": "Besedilo",
+        "default": "#3f3b35"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_muted",
+        "label": "Drobno besedilo",
+        "default": "#67625a"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_accent",
+        "label": "Gumbi",
+        "info": "Ob prehodu z miško se gumb obarva v okrasno zlato.",
+        "default": "#252320"
+      },
+      {
+        "type": "color",
+        "id": "semen_c_gold",
+        "label": "Okrasna zlata (črte, ikone)",
+        "info": "Drobne oznake nad naslovi se samodejno izpišejo v temnejši bronasti, da so dobro berljive.",
+        "default": "#c99a5c"
+      }
+    ]
+  },
+  {
     "name": "General settings",
     "settings": [
       {

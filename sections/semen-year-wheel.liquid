@@ -11,9 +11,11 @@
   assign months = section.blocks | where: 'type', 'month'
   assign forages = section.blocks | where: 'type', 'forage'
   if s.scheme == 'cream'
-    assign bg = '#f7f3ea'
+    assign bg = 'var(--s-plate, #f7f3ea)'
+  elsif s.scheme == 'tint'
+    assign bg = 'var(--s-tint, #edf0e3)'
   else
-    assign bg = '#ffffff'
+    assign bg = 'var(--s-bg, #ffffff)'
   endif
   assign tau = 6.2831853
   assign r_month = 262
@@ -24,11 +26,11 @@
   assign step_deg = 360.0 | divided_by: month_count
 -%}
 <style>
-  .yw-{{ sid }} { --yw-accent: {{ s.accent }}; display: block; position: relative; background: {{ bg }}; padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  .yw-{{ sid }} { --yw-accent: {{ s.accent }}; --yw-accent-ink: {% if false %}{{ s.accent }}{% else %}{{ s.accent | color_darken: 22 }}{% endif %}; display: block; position: relative; background: {{ bg }}; padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
   .yw-{{ sid }} .yw-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 36px; }
-  .yw-{{ sid }} .yw-eyebrow { display: block; color: var(--yw-accent) !important; }
+  .yw-{{ sid }} .yw-eyebrow { display: block; color: var(--yw-accent-ink) !important; }
   .yw-{{ sid }} .yw-title { margin: 6px 0 0; text-wrap: balance; }
-  .yw-{{ sid }} .yw-intro { margin: 0; max-width: 52ch; color: #5c6978; }
+  .yw-{{ sid }} .yw-intro { margin: 0; max-width: 52ch; color: var(--s-muted, #5c6978); }
   .yw-{{ sid }} .yw-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; align-items: center; }
 
   /* kolo */
@@ -37,19 +39,19 @@
   .yw-{{ sid }} .yw-seg { fill: none; stroke-width: 34; opacity: .28; cursor: pointer; pointer-events: stroke; transition: opacity .4s, stroke-width .4s; }
   .yw-{{ sid }} .yw-seg:hover { opacity: .55; }
   .yw-{{ sid }} .yw-seg.is-active { opacity: 1; stroke-width: 40; }
-  .yw-{{ sid }} .yw-label { font-family: var(--g-font-2); font-size: 12px; font-weight: 600; letter-spacing: .14em; fill: #2b2420; cursor: pointer; text-transform: uppercase; transition: fill .4s; }
+  .yw-{{ sid }} .yw-label { font-family: var(--g-font-2); font-size: 12px; font-weight: 600; letter-spacing: .14em; fill: var(--s-ink, #2b2420); cursor: pointer; text-transform: uppercase; transition: fill .4s; }
   .yw-{{ sid }} .yw-label.is-active { fill: #ffffff; }
   .yw-{{ sid }} .yw-track { fill: none; stroke: rgba(34,34,34,.07); stroke-width: 8; }
   .yw-{{ sid }} .yw-ring { fill: none; stroke-width: 8; stroke-linecap: butt; opacity: .3; transition: opacity .45s, stroke-width .45s; }
   .yw-{{ sid }} .yw-ring.is-on { opacity: 1; stroke-width: 10; }
   .yw-{{ sid }} .yw-needle { transform-box: view-box; transform-origin: 50% 50%; transition: transform 1s cubic-bezier(.3,1.4,.4,1); }
-  .yw-{{ sid }} .yw-needle line { stroke: #2b2420; stroke-width: 2; }
+  .yw-{{ sid }} .yw-needle line { stroke: var(--s-ink, #2b2420); stroke-width: 2; }
   .yw-{{ sid }} .yw-needle path { fill: var(--yw-accent); stroke: none; }
   .yw-{{ sid }} .yw-today { transform-box: view-box; transform-origin: 50% 50%; }
   .yw-{{ sid }} .yw-today circle { fill: var(--yw-accent); stroke: {{ bg }}; stroke-width: 3; }
-  .yw-{{ sid }} .yw-center { position: absolute; top: 50%; left: 50%; width: 34%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: #2b2420; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #ffffff; box-shadow: 0 18px 40px -18px rgba(43,36,32,.55); }
-  .yw-{{ sid }} .yw-center-num { font-family: var(--g-font-1); font-size: clamp(28px, 4.2vw, 52px); font-weight: 700; line-height: 1; color: var(--yw-accent); }
-  .yw-{{ sid }} .yw-center-name { margin-top: 6px; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: #cfc4b4; }
+  .yw-{{ sid }} .yw-center { position: absolute; top: 50%; left: 50%; width: 34%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: var(--s-panel-bg, var(--s-dark, #2b2420)); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #ffffff; box-shadow: 0 18px 40px -18px rgba(43,36,32,.55); }
+  .yw-{{ sid }} .yw-center-num { font-family: var(--g-font-1); font-size: clamp(28px, 4.2vw, 52px); font-weight: 700; line-height: 1; color: var(--s-panel-label, var(--yw-accent)); }
+  .yw-{{ sid }} .yw-center-name { margin-top: 6px; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--s-panel-faint, var(--s-on-dark-muted, #cfc4b4)); }
 
   /* plošča */
   .yw-{{ sid }} .yw-panel { position: relative; }
@@ -57,23 +59,23 @@
   .yw-{{ sid }} .yw-month.is-active { display: block; animation: yw-in-{{ sid }} .55s cubic-bezier(.2,.6,.2,1) both; }
   @keyframes yw-in-{{ sid }} { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
   .yw-{{ sid }} .yw-season { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--m-color); }
-  .yw-{{ sid }} .yw-month-name { margin: 12px 0 26px; font-size: clamp(40px, 5.6vw, 72px); line-height: 1; letter-spacing: -.01em; color: #2b2420; text-transform: none; }
+  .yw-{{ sid }} .yw-month-name { margin: 12px 0 26px; font-size: clamp(40px, 5.6vw, 72px); line-height: 1; letter-spacing: -.01em; color: var(--s-ink, #2b2420); text-transform: none; }
   .yw-{{ sid }} .yw-rows { margin: 0; padding: 0; list-style: none; }
   .yw-{{ sid }} .yw-row { display: grid; grid-template-columns: 34px 1fr; gap: 0 14px; padding: 18px 0; border-top: 1px solid rgba(34,34,34,.1); margin: 0; }
   .yw-{{ sid }} .yw-row .semen-icon { grid-row: span 2; color: var(--m-color); margin-top: 2px; }
-  .yw-{{ sid }} .yw-row-label { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #5c6978; }
-  .yw-{{ sid }} .yw-row-text { margin-top: 4px; font-size: 15px; line-height: 1.6; color: #2b2420; }
+  .yw-{{ sid }} .yw-row-label { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--s-muted, #5c6978); }
+  .yw-{{ sid }} .yw-row-text { margin-top: 4px; font-size: 15px; line-height: 1.6; color: var(--s-ink, #2b2420); }
   .yw-{{ sid }} .yw-honeys { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; min-height: 30px; }
-  .yw-{{ sid }} .yw-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 8px; border: 1px solid rgba(34,34,34,.12); font-size: 12px; color: #2b2420; background: #ffffff; }
+  .yw-{{ sid }} .yw-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 8px; border: 1px solid rgba(34,34,34,.12); font-size: 12px; color: var(--s-ink, #2b2420); background: var(--s-card, #ffffff); }
   .yw-{{ sid }} .yw-chip i { width: 12px; height: 14px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: var(--chip); }
   .yw-{{ sid }} .yw-chip[hidden] { display: none; }
-  .yw-{{ sid }} .yw-rest { font-size: 13px; color: #5c6978; }
+  .yw-{{ sid }} .yw-rest { font-size: 13px; color: var(--s-muted, #5c6978); }
   .yw-{{ sid }} .yw-rest[hidden] { display: none; }
   .yw-{{ sid }} .yw-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(34,34,34,.1); }
-  .yw-{{ sid }} .yw-nav button { display: inline-flex; align-items: center; gap: 10px; padding: 0; border: 0; background: none; cursor: pointer; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #2b2420; transition: color .3s; }
-  .yw-{{ sid }} .yw-nav button:hover { color: var(--yw-accent); }
+  .yw-{{ sid }} .yw-nav button { display: inline-flex; align-items: center; gap: 10px; padding: 0; border: 0; background: none; cursor: pointer; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--s-ink, #2b2420); transition: color .3s; }
+  .yw-{{ sid }} .yw-nav button:hover { color: var(--yw-accent-ink); }
   .yw-{{ sid }} .yw-nav button span { font-size: 16px; letter-spacing: 0; }
-  .yw-{{ sid }} .yw-note { margin: 18px 0 0; font-size: 12px; color: #5c6978; }
+  .yw-{{ sid }} .yw-note { margin: 18px 0 0; font-size: 12px; color: var(--s-muted, #5c6978); }
   @media (max-width: 749px) { .yw-{{ sid }} .yw-label { font-size: 17px; letter-spacing: .08em; } }
   @media (prefers-reduced-motion: reduce) { .yw-{{ sid }} .yw-needle { transition: none; } .yw-{{ sid }} .yw-month.is-active { animation: none; } }
   @media (min-width: 990px) {
@@ -90,7 +92,7 @@
       <div class="yw-head" data-aos="fade-up">
         <div>
           {%- if s.title_top != blank -%}<span class="subtop yw-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
-          {%- if s.title != blank -%}<h2 class="h2 yw-title">{{ s.title | escape }}</h2>{%- endif -%}
+          {%- if s.title != blank -%}<h2 class="h2 yw-title">{% render 'semen-em', text: s.title %}</h2>{%- endif -%}
         </div>
         {%- if s.des != blank -%}<p class="yw-intro">{{ s.des | escape }}</p>{%- endif -%}
       </div>
@@ -230,7 +232,7 @@
   "tag": "section",
   "class": "section-semen-year",
   "settings": [
-    { "type": "select", "id": "scheme", "label": "Ozadje", "default": "white", "options": [ { "value": "white", "label": "Belo" }, { "value": "cream", "label": "Kremno" } ] },
+    { "type": "select", "id": "scheme", "label": "Ozadje", "default": "white", "options": [ { "value": "white", "label": "Slonokoščeno (osnovno)" }, { "value": "cream", "label": "Pšenično (toplo)" } , { "value": "tint", "label": "Medena (svetel pas)" } ] },
     { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
     { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
     { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)" },

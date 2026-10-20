@@ -1,0 +1,16 @@
+{%- comment -%}
+  Naslov z enim ležečim poudarkom: besedilo med zvezdicama se izpiše ležeče.
+  "Doživite *mir* ob čebelah" -> Doživite <em>mir</em> ob čebelah
+  Uporaba: {% render 'semen-em', text: block.settings.title %}
+{%- endcomment -%}
+{%- liquid
+  assign parts = text | escape | split: '*'
+  for part in parts
+    assign odd = forloop.index0 | modulo: 2
+    if odd == 1
+      echo '<em>' | append: part | append: '</em>'
+    else
+      echo part
+    endif
+  endfor
+-%}

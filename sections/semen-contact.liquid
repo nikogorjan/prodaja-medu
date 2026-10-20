@@ -10,9 +10,17 @@
   assign form_id = 'ContactForm-' | append: sid
   assign topics = s.topics | newline_to_br | split: '<br />'
   if s.scheme == 'cream'
-    assign bg = '#f7f3ea'
+    assign bg = 'var(--s-plate, #f7f3ea)'
+  elsif s.scheme == 'tint'
+    assign bg = 'var(--s-tint, #edf0e3)'
   else
-    assign bg = '#ffffff'
+    assign bg = 'var(--s-bg, #ffffff)'
+  endif
+  comment
+    Barva po meri (nastavitev "Barva ozadja") prepiše samo ozadje sekcije; plošča in obrazec sledita izbiri zgoraj.
+  endcomment
+  if s.bg_custom != blank
+    assign bg = s.bg_custom
   endif
 -%}
 <style>
@@ -20,41 +28,46 @@
   .sct-{{ sid }} .sct-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 36px; }
   .sct-{{ sid }} .sct-eyebrow { display: block; }
   .sct-{{ sid }} .sct-title { margin: 6px 0 0; text-wrap: balance; }
-  .sct-{{ sid }} .sct-intro { margin: 0; max-width: 52ch; color: #5c6978; }
+  .sct-{{ sid }} .sct-intro { margin: 0; max-width: 52ch; color: var(--s-muted, #5c6978); }
   .sct-{{ sid }} .sct-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
-  .sct-{{ sid }} .sct-panel { position: relative; overflow: hidden; background: #2b2420; color: #cfc4b4; padding: 36px 24px; }
+  .sct-{{ sid }} .sct-panel { position: relative; overflow: hidden; background: var(--s-panel-bg, var(--s-dark, #2b2420)); color: var(--s-panel-text, var(--s-on-dark-muted, #cfc4b4)); padding: 36px 24px; }
   .sct-{{ sid }} .sct-panel > * { position: relative; z-index: 1; }
+  {%- if s.scheme == 'cream' or s.scheme == 'tint' %}
+  /* na barvnem pasu sta plošča s podatki in obrazec ena kremna kartica */
+  .sct-{{ sid }} .sct-panel { --s-panel-bg: var(--s-card, var(--s-dark, #2b2420)); }
+  .sct-{{ sid }} .sct-form-wrap { border-color: transparent; }
+  {%- endif %}
   .sct-{{ sid }} .sct-panel::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; opacity: .14; pointer-events: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><path d='M28 1l27 15.5v31L28 63 1 47.5v-31L28 1zm0 48l27 15.5v31L28 97 1 80.5v-31L28 49z' fill='none' stroke='{{ s.accent | replace: '#', '%23' }}' stroke-width='1'/></svg>"); background-size: 56px 97px; -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 100%); mask-image: linear-gradient(to top, #000 0%, transparent 100%); }
-  .sct-{{ sid }} .sct-panel-title { margin: 0 0 12px; color: #ffffff; font-size: 24px; line-height: 1.25; }
+  .sct-{{ sid }} .sct-panel-title { margin: 0 0 12px; color: var(--s-panel-title, #ffffff); font-size: 24px; line-height: 1.25; }
   .sct-{{ sid }} .sct-panel-text { font-size: 14px; line-height: 1.7; }
   .sct-{{ sid }} .sct-panel-text p { margin: 0 0 10px; color: inherit; font-size: inherit; line-height: inherit; }
-  .sct-{{ sid }} .sct-panel-text a { color: #ffffff; }
+  .sct-{{ sid }} .sct-panel-text a { color: var(--s-panel-title, #ffffff); }
   .sct-{{ sid }} .sct-items { list-style: none; margin: 28px 0 0; padding: 0; }
-  .sct-{{ sid }} .sct-item { display: flex; gap: 16px; align-items: flex-start; margin: 0; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.1); }
-  .sct-{{ sid }} .sct-item:last-child { border-bottom: 1px solid rgba(255,255,255,.1); }
+  .sct-{{ sid }} .sct-item { display: flex; gap: 16px; align-items: flex-start; margin: 0; padding: 18px 0; border-top: 1px solid var(--s-panel-rule, rgba(255,255,255,.1)); }
+  .sct-{{ sid }} .sct-item:last-child { border-bottom: 1px solid var(--s-panel-rule, rgba(255,255,255,.1)); }
   .sct-{{ sid }} .sct-item .semen-icon { flex: 0 0 auto; color: var(--sct-accent); margin-top: 2px; }
-  .sct-{{ sid }} .sct-item-label { display: block; font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--sct-accent); line-height: 1.5; }
-  .sct-{{ sid }} .sct-item-value { display: block; margin-top: 2px; font-family: var(--g-font-1); font-size: 17px; line-height: 1.4; color: #ffffff; text-decoration: none; word-break: break-word; }
+  .sct-{{ sid }} .sct-item-label { display: block; font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--s-panel-label, var(--sct-accent)); line-height: 1.5; }
+  .sct-{{ sid }} .sct-item-value { display: block; margin-top: 2px; font-family: var(--g-font-1); font-size: 17px; line-height: 1.4; color: var(--s-panel-title, #ffffff); text-decoration: none; word-break: break-word; }
   .sct-{{ sid }} a.sct-item-value { transition: color .3s; }
-  .sct-{{ sid }} a.sct-item-value:hover { color: var(--sct-accent); }
-  .sct-{{ sid }} .sct-item-note { display: block; margin-top: 2px; font-size: 13px; line-height: 1.55; color: #a99c8b; }
-  .sct-{{ sid }} .sct-form-wrap { background: #ffffff; border: 1px solid #ece4d4; padding: 32px 22px 36px; }
+  .sct-{{ sid }} a.sct-item-value:hover { color: var(--s-panel-label, var(--sct-accent)); }
+  .sct-{{ sid }} .sct-item-note { display: block; margin-top: 2px; font-size: 13px; line-height: 1.55; color: var(--s-panel-faint, var(--s-on-dark-muted, #a99c8b)); }
+  .sct-{{ sid }} .sct-form-wrap { background: var(--s-card, #ffffff); border: 1px solid var(--s-rule-solid, #ece4d4); padding: 32px 22px 36px; }
   .sct-{{ sid }} .sct-form-title { margin: 0 0 8px; font-size: 24px; line-height: 1.25; }
-  .sct-{{ sid }} .sct-form-intro { margin: 0 0 24px; color: #5c6978; font-size: 14px; line-height: 1.7; }
+  .sct-{{ sid }} .sct-form-intro { margin: 0 0 24px; color: var(--s-muted, #5c6978); font-size: 14px; line-height: 1.7; }
   .sct-{{ sid }} .sct-fields { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .sct-{{ sid }} .sct-field { display: flex; flex-direction: column; gap: 7px; margin: 0; }
   .sct-{{ sid }} .sct-field label { margin: 0; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--g-color-heading); }
   .sct-{{ sid }} .sct-field label span { color: var(--sct-accent); }
-  .sct-{{ sid }} .sct-field input, .sct-{{ sid }} .sct-field select, .sct-{{ sid }} .sct-field textarea { width: 100%; height: auto; min-height: 50px; margin: 0; padding: 13px 16px; border: 1px solid #ddd3c2; border-radius: 0; background: #fdfbf7; color: var(--g-color-heading); font-family: var(--g-font-2); font-size: 15px; line-height: 1.5; box-shadow: none; transition: border-color .25s, background-color .25s; -webkit-appearance: none; appearance: none; }
+  .sct-{{ sid }} .sct-field input, .sct-{{ sid }} .sct-field select, .sct-{{ sid }} .sct-field textarea { width: 100%; height: auto; min-height: 50px; margin: 0; padding: 13px 16px; border: 1px solid var(--s-rule-solid, #ddd3c2); border-radius: 0; background: #fdfbf7; color: var(--g-color-heading); font-family: var(--g-font-2); font-size: 15px; line-height: 1.5; box-shadow: none; transition: border-color .25s, background-color .25s; -webkit-appearance: none; appearance: none; }
   .sct-{{ sid }} .sct-field select { padding-right: 44px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5l5 5 5-5' fill='none' stroke='%23222' stroke-width='1.2'/></svg>"); background-repeat: no-repeat; background-position: right 16px center; }
   .sct-{{ sid }} .sct-field textarea { min-height: 150px; resize: vertical; }
-  .sct-{{ sid }} .sct-field input:focus, .sct-{{ sid }} .sct-field select:focus, .sct-{{ sid }} .sct-field textarea:focus { outline: none; border-color: var(--sct-accent); background-color: #ffffff; }
+  .sct-{{ sid }} .sct-field input:focus, .sct-{{ sid }} .sct-field select:focus, .sct-{{ sid }} .sct-field textarea:focus { outline: none; border-color: var(--sct-accent); background-color: var(--s-card, #ffffff); }
   .sct-{{ sid }} .sct-field input[aria-invalid="true"] { border-color: #bb5237; }
-  .sct-{{ sid }} .sct-consent { margin: 2px 0 0; font-size: 12px; line-height: 1.6; color: #5c6978; }
+  .sct-{{ sid }} .sct-consent { margin: 2px 0 0; font-size: 12px; line-height: 1.6; color: var(--s-muted, #5c6978); }
   .sct-{{ sid }} .sct-consent a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
   .sct-{{ sid }} .sct-submit { margin-top: 6px; }
   .sct-{{ sid }} .sct-submit .btn { width: 100%; }
-  .sct-{{ sid }} .sct-status { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 22px; padding: 16px 18px; border-left: 2px solid var(--sct-accent); background: #f7f3ea; color: var(--g-color-heading); font-size: 14px; line-height: 1.6; }
+  .sct-{{ sid }} .sct-status { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 22px; padding: 16px 18px; border-left: 2px solid var(--sct-accent); background: var(--s-plate, #f7f3ea); color: var(--g-color-heading); font-size: 14px; line-height: 1.6; }
   .sct-{{ sid }} .sct-status .semen-icon { flex: 0 0 auto; color: var(--sct-accent); }
   .sct-{{ sid }} .sct-status--error { border-left-color: #bb5237; }
   .sct-{{ sid }} .sct-status ul { margin: 6px 0 0; padding-left: 18px; }
@@ -81,7 +94,7 @@
       <div class="sct-head" data-aos="fade-up">
         <div>
           {%- if s.title_top != blank -%}<span class="subtop sct-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
-          {%- if s.title != blank -%}<h2 class="h2 sct-title">{{ s.title | escape }}</h2>{%- endif -%}
+          {%- if s.title != blank -%}<h2 class="h2 sct-title">{% render 'semen-em', text: s.title %}</h2>{%- endif -%}
         </div>
         {%- if s.des != blank -%}<p class="sct-intro">{{ s.des | escape }}</p>{%- endif -%}
       </div>
@@ -233,7 +246,7 @@
   "tag": "section",
   "class": "section-semen-contact",
   "settings": [
-    { "type": "select", "id": "scheme", "label": "Ozadje sekcije", "default": "cream", "options": [ { "value": "white", "label": "Belo" }, { "value": "cream", "label": "Kremno" } ] },
+    { "type": "select", "id": "scheme", "label": "Ozadje sekcije", "default": "cream", "options": [ { "value": "white", "label": "Slonokoščeno (osnovno)" }, { "value": "cream", "label": "Pšenično (toplo)" } , { "value": "tint", "label": "Medena (svetel pas)" } ] },
     { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
     { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
     { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)", "info": "Npr. povprasevanje – nato povezava #povprasevanje skoči na to sekcijo." },

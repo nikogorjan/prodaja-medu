@@ -7,23 +7,32 @@
 {%- liquid
   assign sid = section.id
   assign s = section.settings
+  comment
+    Nova podoba nima temnih pasov: temna shema se izriše kot topel svetel pas.
+  endcomment
+  assign scheme = s.scheme
+  if settings.semen_design and scheme == 'dark'
+    assign scheme = 'cream'
+  endif
   assign seasons = section.blocks | where: 'type', 'season'
   assign forages = section.blocks | where: 'type', 'forage'
   assign activity = s.activity | split: ','
   assign wave = '0.55,0.95,0.7,1,0.62,0.86' | split: ','
   assign months = 'jan,feb,mar,apr,maj,jun,jul,avg,sep,okt,nov,dec' | split: ','
-  if s.scheme == 'dark'
-    assign bg = '#2b2420'
+  if scheme == 'dark'
+    assign bg = 'var(--s-dark, #2b2420)'
+  elsif scheme == 'tint'
+    assign bg = 'var(--s-tint, #edf0e3)'
   else
-    assign bg = '#f7f3ea'
+    assign bg = 'var(--s-plate, #f7f3ea)'
   endif
 -%}
 <style>
-  .ss-{{ sid }} { --ss-accent: {{ s.accent }}; --ss-line: {% if s.scheme == 'dark' %}rgba(255,255,255,.1){% else %}rgba(34,34,34,.1){% endif %}; --ss-muted: {% if s.scheme == 'dark' %}#a99c8b{% else %}#5c6978{% endif %}; --ss-text: {% if s.scheme == 'dark' %}#cfc4b4{% else %}#4a4540{% endif %}; --ss-strong: {% if s.scheme == 'dark' %}#ffffff{% else %}#222222{% endif %}; display: block; position: relative; overflow: hidden; background: {{ bg }}; color: var(--ss-text); padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
+  .ss-{{ sid }} { --ss-accent: {{ s.accent }}; --ss-accent-ink: {% if scheme == 'dark' %}{{ s.accent }}{% else %}{{ s.accent | color_darken: 22 }}{% endif %}; --ss-line: {% if scheme == 'dark' %}rgba(255,255,255,.1){% else %}rgba(34,34,34,.1){% endif %}; --ss-muted: {% if scheme == 'dark' %}var(--s-on-dark-muted, #a99c8b){% else %}var(--s-muted, #5c6978){% endif %}; --ss-text: {% if scheme == 'dark' %}var(--s-on-dark-muted, #cfc4b4){% else %}var(--s-text, #4a4540){% endif %}; --ss-strong: {% if scheme == 'dark' %}#ffffff{% else %}var(--s-ink, #222222){% endif %}; display: block; position: relative; overflow: hidden; background: {{ bg }}; color: var(--ss-text); padding: {{ s.padding_top | times: 0.55 | round }}px 0 {{ s.padding_bottom | times: 0.55 | round }}px; scroll-margin-top: 90px; }
   .ss-{{ sid }} .ss-hex { position: absolute; inset: 0; pointer-events: none; opacity: .06; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><path d='M28 1l27 15.5v31L28 63 1 47.5v-31L28 1zm0 48l27 15.5v31L28 97 1 80.5v-31L28 49z' fill='none' stroke='{{ s.accent | replace: '#', '%23' }}' stroke-width='1'/></svg>"); background-size: 56px 97px; -webkit-mask-image: linear-gradient(180deg, #000, transparent 70%); mask-image: linear-gradient(180deg, #000, transparent 70%); }
   .ss-{{ sid }} .container, .ss-{{ sid }} .container-fluid { position: relative; }
   .ss-{{ sid }} .ss-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 36px; }
-  .ss-{{ sid }} .ss-eyebrow { display: block; color: var(--ss-accent) !important; }
+  .ss-{{ sid }} .ss-eyebrow { display: block; color: var(--ss-accent-ink) !important; }
   .ss-{{ sid }} .ss-title { margin: 6px 0 0; color: var(--ss-strong); text-wrap: balance; }
   .ss-{{ sid }} .ss-intro { margin: 0; max-width: 52ch; color: var(--ss-muted); }
 
@@ -37,18 +46,18 @@
   .ss-{{ sid }} .ss-tab:focus-visible { outline: 1px dashed var(--ss-accent); outline-offset: 4px; }
   .ss-{{ sid }} .ss-tab-top { display: flex; align-items: center; gap: 10px; }
   .ss-{{ sid }} .ss-tab .semen-icon { color: var(--tab-color); }
-  .ss-{{ sid }} .ss-tab-name { font-family: var(--g-font-1); font-size: 19px; line-height: 1.2; }
+  .ss-{{ sid }} .ss-tab-name { font-family: var(--g-font-1); font-size: 23px; line-height: 1.2; }
   .ss-{{ sid }} .ss-tab-months { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; }
   .ss-{{ sid }} .ss-now { display: inline-block; margin-left: 6px; padding: 2px 6px; background: var(--ss-accent); color: #fff; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; vertical-align: middle; }
 
   /* graf */
   .ss-{{ sid }} .ss-chart-wrap { margin-top: 28px; overflow-x: auto; scrollbar-width: thin; }
-  .ss-{{ sid }} .ss-chart { position: relative; min-width: 700px; display: grid; grid-template-columns: 156px 1fr; row-gap: 8px; padding: 26px 24px 22px; background: {% if s.scheme == 'dark' %}rgba(255,255,255,.025){% else %}#ffffff{% endif %}; border: 1px solid var(--ss-line); }
+  .ss-{{ sid }} .ss-chart { position: relative; min-width: 700px; display: grid; grid-template-columns: 156px 1fr; row-gap: 8px; padding: 26px 24px 22px; background: {% if scheme == 'dark' %}rgba(255,255,255,.025){% else %}var(--s-card, #ffffff){% endif %}; border: 1px solid var(--ss-line); }
   .ss-{{ sid }} .ss-row-label { align-self: center; padding-right: 16px; font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--ss-muted); line-height: 1.3; }
   .ss-{{ sid }} .ss-track { position: relative; }
   .ss-{{ sid }} .ss-tint { position: absolute; top: 0; bottom: 0; background: var(--tint); opacity: 0; transition: opacity .5s; pointer-events: none; }
   .ss-{{ sid }} .ss-wave { position: relative; height: 110px; display: flex; align-items: center; gap: 2px; }
-  .ss-{{ sid }} .ss-bar { flex: 1 1 0; min-width: 1px; height: var(--h); background: {% if s.scheme == 'dark' %}rgba(255,255,255,.15){% else %}rgba(34,34,34,.13){% endif %}; border-radius: 0; transition: background-color .5s, transform .5s; transform-origin: center; }
+  .ss-{{ sid }} .ss-bar { flex: 1 1 0; min-width: 1px; height: var(--h); background: {% if scheme == 'dark' %}rgba(255,255,255,.15){% else %}rgba(34,34,34,.13){% endif %}; border-radius: 0; transition: background-color .5s, transform .5s; transform-origin: center; }
   .ss-{{ sid }} .ss-axis { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); border-top: 1px solid var(--ss-line); padding-top: 8px; }
   .ss-{{ sid }} .ss-axis span { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ss-muted); text-align: center; transition: color .4s; }
   .ss-{{ sid }} .ss-band-track { height: 22px; background-image: linear-gradient(90deg, var(--ss-line) 1px, transparent 1px); background-size: calc(100% / 12) 100%; }
@@ -56,7 +65,7 @@
   .ss-{{ sid }} .ss-band:hover { opacity: 1; transform: scaleY(1.35); }
   .ss-{{ sid }} .ss-band-honey { align-self: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--ss-text); white-space: nowrap; }
   .ss-{{ sid }} .ss-today { position: absolute; top: 14px; bottom: 14px; width: 0; border-left: 1px dashed var(--ss-accent); z-index: 3; pointer-events: none; }
-  .ss-{{ sid }} .ss-today span { position: absolute; top: -2px; left: 6px; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ss-accent); white-space: nowrap; }
+  .ss-{{ sid }} .ss-today span { position: absolute; top: -2px; left: 6px; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ss-accent-ink); white-space: nowrap; }
   .ss-{{ sid }} .ss-note { margin: 12px 0 0; font-size: 12px; color: var(--ss-muted); }
 
   /* podrobnosti letnega časa */
@@ -92,7 +101,7 @@
     .ss-{{ sid }} .ss-tab-name { font-size: 17px; }
     .ss-{{ sid }} .ss-chart { grid-template-columns: 112px 1fr; padding: 22px 16px 18px; }
     .ss-{{ sid }} .ss-band-honey { font-size: 12px; white-space: normal; }
-    .ss-{{ sid }} .ss-row-label { position: sticky; left: -16px; z-index: 4; margin-left: -16px; padding-left: 16px; background: {% if s.scheme == 'dark' %}#2f2824{% else %}#ffffff{% endif %}; box-shadow: 8px 0 10px -6px rgba(0,0,0,.35); }
+    .ss-{{ sid }} .ss-row-label { position: sticky; left: -16px; z-index: 4; margin-left: -16px; padding-left: 16px; background: {% if scheme == 'dark' %}var(--s-dark-2, #2f2824){% else %}var(--s-card, #ffffff){% endif %}; box-shadow: 8px 0 10px -6px rgba(0,0,0,.35); }
   }
   @media (min-width: 990px) {
     .ss-{{ sid }} { padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
@@ -109,7 +118,7 @@
       <div class="ss-head" data-aos="fade-up">
         <div>
           {%- if s.title_top != blank -%}<span class="subtop ss-eyebrow">{{ s.title_top | escape }}</span>{%- endif -%}
-          {%- if s.title != blank -%}<h2 class="h2 ss-title">{{ s.title | escape }}</h2>{%- endif -%}
+          {%- if s.title != blank -%}<h2 class="h2 ss-title">{% render 'semen-em', text: s.title %}</h2>{%- endif -%}
         </div>
         {%- if s.des != blank -%}<p class="ss-intro">{{ s.des | escape }}</p>{%- endif -%}
       </div>
@@ -326,7 +335,7 @@
   "tag": "section",
   "class": "section-semen-seasons",
   "settings": [
-    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "dark", "options": [ { "value": "dark", "label": "Temna" }, { "value": "cream", "label": "Kremna" } ] },
+    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "dark", "options": [ { "value": "dark", "label": "Gozdno zelena (temna)" }, { "value": "cream", "label": "Pšenična (topla)" } , { "value": "tint", "label": "Medena (svetel pas)" } ] },
     { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
     { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
     { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)" },
