@@ -999,45 +999,45 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
 {%- endif -%}
 {% schema %}
 {
-  "name": "Slideshow 1",
+  "name": "Drsnik slik 1",
   "class": "index-section index-section--slideshow",
   "max_blocks": 8,
   "settings": [
     {
       "type": "checkbox",
       "id": "enable_slideshow",
-      "label": "Enable Slideshow",
+      "label": "Vklopi drsnik",
       "default": true
     },
     {
       "type": "select",
       "id": "setwidthout",
-      "label": "Width Slideshow",
+      "label": "Širina drsnika",
       "default": "full",
       "options": [
         {
           "value": "container",
-          "label": "Box"
+          "label": "Okvir"
         },
         {
           "value": "container-fluid",
-          "label": "Container Fluid"
+          "label": "Čez celo širino"
         },
         {
           "value": "full",
-          "label": "Full"
+          "label": "Polna širina"
         }
       ]
     },
     {
       "type": "select",
       "id": "slideshow_height_adapt",
-      "label": "Desktop Height",
+      "label": "Višina na računalniku",
       "default": "750",
       "options": [
         {
           "value": "adapt",
-          "label": "Adapt to first image"
+          "label": "Prilagodi prvi sliki"
         },
         {
           "value": "450",
@@ -1057,23 +1057,23 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
         },
         {
           "value": "full",
-          "label": "Full Screen"
+          "label": "Čez cel zaslon"
         },
         {
           "value": "full-header",
-          "label": "Full Screen Header Transparent"
+          "label": "Čez cel zaslon, prosojna glava"
         }
       ]
     },
     {
       "type": "select",
       "id": "slideshow_height_mobile",
-      "label": "Mobile Height",
+      "label": "Višina na telefonu",
       "default": "500",
       "options": [
         {
           "value": "adapt",
-          "label": "Adapt to first image"
+          "label": "Prilagodi prvi sliki"
         },
         {
           "value": "250",
@@ -1093,43 +1093,43 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
         },
         {
           "value": "full",
-          "label": "Full Screen"
+          "label": "Čez cel zaslon"
         }
       ]
     },
     {
       "type": "select",
       "id": "setwidth",
-      "label": "Width Inner Slideshow",
+      "label": "Notranja širina drsnika",
       "default": "container",
       "options": [
         {
           "value": "container",
-          "label": "Box"
+          "label": "Okvir"
         },
         {
           "value": "container-fluid",
-          "label": "Container Fluid"
+          "label": "Čez celo širino"
         }
       ]
     },
     {
       "type": "checkbox",
       "id": "slideshow_mobile",
-      "label": "Show text look like Desktop",
-      "info": "Mobile",
+      "label": "Besedilo na telefonu kot na računalniku",
+      "info": "Telefon",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "autorotate",
-      "label": "Auto-rotate slides",
+      "label": "Samodejno menjavanje",
       "default": false
     },
     {
       "type": "range",
       "id": "autorotate_speed",
-      "label": "Change slides every",
+      "label": "Menjava vsakih",
       "max": 9,
       "min": 3,
       "step": 2,
@@ -1139,20 +1139,20 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
     {
       "type": "select",
       "id": "anim_slideshow",
-      "label": "Transition",
+      "label": "Prehod",
       "default": "fade",
       "options": [
         {
           "value": "fade",
-          "label": "Fade"
+          "label": "Pojav"
         },
         {
           "value": "zoom",
-          "label": "Zoom"
+          "label": "Povečava"
         },
         {
           "value": "slide-fade",
-          "label": "Slide & Fade"
+          "label": "Zdrs in pojav"
         },
         {
           "value": "slide",
@@ -1162,30 +1162,30 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
     },
     {
       "type": "header",
-      "content": "Arrow"
+      "content": "Puščica"
     },
     {
       "type": "checkbox",
       "id": "e_arrow",
-      "label": "Enable Arrow",
+      "label": "Pokaži puščice",
       "default": false
     },
     {
       "type": "color",
       "id": "color_arrow",
-      "label": "Color Arrow",
+      "label": "Barva puščic",
       "default": "#000"
     },
     {
       "type": "color",
       "id": "bg_arrow",
-      "label": "Background Arrow",
+      "label": "Ozadje puščic",
       "default": "#fff"
     },
     {
       "type": "range",
       "id": "opacity_arrow",
-      "label": "Opacity Background Arrow",
+      "label": "Neprosojnost ozadja puščic",
       "max": 1,
       "min": 0,
       "step": 0.1,
@@ -1194,52 +1194,52 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
     },
     {
       "type": "header",
-      "content": "Dot"
+      "content": "Pika"
     },
     {
       "type": "checkbox",
       "id": "e_dot",
-      "label": "Enable Dot Nav",
+      "label": "Pokaži pike",
       "default": true
     },
     {
       "type": "select",
       "id": "slide_dot",
-      "label": "Style Dot",
+      "label": "Slog pik",
       "default": "square",
       "options": [
         {
           "value": "square",
-          "label": "Square"
+          "label": "Kvadrat"
         },
         {
           "value": "circle",
-          "label": "Circle"
+          "label": "Krog"
         }
       ]
     },
     {
       "type": "color",
       "id": "color_dot_nav",
-      "label": "Color Dot",
+      "label": "Barva pik",
       "default": "#000"
     },
     {
       "type": "color",
       "id": "color_dot_active",
-      "label": "Color Dot Active",
+      "label": "Barva aktivne pike",
       "default": "#C99A5C"
     }
   ],
   "blocks": [
     {
       "type": "image",
-      "name": "Image slide",
+      "name": "Slika drsnika",
       "settings": [
         {
           "type": "checkbox",
           "id": "enable_video",
-          "label": "Enable Video",
+          "label": "Pokaži video",
           "default": false
         },
         {
@@ -1250,58 +1250,58 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image 1"
+          "label": "Slika 1"
         },
         {
           "type": "image_picker",
           "id": "image2",
-          "label": "Image 2"
+          "label": "Slika 2"
         },
         {
           "type": "image_picker",
           "id": "image_mobile",
-          "label": "Image Mobile"
+          "label": "Slika za telefon"
         },
         {
           "type": "select",
           "id": "alignment",
-          "label": "Image position",
+          "label": "Položaj slike",
           "default": "center center",
           "options": [
             {
-              "label": "Top left",
+              "label": "Zgoraj levo",
               "value": "left top"
             },
             {
-              "label": "Top center",
+              "label": "Zgoraj na sredini",
               "value": "center top"
             },
             {
-              "label": "Top right",
+              "label": "Zgoraj desno",
               "value": "right top"
             },
             {
-              "label": "Middle left",
+              "label": "Na sredini levo",
               "value": "left center"
             },
             {
-              "label": "Middle center",
+              "label": "Na sredini",
               "value": "center center"
             },
             {
-              "label": "Middle right",
+              "label": "Na sredini desno",
               "value": "right center"
             },
             {
-              "label": "Bottom left",
+              "label": "Spodaj levo",
               "value": "left bottom"
             },
             {
-              "label": "Bottom center",
+              "label": "Spodaj na sredini",
               "value": "center bottom"
             },
             {
-              "label": "Bottom right",
+              "label": "Spodaj desno",
               "value": "right bottom"
             }
           ]
@@ -1309,43 +1309,43 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
         {
           "type": "select",
           "id": "text_alignment",
-          "label": "Text alignment",
+          "label": "Poravnava besedila",
           "default": "center center",
           "options": [
             {
-              "label": "Top left",
+              "label": "Zgoraj levo",
               "value": "left top"
             },
             {
-              "label": "Top center",
+              "label": "Zgoraj na sredini",
               "value": "center top"
             },
             {
-              "label": "Top right",
+              "label": "Zgoraj desno",
               "value": "right top"
             },
             {
-              "label": "Middle left",
+              "label": "Na sredini levo",
               "value": "left center"
             },
             {
-              "label": "Middle center",
+              "label": "Na sredini",
               "value": "center center"
             },
             {
-              "label": "Middle right",
+              "label": "Na sredini desno",
               "value": "right center"
             },
             {
-              "label": "Bottom left",
+              "label": "Spodaj levo",
               "value": "left bottom"
             },
             {
-              "label": "Bottom center",
+              "label": "Spodaj na sredini",
               "value": "center bottom"
             },
             {
-              "label": "Bottom right",
+              "label": "Spodaj desno",
               "value": "right bottom"
             }
           ]
@@ -1353,31 +1353,31 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
         {
           "type": "color",
           "id": "bgwrap",
-          "label": "Background Slide",
+          "label": "Ozadje drsnika",
           "default": "#F8EDE7"
         },
         {
           "type": "checkbox",
           "id": "show_overlay",
-          "label": "Show overlay",
+          "label": "Pokaži prekrivni sloj",
           "default": false
         },
         {
           "type": "checkbox",
           "id": "gradient_overlay",
-          "label": "Gradient overlay",
+          "label": "Prelivni prekrivni sloj",
           "default": false
         },
         {
           "type": "color",
           "id": "bg_overlay",
-          "label": "Background Overlay",
+          "label": "Barva prekrivnega sloja",
           "default": "#000000"
         },
         {
           "type": "range",
           "id": "opacity_overlay",
-          "label": "Opacity Overlay",
+          "label": "Moč prekrivnega sloja",
           "max": 1,
           "min": 0,
           "step": 0.1,
@@ -1387,13 +1387,13 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
         {
           "type": "text",
           "id": "slide_toptitle",
-          "label": "Top Title",
+          "label": "Nadnaslov",
           "default": "Design by Shopifytemplate"
         },
         {
           "type": "range",
           "id": "margin_title",
-          "label": "Space under title ",
+          "label": "Razmik pod naslovom",
           "max": 3,
           "min": 0,
           "step": 0.5,
@@ -1403,155 +1403,155 @@ html:not(.no-js) .slideshow.slick-initialized .slideshow__slide{
         {
           "type": "color",
           "id": "slide_toptitle_color",
-          "label": "Top title color",
+          "label": "Barva nadnaslova",
           "default": "#999999"
         },
         {
           "type": "text",
           "id": "slide_title",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Image slide"
         },
         {
           "type": "color",
           "id": "slide_title_color",
-          "label": "Heading color",
+          "label": "Barva naslova",
           "default": "#ffffff"
         },
         {
           "type": "textarea",
           "id": "subheading",
-          "label": "Subheading",
+          "label": "Podnaslov",
           "default": "Tell your brand's story through images"
         },
         {
           "type": "color",
           "id": "subheading_color",
-          "label": "Subheading color",
+          "label": "Barva podnaslova",
           "default": "#ffffff"
         },
         {
           "type": "header",
-          "content": "Button 1 "
+          "content": "Gumb 1"
         },
         {
           "type": "text",
           "id": "button_label",
-          "label": "Button label"
+          "label": "Besedilo gumba"
         },
         {
           "type": "url",
           "id": "button_link",
-          "label": "Button link"
+          "label": "Povezava gumba"
         },
         {
           "type": "select",
           "id": "stylebtns",
-          "label": "Style Button",
+          "label": "Slog gumba",
           "default": "btn-theme",
           "options": [
             {
-              "label": "Button Solid",
+              "label": "Poln gumb",
               "value": "btn-theme"
             },
             {
-              "label": "Button Outline",
+              "label": "Gumb z obrobo",
               "value": "btn-outline"
             },
             {
-              "label": "Button Line",
+              "label": "Gumb s podčrtajem",
               "value": "btn-underline"
             }
           ]
         },
         {
           "type": "header",
-          "content": "Color Button 1"
+          "content": "Barva gumba 1"
         },
         {
           "type": "color",
           "id": "bg_button",
-          "label": "Background Button",
+          "label": "Ozadje gumba",
           "default": "#000000"
         },
         {
           "type": "color",
           "id": "color_button",
-          "label": "Color Button",
+          "label": "Barva gumba",
           "default": "#ffffff"
         },
         {
           "type": "color",
           "id": "bg_button_hover",
-          "label": "Background Button Hover",
+          "label": "Ozadje gumba ob prehodu miške",
           "default": "#FF6F2E"
         },
         {
           "type": "color",
           "id": "color_button_hover",
-          "label": "Color Button Hover",
+          "label": "Barva gumba ob prehodu miške",
           "default": "#ffffff"
         },
         {
           "type": "header",
-          "content": "Button 2 "
+          "content": "Gumb 2"
         },
         {
           "type": "text",
           "id": "button_label_2",
-          "label": "Button label"
+          "label": "Besedilo gumba"
         },
         {
           "type": "url",
           "id": "button_link_2",
-          "label": "Button link"
+          "label": "Povezava gumba"
         },
         {
           "type": "select",
           "id": "stylebtns_2",
-          "label": "Style Button",
+          "label": "Slog gumba",
           "default": "btn-theme",
           "options": [
             {
-              "label": "Button Solid",
+              "label": "Poln gumb",
               "value": "btn-theme"
             },
             {
-              "label": "Button Outline",
+              "label": "Gumb z obrobo",
               "value": "btn-outline"
             },
             {
-              "label": "Button Line",
+              "label": "Gumb s podčrtajem",
               "value": "btn-underline"
             }
           ]
         },
         {
           "type": "header",
-          "content": "Color Button 2"
+          "content": "Barva gumba 2"
         },
         {
           "type": "color",
           "id": "bg_button_2",
-          "label": "Background Button",
+          "label": "Ozadje gumba",
           "default": "#000000"
         },
         {
           "type": "color",
           "id": "color_button_2",
-          "label": "Color Button",
+          "label": "Barva gumba",
           "default": "#ffffff"
         },
         {
           "type": "color",
           "id": "bg_button_hover_2",
-          "label": "Background Button Hover",
+          "label": "Ozadje gumba ob prehodu miške",
           "default": "#FF6F2E"
         },
         {
           "type": "color",
           "id": "color_button_hover_2",
-          "label": "Color Button Hover",
+          "label": "Barva gumba ob prehodu miške",
           "default": "#ffffff"
         }
       ]

@@ -58,95 +58,95 @@
 
 {% schema %}
 {
-  "name": "Store messages",
+  "name": "Sporočila trgovine",
   "max_blocks": 3,
   "settings": [
     {
       "type": "header",
-      "content": "Store Messages",
-      "info": "These are displayed under the main menu - great for promotions and notices.They are hidden on the home page if the header is transparent."
+      "content": "Sporočila trgovine",
+      "info": "Prikažejo se pod glavnim menijem, primerno za akcije in obvestila. Na domači strani se skrijejo, če je glava prosojna."
     },
     {
       "type": "checkbox",
       "id": "enable",
-      "label": "Enable",
+      "label": "Vklopi",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_homepage",
-      "label": "Enable only home page",
+      "label": "Samo na domači strani",
       "default": false
     },
     {
       "type": "color",
       "id": "background",
-      "label": "Background",
+      "label": "Ozadje",
       "default": "#000000"
     },
     {
       "id": "gradient_bg",
       "type": "color_background",
-      "label": "Background Gradient"
+      "label": "Prelivno ozadje"
     },
     {
       "type": "color",
       "id": "text",
-      "label": "Text color",
+      "label": "Barva besedila",
       "default": "#ffffff"
     },
     {
       "type": "header",
-      "content": "Section Padding "
+      "content": "Notranji odmik sekcije"
     },
     {
       "type": "text",
       "id": "paddingsection",
-      "label": "Padding Section",
+      "label": "Notranji odmik sekcije",
       "default": "8px 0px 8px 0px",
-      "info": "Padding: Top Right Bottom Left"
+      "info": "Notranji odmik: zgoraj desno spodaj levo"
     },
     {
       "type": "text",
       "id": "paddingmobile",
-      "label": "Padding Section Mobile",
+      "label": "Notranji odmik sekcije na telefonu",
       "default": "8px 0px 8px 0px",
-      "info": "Padding: Top Right Bottom Left"
+      "info": "Notranji odmik: zgoraj desno spodaj levo"
     },
     {
       "type": "header",
-      "content": "Section Margin "
+      "content": "Zunanji odmik sekcije"
     },
     {
       "type": "text",
       "id": "marginsection",
-      "label": "Margin Section",
+      "label": "Zunanji odmik sekcije",
       "default": "0px 0px 0px 0px",
-      "info": "Margin: Top Right Bottom Left"
+      "info": "Zunanji odmik: zgoraj desno spodaj levo"
     },
     {
       "type": "text",
       "id": "marginmobile",
-      "label": "Margin Mobile",
+      "label": "Zunanji odmik na telefonu",
       "default": "0px 0px 0px 0px",
-      "info": "Margin: Top Right Bottom Left"
+      "info": "Zunanji odmik: zgoraj desno spodaj levo"
     }
   ],
   "blocks": [
     {
       "type": "Item",
-      "name": "Item",
+      "name": "Element",
       "settings": [
         {
           "type": "textarea",
           "id": "code",
-          "label": "HTML and Text",
+          "label": "HTML in besedilo",
           "default": "Add important information here"
         },
         {
           "type": "url",
           "id": "button_link",
-          "label": "Link to"
+          "label": "Povezava"
         }
       ]
     }

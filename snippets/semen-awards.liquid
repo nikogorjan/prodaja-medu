@@ -1,0 +1,32 @@
+{%- comment -%}
+  Nagrade izdelka (Čebelarstvo Šemen): nalepke medalj na fotografiji izdelka.
+  Nalepke so slike v metapolju izdelka "Nagrade" (custom.nagrade, seznam datotek). Izdelku jih dodate v
+  Izdelki › izdelek › Metapolja › Nagrade. Opis slike (alt) iz Vsebina › Datoteke je besedilo za bralnike zaslona.
+  Vklop, položaj in velikost: Nastavitve teme › Šemen · Nagrade.
+  Prikažejo se vse nalepke (največ 8) v vrstnem redu iz metapolja. Pri 3 ali več se prekrivajo kot kovanci, prva je
+  na vrhu; skupina se prilagodi širini fotografije (header-css: .s-awards--stack, --n = število nalepk).
+  Uporaba: {% render 'semen-awards', product: product, context: 'card' %}   card = kartica v trgovini, media = stran izdelka
+{%- endcomment -%}
+{%- liquid
+  assign awards = product.metafields.custom.nagrade.value
+  if context == 'media'
+    assign show = settings.semen_awards_media
+    assign widths = '160, 240, 320, 400'
+    assign sizes = settings.semen_awards_size_media | append: 'px'
+  else
+    assign show = settings.semen_awards_cards
+    assign widths = '100, 160, 240'
+    assign sizes = settings.semen_awards_size_card | append: 'px'
+  endif
+-%}
+{%- if show and awards != blank -%}
+  {%- assign shown = awards.size | at_most: 8 -%}
+  <div class="s-awards s-awards--{{ context | default: 'card' }} s-awards--{{ settings.semen_awards_position | default: 'bottom-right' }}{% if shown > 2 %} s-awards--stack{% endif %}" style="--n: {{ shown }};">
+    {%- for file in awards limit: 8 -%}
+      {%- assign img = file.preview_image | default: file -%}
+      {%- if img != blank -%}
+        {{ img | image_url: width: 400 | image_tag: class: 's-award', loading: 'lazy', widths: widths, sizes: sizes, alt: file.alt }}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}

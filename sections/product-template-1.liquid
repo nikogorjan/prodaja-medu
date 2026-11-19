@@ -934,29 +934,29 @@ initPhotoSwipeFromDOM('.my-gallery');
 {% endjavascript %}
 {% schema %}
 {
-  "name": "Product overview",
+  "name": "Stran izdelka",
   "settings": [
     {
       "type": "header",
-      "content": "Layout"
+      "content": "Postavitev"
     },
     {
       "type": "select",
       "id": "setwidth",
-      "label": "Container",
+      "label": "Širina vsebine",
       "default": "container",
       "options": [
         {
           "value": "container",
-          "label": "Container"
+          "label": "Širina vsebine"
         },
         {
           "value": "container-fluid",
-          "label": "Container Fluid"
+          "label": "Čez celo širino"
         },
         {
           "value": "full",
-          "label": "Full"
+          "label": "Polna širina"
         }
       ]
     },
@@ -966,39 +966,39 @@ initPhotoSwipeFromDOM('.my-gallery');
       "options": [
         {
           "value": "media-bottom",
-          "label": "Thumbnails - Bottom"
+          "label": "Sličice spodaj"
         },
         {
           "value": "media-left",
-          "label": "Thumbnails - Left"
+          "label": "Sličice levo"
         },
         {
           "value": "media-right",
-          "label": "Thumbnails - Right"
+          "label": "Sličice desno"
         },
         {
           "value": "media-nothumb",
-          "label": "No - Thumbnails"
+          "label": "Brez sličic"
         },
         {
           "value": "media-list",
-          "label": "List - Stacked"
+          "label": "Seznam – drug pod drugim"
         },
         {
           "value": "media-grid",
-          "label": "List - Grid"
+          "label": "Seznam – mreža"
         },
         {
           "value": "media-collage-1",
-          "label": "Collage - Style 1"
+          "label": "Kolaž – slog 1"
         },
         {
           "value": "media-collage-2",
-          "label": "Collage - Style 2"
+          "label": "Kolaž – slog 2"
         }
       ],
       "default": "media-bottom",
-      "label": "Style"
+      "label": "Slog"
     },
     {
       "type": "select",
@@ -1006,27 +1006,27 @@ initPhotoSwipeFromDOM('.my-gallery');
       "options": [
         {
           "value": "small",
-          "label": "Small"
+          "label": "Majhno"
         },
         {
           "value": "normal",
-          "label": "Normal"
+          "label": "Običajno"
         },
         {
           "value": "large",
-          "label": "Large"
+          "label": "Veliko"
         },
         {
           "value": "largest",
-          "label": "Largest"
+          "label": "Največje"
         }
       ],
       "default": "normal",
-      "label": "Media Size"
+      "label": "Velikost slik"
     },
     {
       "type": "paragraph",
-      "content": "Learn more about [media types](https://help.shopify.com/manual/products/product-media)"
+      "content": "Več o [vrstah medijev](https://help.shopify.com/manual/products/product-media)"
     },
     {
       "type": "select",
@@ -1034,116 +1034,116 @@ initPhotoSwipeFromDOM('.my-gallery');
       "options": [
         {
           "value": "auto",
-          "label": "Adapt to image"
+          "label": "Prilagodi sliki"
         },
         {
           "value": "portrait",
-          "label": "Portrait"
+          "label": "Pokončno"
         },
         {
           "value": "square",
-          "label": "Square"
+          "label": "Kvadrat"
         }
       ],
       "default": "auto",
-      "label": "Image ratio"
+      "label": "Razmerje slike"
     },
     {
       "type": "checkbox",
       "id": "enable_video_looping",
-      "label": "Enable video looping",
+      "label": "Ponavljaj video",
       "default": false
     },
     {
       "type": "header",
-      "content": "Product"
+      "content": "Izdelek"
     },
     {
       "type": "checkbox",
       "id": "stock_enable",
-      "label": "Show stock when less than 10 products available",
+      "label": "Pokaži zalogo, ko je na voljo manj kot 10 kosov",
       "default": true
     },
     {
       "type": "header",
-      "content": "Size guide"
+      "content": "Tabela velikosti"
     },
     {
       "type": "checkbox",
       "id": "sizeguide_enable",
-      "label": "Enable",
+      "label": "Vklopi",
       "default": true
     },
     {
       "type": "text",
       "id": "sizeguide_title",
-      "label": "Title",
+      "label": "Naslov",
       "default": "Size guide"
     },
     {
       "type": "page",
       "id": "sizeguide_page",
-      "label": "Select page",
-      "info": "[Create new page](/admin/pages/new) and enter your HTML size guide"
+      "label": "Izberite stran",
+      "info": "[Ustvarite novo stran](/admin/pages/new) in vanjo vpišite tabelo velikosti."
     },
     {
       "type": "header",
-      "content": "Product metafields 🔥"
+      "content": "Metapolja izdelka 🔥"
     },
     {
       "type": "header",
-      "content": "🔀 Cross-sell"
+      "content": "🔀 Dopolnilni izdelki (cross-sell)"
     },
     {
       "type": "paragraph",
-      "content": "💡 Work with product handle, separate values by a comma."
+      "content": "💡 Deluje z oznakami izdelkov, ločenimi z vejico."
     },
     {
       "type": "paragraph",
-      "content": "💡 Example: \"product-handle-1,product-handle-2,product-handle-3,product-handle-4\""
+      "content": "💡 Primer: \"product-handle-1,product-handle-2,product-handle-3,product-handle-4\""
     },
     {
       "type": "paragraph",
-      "content": "💡 Set blank to make hidden."
+      "content": "💡 Pustite prazno, da se ne prikaže."
     },
     {
       "type": "paragraph",
-      "content": "💡 [Enter product handle here (Crossell column).](/admin/bulk?resource_name=Product&edit=metafields.info.crosssell%3Astring%2Chandle)"
+      "content": "💡 [Tukaj vpišite oznake izdelkov (stolpec Crossell).](/admin/bulk?resource_name=Product&edit=metafields.info.crosssell%3Astring%2Chandle)"
     },
     {
       "type": "text",
       "id": "crosssell_title",
       "default": "Cross-selling",
-      "info": "This title shows with the products are setup",
-      "label": "Title"
+      "info": "Naslov se pokaže, ko so izdelki nastavljeni.",
+      "label": "Naslov"
     },
     {
       "type": "header",
-      "content": "⬆️ Upsell"
+      "content": "⬆️ Dražji izdelek (upsell)"
     },
     {
       "type": "paragraph",
-      "content": "💡 Work with product handle and [automatic discount code](/admin/discounts/automatic). Discount codes will automatically apply when your customer checkout"
+      "content": "💡 Deluje z oznako izdelka in [samodejnim popustom](/admin/discounts/automatic). Popust se uveljavi ob nakupu."
     },
     {
       "type": "paragraph",
-      "content": "💡 [Enter product handle and promotion text here.](/admin/bulk?resource_name=Product&edit=metafields.info.upsell%3Astring%2Cmetafields.info.promotion%3Astring%2Chandle)"
+      "content": "💡 [Tukaj vpišite oznako izdelka in besedilo promocije.](/admin/bulk?resource_name=Product&edit=metafields.info.upsell%3Astring%2Cmetafields.info.promotion%3Astring%2Chandle)"
     },
     {
       "type": "paragraph",
-      "content": "⚠️ Enter only ONE product handle (Upsell column)"
+      "content": "⚠️ Vpišite le ENO oznako izdelka (stolpec Upsell)"
     },
     {
       "type": "text",
       "id": "upsell_accept",
       "default": "Yes, let me select variants",
-      "label": "Button accept"
+      "label": "Gumb za strinjanje"
     },
     {
       "type": "text",
       "id": "upsell_decline",
       "default": "No, thanks",
-      "label": "Button decline"
+      "label": "Gumb za zavrnitev"
     },
     {
       "type": "range",
@@ -1152,53 +1152,53 @@ initPhotoSwipeFromDOM('.my-gallery');
       "max": 10,
       "step": 0.1,
       "unit": "s",
-      "label": "Delay time before show popup",
+      "label": "Zakasnitev pred prikazom okna",
       "default": 3
     },
     {
       "type": "header",
-      "content": "Sticky Cart"
+      "content": "Lepljiva košarica"
     },
     {
       "type": "checkbox",
       "id": "enable",
-      "label": "Enable",
+      "label": "Vklopi",
       "default": true
     },
     {
       "type": "color",
       "id": "mix_1",
-      "label": "Background Color",
+      "label": "Barva ozadja",
       "default": "#262626"
     },
     {
       "type": "color",
       "id": "mix_2",
-      "label": "Color Variant",
+      "label": "Barva različice",
       "default": "#c0c0c0"
     },
     {
       "type": "color",
       "id": "text_cl",
-      "label": "Text",
+      "label": "Besedilo",
       "default": "#fff"
     },
     {
       "type": "color",
       "id": "cart_bg",
-      "label": "CTA Button Background",
+      "label": "Ozadje glavnega gumba",
       "default": "#008060"
     },
     {
       "type": "color",
       "id": "cart_cl",
-      "label": "CTA Button Text",
+      "label": "Besedilo glavnega gumba",
       "default": "#fff"
     },
     {
       "type": "color",
       "id": "cart_cl_hover",
-      "label": "CTA Button Text Hover",
+      "label": "Besedilo glavnega gumba ob prehodu",
       "default": "#fff"
     }
   ],
@@ -1208,13 +1208,13 @@ initPhotoSwipeFromDOM('.my-gallery');
     },
     {
       "type": "text",
-      "name": "Text",
+      "name": "Besedilo",
       "settings": [
         {
           "type": "text",
           "id": "text",
           "default": "Text block",
-          "label": "Text"
+          "label": "Besedilo"
         },
         {
           "type": "select",
@@ -1222,272 +1222,272 @@ initPhotoSwipeFromDOM('.my-gallery');
           "options": [
             {
               "value": "body",
-              "label": "Body"
+              "label": "Pisava besedila"
             },
             {
               "value": "subtitle",
-              "label": "Sub Title"
+              "label": "Nadnaslov"
             },
             {
               "value": "uppercase",
-              "label": "Uppercase"
+              "label": "Velike črke"
             }
           ],
           "default": "body",
-          "label": "Body"
+          "label": "Pisava besedila"
         }
       ]
     },
     {
       "type": "title",
-      "name": "Title Product",
+      "name": "Naslov izdelka",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "e_label",
-          "label": "Show Label",
+          "label": "Pokaži oznako",
           "default": true
         }
       ]
     },
     {
       "type": "price",
-      "name": "Price",
+      "name": "Cena",
       "limit": 1
     },
     {
       "type": "buttons",
-      "name": "Button & Variants",
+      "name": "Gumb in različice",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "enable_local_pickup",
-          "label": "Show Local Pickup",
+          "label": "Pokaži osebni prevzem",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "enable_hurrify",
-          "label": "Show Hurrify",
+          "label": "Pokaži opozorilo o zalogi",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "enable_payment_button",
-          "label": "Show dynamic checkout button",
-          "info": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+          "label": "Pokaži gumb za hiter nakup",
+          "info": "Vsak kupec vidi svoj najljubši način plačila izmed razpoložljivih, npr. PayPal ali Apple Pay. [Več o tem](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "waitlist",
-          "label": "Show waitlist",
+          "label": "Pokaži čakalni seznam",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "enable_question",
-          "label": "Show Popup Question",
+          "label": "Pokaži okno za vprašanje",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "enable_sibling",
-          "label": "Show Sibling Product",
+          "label": "Pokaži sorodne izdelke",
           "default": true,
-          "info": "Use metafields => metafields.theme.siblings_collection, Show name color => metafields.theme.siblings_color"
+          "info": "Uporablja metapolji metafields.theme.siblings_collection in za ime barve metafields.theme.siblings_color."
         },
         {
           "type": "select",
           "id": "product_selector",
-          "label": "Option type",
+          "label": "Vrsta izbire",
           "options": [
             {
               "value": "radio",
-              "label": "Button"
+              "label": "Gumb"
             },
             {
               "value": "select",
-              "label": "Dropdown"
+              "label": "Spustni seznam"
             }
           ]
         },
         {
           "type": "checkbox",
           "id": "sw_color_product",
-          "label": "Enable Swatch Color",
+          "label": "Barvni vzorci različic",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "color_circle",
-          "label": "Circle Color",
+          "label": "Barva kroga",
           "default": true
         },
         {
           "type": "select",
           "id": "size_color",
-          "label": "Size Color",
+          "label": "Velikost barvnih vzorcev",
           "default": "small-38",
           "options": [
             {
               "value": "small-38",
-              "label": "Small"
+              "label": "Majhno"
             },
             {
               "value": "normal-48",
-              "label": "Normal"
+              "label": "Običajno"
             },
             {
               "value": "large-70",
-              "label": "Large"
+              "label": "Veliko"
             }
           ]
         },
         {
           "type": "header",
-          "content": "🔗 Affiliate product"
+          "content": "🔗 Partnerski izdelek"
         },
         {
           "type": "paragraph",
-          "content": "💡 [Enter affiliate link here.](/admin/bulk?resource_name=Product&edit=metafields.info.affiliate_link,metafields.info.affiliate_button)"
+          "content": "💡 [Tukaj vpišite partnersko povezavo.](/admin/bulk?resource_name=Product&edit=metafields.info.affiliate_link,metafields.info.affiliate_button)"
         }
       ]
     },
     {
       "type": "description",
-      "name": "Description",
+      "name": "Opis",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "enable_tab",
-          "label": "Enable Tab",
+          "label": "Zavihki",
           "default": true
         },
         {
           "type": "text",
           "id": "title_tab",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Description"
         }
       ]
     },
     {
       "type": "shortdesc",
-      "name": "Short Description",
+      "name": "Kratek opis",
       "limit": 1,
       "settings": [
         {
           "type": "header",
-          "content": "Short description"
+          "content": "Kratek opis"
         },
         {
           "type": "paragraph",
-          "content": "💡 [Enter content for each product here.](/admin/bulk?resource_name=Product&edit=metafields.info.shortdesc)"
+          "content": "💡 [Tukaj vpišite vsebino za vsak izdelek.](/admin/bulk?resource_name=Product&edit=metafields.info.shortdesc)"
         },
         {
           "type": "paragraph",
-          "content": "💡 Can use plain text or HTML code"
+          "content": "💡 Navadno besedilo ali koda HTML."
         }
       ]
     },
     {
       "type": "review",
-      "name": "Review",
+      "name": "Ocene",
       "limit": 1
     },
     {
       "type": "shipping",
-      "name": "Free Shipping",
+      "name": "Brezplačna dostava",
       "limit": 1
     },
     {
       "type": "shippingtime",
-      "name": "Shipping Time",
+      "name": "Čas dostave",
       "limit": 1,
       "settings": [
         {
           "type": "paragraph",
-          "content": "💡 [Setup your store shipping here](/admin/settings/shipping)"
+          "content": "💡 [Tukaj nastavite dostavo](/admin/settings/shipping)"
         },
         {
           "type": "header",
-          "content": "🚚 Shipping time"
+          "content": "🚚 Čas dostave"
         },
         {
           "type": "paragraph",
-          "content": "💡 [Enter shipping time for each product here (days).](/admin/bulk?resource_name=Product&edit=metafields.info.shipping)"
+          "content": "💡 [Tukaj vpišite čas dostave za vsak izdelek (v dnevih).](/admin/bulk?resource_name=Product&edit=metafields.info.shipping)"
         },
         {
           "type": "text",
           "id": "shipping_button",
           "default": "Delivery information",
-          "label": "Shipping button"
+          "label": "Gumb za dostavo"
         },
         {
           "type": "page",
           "id": "page_shipping",
-          "label": "Shipping page"
+          "label": "Stran o dostavi"
         }
       ]
     },
     {
       "type": "countdown",
-      "name": "Countdown Time",
+      "name": "Odštevanje časa",
       "limit": 1,
       "settings": [
         {
           "type": "header",
-          "content": "⌛ Deal - countdown"
+          "content": "⌛ Odštevanje do konca akcije"
         },
         {
           "type": "text",
           "id": "title_heading",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Hurry up! Sale ends in"
         },
         {
           "type": "paragraph",
-          "content": "⏱ [Enter the end times here.](/admin/bulk?resource_name=Product&edit=metafields.info.countdown)"
+          "content": "⏱ [Tukaj vpišite čas konca akcije.](/admin/bulk?resource_name=Product&edit=metafields.info.countdown)"
         },
         {
           "type": "paragraph",
-          "content": "💡 Example: 2030/10/10 12:30:00"
+          "content": "💡 Primer: 2030/10/10 12:30:00"
         },
         {
           "type": "paragraph",
-          "content": "💡 Set blank to make hidden."
+          "content": "💡 Pustite prazno, da se ne prikaže."
         }
       ]
     },
     {
       "type": "image",
-      "name": "Image",
+      "name": "Slika",
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Slika"
         }
       ]
     },
     {
       "type": "trust-badge",
-      "name": "Trust Badge",
+      "name": "Znak zaupanja",
       "settings": [
         {
           "type": "text",
           "id": "trust-heading",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Guarantee safe checkout"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Slika"
         },
         {
           "type": "range",
@@ -1496,100 +1496,100 @@ initPhotoSwipeFromDOM('.my-gallery');
           "max": 100,
           "step": 1,
           "unit": "%",
-          "label": "Width Image",
+          "label": "Širina slike",
           "default": 65
         }
       ]
     },
     {
       "type": "salepoint",
-      "name": "Sale Point",
+      "name": "Prodajna prednost",
       "settings": [
         {
           "type": "select",
           "id": "icon",
-          "label": "Icon",
+          "label": "Ikona",
           "default": "globe",
           "options": [
             {
               "value": "checkmark",
-              "label": "Checkmark"
+              "label": "Kljukica"
             },
             {
               "value": "gift",
-              "label": "Gift"
+              "label": "Darilo"
             },
             {
               "value": "globe",
-              "label": "Globe"
+              "label": "Globus"
             },
             {
               "value": "heart",
-              "label": "Heart"
+              "label": "Srce"
             },
             {
               "value": "leaf",
-              "label": "Feaf"
+              "label": "Listek"
             },
             {
               "value": "lock",
-              "label": "Lock"
+              "label": "Ključavnica"
             },
             {
               "value": "package",
-              "label": "Package"
+              "label": "Paket"
             },
             {
               "value": "phone",
-              "label": "Phone"
+              "label": "Telefon"
             },
             {
               "value": "ribbon",
-              "label": "Ribbon"
+              "label": "Trak (priznanje)"
             },
             {
               "value": "shield",
-              "label": "Shield"
+              "label": "Ščit"
             },
             {
               "value": "tag",
-              "label": "Tag"
+              "label": "Oznaka"
             },
             {
               "value": "truck",
-              "label": "Truck"
+              "label": "Tovornjak (dostava)"
             }
           ]
         },
         {
           "type": "textarea",
           "id": "free_word",
-          "label": "Free worldwide shipping",
+          "label": "Besedilo o brezplačni dostavi",
           "default": "Free worldwide shipping"
         }
       ]
     },
     {
       "type": "separator",
-      "name": "Separator"
+      "name": "Ločilna črta"
     },
     {
       "type": "list-info",
-      "name": "List Info",
+      "name": "Seznam podatkov",
       "limit": 1,
       "settings": [
         {
           "type": "select",
           "id": "block_style",
-          "label": "Style",
+          "label": "Slog",
           "options": [
            {
             "value": "ver",
-            "label": "Vertical"
+            "label": "Navpično"
            },
            {
             "value": "hoz",
-            "label": "Horizontal"
+            "label": "Vodoravno"
            }
           ],
           "default": "ver"
@@ -1597,32 +1597,32 @@ initPhotoSwipeFromDOM('.my-gallery');
         {
           "type": "checkbox",
           "id": "product_vendor_enable",
-          "label": "Show product vendor",
+          "label": "Pokaži prodajalca",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "product_type_enable",
-          "label": "Show product type",
+          "label": "Pokaži vrsto izdelka",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "variant_sku_enable",
-          "label": "Show variant sku",
+          "label": "Pokaži šifro različice",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "variant_available_enable",
-          "label": "Show variant availability",
+          "label": "Pokaži razpoložljivost različice",
           "default": true
         }
       ]
     },
     {
       "type": "fakeviewer",
-      "name": "Fake View",
+      "name": "Prikaz gledalcev",
       "limit": 1,
       "settings": [
         {
@@ -1631,7 +1631,7 @@ initPhotoSwipeFromDOM('.my-gallery');
           "min": 10,
           "max": 110,
           "step": 1,
-          "label": "Min value",
+          "label": "Najmanjša vrednost",
           "default": 12
         },
         {
@@ -1640,7 +1640,7 @@ initPhotoSwipeFromDOM('.my-gallery');
           "min": 25,
           "max": 125,
           "step": 1,
-          "label": "Max value",
+          "label": "Največja vrednost",
           "default": 30
         },
         {
@@ -1650,203 +1650,203 @@ initPhotoSwipeFromDOM('.my-gallery');
           "max": 20,
           "step": 1,
           "unit": "s",
-          "label": "Duration time",
+          "label": "Trajanje",
           "default": 3
         },
         {
           "type": "text",
           "id": "fake_view_text_prefix",
-          "label": "Pretext",
+          "label": "Uvodno besedilo",
           "default": "Currently there are "
         },
         {
           "type": "text",
           "id": "fake_view_text_suffix",
-          "label": "Subtext",
+          "label": "Dodatno besedilo",
           "default": " peoples are currently looking at this product"
         }
       ]
     },
     {
       "type": "tabcustom",
-      "name": "Collapsible row",
+      "name": "Zložljiva vrstica",
       "settings": [
         {
           "type": "text",
           "id": "title_tab",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Shipping information"
         },
         {
           "type": "select",
           "id": "icon",
-          "label": "Icon",
+          "label": "Ikona",
           "default": "none",
           "options": [
             {
               "value": "checkmark",
-              "label": "Checkmark"
+              "label": "Kljukica"
             },
             {
               "value": "gift",
-              "label": "Gift"
+              "label": "Darilo"
             },
             {
               "value": "globe",
-              "label": "Globe"
+              "label": "Globus"
             },
             {
               "value": "heart",
-              "label": "Heart"
+              "label": "Srce"
             },
             {
               "value": "leaf",
-              "label": "Feaf"
+              "label": "Listek"
             },
             {
               "value": "lock",
-              "label": "Lock"
+              "label": "Ključavnica"
             },
             {
               "value": "package",
-              "label": "Package"
+              "label": "Paket"
             },
             {
               "value": "phone",
-              "label": "Phone"
+              "label": "Telefon"
             },
             {
               "value": "ribbon",
-              "label": "Ribbon"
+              "label": "Trak (priznanje)"
             },
             {
               "value": "shield",
-              "label": "Shield"
+              "label": "Ščit"
             },
             {
               "value": "tag",
-              "label": "Tag"
+              "label": "Oznaka"
             },
             {
               "value": "truck",
-              "label": "Truck"
+              "label": "Tovornjak (dostava)"
             },
             {
               "value": "none",
-              "label": "None"
+              "label": "Brez"
             }
           ]
         },
         {
           "type": "richtext",
           "id": "answer_content",
-          "label": "Tab content",
+          "label": "Vsebina zavihka",
           "default": "<p>Use collapsible tabs for more detailed information that will help customers make a purchasing decision.</p><p>Ex: Shipping and return policies, size guides, and other common questions.</p>"
         },
         {
           "type": "page",
           "id": "page",
-          "label": "Select Page"
+          "label": "Izberite stran"
         }
       ]
     },
     {
       "type": "tabfix",
-      "name": "Tab Fix",
+      "name": "Stalni zavihek",
       "limit": 1,
       "settings": [
         {
           "type": "header",
-          "content": "General tabs"
+          "content": "Splošni zavihki"
         },
         {
           "type": "checkbox",
           "id": "enable_tabvertical",
-          "label": "Enable Tab Vertical"
+          "label": "Navpični zavihki"
         },
         {
           "type": "text",
           "id": "gtab_des",
-          "label": "Title (Description tab)",
+          "label": "Naslov zavihka z opisom",
           "default": "Description"
         },
         {
           "type": "checkbox",
           "id": "gtab_review_enable",
-          "label": "Review tab",
+          "label": "Zavihek z ocenami",
           "default": true,
-          "info": "[Install review application here](https://apps.shopify.com/product-reviews)"
+          "info": "[Namestite aplikacijo za ocene](https://apps.shopify.com/product-reviews)"
         },
         {
           "type": "text",
           "id": "gtab_review",
-          "label": "Title (Review tab)",
+          "label": "Naslov zavihka z ocenami",
           "default": "Review"
         },
         {
           "type": "header",
-          "content": "Special tabs"
+          "content": "Posebni zavihki"
         },
         {
           "type": "paragraph",
-          "content": "💡 Set blank to disable."
+          "content": "💡 Pustite prazno, da se izklopi."
         },
         {
           "type": "text",
           "id": "stab_title1",
-          "label": "Title 1"
+          "label": "Naslov 1"
         },
         {
           "type": "richtext",
           "id": "stab_content1",
-          "label": "Content 1"
+          "label": "Vsebina 1"
         },
         {
           "type": "text",
           "id": "stab_title2",
-          "label": "Title 2"
+          "label": "Naslov 2"
         },
         {
           "type": "richtext",
           "id": "stab_content2",
-          "label": "Content 2"
+          "label": "Vsebina 2"
         },
         {
           "type": "text",
           "id": "stab_title3",
-          "label": "Title 3"
+          "label": "Naslov 3"
         },
         {
           "type": "richtext",
           "id": "stab_content3",
-          "label": "Content 3"
+          "label": "Vsebina 3"
         },
         {
           "type": "text",
           "id": "stab_title4",
-          "label": "Title 4"
+          "label": "Naslov 4"
         },
         {
           "type": "richtext",
           "id": "stab_content4",
-          "label": "Content 4"
+          "label": "Vsebina 4"
         }
       ]
     },
     {
       "type": "share",
-      "name": "Share",
+      "name": "Deljenje",
       "limit": 1
     },
     {
       "type": "related-product",
-      "name": "Featured products ",
+      "name": "Izbrani izdelki",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "title_heading",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Related products"
         },
         {
@@ -1879,7 +1879,7 @@ initPhotoSwipeFromDOM('.my-gallery');
               "label": "H6"
             }
           ],
-          "label": "Heading Size"
+          "label": "Velikost naslova"
         },
         {
           "type": "range",
@@ -1887,60 +1887,60 @@ initPhotoSwipeFromDOM('.my-gallery');
           "min": 1,
           "max": 4,
           "step": 1,
-          "label": "Limit Products",
+          "label": "Največ izdelkov",
           "default": 3,
-          "info":"Complementary products. Guide https://help.shopify.com/en/manual/online-store/search-and-discovery/product-recommendations"
+          "info":"Dopolnilni izdelki. Navodila: https://help.shopify.com/en/manual/online-store/search-and-discovery/product-recommendations"
         }
       ]
     },
     {
       "type": "custom_liquid",
-      "name": "Custom Liquid",
+      "name": "Liquid po meri",
       "settings": [
         {
           "type": "liquid",
           "id": "custom_liquid",
-          "label": "Custom Liquid",
-          "info": "Add app snippets or other Liquid code to create advanced customizations."
+          "label": "Liquid po meri",
+          "info": "Dodajte delčke aplikacij ali drugo kodo Liquid za napredne prilagoditve."
         }
       ]
     },
     {
       "type": "block_banner",
-      "name": "Block Banner",
+      "name": "Pasica",
       "settings": [
         {
           "type": "text",
           "id": "banner_text",
-          "label": "Title",
+          "label": "Naslov",
           "default": "Rewards"
         },
         {
           "type": "text",
           "id": "banner_des",
-          "label": "Description",
+          "label": "Opis",
           "default": "Join to earn 84 points from this item"
         },
         {
           "type": "image_picker",
           "id": "banner_icon",
-          "label": "Image"
+          "label": "Slika"
         },
         {
           "type": "textarea",
           "id": "banner_icon_svg",
-          "label": "SVG icon "
+          "label": "Ikona SVG"
         },
         {
           "type": "color",
           "id": "banner_txt_color",
-          "label": "Banner Text Color",
+          "label": "Barva besedila pasice",
           "default": "#000000"
         },
         {
           "id": "banner_bg_color",
           "type": "color_background",
-          "label": "Background "
+          "label": "Ozadje"
         },
         {
           "type": "range",
@@ -1949,294 +1949,294 @@ initPhotoSwipeFromDOM('.my-gallery');
           "max": 40,
           "step": 1,
           "unit": "px",
-          "label": "Radius",
+          "label": "Zaobljenost",
           "default": 0
         }
       ]
     },
     {
       "type": "icon_with_text",
-      "name": "Icon with Text",
+      "name": "Ikona z besedilom",
       "settings": [
           {
           "type": "select",
           "id": "block_style",
-          "label": "Style",
+          "label": "Slog",
           "options": [
            {
             "value": "ver",
-            "label": "Vertical"
+            "label": "Navpično"
            },
            {
             "value": "hoz",
-            "label": "Horizontal"
+            "label": "Vodoravno"
            }
           ],
           "default": "ver"
         },
         {
           "type": "header",
-          "content": "Icon with Text"
+          "content": "Ikona z besedilom"
         },
         {
           "type": "select",
           "id": "icon_1",
-          "label": "Icon 1",
+          "label": "Ikona 1",
           "default": "none",
           "options": [
             {
               "value": "checkmark",
-              "label": "Checkmark"
+              "label": "Kljukica"
             },
             {
               "value": "gift",
-              "label": "Gift"
+              "label": "Darilo"
             },
             {
               "value": "globe",
-              "label": "Globe"
+              "label": "Globus"
             },
             {
               "value": "heart",
-              "label": "Heart"
+              "label": "Srce"
             },
             {
               "value": "leaf",
-              "label": "Feaf"
+              "label": "Listek"
             },
             {
               "value": "lock",
-              "label": "Lock"
+              "label": "Ključavnica"
             },
             {
               "value": "package",
-              "label": "Package"
+              "label": "Paket"
             },
             {
               "value": "phone",
-              "label": "Phone"
+              "label": "Telefon"
             },
             {
               "value": "ribbon",
-              "label": "Ribbon"
+              "label": "Trak (priznanje)"
             },
             {
               "value": "shield",
-              "label": "Shield"
+              "label": "Ščit"
             },
             {
               "value": "tag",
-              "label": "Tag"
+              "label": "Oznaka"
             },
             {
               "value": "truck",
-              "label": "Truck"
+              "label": "Tovornjak (dostava)"
             },
             {
               "value": "none",
-              "label": "None"
+              "label": "Brez"
             }
           ]
         },
         {
           "type": "text",
           "id": "icon_text_1",
-          "label": "Text 1"
+          "label": "Besedilo 1"
         },
         {
           "type": "select",
           "id": "icon_2",
-          "label": "Icon 2",
+          "label": "Ikona 2",
           "default": "none",
           "options": [
             {
               "value": "checkmark",
-              "label": "Checkmark"
+              "label": "Kljukica"
             },
             {
               "value": "gift",
-              "label": "Gift"
+              "label": "Darilo"
             },
             {
               "value": "globe",
-              "label": "Globe"
+              "label": "Globus"
             },
             {
               "value": "heart",
-              "label": "Heart"
+              "label": "Srce"
             },
             {
               "value": "leaf",
-              "label": "Feaf"
+              "label": "Listek"
             },
             {
               "value": "lock",
-              "label": "Lock"
+              "label": "Ključavnica"
             },
             {
               "value": "package",
-              "label": "Package"
+              "label": "Paket"
             },
             {
               "value": "phone",
-              "label": "Phone"
+              "label": "Telefon"
             },
             {
               "value": "ribbon",
-              "label": "Ribbon"
+              "label": "Trak (priznanje)"
             },
             {
               "value": "shield",
-              "label": "Shield"
+              "label": "Ščit"
             },
             {
               "value": "tag",
-              "label": "Tag"
+              "label": "Oznaka"
             },
             {
               "value": "truck",
-              "label": "Truck"
+              "label": "Tovornjak (dostava)"
             },
             {
               "value": "none",
-              "label": "None"
+              "label": "Brez"
             }
           ]
         },
         {
           "type": "text",
           "id": "icon_text_2",
-          "label": "Text 2"
+          "label": "Besedilo 2"
         },
         {
           "type": "select",
           "id": "icon_3",
-          "label": "Icon 3",
+          "label": "Ikona 3",
           "default": "none",
           "options": [
             {
               "value": "checkmark",
-              "label": "Checkmark"
+              "label": "Kljukica"
             },
             {
               "value": "gift",
-              "label": "Gift"
+              "label": "Darilo"
             },
             {
               "value": "globe",
-              "label": "Globe"
+              "label": "Globus"
             },
             {
               "value": "heart",
-              "label": "Heart"
+              "label": "Srce"
             },
             {
               "value": "leaf",
-              "label": "Feaf"
+              "label": "Listek"
             },
             {
               "value": "lock",
-              "label": "Lock"
+              "label": "Ključavnica"
             },
             {
               "value": "package",
-              "label": "Package"
+              "label": "Paket"
             },
             {
               "value": "phone",
-              "label": "Phone"
+              "label": "Telefon"
             },
             {
               "value": "ribbon",
-              "label": "Ribbon"
+              "label": "Trak (priznanje)"
             },
             {
               "value": "shield",
-              "label": "Shield"
+              "label": "Ščit"
             },
             {
               "value": "tag",
-              "label": "Tag"
+              "label": "Oznaka"
             },
             {
               "value": "truck",
-              "label": "Truck"
+              "label": "Tovornjak (dostava)"
             },
             {
               "value": "none",
-              "label": "None"
+              "label": "Brez"
             }
           ]
         },
         {
           "type": "text",
           "id": "icon_text_3",
-          "label": "Text 3"
+          "label": "Besedilo 3"
         },
         {
           "type": "select",
           "id": "icon_4",
-          "label": "Icon 4",
+          "label": "Ikona 4",
           "default": "none",
           "options": [
             {
               "value": "checkmark",
-              "label": "Checkmark"
+              "label": "Kljukica"
             },
             {
               "value": "gift",
-              "label": "Gift"
+              "label": "Darilo"
             },
             {
               "value": "globe",
-              "label": "Globe"
+              "label": "Globus"
             },
             {
               "value": "heart",
-              "label": "Heart"
+              "label": "Srce"
             },
             {
               "value": "leaf",
-              "label": "Feaf"
+              "label": "Listek"
             },
             {
               "value": "lock",
-              "label": "Lock"
+              "label": "Ključavnica"
             },
             {
               "value": "package",
-              "label": "Package"
+              "label": "Paket"
             },
             {
               "value": "phone",
-              "label": "Phone"
+              "label": "Telefon"
             },
             {
               "value": "ribbon",
-              "label": "Ribbon"
+              "label": "Trak (priznanje)"
             },
             {
               "value": "shield",
-              "label": "Shield"
+              "label": "Ščit"
             },
             {
               "value": "tag",
-              "label": "Tag"
+              "label": "Oznaka"
             },
             {
               "value": "truck",
-              "label": "Truck"
+              "label": "Tovornjak (dostava)"
             },
             {
               "value": "none",
-              "label": "None"
+              "label": "Brez"
             }
           ]
         },
         {
           "type": "text",
           "id": "icon_text_4",
-          "label": "Text 4"
+          "label": "Besedilo 4"
         }
       ]
     }

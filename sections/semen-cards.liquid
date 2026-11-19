@@ -151,15 +151,15 @@
 
 {% schema %}
 {
-  "name": "Kartice (Šemen)",
+  "name": "Kartice z ikonami (Šemen)",
   "tag": "section",
   "class": "section-semen-cards",
   "settings": [
-    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "cream", "options": [ { "value": "white", "label": "Slonokoščena (osnovna)" }, { "value": "cream", "label": "Pšenična (topla)" }, { "value": "dark", "label": "Gozdno zelena (temna)" } , { "value": "tint", "label": "Medena (svetel pas)" } ] },
+    { "type": "select", "id": "scheme", "label": "Barvna shema", "default": "cream", "options": [ { "value": "white", "label": "Slonokoščena (osnovna)" }, { "value": "cream", "label": "Pšenična (topla)" }, { "value": "dark", "label": "Temna (prikaže se pšenično)" } , { "value": "tint", "label": "Medena (svetel pas)" } ] },
     { "type": "color", "id": "bg_custom", "label": "Barva ozadja (po meri)", "info": "Prepiše barvo ozadja iz sheme. Pustite prazno za barvo sheme. Shema še vedno določa barve kartic in besedila." },
     { "type": "checkbox", "id": "pattern", "label": "Vzorec satovja v ozadju", "default": false },
     { "type": "color", "id": "accent", "label": "Poudarna barva", "default": "#c99a5c" },
-    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Container" }, { "value": "container-fluid", "label": "Fluid" } ] },
+    { "type": "select", "id": "setwidth", "label": "Širina", "default": "container", "options": [ { "value": "container", "label": "Širina vsebine" }, { "value": "container-fluid", "label": "Čez celo širino" } ] },
     { "type": "text", "id": "anchor", "label": "Sidro (neobvezno)", "info": "Npr. ponudba – nato povezava #ponudba skoči na to sekcijo." },
     { "type": "header", "content": "Glava" },
     { "type": "select", "id": "heading_layout", "label": "Postavitev glave", "default": "split", "options": [ { "value": "split", "label": "Naslov levo, uvod desno" }, { "value": "center", "label": "Na sredini" } ] },
@@ -231,6 +231,6 @@
       ]
     }
   ],
-  "presets": [ { "name": "Kartice (Šemen)", "blocks": [ { "type": "card" }, { "type": "card" }, { "type": "card" } ] } ]
+  "presets": [ { "name": "Kartice z ikonami (Šemen)", "blocks": [ { "type": "card" }, { "type": "card" }, { "type": "card" } ] } ]
 }
 {% endschema %}

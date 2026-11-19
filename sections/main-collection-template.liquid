@@ -247,22 +247,22 @@
 
 {% schema %}
 {
-  "name": "Product Grid",
+  "name": "Zbirka – izdelki",
   "class": "section",
   "settings": [
     {
       "type": "select",
       "id": "collection_width",
-      "label": "Set Width Collection",
+      "label": "Širina zbirke",
       "default": "container",
       "options": [
         {
           "value": "container",
-          "label": "Container"
+          "label": "Širina vsebine"
         },
         {
           "value": "container-fluid",
-          "label": "Container Fluid"
+          "label": "Čez celo širino"
         }
       ]
     },
@@ -273,12 +273,12 @@
       "max": 32,
       "step": 1,
       "default": 16,
-      "label": "Products per page"
+      "label": "Izdelkov na stran"
     },
     {
       "type": "select",
       "id": "collection_perrow",
-      "label": "Products per row",
+      "label": "Izdelkov v vrsti",
       "default": "3",
       "options": [
         {
@@ -298,20 +298,20 @@
     {
       "type": "select",
       "id": "type_pagination",
-      "label": "Type Pagination",
+      "label": "Vrsta številčenja strani",
       "default": "pagi",
       "options": [
         {
           "value": "pagi",
-          "label": "Pagination"
+          "label": "Številčenje strani"
         },
         {
           "value": "scroll",
-          "label": "Infinite scrolling "
+          "label": "Neskončno drsenje"
         },
         {
           "value": "click",
-          "label": "Click Load more"
+          "label": "Gumb »Naloži več«"
         }
       ]
     },
@@ -319,7 +319,7 @@
       "type": "checkbox",
       "id": "enable_viewcolumn",
       "default": true,
-      "label": "Enable View Mode "
+      "label": "Izbira pogleda (mreža ali seznam)"
     },
     {
       "type": "header",
@@ -329,14 +329,14 @@
       "type": "checkbox",
       "id": "enable_filtering",
       "default": true,
-      "label": "Enable filtering",
-      "info": "Customize [filters](/admin/menus)"
+      "label": "Vklopi filtre",
+      "info": "Uredite [filtre](/admin/menus)."
     },
     {
       "type": "checkbox",
       "id": "enable_sorting",
       "default": true,
-      "label": "Enable sorting"
+      "label": "Vklopi razvrščanje"
     },
     {
       "type": "select",
@@ -344,179 +344,179 @@
       "options": [
         {
           "value": "horizontal",
-          "label": "Horizontal "
+          "label": "Vodoravno"
         },
         {
           "value": "vertical",
-          "label": "Vertical"
+          "label": "Navpično"
         },
         {
           "value": "drawer",
-          "label": "Drawer Slide Right"
+          "label": "Drsni predal desno"
         },
         {
           "value": "drawer-slide-left",
-          "label": "Drawer Slide Left"
+          "label": "Drsni predal levo"
         },
         {
           "value": "drawer-collapse-left",
-          "label": "Drawer Collapse Left"
+          "label": "Zložljiv predal levo"
         },
         {
           "value": "drawer-collapse-right",
-          "label": "Drawer Collapse Right"
+          "label": "Zložljiv predal desno"
         }
       ],
       "default": "horizontal",
-      "label": "Desktop filter layout",
-      "info": "Drawer is the default mobile layout."
+      "label": "Postavitev filtrov na računalniku",
+      "info": "Na telefonu so filtri vedno v stranskem predalu."
     },
     {
       "type": "header",
-      "content": " Vertical Filter"
+      "content": "Navpični filter"
     },
     {
       "type": "checkbox",
       "id": "first_group",
       "default": true,
-      "label": "Open first group by default"
+      "label": "Prva skupina privzeto odprta"
     },
     {
       "type": "checkbox",
       "id": "open_group",
       "default": false,
-      "label": "Open all group"
+      "label": "Odpri vse skupine"
     },
     {
       "type": "header",
-      "content": "Style Color"
+      "content": "Slog barv"
     },
     {
       "type": "checkbox",
       "id": "enable_color",
       "default": true,
-      "label": "Enable Color Filter"
+      "label": "Barvni filter"
     },
     {
       "type": "checkbox",
       "id": "type_color",
       "default": true,
-      "label": "Enable Circle Style",
-      "info": "If disable color is style Square"
+      "label": "Okrogel slog",
+      "info": "Če je izklopljeno, so barve kvadratne."
     },
     {
       "type": "select",
       "id": "style_color",
-      "label": "Style Color Filter",
+      "label": "Slog barvnega filtra",
       "default": "color_list",
       "options": [
         {
           "value": "color_list",
-          "label": "List Color"
+          "label": "Barve v seznamu"
         },
         {
           "value": "color_grid",
-          "label": "Grid Color"
+          "label": "Barve v mreži"
         }
       ]
     },
     {
       "type": "header",
-      "content": " Style Size"
+      "content": "Slog velikosti"
     },
     {
       "type": "select",
       "id": "style_size",
-      "label": "Style Size Filter",
+      "label": "Slog filtra velikosti",
       "default": "list",
       "options": [
         {
           "value": "list",
-          "label": "List Size"
+          "label": "Velikosti v seznamu"
         },
         {
           "value": "grid",
-          "label": "Grid Size"
+          "label": "Velikosti v mreži"
         }
       ]
     },
     {
       "type": "header",
-      "content": "Customize Item Hover"
+      "content": "Prilagoditev ob prehodu miške"
     },
     {
       "type": "checkbox",
       "id": "enable_edit_item",
       "default": false,
-      "label": "Enable Select Item",
-      "info": "If disable Item Hover This page gets config in Theme settings / Product card => Item Hover Style"
+      "label": "Izbira sloga kartice",
+      "info": "Če je izklopljeno, velja nastavitev iz Nastavitve teme › Product Card."
     },
     {
       "type": "select",
       "id": "select_item",
-      "label": "Item Hover Style ",
+      "label": "Slog ob prehodu miške",
       "default": "product-7",
       "options": [
         {
           "value": "product-1",
-          "label": "Style - 1"
+          "label": "Slog 1"
         },
         {
           "value": "product-2",
-          "label": "Style - 2"
+          "label": "Slog 2"
         },
         {
           "value": "product-3",
-          "label": "Style - 3"
+          "label": "Slog 3"
         },
         {
           "value": "product-4",
-          "label": "Style - 4"
+          "label": "Slog 4"
         },
         {
           "value": "product-5",
-          "label": "Style - 5"
+          "label": "Slog 5"
         },
         {
           "value": "product-6",
-          "label": "Style - 6"
+          "label": "Slog 6"
         },
         {
           "value": "product-7",
-          "label": "Style - 7"
+          "label": "Slog 7"
         },
         {
           "value": "product-8",
-          "label": "Style - 8"
+          "label": "Slog 8"
         },
         {
           "value": "product-9",
-          "label": "Style - 9"
+          "label": "Slog 9"
         },
         {
           "value": "product-10",
-          "label": "Style - 10"
+          "label": "Slog 10"
         }
       ]
     },
     {
       "type": "header",
-      "content": "Link List Collection"
+      "content": "Seznam zbirk"
     },
     {
       "type": "checkbox",
       "id": "enable_list_collection",
       "default": false,
-      "label": "Link Collection Sidebar"
+      "label": "Zbirke v stranskem stolpcu"
     },
     {
       "id": "link_list_head",
       "type": "link_list",
-      "label": "Menu"
+      "label": "Meni"
     },
     {
       "type": "header",
-      "content": "Section padding"
+      "content": "Odmik sekcije"
     },
     {
       "type": "range",
@@ -525,7 +525,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Top padding",
+      "label": "Odmik zgoraj",
       "default": 36
     },
     {
@@ -535,7 +535,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Bottom padding",
+      "label": "Odmik spodaj",
       "default": 36
     }
   ]

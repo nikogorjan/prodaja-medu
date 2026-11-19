@@ -614,119 +614,119 @@
 
 {% schema %}
 {
-  "name": "Footer",
+  "name": "Noga strani",
   "settings": [
     {
       "type": "select",
       "id": "setwidth",
-      "label": "Full Width",
+      "label": "Čez celo širino",
       "default": "container",
       "options": [
         {
           "value": "container",
-          "label": "Box"
+          "label": "Okvir"
         },
         {
           "value": "container-fluid",
-          "label": "Container Fluid"
+          "label": "Čez celo širino"
         },
         {
           "value": "full",
-          "label": "Full"
+          "label": "Polna širina"
         }
       ]
     },
     {
       "type": "image_picker",
       "id": "image_bg",
-      "label": "Background image"
+      "label": "Slika ozadja"
     },
     {
       "type": "color",
       "id": "background",
-      "label": "Background",
+      "label": "Ozadje",
       "default": "#282828"
     },
     {
       "type": "color",
       "id": "border_headfooter",
-      "label": "Border Top Head Footer",
+      "label": "Zgornja obroba noge",
       "default": "#f8f8f8"
     },
     {
       "type": "color",
       "id": "border-copryright",
-      "label": "Border Bottom Footer",
+      "label": "Spodnja obroba noge",
       "default": "#f8f8f8"
     },
     {
       "type": "color",
       "id": "text",
-      "label": "Text",
+      "label": "Besedilo",
       "default": "#fff"
     },
     {
       "type": "color",
       "id": "text_hover",
-      "label": "Text Hover",
+      "label": "Besedilo ob prehodu miške",
       "default": "#fff"
     },
     {
       "type": "color",
       "id": "title",
-      "label": "Title",
+      "label": "Naslov",
       "default": "#000"
     },
     {
       "type": "select",
       "id": "footer_align_title",
-      "label": "Align Footer",
+      "label": "Poravnava noge",
       "default": "left",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "Levo"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "Na sredini"
         },
         {
           "value": "right",
-          "label": "Right"
+          "label": "Desno"
         }
       ]
     },
     {
       "type": "checkbox",
       "id": "enable_border",
-      "label": "Enable Border Column",
+      "label": "Obroba med stolpci",
       "default": false
     },
     {
       "type": "header",
-      "content": "Typography Title Footer"
+      "content": "Pisava naslovov v nogi"
     },
     {
       "type": "select",
       "id": "footer_font_family",
-      "label": "Footer Title Font Family",
+      "label": "Pisava naslovov v nogi",
       "default": "--g-font-1",
       "options": [
         {
           "value": "--g-font-1",
-          "label": "Heading"
+          "label": "Pisava naslovov"
         },
         {
           "value": "--g-font-2",
-          "label": "Body"
+          "label": "Pisava besedila"
         }
       ]
     },
     {
       "type": "range",
       "id": "footer_font_size_title",
-      "label": "Font Size Title",
+      "label": "Velikost pisave naslovov",
       "max": 48,
       "min": 10,
       "step": 1,
@@ -736,31 +736,31 @@
     {
       "type": "select",
       "id": "footer_font_weight",
-      "label": "Fotter Title Font Weight ",
+      "label": "Debelina pisave naslovov v nogi",
       "default": "400",
       "options": [
         {
           "value": "300",
-          "label": "Light"
+          "label": "Tanko"
         },
         {
           "value": "400",
-          "label": "Normal"
+          "label": "Običajno"
         },
         {
           "value": "500",
-          "label": "Medium"
+          "label": "Srednje"
         },
         {
           "value": "600",
-          "label": "Semi"
+          "label": "Polkrepko"
         }
       ]
     },
     {
       "type": "range",
       "id": "footer_spacing",
-      "label": "Footer Title Letter Spacing",
+      "label": "Razmik črk naslovov v nogi",
       "max": 1,
       "min": 0,
       "step": 0.1,
@@ -770,115 +770,115 @@
     {
       "type": "select",
       "id": "footer_typetext",
-      "label": "Footer TitleType Text",
+      "label": "Velikost črk naslovov v nogi",
       "default": "uppercase",
       "options": [
         {
           "value": "uppercase",
-          "label": "Uppercase"
+          "label": "Velike črke"
         },
         {
           "value": "lowercase",
-          "label": "Lowercase"
+          "label": "Male črke"
         },
         {
           "value": "capitalize",
-          "label": "Capitalize"
+          "label": "Prva črka velika"
         }
       ]
     },
     {
       "type": "checkbox",
       "id": "acc_mobile",
-      "label": "Enable Accordion Mobile",
+      "label": "Zložljivi stolpci na telefonu",
       "default": true
     },
     {
       "type": "header",
-      "content": "--- Bottom Footer"
+      "content": "--- Spodnji del noge"
     },
     {
       "type": "header",
-      "content": "Currency selector",
-      "info": "To add a currency, go to your [currency settings.](/admin/settings/payments)"
+      "content": "Izbira valute",
+      "info": "Valuto dodate v [nastavitvah valut](/admin/settings/payments)."
     },
     {
       "type": "checkbox",
       "id": "e_ft_currency",
-      "label": "Enable Currency",
+      "label": "Pokaži izbiro valute",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_image",
-      "label": "Enable Image Currency",
+      "label": "Pokaži zastavico valute",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_name",
-      "label": "Enable Country Name",
+      "label": "Pokaži ime države",
       "default": true
     },
     {
       "type": "header",
-      "content": "Language selector",
-      "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+      "content": "Izbira jezika",
+      "info": "Jezik dodate v [nastavitvah jezikov](/admin/settings/languages)."
     },
     {
       "type": "checkbox",
       "id": "enable_language_selector",
-      "label": "Enable Language",
+      "label": "Pokaži izbiro jezika",
       "default": true
     },
     {
       "type": "select",
       "id": "payment_info",
-      "label": "Payment Info",
+      "label": "Načini plačila",
       "default": "svg",
       "options": [
         {
           "value": "svg",
-          "label": "Svg Payment"
+          "label": "Ikone plačil (SVG)"
         },
         {
           "value": "img",
-          "label": "Image Payment"
+          "label": "Slika načinov plačila"
         }
       ]
     },
     {
       "type": "image_picker",
       "id": "imgpayment",
-      "label": "Image Payment"
+      "label": "Slika načinov plačila"
     },
     {
       "id": "link_list_bottom",
       "type": "link_list",
-      "label": "Menu Bottom",
+      "label": "Spodnji meni",
       "default": "footer",
-      "info": "This menu won't show dropdown items"
+      "info": "Ta meni ne prikaže podmenijev."
     },
     {
       "type": "checkbox",
       "id": "copyright",
-      "label": "Enable Copyright",
+      "label": "Pokaži avtorske pravice",
       "default": true
     },
     {
       "type": "textarea",
       "id": "customcopyright",
-      "label": "Custom Copyright",
+      "label": "Besedilo avtorskih pravic",
       "default": "© 2021, Your Store. Powered by Shopify"
     },
     {
       "type": "header",
-      "content": "Footer Padding "
+      "content": "Odmiki noge"
     },
     {
       "type": "range",
       "id": "padding_top",
-      "label": "Padding Top",
+      "label": "Odmik zgoraj",
       "max": 200,
       "min": 0,
       "step": 4,
@@ -888,7 +888,7 @@
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "Padding Bottom",
+      "label": "Odmik spodaj",
       "max": 200,
       "min": 0,
       "step": 4,
@@ -897,12 +897,12 @@
     },
     {
       "type": "header",
-      "content": "Footer Padding Mobile "
+      "content": "Odmiki noge na telefonu"
     },
     {
       "type": "range",
       "id": "m_padding_top",
-      "label": "Padding Top Mobile",
+      "label": "Odmik zgoraj na telefonu",
       "max": 200,
       "min": 0,
       "step": 4,
@@ -912,7 +912,7 @@
     {
       "type": "range",
       "id": "m_padding_bottom",
-      "label": "Padding Bottom Mobile",
+      "label": "Odmik spodaj na telefonu",
       "max": 200,
       "min": 0,
       "step": 4,
@@ -923,19 +923,19 @@
   "blocks": [
     {
       "type": "social",
-      "name": "Social accounts",
+      "name": "Družbena omrežja",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "title",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Follow us"
         },
         {
           "type": "select",
           "id": "width",
-          "label": "Container width",
+          "label": "Širina vsebine",
           "default": "25%",
           "options": [
             {
@@ -976,19 +976,19 @@
     },
     {
       "type": "menu",
-      "name": "Menu",
+      "name": "Meni",
       "settings": [
         {
           "id": "link_list",
           "type": "link_list",
-          "label": "Menu",
+          "label": "Meni",
           "default": "footer",
-          "info": "This menu won't show dropdown items"
+          "info": "Ta meni ne prikaže podmenijev."
         },
         {
           "type": "select",
           "id": "width",
-          "label": "Container width",
+          "label": "Širina vsebine",
           "default": "25%",
           "options": [
             {
@@ -1029,12 +1029,12 @@
     },
     {
       "type": "text",
-      "name": "Text",
+      "name": "Besedilo",
       "settings": [
         {
           "type": "image_picker",
           "id": "logofooter",
-          "label": "Image"
+          "label": "Slika"
         },
         {
           "type": "range",
@@ -1043,25 +1043,25 @@
           "max": 400,
           "step": 10,
           "unit": "px",
-          "label": "Width Image",
+          "label": "Širina slike",
           "default": 130
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Text column"
         },
         {
           "type": "textarea",
           "id": "text",
-          "label": "Text",
+          "label": "Besedilo",
           "default": "<p>Share store details, promotions, or brand content with your customers</p>"
         },
         {
           "type": "select",
           "id": "width",
-          "label": "Container width",
+          "label": "Širina vsebine",
           "default": "25%",
           "options": [
             {
@@ -1102,12 +1102,12 @@
     },
     {
       "type": "line",
-      "name": "Line",
+      "name": "Črta",
       "settings": [
         {
           "type": "select",
           "id": "width",
-          "label": "Container width",
+          "label": "Širina vsebine",
           "default": "25%",
           "options": [
             {
@@ -1148,104 +1148,104 @@
     },
     {
       "type": "contact",
-      "name": "Contact Infor",
+      "name": "Kontaktni podatki",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "title",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Information"
         },
         {
           "type": "textarea",
           "id": "contact_des",
-          "label": "Description",
+          "label": "Opis",
           "default": "Have a question? Give us a call or fill out the contact form. We’d love to hear from you"
         },
         {
           "type": "text",
           "id": "contact_addess",
-          "label": "Addess",
+          "label": "Naslov",
           "default": "123 Sky Tower, West 21th Street, Suite 721, NY"
         },
         {
           "type": "text",
           "id": "contact_phone",
-          "label": "Phone",
+          "label": "Telefon",
           "default": "+844 123 456 789"
         },
         {
           "type": "text",
           "id": "contact_mail",
-          "label": "Email",
+          "label": "E-pošta",
           "default": "sale@yourcompany.com"
         },
         {
           "type": "text",
           "id": "contact_web",
-          "label": "Website",
+          "label": "Spletna stran",
           "default": "www.example.com"
         }
       ]
     },
     {
       "type": "newsletter",
-      "name": "Newsletter",
+      "name": "E-novice",
       "limit": 1,
       "settings": [
         {
           "type": "color",
           "id": "bg_new",
-          "label": "Bg Input",
+          "label": "Ozadje vnosnega polja",
           "default": "#f7f7f7"
         },
         {
           "type": "color",
           "id": "border_new",
-          "label": "Border Input",
+          "label": "Obroba vnosnega polja",
           "default": "#f7f7f7"
         },
         {
           "type": "color",
           "id": "btn_bg_new",
-          "label": "Button Bg",
+          "label": "Ozadje gumba",
           "default": "#000000"
         },
         {
           "type": "color",
           "id": "btn_cl_new",
-          "label": "Button Color",
+          "label": "Barva gumba",
           "default": "#ffffff"
         },
         {
           "type": "color",
           "id": "btn_cl_new_hover",
-          "label": "Button Color Hover",
+          "label": "Barva gumba ob prehodu miške",
           "default": "#ffffff"
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Heading",
+          "label": "Naslov",
           "default": "Be in the know"
         },
         {
           "type": "richtext",
           "id": "subheading",
-          "label": "Subheading",
+          "label": "Podnaslov",
           "default": "<p>Promotions, new products and sales. Directly to your inbox.</p>"
         },
         {
           "type": "checkbox",
           "id": "enablesocial",
-          "label": "Enable Social",
+          "label": "Pokaži družbena omrežja",
           "default": true
         },
         {
           "type": "select",
           "id": "width",
-          "label": "Container width",
+          "label": "Širina vsebine",
           "default": "25%",
           "options": [
             {

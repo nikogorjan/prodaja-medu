@@ -15,7 +15,7 @@
   assign c_bg = settings.semen_c_bg | default: '#faf7f0'
   assign c_tint = settings.semen_c_tint | default: '#f6edd3'
   assign c_plate = settings.semen_c_plate | default: '#f3ebda'
-  assign c_footer = settings.semen_c_footer | default: '#f3ebda'
+  assign c_footer = settings.semen_c_footer | default: '#e8cf98'
   assign c_dark = settings.semen_c_dark | default: '#2b2825'
   assign c_ink = settings.semen_c_ink | default: '#252320'
   assign c_text = settings.semen_c_text | default: '#3f3b35'
@@ -23,6 +23,8 @@
   assign c_accent = settings.semen_c_accent | default: '#252320'
   assign c_gold = settings.semen_c_gold | default: '#c99a5c'
   assign c_gold_ink = c_gold | color_darken: 22
+  # naslovi v medeni nogi: zlata, potemnjena dovolj za berljivost drobnih črk (vsaj 4,5 : 1)
+  assign c_footer_title = c_gold | color_darken: 32
   assign c_dark_2 = c_dark | color_lighten: 6
   assign c_rule_solid = c_ink | color_mix: c_bg, 12
   assign c_rule_footer = c_ink | color_mix: c_footer, 9
@@ -43,6 +45,7 @@
     --s-tint: {{ c_tint }};
     --s-plate: {{ c_plate }};
     --s-footer: {{ c_footer }};
+    --s-footer-title: {{ c_footer_title }};
     --s-dark: {{ c_dark }};
     --s-dark-2: {{ c_dark_2 }};
     --s-ink: {{ c_ink }};
@@ -221,12 +224,12 @@
   body .blog__item .article__photo-wrapper img { transition: transform 1.4s var(--s-ease); }
   body .blog__item:hover .article__photo-wrapper img { transform: scale(1.035); }
 
-  /* ---------- noga: svetla, s svetlimi črtami ---------- */
+  /* ---------- noga: svetla medena (drugačna od pasov sekcij), s svetlimi črtami ---------- */
   body .site-footer {
     --footer-bg: var(--s-footer);
     --footer-text: var(--s-text);
-    --footer-title: var(--s-gold-ink);
-    --footer-text-hover: var(--s-gold-ink);
+    --footer-title: var(--s-footer-title);
+    --footer-text-hover: var(--s-footer-title);
     --footer-head-border: var(--s-rule-footer);
     --bottom-copy-border: var(--s-rule-footer);
     --color-footer-text-rgb: {{ text_r }}, {{ text_g }}, {{ text_b }};
@@ -235,20 +238,20 @@
     color: var(--s-text) !important;
     border-top: 0;
   }
-  body .site-footer .site-footer__section-title { color: var(--s-gold-ink) !important; }
+  body .site-footer .site-footer__section-title { color: var(--s-footer-title) !important; }
   body .site-footer a, body .site-footer .site-footer__list-item a { color: var(--s-ink) !important; transition: color .25s; }
-  body .site-footer a:hover, body .site-footer .site-footer__list-item a:hover { color: var(--s-gold-ink) !important; }
+  body .site-footer a:hover, body .site-footer .site-footer__list-item a:hover { color: var(--s-footer-title) !important; }
   body .site-footer p, body .site-footer .rte p, body .site-footer .rte { color: var(--s-text) !important; }
-  body .site-footer .footer-email .form-group label, body .site-footer .form-group label { background-color: var(--s-footer) !important; color: var(--s-muted) !important; }
+  body .site-footer .footer-email .form-group label, body .site-footer .form-group label { background-color: var(--s-footer) !important; color: var(--s-text) !important; }
   body .site-footer .footer__newsletter .form-control { border: 0 !important; border-bottom: 1px solid var(--s-rule-strong) !important; border-radius: 0; padding-left: 0 !important; color: var(--s-ink) !important; }
-  body .site-footer .footer__newsletter .form-control::placeholder { color: var(--s-muted); }
+  body .site-footer .footer__newsletter .form-control::placeholder { color: var(--s-text); opacity: .85; }
   body .site-footer .footer__newsletter .form-control:focus { border-bottom-color: var(--s-gold) !important; box-shadow: none; }
   body .site-footer .btn-theme { background: var(--s-accent) !important; border-color: var(--s-accent) !important; color: var(--s-bg) !important; }
   body .site-footer .btn-theme span { color: inherit !important; }
   body .site-footer .btn-theme:before { background: var(--s-gold); }
   body .site-footer .btn-theme:hover, body .site-footer .btn-theme:hover span { color: var(--s-ink) !important; border-color: var(--s-gold) !important; }
   body .site-footer .social-icons a, body .site-footer .social-icons svg { color: var(--s-ink) !important; fill: currentColor; }
-  body .site-footer .social-icons a:hover { color: var(--s-gold-ink) !important; }
+  body .site-footer .social-icons a:hover { color: var(--s-footer-title) !important; }
 
   /* ---------- lepljiva vrstica "Dodaj v košarico" na strani izdelka: kremna kot stran ---------- */
   body .sticky-cart-wr {

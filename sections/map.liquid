@@ -221,42 +221,42 @@
 
 {% schema %}
 {
-  "name": "Map",
+  "name": "Zemljevid z naslovom",
   "class": "index-section",
   "settings": [
     {
       "type": "header",
-      "content": "Text"
+      "content": "Besedilo"
     },
     {
       "id": "heading",
       "type": "text",
-      "label": "Heading",
+      "label": "Naslov",
       "default": "Our store"
     },
     {
       "id": "address",
       "type": "richtext",
-      "label": "Address and hours",
+      "label": "Naslov in delovni čas",
       "default": "<p>123 Fake St.<br>Toronto, Canada</p><p>Mon - Fri, 10am - 9pm<br>Saturday, 11am - 9pm<br>Sunday, 11am - 5pm</p>"
     },
     {
       "id": "map_address",
       "type": "text",
-      "label": "Map address",
-      "info": "Google Maps will find the exact location",
+      "label": "Naslov za zemljevid",
+      "info": "Google Zemljevidi poiščejo točno lokacijo.",
       "default": "301 Front St W, Toronto"
     },
     {
       "id": "button_text",
       "type": "text",
-      "label": "Map link label",
+      "label": "Besedilo povezave do zemljevida",
       "default": "Get directions"
     },
     {
       "id": "show_pin",
       "type": "checkbox",
-      "label": "Show pin",
+      "label": "Pokaži žebljiček",
       "default": true
     },
     {
@@ -267,66 +267,66 @@
     },
     {
       "type": "header",
-      "content": "BACKGROUND"
+      "content": "OZADJE"
     },
     {
       "id": "api_key",
       "type": "text",
-      "label": "Google Maps API key",
-      "info": "You’ll need to [register a Google Maps API Key](https://help.shopify.com/manual/using-themes/troubleshooting/map-section-api-key) to display the map"
+      "label": "Ključ API za Google Zemljevide",
+      "info": "Za prikaz zemljevida potrebujete [ključ API za Google Zemljevide](https://help.shopify.com/manual/using-themes/troubleshooting/map-section-api-key)."
     },
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Image",
-      "info": "Displayed if the map isn’t loaded"
+      "label": "Slika",
+      "info": "Prikaže se, če se zemljevid ne naloži."
     },
     {
       "type": "textarea",
       "id": "map_code",
-      "label": "Iframe Google Map code",
-      "info": "[Get map here](https://www.embedgooglemap.net/)"
+      "label": "Koda iframe za Google Zemljevid",
+      "info": "[Kodo zemljevida dobite tukaj](https://www.embedgooglemap.net/)"
     },
     {
       "type": "select",
       "id": "background_image_position",
-      "label": "Image position",
+      "label": "Položaj slike",
       "default": "center center",
       "options": [
         {
-          "label": "Top left",
+          "label": "Zgoraj levo",
           "value": "top left"
         },
         {
-          "label": "Top Center",
+          "label": "Zgoraj na sredini",
           "value": "top center"
         },
         {
-          "label": "Top Right",
+          "label": "Zgoraj desno",
           "value": "top right"
         },
         {
-          "label": "Center Left",
+          "label": "Na sredini levo",
           "value": "center left"
         },
         {
-          "label": "Center Center",
+          "label": "Na sredini",
           "value": "center center"
         },
         {
-          "label": "Center Right",
+          "label": "Na sredini desno",
           "value": "center right"
         },
         {
-          "label": "Bottom Left",
+          "label": "Spodaj levo",
           "value": "bottom left"
         },
         {
-          "label": "Bottom Center",
+          "label": "Spodaj na sredini",
           "value": "bottom center"
         },
         {
-          "label": "Bottom Right",
+          "label": "Spodaj desno",
           "value": "bottom right"
         }
       ]
@@ -334,7 +334,7 @@
   ],
   "presets": [
     {
-      "name": "Map"
+      "name": "Zemljevid z naslovom"
     }
   ]
 }

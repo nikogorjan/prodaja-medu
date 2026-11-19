@@ -308,6 +308,8 @@
         {% endcase %}
       {%- endfor -%}
       </div>
+      {%- comment -%} Šemen: nalepke nagrad na glavni fotografiji (Nastavitve teme › Šemen · Nagrade) {%- endcomment -%}
+      {%- render 'semen-awards', product: product, context: 'media' -%}
     </div>
     {%- if product.images.size > 1 -%}
     <div class="photos__item photos__item--thumbs {{ layout_mobile }}">

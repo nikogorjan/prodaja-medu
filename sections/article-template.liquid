@@ -310,7 +310,7 @@
 
 {% schema %}
 {
-  "name": "Article content",
+  "name": "Članek – vsebina",
   "settings": [
     {
       "type": "select",
@@ -318,192 +318,192 @@
       "options": [
         {
           "value": "",
-          "label": "None"
+          "label": "Brez"
         },
         {
           "value": "fade",
-          "label": "Fade"
+          "label": "Pojav"
         },
         {
           "value": "fade-up",
-          "label": "Fade Up"
+          "label": "Pojav navzgor"
         },
         {
           "value": "fade-down",
-          "label": "Fade Down"
+          "label": "Pojav navzdol"
         },
         {
           "value": "fade-left",
-          "label": "Fade Left"
+          "label": "Pojav v levo"
         },
         {
           "value": "fade-right",
-          "label": "Fade Right"
+          "label": "Pojav v desno"
         },
         {
           "value": "fade-up-right",
-          "label": "Fade Up Right"
+          "label": "Pojav navzgor desno"
         },
         {
           "value": "fade-up-left",
-          "label": "Fade Up Left"
+          "label": "Pojav navzgor levo"
         },
         {
           "value": "fade-down-right",
-          "label": "Fade Down Right"
+          "label": "Pojav navzdol desno"
         },
         {
           "value": "fade-down-left",
-          "label": "Fade Down Left"
+          "label": "Pojav navzdol levo"
         },
         {
           "value": "flip-up",
-          "label": "Flip Up"
+          "label": "Obrat navzgor"
         },
         {
           "value": "flip-down",
-          "label": "Flip Down"
+          "label": "Obrat navzdol"
         },
         {
           "value": "flip-left",
-          "label": "Flip Left"
+          "label": "Obrat v levo"
         },
         {
           "value": "flip-right",
-          "label": "Flip Right"
+          "label": "Obrat v desno"
         },
         {
           "value": "slide-up",
-          "label": "Slide Up"
+          "label": "Zdrs navzgor"
         },
         {
           "value": "slide-down",
-          "label": "Slide Down"
+          "label": "Zdrs navzdol"
         },
         {
           "value": "slide-left",
-          "label": "Slide Left"
+          "label": "Zdrs v levo"
         },
         {
           "value": "slide-right",
-          "label": "Slide Right"
+          "label": "Zdrs v desno"
         },
         {
           "value": "zoom-in",
-          "label": "Zoom In"
+          "label": "Povečava"
         },
         {
           "value": "zoom-in-up",
-          "label": "Zoom In Up"
+          "label": "Povečava navzgor"
         },
         {
           "value": "zoom-in-down",
-          "label": "Zoom In Down"
+          "label": "Povečava navzdol"
         },
         {
           "value": "zoom-in-left",
-          "label": "Zoom In Left"
+          "label": "Povečava v levo"
         },
         {
           "value": "zoom-in-right",
-          "label": "Zoom In Right"
+          "label": "Povečava v desno"
         },
         {
           "value": "zoom-out",
-          "label": "Zoom Out"
+          "label": "Pomanjšava"
         },
         {
           "value": "zoom-out-up",
-          "label": "Zoom Out Up"
+          "label": "Pomanjšava navzgor"
         },
         {
           "value": "zoom-out-down",
-          "label": "Zoom Out Down"
+          "label": "Pomanjšava navzdol"
         },
         {
           "value": "zoom-out-left",
-          "label": "Zoom Out Feft"
+          "label": "Pomanjšava v levo"
         },
         {
           "value": "zoom-out-right",
-          "label": "Zoom Out Right"
+          "label": "Pomanjšava v desno"
         }
       ],
-      "label": "Select Animation"
+      "label": "Animacija ob prikazu"
     },
     {
       "type": "color",
       "id": "bgsection",
-      "label": "Background Section",
+      "label": "Ozadje sekcije",
       "default": "rgba(0,0,0,0)"
     },
     {
       "id": "gradient_bg",
       "type": "color_background",
-      "label": "Background Overlay",
-      "info":"Case => Title over Image"
+      "label": "Barva prekrivnega sloja",
+      "info":"Velja pri postavitvi »Naslov na sliki«."
     },
     {
       "type": "header",
-      "content": "Layout Featured Image"
+      "content": "Postavitev glavne slike"
     },
     {
       "type": "select",
       "id": "layout_featured",
-      "label": "Layout",
+      "label": "Postavitev",
       "default": "basic",
       "options": [
         {
           "value": "basic",
-          "label": "Title before Image"
+          "label": "Naslov nad sliko"
         },
         {
           "value": "first-image",
-          "label": "Title after Image"
+          "label": "Naslov pod sliko"
         },
         {
           "value": "in-image",
-          "label": "Title over Image"
+          "label": "Naslov na sliki"
         }
       ]
     },
     {
       "type": "select",
       "id": "align",
-      "label": "Align Title",
+      "label": "Poravnava naslova",
       "default": "left",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "Levo"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "Na sredini"
         }
       ]
     },
     {
       "type": "checkbox",
       "id": "enable_image",
-      "label": "Enable Image",
+      "label": "Pokaži sliko",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_full",
-      "label": "Enable Full Image",
+      "label": "Slika čez celo širino",
       "default": true
     },
     {
       "type": "select",
       "id": "height_adapt",
-      "label": "Height",
+      "label": "Višina",
       "default": "750",
       "options": [
         {
           "value": "adapt",
-          "label": "Adapt to first image"
+          "label": "Prilagodi prvi sliki"
         },
         {
           "value": "350",
@@ -530,94 +530,94 @@
     {
       "type": "checkbox",
       "id": "enable_comment",
-      "label": "Enable comment",
+      "label": "Vklopi komentarje",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_date",
-      "label": "Enable Date",
+      "label": "Pokaži datum",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_author",
-      "label": "Enable Author",
+      "label": "Pokaži avtorja",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "social_sharing_blog",
-      "label": "Enable blog post sharing",
+      "label": "Gumbi za deljenje objave",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "blog_show_previous_and_next_buttons",
-      "label": "Show next/ previous buttons",
+      "label": "Gumba prejšnji in naslednji",
       "default": true
     },
     {
       "type": "header",
-      "content": "Sidebar"
+      "content": "Stranski stolpec"
     },
     {
       "type": "checkbox",
       "id": "sidebar_enable",
-      "label": "Enable",
+      "label": "Vklopi",
       "default": true
     },
     {
       "type": "select",
       "id": "sidebar_position",
-      "label": "Position",
+      "label": "Položaj",
       "default": "right",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "Levo"
         },
         {
           "value": "right",
-          "label": "Right"
+          "label": "Desno"
         }
       ]
     },
     {
       "type": "header",
-      "content": "Section Padding "
+      "content": "Notranji odmik sekcije"
     },
     {
       "type": "text",
       "id": "paddingsection",
-      "label": "Padding Section",
+      "label": "Notranji odmik sekcije",
       "default": "0px 0px 0px 0px",
-      "info": "Padding: Top Right Bottom Left"
+      "info": "Notranji odmik: zgoraj desno spodaj levo"
     },
     {
       "type": "text",
       "id": "paddingmobile",
-      "label": "Padding Section Mobile",
+      "label": "Notranji odmik sekcije na telefonu",
       "default": "40px 0px 40px 0px",
-      "info": "Padding: Top Right Bottom Left"
+      "info": "Notranji odmik: zgoraj desno spodaj levo"
     },
     {
       "type": "header",
-      "content": "Section Margin "
+      "content": "Zunanji odmik sekcije"
     },
     {
       "type": "text",
       "id": "marginsection",
-      "label": "Margin Section",
+      "label": "Zunanji odmik sekcije",
       "default": "0px 0px 0px 0px",
-      "info": "Margin: Top Right Bottom Left"
+      "info": "Zunanji odmik: zgoraj desno spodaj levo"
     },
     {
       "type": "text",
       "id": "marginmobile",
-      "label": "Margin Mobile",
+      "label": "Zunanji odmik na telefonu",
       "default": "0px 0px 0px 0px",
-      "info": "Margin: Top Right Bottom Left"
+      "info": "Zunanji odmik: zgoraj desno spodaj levo"
     }
   ]
 }

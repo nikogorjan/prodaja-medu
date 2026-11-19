@@ -553,5 +553,43 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     body.body-theme { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
     body.body-theme > .page-container { flex: 1 0 auto; display: flex; flex-direction: column; }
     body.body-theme > .page-container > .main-content { flex: 1 0 auto; }
+    /* Nalepke nagrad na fotografiji izdelka (snippet semen-awards, Nastavitve teme › Šemen · Nagrade).
+       Pravila teme za slike v kartici (100 % širina in višina, absolutni položaj, povečava ob prehodu) tu ne veljajo. */
+    .s-awards { position: absolute !important; z-index: 4; display: flex; gap: 6px; pointer-events: none; width: auto !important; height: auto !important; --s-award-size: {{ settings.semen_awards_size_card | default: 68 }}px; }
+    .s-awards--media { z-index: 6; gap: 10px; --s-award-size: {{ settings.semen_awards_size_media | default: 120 }}px; }
+    .s-awards--bottom-right { right: 8px; bottom: 8px; }
+    .s-awards--bottom-left { left: 8px; bottom: 8px; }
+    .s-awards--top-right { right: 8px; top: 8px; }
+    .s-awards--top-left { left: 8px; top: 8px; }
+    .s-awards--media.s-awards--bottom-right { right: 16px; bottom: 16px; }
+    .s-awards--media.s-awards--bottom-left { left: 16px; bottom: 16px; }
+    .s-awards--media.s-awards--top-right { right: 16px; top: 16px; }
+    .s-awards--media.s-awards--top-left { left: 16px; top: 16px; }
+    .s-awards img.s-award { position: static !important; display: block; width: var(--s-award-size) !important; height: auto !important; max-width: none; aspect-ratio: 1 / 1; object-fit: contain !important; transform: none !important; opacity: 1 !important; border-radius: 50%; filter: drop-shadow(0 4px 10px rgba(30, 22, 12, .22)); }
+    /* 3 ali več nalepk: prekrivajo se kot kovanci (prva na vrhu) in se vse prilagodijo fotografiji.
+       Skupina zasede največ --s-award-fit širine (kartica 90 %, stran izdelka 80 %). Nalepka je velika največ
+       --s-award-size; ko prostora zmanjka, se pomanjša in bolj prekrije, vidnih ostane vsaj 45 % vsake.
+       Ko je prostora dovolj, se prekrivajo 30 %, da letnice ostanejo vidne. --n (število) nastavi semen-awards. */
+    .s-awards { --s-award-fit: 0.9; }
+    .s-awards--media { --s-award-fit: 0.8; }
+    .s-awards--stack { gap: 0; }
+    .s-awards--stack.s-awards--bottom-right, .s-awards--stack.s-awards--top-right { left: 8px; justify-content: flex-end; }
+    .s-awards--stack.s-awards--bottom-left, .s-awards--stack.s-awards--top-left { right: 8px; justify-content: flex-start; }
+    .s-awards--media.s-awards--stack.s-awards--bottom-right, .s-awards--media.s-awards--stack.s-awards--top-right { left: 16px; }
+    .s-awards--media.s-awards--stack.s-awards--bottom-left, .s-awards--media.s-awards--stack.s-awards--top-left { right: 16px; }
+    .s-awards--stack img.s-award { --s: min(var(--s-award-size), 100% * var(--s-award-fit) / (1 + (var(--n) - 1) * 0.45)); position: relative !important; flex: 0 0 auto; width: var(--s) !important; }
+    .s-awards--stack img.s-award + img.s-award { margin-left: calc(min(0.7 * var(--s), (100% * var(--s-award-fit) - var(--s)) / (var(--n) - 1)) - var(--s)) !important; }
+    .s-awards--stack img.s-award:nth-child(1) { z-index: 8; }
+    .s-awards--stack img.s-award:nth-child(2) { z-index: 7; }
+    .s-awards--stack img.s-award:nth-child(3) { z-index: 6; }
+    .s-awards--stack img.s-award:nth-child(4) { z-index: 5; }
+    .s-awards--stack img.s-award:nth-child(5) { z-index: 4; }
+    .s-awards--stack img.s-award:nth-child(6) { z-index: 3; }
+    .s-awards--stack img.s-award:nth-child(7) { z-index: 2; }
+    .s-awards--stack img.s-award:nth-child(8) { z-index: 1; }
+    @media (max-width: 749px) {
+      .s-awards { --s-award-size: {{ settings.semen_awards_size_card | default: 68 | times: 0.8 | round }}px; }
+      .s-awards--media { --s-award-size: {{ settings.semen_awards_size_media | default: 120 | times: 0.7 | round }}px; }
+    }
 </style>
 {%- render 'semen-design' -%}

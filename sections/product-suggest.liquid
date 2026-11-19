@@ -77,18 +77,18 @@
 {%- endif -%}
 {% schema %}
 {
-  "name": "Product Suggest",
+  "name": "Obvestilo o nakupih",
   "max_blocks": 100,
   "settings": [
     {
       "type": "checkbox",
       "id": "enable",
-      "label": "Enable"
+      "label": "Vklopi"
     },
     {
       "type": "range",
       "id": "duration",
-      "label": "Duration Time",
+      "label": "Trajanje prikaza",
       "min": 5,
       "max": 20,
       "step": 1,
@@ -98,36 +98,36 @@
     {
       "type": "text",
       "id": "text",
-      "label": "Pretext",
+      "label": "Uvodno besedilo",
       "default": "Someone recently bought "
     },
     {
           "type": "text",
           "id": "verify",
-          "label": "Verify",
+          "label": "Oznaka »preverjeno«",
           "default": "Verified"
         }
   ],
   "blocks": [
     {
       "type": "product",
-      "name": "Product",
+      "name": "Izdelek",
       "settings": [
         {
           "type": "product",
           "id": "product",
-          "label": "Product"
+          "label": "Izdelek"
         },
         {
           "type": "text",
           "id": "local",
-          "label": "Local",
+          "label": "Kraj",
           "default": "in Blackburn, UK"
         },
         {
           "type": "text",
           "id": "time",
-          "label": "Time",
+          "label": "Čas",
           "default": "about 21 minutes ago"
         }
         

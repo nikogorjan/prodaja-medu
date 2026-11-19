@@ -297,97 +297,97 @@
 </div>
 {% schema %}
 {
-  "name": "Collection Banner",
+  "name": "Zbirka – pasica",
   "class": "section",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_breadcrumb",
       "default": true,
-      "label": "Show Breadcrumb"
+      "label": "Pokaži drobtinice"
     },
     {
       "type": "select",
       "id": "width_breadcrumb",
-      "label": "Width Breadcrumb",
+      "label": "Širina drobtinic",
       "default": "container",
       "options": [
         {
           "value": "container",
-          "label": "Box"
+          "label": "Okvir"
         },
         {
           "value": "container-fluid",
-          "label": "Container Fluid"
+          "label": "Čez celo širino"
         }
       ]
     },
     {
       "type": "header",
-      "content": "Collection Banner"
+      "content": "Pasica zbirke"
     },
     {
       "type": "paragraph",
-      "content": "Add a description or image by editing your collection. [Learn more](https://help.shopify.com/manual/products/collections/collection-layout)"
+      "content": "Opis ali sliko dodate pri urejanju zbirke. [Več o tem](https://help.shopify.com/manual/products/collections/collection-layout)"
     },
     {
       "type": "checkbox",
       "id": "show_collection_description",
       "default": true,
-      "label": "Show collection description"
+      "label": "Pokaži opis zbirke"
     },
     {
       "type": "checkbox",
       "id": "show_collection_image",
       "default": false,
-      "label": "Show collection image",
-      "info": "For best results, use an image with a 16:9 aspect ratio. [Learn more](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)"
+      "label": "Pokaži sliko zbirke",
+      "info": "Najbolje deluje slika z razmerjem 16:9. [Več o tem](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)"
     },
     {
       "type": "header",
-      "content": "All Products",
-      "info": "Config default All Products"
+      "content": "Vsi izdelki",
+      "info": "Privzete nastavitve za vse izdelke"
     },
     {
       "type": "checkbox",
       "id": "save_allproducts",
       "default": true,
-      "label": "Apply to all product collection",
-      "info":"collection handle 'all' will use this configuration"
+      "label": "Uporabi za vse zbirke izdelkov",
+      "info":"Velja za zbirko z oznako 'all' (vsi izdelki)."
     },
     {
       "type": "image_picker",
       "id": "img_bannercollection",
-      "label": "Background All Products"
+      "label": "Ozadje za vse izdelke"
     },
     {
       "type": "text",
       "id": "title_all",
-      "label": "Title All Products",
+      "label": "Naslov za vse izdelke",
       "default": "All Products"
     },
     {
       "type": "richtext",
       "id": "des_all",
-      "label": "Descripion All Products",
+      "label": "Opis za vse izdelke",
       "default": "<p>Shop now, not later. Browse the best of our favorite sale styles and brands.</p>"
     },
     {
       "type": "header",
-      "content": "Style"
+      "content": "Slog"
     },
     {
       "type": "select",
       "id": "style_banner",
-      "label": "Style Banner",
+      "label": "Slog pasice",
       "options": [
         {
           "value": "full",
-          "label": "Banner Full"
+          "label": "Pasica čez celo širino"
         },
         {
           "value": "split",
-          "label": "Banner Split"
+          "label": "Deljena pasica"
         }
       ],
       "default": "full"
@@ -395,7 +395,7 @@
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "Velikost naslova",
       "options": [
         {
           "value": "h1",
@@ -415,11 +415,11 @@
     {
       "type": "select",
       "id": "img_height",
-      "label": "Image Height",
+      "label": "Višina slike",
       "options": [
         {
           "value": "orginal",
-          "label": "Original Image"
+          "label": "Izvirna slika"
         },
         {
           "value": "250px",
@@ -446,31 +446,31 @@
     },
     {
       "type": "header",
-      "content": "Color",
-      "info": "Only applicable when collection image is used."
+      "content": "Barva",
+      "info": "Velja le, če zbirka uporablja sliko."
     },
     {
       "type": "color",
       "id": "bg_color",
-      "label": "Background Color",
+      "label": "Barva ozadja",
       "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "image_text_color",
-      "label": "Text",
+      "label": "Besedilo",
       "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "image_overlay_color",
-      "label": "Overlay",
+      "label": "Prekrivni sloj",
       "default": "#000000"
     },
     {
       "type": "range",
       "id": "image_overlay_opacity",
-      "label": "Overlay opacity",
+      "label": "Moč prekrivnega sloja",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -479,25 +479,25 @@
     },
     {
       "type": "header",
-      "content": "Link Menu Collection"
+      "content": "Meni zbirk"
     },
     {
       "type": "checkbox",
       "id": "enable_collection",
       "default": true,
-      "label": "Show Menu Collections"
+      "label": "Pokaži meni zbirk"
     },
     {
       "type": "checkbox",
       "id": "enable_count",
       "default": true,
-      "label": "Show items number"
+      "label": "Pokaži število izdelkov"
     },
     {
       "id": "link_list_head",
       "type": "link_list",
-      "label": "Menu",
-      "info": "This menu won't show dropdown items"
+      "label": "Meni",
+      "info": "Ta meni ne prikaže podmenijev."
     }
   ]
 }

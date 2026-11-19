@@ -4,7 +4,7 @@
     "theme_name": "Molding",
     "theme_author": "Oranthemes",
     "theme_version": "2.0",
-    "theme_documentation_url": "https:\/\/oranthemes.gitbook.io\/magnoli-theme\/",
+    "theme_documentation_url": "https://oranthemes.gitbook.io/magnoli-theme/",
     "theme_support_email": "oranthemes@gmail.com"
   },
   {
@@ -47,7 +47,7 @@
         "type": "color",
         "id": "semen_c_footer",
         "label": "Noga",
-        "default": "#f3ebda"
+        "default": "#e8cf98"
       },
       {
         "type": "color",
@@ -90,6 +90,71 @@
         "label": "Okrasna zlata (črte, ikone)",
         "info": "Drobne oznake nad naslovi se samodejno izpišejo v temnejši bronasti, da so dobro berljive.",
         "default": "#c99a5c"
+      }
+    ]
+  },
+  {
+    "name": "Šemen · Nagrade",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Nalepke nagrad (na primer medalje z ocenjevanja medu) se prikažejo na fotografiji izdelka v trgovini in na strani izdelka. Izdelku jih dodate v Izdelki › izberite izdelek › Metapolja › Nagrade, kjer izberete slike nalepk iz Vsebina › Datoteke. Prikažejo se vse nalepke izdelka v vrstnem redu iz metapolja (prva je na vrhu). Ko jih je več, se prekrivajo in po potrebi pomanjšajo, da ostanejo na fotografiji."
+      },
+      {
+        "type": "checkbox",
+        "id": "semen_awards_cards",
+        "label": "Nalepke na izdelkih v trgovini",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "semen_awards_media",
+        "label": "Nalepke na strani izdelka",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "semen_awards_position",
+        "label": "Položaj nalepke na fotografiji",
+        "default": "bottom-right",
+        "options": [
+          {
+            "value": "bottom-right",
+            "label": "Spodaj desno"
+          },
+          {
+            "value": "bottom-left",
+            "label": "Spodaj levo"
+          },
+          {
+            "value": "top-right",
+            "label": "Zgoraj desno"
+          },
+          {
+            "value": "top-left",
+            "label": "Zgoraj levo"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "semen_awards_size_card",
+        "label": "Največja velikost nalepke v trgovini",
+        "min": 40,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 68
+      },
+      {
+        "type": "range",
+        "id": "semen_awards_size_media",
+        "label": "Največja velikost nalepke na strani izdelka",
+        "min": 60,
+        "max": 200,
+        "step": 5,
+        "unit": "px",
+        "default": 120
       }
     ]
   },
@@ -374,7 +439,7 @@
         "type": "text",
         "id": "font_family_google",
         "label": "Google font",
-        "info": "💡 [Find more Google fonts](https:\/\/fonts.google.com)",
+        "info": "💡 [Find more Google fonts](https://fonts.google.com)",
         "default": "Staatliches"
       },
       {
@@ -395,7 +460,7 @@
         "type": "text",
         "id": "font_family2_google",
         "label": "Google font",
-        "info": "💡 [Find more Google fonts](https:\/\/fonts.google.com)",
+        "info": "💡 [Find more Google fonts](https://fonts.google.com)",
         "default": "Staatliches"
       },
       {
@@ -1397,7 +1462,7 @@
         "type": "image_picker",
         "id": "share_image",
         "label": "Image",
-        "info": "Shown when sharing a link on social media. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/troubleshooting\/showing-social-media-thumbnail-images\/) about image thumbnails."
+        "info": "Shown when sharing a link on social media. [Learn more](https://help.shopify.com/manual/using-themes/troubleshooting/showing-social-media-thumbnail-images/) about image thumbnails."
       },
       {
         "type": "header",
@@ -1407,55 +1472,55 @@
         "type": "text",
         "id": "social_facebook_link",
         "label": "Facebook",
-        "info": "https:\/\/www.facebook.com\/shopify"
+        "info": "https://www.facebook.com/shopify"
       },
       {
         "type": "text",
         "id": "social_twitter_link",
         "label": "Twitter",
-        "info": "https:\/\/twitter.com\/shopify"
+        "info": "https://twitter.com/shopify"
       },
       {
         "type": "text",
         "id": "social_pinterest_link",
         "label": "Pinterest",
-        "info": "https:\/\/www.pinterest.com\/shopify"
+        "info": "https://www.pinterest.com/shopify"
       },
       {
         "type": "text",
         "id": "social_instagram_link",
         "label": "Instagram",
-        "info": "https:\/\/instagram.com\/shopify"
+        "info": "https://instagram.com/shopify"
       },
       {
         "type": "text",
         "id": "social_tumblr_link",
         "label": "Tumblr",
-        "info": "http:\/\/shopify.tumblr.com"
+        "info": "http://shopify.tumblr.com"
       },
       {
         "type": "text",
         "id": "social_snapchat_link",
         "label": "Snapchat",
-        "info": "https:\/\/www.snapchat.com\/add\/shopify"
+        "info": "https://www.snapchat.com/add/shopify"
       },
       {
         "type": "text",
         "id": "social_youtube_link",
         "label": "YouTube",
-        "info": "https:\/\/www.youtube.com\/user\/shopify"
+        "info": "https://www.youtube.com/user/shopify"
       },
       {
         "type": "text",
         "id": "social_vimeo_link",
         "label": "Vimeo",
-        "info": "https:\/\/vimeo.com\/shopify"
+        "info": "https://vimeo.com/shopify"
       },
       {
         "type": "text",
         "id": "social_tiktok_link",
         "label": "Tiktok",
-        "info": "https:\/\/tiktok.com\/shopify"
+        "info": "https://tiktok.com/shopify"
       },
       {
         "type": "header",
@@ -1576,7 +1641,7 @@
         "type": "page",
         "id": "page_wishlist",
         "label": "Wishlist page",
-        "info": "[Create new page](\/admin\/pages\/new) and select template suffix is page.wishlist"
+        "info": "[Create new page](/admin/pages/new) and select template suffix is page.wishlist"
       },
       {
         "type": "header",
@@ -2408,7 +2473,7 @@
         "type": "richtext",
         "id": "coupon_code_content",
         "label": "Content",
-        "default": "<p>Discount Code<\/p>"
+        "default": "<p>Discount Code</p>"
       },
       {
         "type": "header",
@@ -2438,7 +2503,7 @@
       {
         "type": "text",
         "id": "free_end",
-        "default": "for <b>FREE SHIPPING<\/b>",
+        "default": "for <b>FREE SHIPPING</b>",
         "label": "End Text Price"
       },
       {
@@ -2487,7 +2552,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Do not forget to include the snippet shipping-calculator in your cart.liquid template where you want the shipping calculator to appear. You can get the snippet here: [shipping-calculator.liquid](https:\/\/github.com\/carolineschnapp\/shipping-calculator\/blob\/master\/shipping-calculator.liquid) ."
+        "content": "Do not forget to include the snippet shipping-calculator in your cart.liquid template where you want the shipping calculator to appear. You can get the snippet here: [shipping-calculator.liquid](https://github.com/carolineschnapp/shipping-calculator/blob/master/shipping-calculator.liquid) ."
       },
       {
         "type": "header",
@@ -2522,7 +2587,7 @@
       },
       {
         "type": "paragraph",
-        "content": "💡 [Find safe checkout image?](http:\/\/bit.ly\/2ZLhS4V)"
+        "content": "💡 [Find safe checkout image?](http://bit.ly/2ZLhS4V)"
       },
       {
         "type": "image_picker",

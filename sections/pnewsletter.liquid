@@ -115,38 +115,38 @@
 
 {% schema %}
 {
-  "name": "Popup newsletter",
+  "name": "Pojavno okno za e-novice",
   "settings": [
     {
       "type": "checkbox",
       "id": "pnewletter_enable",
-      "label": "Enable"
+      "label": "Vklopi"
     },
     {
       "type": "header",
-      "content": "Layout"
+      "content": "Postavitev"
     },
     {
       "type": "select",
       "id": "pnew_style",
-      "label": "Layout Popup",
+      "label": "Postavitev okna",
       "default": "pnew_style-1",
       "options": [
         {
           "value": "pnew_style-1",
-          "label": "Popup Split, Left Image"
+          "label": "Deljeno okno, slika levo"
         },
         {
           "value": "pnew_style-2",
-          "label": "Popup Split, Right Image"
+          "label": "Deljeno okno, slika desno"
         },
         {
           "value": "pnew_style-3",
-          "label": "Popup Box"
+          "label": "Okno v okvirju"
         },
         {
           "value": "pnew_style-4",
-          "label": "Popup Top Image"
+          "label": "Okno s sliko zgoraj"
         }
       ]
     },
@@ -157,7 +157,7 @@
       "max": 900,
       "step": 10,
       "unit": "px",
-      "label": "Width Popup",
+      "label": "Širina okna",
       "default": 800
     },
     {
@@ -167,12 +167,12 @@
       "max": 600,
       "step": 10,
       "unit": "px",
-      "label": "Height Popup",
+      "label": "Višina okna",
       "default": 500
     },
     {
       "type": "header",
-      "content": "Time"
+      "content": "Čas"
     },
     {
       "type": "range",
@@ -181,7 +181,7 @@
       "max": 100,
       "step": 1,
       "unit": "s",
-      "label": "Delayed popups",
+      "label": "Zakasnitev okna",
       "default": 3
     },
     {
@@ -191,52 +191,52 @@
       "max": 900,
       "step": 10,
       "unit": "min",
-      "label": "Cookie times to show popup again",
+      "label": "Čez koliko dni se okno spet pokaže",
       "default": 20
     },
     {
       "type": "header",
-      "content": "Background"
+      "content": "Ozadje"
     },
     {
       "type": "color",
       "id": "pnewletter_background",
-      "label": "Color"
+      "label": "Barva"
     },
     {
       "type": "image_picker",
       "id": "pnewletter_bgimage",
-      "label": "Image"
+      "label": "Slika"
     },
     {
       "type": "header",
-      "content": "Sub Title"
+      "content": "Nadnaslov"
     },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Sub Title",
+      "label": "Nadnaslov",
       "default": "FIRST TIMER?"
     },
     {
       "type": "header",
-      "content": "Title"
+      "content": "Naslov"
     },
     {
       "type": "text",
       "id": "pnewletter_title",
-      "label": "Text",
+      "label": "Besedilo",
       "default": "Follow us"
     },
     {
       "type": "color",
       "id": "pnewletter_title_cl",
-      "label": "Color"
+      "label": "Barva"
     },
     {
       "type": "select",
       "id": "pnew_size_heading",
-      "label": "Size of Heading",
+      "label": "Velikost naslova",
       "default": "h3",
       "options": [
         {
@@ -259,29 +259,29 @@
     },
     {
       "type": "header",
-      "content": "Description"
+      "content": "Opis"
     },
     {
       "type": "textarea",
       "id": "pnewletter_description",
-      "label": "Text / HTML codes",
+      "label": "Besedilo ali HTML",
       "default": "<p>We promise we won't write to you often, only for the fun stuff.</p>\n<ul>\n<li>Exclusive offers</li>\n<li>Sales</li>\n</ul>"
     },
     {
       "type": "color",
       "id": "pnewletter_description_cl",
-      "label": "Color"
+      "label": "Barva"
     },
     {
       "type": "text",
       "id": "button",
-      "label": "Button text",
+      "label": "Besedilo gumba",
       "default": "Get Offer"
     },
     {
       "type": "textarea",
       "id": "pnewletter_description_sub",
-      "label": "Description Sub",
+      "label": "Dodatni opis",
       "default": "<p>By completing this form, you are signing up to receive our emails and can unsubscribe at any time</p>"
     }
   ]

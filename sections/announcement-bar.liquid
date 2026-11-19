@@ -145,13 +145,13 @@
 {% schema %}
 
 {
-  "name": "Announcement Bar ",
+  "name": "Obvestilna vrstica",
   "class":"header-announcement",
   "settings": [
     {
       "type": "checkbox",
       "id": "enable",
-      "label": "Enable",
+      "label": "Vklopi",
       "default": true
     },
     {
@@ -160,164 +160,164 @@
       "options": [
         {
           "value": "",
-          "label": "None"
+          "label": "Brez"
         },
         {
           "value": "fade",
-          "label": "Fade"
+          "label": "Pojav"
         },
         {
           "value": "fade-up",
-          "label": "Fade Up"
+          "label": "Pojav navzgor"
         },
         {
           "value": "fade-down",
-          "label": "Fade Down"
+          "label": "Pojav navzdol"
         },
         {
           "value": "fade-left",
-          "label": "Fade Left"
+          "label": "Pojav v levo"
         },
         {
           "value": "fade-right",
-          "label": "Fade Right"
+          "label": "Pojav v desno"
         },
         {
           "value": "fade-up-right",
-          "label": "Fade Up Right"
+          "label": "Pojav navzgor desno"
         },
         {
           "value": "fade-up-left",
-          "label": "Fade Up Left"
+          "label": "Pojav navzgor levo"
         },
         {
           "value": "fade-down-right",
-          "label": "Fade Down Right"
+          "label": "Pojav navzdol desno"
         },
         {
           "value": "fade-down-left",
-          "label": "Fade Down Left"
+          "label": "Pojav navzdol levo"
         },
         {
           "value": "flip-up",
-          "label": "Flip Up"
+          "label": "Obrat navzgor"
         },
         {
           "value": "flip-down",
-          "label": "Flip Down"
+          "label": "Obrat navzdol"
         },
         {
           "value": "flip-left",
-          "label": "Flip Left"
+          "label": "Obrat v levo"
         },
         {
           "value": "flip-right",
-          "label": "Flip Right"
+          "label": "Obrat v desno"
         },
         {
           "value": "slide-up",
-          "label": "Slide Up"
+          "label": "Zdrs navzgor"
         },
         {
           "value": "slide-down",
-          "label": "Slide Down"
+          "label": "Zdrs navzdol"
         },
         {
           "value": "slide-left",
-          "label": "Slide Left"
+          "label": "Zdrs v levo"
         },
         {
           "value": "slide-right",
-          "label": "Slide Right"
+          "label": "Zdrs v desno"
         },
         {
           "value": "zoom-in",
-          "label": "Zoom In"
+          "label": "Povečava"
         },
         {
           "value": "zoom-in-up",
-          "label": "Zoom In Up"
+          "label": "Povečava navzgor"
         },
         {
           "value": "zoom-in-down",
-          "label": "Zoom In Down"
+          "label": "Povečava navzdol"
         },
         {
           "value": "zoom-in-left",
-          "label": "Zoom In Left"
+          "label": "Povečava v levo"
         },
         {
           "value": "zoom-in-right",
-          "label": "Zoom In Right"
+          "label": "Povečava v desno"
         },
         {
           "value": "zoom-out",
-          "label": "Zoom Out"
+          "label": "Pomanjšava"
         },
         {
           "value": "zoom-out-up",
-          "label": "Zoom Out Up"
+          "label": "Pomanjšava navzgor"
         },
         {
           "value": "zoom-out-down",
-          "label": "Zoom Out Down"
+          "label": "Pomanjšava navzdol"
         },
         {
           "value": "zoom-out-left",
-          "label": "Zoom Out Feft"
+          "label": "Pomanjšava v levo"
         },
         {
           "value": "zoom-out-right",
-          "label": "Zoom Out Right"
+          "label": "Pomanjšava v desno"
         }
       ],
-      "label": "Select Animation"
+      "label": "Animacija ob prikazu"
     },
     {
       "type": "select",
       "id": "setwidth",
-      "label": "Full Width",
+      "label": "Čez celo širino",
       "default": "container",
       "options": [
         {
           "value": "container",
-          "label": "Box"
+          "label": "Okvir"
         },
         {
           "value": "container-fluid",
-          "label": "Container Fluid"
+          "label": "Čez celo širino"
         },
         {
           "value": "full",
-          "label": "Full"
+          "label": "Polna širina"
         }
       ]
     },
     {
       "type": "header",
-      "content": "Color",
-      "info": "Background, Color"
+      "content": "Barva",
+      "info": "Ozadje, barva"
     },
     {
       "type": "color",
       "id": "background",
-      "label": "Background",
+      "label": "Ozadje",
       "default": "#000000"
     },
     {
       "id": "gradient_bg",
       "type": "color_background",
-      "label": "Background Gradient"
+      "label": "Prelivno ozadje"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "Barva besedila",
       "default": "#ffffff"
     },
     {
       "type": "header",
-      "content": "Config"
+      "content": "Nastavitve"
     },
     {
         "type": "range",
@@ -326,59 +326,59 @@
         "max": 20,
         "step": 1,
         "unit": "px",
-        "label": "Font Size",
+        "label": "Velikost pisave",
         "default": 14
     },
     {
       "type": "checkbox",
       "id": "enable_image",
-      "label": "Enable Image Currency",
+      "label": "Pokaži zastavico valute",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_name",
-      "label": "Enable Country Name",
+      "label": "Pokaži ime države",
       "default": true
     },
     {
           "type": "checkbox",
           "id": "enable_money_topbar",
-          "label": "Enable Currencies Topbar",
+          "label": "Valute v zgornji vrstici",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "enable_language_topbar",
-          "label": "Enable Language Topbar",
+          "label": "Jeziki v zgornji vrstici",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "enable_social_topbar",
-          "label": "Enable Social Topbar",
+          "label": "Družbena omrežja v zgornji vrstici",
           "default": true
         },
         {
           "type": "checkbox",
           "id": "enable_login_topbar",
-          "label": "Enable Login Topbar",
+          "label": "Prijava v zgornji vrstici",
           "default": true
         },
         {
           "type": "textarea",
           "id": "text_topbar",
-          "label": "Text on Topbar"
+          "label": "Besedilo v zgornji vrstici"
         },
         {
           "type": "text",
           "id": "buttonall_topbar",
-          "label": "Button" 
+          "label": "Gumb" 
         },
         {
           "type": "url",
           "id": "buttonall_link_topbar",
-          "label": "Button Link"
+          "label": "Povezava gumba"
         }
   ]
   

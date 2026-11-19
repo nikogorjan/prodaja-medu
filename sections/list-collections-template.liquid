@@ -202,74 +202,74 @@ endif
 
 {% schema %}
 {
-  "name": "Collections list page",
+  "name": "Seznam zbirk – stran",
   "settings": [
     {
       "type": "paragraph",
-      "content": "All of your collections are listed by default. To customize your list, choose 'Selected' and add collections."
+      "content": "Privzeto so prikazane vse zbirke. Za lasten izbor izberite »Izbrane« in dodajte zbirke."
     },
     {
       "type": "radio",
       "id": "display_type",
-      "label": "Select collections to show",
+      "label": "Izberite zbirke za prikaz",
       "default": "all",
       "options": [
         {
           "value": "all",
-          "label": "All"
+          "label": "Vse"
         },
         {
           "value": "selected",
-          "label": "Selected"
+          "label": "Izbrane"
         }
       ]
     },
     {
       "type": "select",
       "id": "layout",
-      "label": "Select layout",
+      "label": "Izberite postavitev",
       "default": "grid",
       "options": [
         {
           "value": "grid",
-          "label": "Style Grid"
+          "label": "Slog mreže"
         },
         {
           "value": "list",
-          "label": "Style List"
+          "label": "Slog seznama"
         }
       ]
     },
     {
       "type": "select",
       "id": "sort",
-      "label": "Sort collections by:",
-      "info": "Sorting only applies when 'All' is selected",
+      "label": "Razvrsti zbirke po:",
+      "info": "Razvrščanje velja le, če je izbrano »Vse«.",
       "default": "alphabetical",
       "options": [
         {
           "value": "products_high",
-          "label": "Product count, high to low"
+          "label": "Število izdelkov, od največ"
         },
         {
           "value": "products_low",
-          "label": "Product count, low to high"
+          "label": "Število izdelkov, od najmanj"
         },
         {
           "value": "alphabetical",
-          "label": "Alphabetically, A-Z"
+          "label": "Po abecedi, A–Ž"
         },
         {
           "value": "alphabetical_reversed",
-          "label": "Alphabetically, Z-A"
+          "label": "Po abecedi, Ž–A"
         },
         {
           "value": "date",
-          "label": "Date, old to new"
+          "label": "Datum, od starejših"
         },
         {
           "value": "date_reversed",
-          "label": "Date, new to old"
+          "label": "Datum, od novejših"
         }
       ]
     }
@@ -277,10 +277,10 @@ endif
   "blocks": [
     {
       "type": "collection",
-      "name": "Collection",
+      "name": "Zbirka",
       "settings": [
         {
-          "label": "Collection",
+          "label": "Zbirka",
           "id": "collection",
           "type": "collection"
         }

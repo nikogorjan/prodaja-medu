@@ -271,14 +271,14 @@
 
 {% schema %}
 {
-  "name": "Search",
+  "name": "Iskanje – rezultati",
   "tag": "section",
   "class": "section",
   "settings": [
     {
       "type": "select",
       "id": "search_perrow",
-      "label": "Item per row",
+      "label": "Elementov v vrsti",
       "default": "3",
       "options": [
         {
@@ -307,7 +307,7 @@
       "type": "checkbox",
       "id": "enable_filtering",
       "default": true,
-      "label": "Enable filtering"
+      "label": "Vklopi filtre"
     },
     {
       "type": "select",
@@ -315,46 +315,46 @@
       "options": [
         {
           "value": "horizontal",
-          "label": "Horizontal"
+          "label": "Vodoravno"
         },
         {
           "value": "vertical",
-          "label": "Vertical"
+          "label": "Navpično"
         },
         {
           "value": "drawer",
-          "label": "Drawer"
+          "label": "Stranski predal"
         }
       ],
       "default": "horizontal",
-      "label": "Desktop filter layout",
-      "info": "Drawer is the default mobile layout."
+      "label": "Postavitev filtrov na računalniku",
+      "info": "Na telefonu so filtri vedno v stranskem predalu."
     },
     {
       "type": "checkbox",
       "id": "enable_sorting",
       "default": true,
-      "label": "Enable sorting"
+      "label": "Vklopi razvrščanje"
     },
     {
       "type": "header",
-      "content": "Article"
+      "content": "Članek"
     },
     {
       "type": "checkbox",
       "id": "article_show_date",
       "default": true,
-      "label": "Article show date"
+      "label": "Pri člankih pokaži datum"
     },
     {
       "type": "checkbox",
       "id": "article_show_author",
       "default": false,
-      "label": "Article show author"
+      "label": "Pri člankih pokaži avtorja"
     },
     {
       "type": "header",
-      "content": "Padding"
+      "content": "Notranji odmik"
     },
     {
       "type": "range",
@@ -363,7 +363,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding Top",
+      "label": "Odmik zgoraj",
       "default": 36
     },
     {
@@ -373,7 +373,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding Bottom",
+      "label": "Odmik spodaj",
       "default": 36
     }
   ]
