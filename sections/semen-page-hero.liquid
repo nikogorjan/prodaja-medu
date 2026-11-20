@@ -16,7 +16,7 @@
 <style>
   .sph-{{ sid }} { --sph-accent: {{ s.accent }}; position: relative; background: var(--s-panel-bg, {{ s.bgsection }}); color: var(--s-panel-text, var(--s-on-dark-muted, #cfc4b4)); overflow: hidden; }
   .sph-{{ sid }} .sph-media { position: relative; overflow: hidden; background: var(--s-panel-media, var(--s-dark-2, #3a312b)); aspect-ratio: 16 / 11; }
-  .sph-{{ sid }} .sph-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{ s.image_position }}; display: block; }
+  .sph-{{ sid }} .sph-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{ s.image_position }}; display: block; transform: scale(var(--sph-zoom, 1)); }
   .sph-{{ sid }} .sph-panel { position: relative; z-index: 2; padding: 36px 20px 44px; }
   .sph-{{ sid }} .sph-inner { max-width: 620px; }
   .sph-{{ sid }} .sph-crumbs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 26px; font-size: 13px; line-height: 20px; color: var(--s-panel-faint, rgba(255,255,255,.55)); }
@@ -62,7 +62,8 @@
 </style>
 
 <section class="sph-{{ sid }} sph--{{ layout }}" aria-labelledby="SemenHeroTitle-{{ sid }}">
-  <div class="sph-media">
+  {%- comment -%} PNG fotografije stranke imajo v datoteki vgrajene prozorne zaobljene vogale: rahla povečava jih obreže. {%- endcomment -%}
+  <div class="sph-media"{% if s.image.src contains '.png' %} style="--sph-zoom: 1.03"{% endif %}>
     {%- if s.image != blank -%}
       {%- liquid
         if layout == 'split'

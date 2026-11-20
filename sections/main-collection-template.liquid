@@ -90,8 +90,17 @@
                 <label for="SortBy-sidebar">{{ 'products.facets.sort_by_label' | t }}</label>
               </h2>
               <div class="select">
-                {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+                {%- liquid
+                  assign sort_by = collection.sort_by | default: collection.default_sort_by
+                  # Šemen: "Po nagradah" (prazen sort_by) je izbrano, dokler kupec ne izbere drugega razvrščanja
+                  assign awards_first = false
+                  if section.settings.sort_awards and collection.sort_by == blank
+                    assign awards_first = true
+                    assign sort_by = ''
+                  endif
+                -%}
                 <select name="sort_by" class="facet-filters__sort select__select caption-large" id="SortBy-sidebar" aria-describedby="a11y-refresh-page-message">
+                  {%- if section.settings.sort_awards -%}<option value=""{% if awards_first %} selected="selected"{% endif %}>Po nagradah</option>{%- endif -%}
                   {%- for option in collection.sort_options -%}
                     <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
                   {%- endfor -%}
@@ -145,12 +154,14 @@
         filter_type: section.settings.filter_type,
         first_group: section.settings.first_group,
         open_group: section.settings.open_group,
-        productPerrow : productPerrow
+        productPerrow : productPerrow,
+        sort_awards: section.settings.sort_awards
         %}
       </aside>
     {%- endif -%}
 
-  <div id="ProductGridContainer" {% if filter_type == 'vertical' and section.settings.enable_filtering %} {% if  filter_check == 'drawer-collapse-left'%} class="col-12 px-0" {% else %}   class="col-md-9 pl-lg-5" {% endif %} {% endif %}>
+  {%- comment -%} Šemen: brez filtrov se mreža raztegne čez vso širino (starš je vrstica flex). {%- endcomment -%}
+  <div id="ProductGridContainer" {% unless section.settings.enable_filtering %} class="w-100" style="flex: 1 1 100%; min-width: 0;" {% endunless %}{% if filter_type == 'vertical' and section.settings.enable_filtering %} {% if  filter_check == 'drawer-collapse-left'%} class="col-12 px-0" {% else %}   class="col-md-9 pl-lg-5" {% endif %} {% endif %}>
     {%- paginate collection.products by section.settings.products_per_page -%}
       {%- if collection.products.size == 0 -%}
         <div class="collection collection--empty" id="product-grid" data-id="{{ section.id }}">
@@ -171,10 +182,29 @@
             {% if collection.products_count < 4 %} grid--{{ collection.products_count }}-col-tablet{% else %}
               {% if collection.products_count == 4 %} grid--4-col-desktop{% else %} grid--3-col-tablet grid--one-third-max grid--4-col-desktop grid--quarter-max{% endif %}
             {% endif %}">
+            {%- liquid
+              # Šemen: "Razvrsti po številu nagrad" - ko kupec ne izbere drugega razvrščanja, so izdelki z več
+              # nagradami (metapolje custom.nagrade) prvi, pri enakem številu ostane vrstni red zbirke.
+              # Razvršča izdelke na trenutni strani (Izdelkov na stran).
+              assign sort_awards = false
+              if section.settings.sort_awards and collection.sort_by == blank
+                assign sort_awards = true
+              endif
+              assign top_awards = 0
+              if sort_awards
+                for p in collection.products
+                  assign n = p.metafields.custom.nagrade.value.size | default: 0
+                  if n > top_awards
+                    assign top_awards = n
+                  endif
+                endfor
+              endif
+            -%}
+            {%- for level in (0..top_awards) reversed -%}
             {%- for product in collection.products -%}
-              
-              {%- if forloop.index > 2 -%}
-                
+              {%- if sort_awards -%}
+                {%- assign n = product.metafields.custom.nagrade.value.size | default: 0 -%}
+                {%- if n != level -%}{%- continue -%}{%- endif -%}
               {%- endif -%}
 
               <li class="grid__item {{ gridProduct }}">
@@ -184,6 +214,7 @@
                 -%}
                 {%- render 'product-card', product: product, size_image_grid: size_image_grid, cover_contain: cover_contain , enable_edit_item: enable_edit_item, select_item: select_item -%}
               </li>
+            {%- endfor -%}
             {%- endfor -%}
           </ul>
           {% case type_pagi %}
@@ -274,6 +305,13 @@
       "step": 1,
       "default": 16,
       "label": "Izdelkov na stran"
+    },
+    {
+      "type": "checkbox",
+      "id": "sort_awards",
+      "label": "Razvrsti po številu nagrad",
+      "info": "Ko kupec ne izbere drugega razvrščanja, so izdelki z največ nagradami (metapolje Nagrade) prvi. Pri enakem številu ostane vrstni red zbirke. Razvrsti izdelke na trenutni strani.",
+      "default": true
     },
     {
       "type": "select",

@@ -15,6 +15,13 @@
 
 {%- liquid
   assign sort_by = results.sort_by | default: results.default_sort_by
+  # Šemen: sort_awards (nastavitev sekcije zbirke "Razvrsti po številu nagrad"): prva možnost "Po nagradah" (prazen
+  # sort_by) je izbrana, dokler kupec ne izbere drugega razvrščanja; zbirka takrat razvrsti izdelke po nagradah.
+  assign awards_first = false
+  if sort_awards and results.sort_by == blank
+    assign awards_first = true
+    assign sort_by = ''
+  endif
   assign total_active_values = 0
   if results.url
     assign results_url = results.url
@@ -457,8 +464,9 @@
                   <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
                 </h2>
                 <div class="select">
-                  {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+                  {%- unless awards_first -%}{%- assign sort_by = results.sort_by | default: results.default_sort_by -%}{%- endunless -%}
                   <select name="sort_by" class="facet-filters__sort select__select caption-large" id="SortBy" aria-describedby="a11y-refresh-page-message">
+                    {%- if sort_awards -%}<option value=""{% if awards_first %} selected="selected"{% endif %}>Po nagradah</option>{%- endif -%}
                     {%- for option in results.sort_options -%}
                       <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
                     {%- endfor -%}
@@ -503,8 +511,9 @@
                 <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
               </h2>
               <div class="select">
-                {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+                {%- unless awards_first -%}{%- assign sort_by = results.sort_by | default: results.default_sort_by -%}{%- endunless -%}
                 <select name="sort_by" class="facet-filters__sort select__select caption-large" id="SortBy" aria-describedby="a11y-refresh-page-message">
+                  {%- if sort_awards -%}<option value=""{% if awards_first %} selected="selected"{% endif %}>Po nagradah</option>{%- endif -%}
                   {%- for option in results.sort_options -%}
                     <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
                   {%- endfor -%}
@@ -778,6 +787,7 @@
                       <label for="SortBy-mobile">{{ 'products.facets.sort_by_label' | t }}</label>
                       <div class="select">
                         <select name="sort_by" class="select__select" id="SortBy-mobile" aria-describedby="a11y-refresh-page-message">
+                          {%- if sort_awards -%}<option value=""{% if awards_first %} selected="selected"{% endif %}>Po nagradah</option>{%- endif -%}
                           {%- for option in results.sort_options -%}
                             <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
                           {%- endfor -%}
@@ -864,8 +874,9 @@
               <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
             </h2>
             <div class="select">
-              {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+              {%- unless awards_first -%}{%- assign sort_by = results.sort_by | default: results.default_sort_by -%}{%- endunless -%}
               <select name="sort_by" class="facet-filters__sort select__select caption-large " id="SortBy" aria-describedby="a11y-refresh-page-message">
+                {%- if sort_awards -%}<option value=""{% if awards_first %} selected="selected"{% endif %}>Po nagradah</option>{%- endif -%}
                 {%- for option in results.sort_options -%}
                   <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
                 {%- endfor -%}

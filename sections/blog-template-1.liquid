@@ -112,7 +112,13 @@
 <div class="customstyle{{ section.id }}">
   <div class="container">
     <div class="row {% if section.settings.sidebar_position == 'left' %}flex-row-reverse{% endif %}">
-      {%- assign limit = section.settings.limit -%}
+      {%- liquid
+        # Šemen: with the big post on, each page = 1 big post + a full grid of `limit` posts (no empty slot)
+        assign limit = section.settings.limit
+        if section.settings.feature_first
+          assign limit = limit | plus: 1
+        endif
+      -%}
       {%- paginate blog.articles by limit -%}
       <div class="{% if section.settings.sidebar_enable %}col-md-9 {% if section.settings.sidebar_position == 'left' %} pl-lg-5 {% else %} pr-lg-5{% endif %} {% else %}col-12{% endif %}">
       <tag-blog class="mb-5 d-block" data-aos="{{ animation }}">
@@ -124,9 +130,29 @@
             <li class="template-tags-item {% if current_tags contains tag %} active {% endif %}">{{ tag | link_to_tag: tag | replace: '<a', '<a class="h6"' }}</li>
           {%- endfor -%}
         </ul>
-        </tag-blog>  
+        </tag-blog>
+        {%- liquid
+          assign feature_first = false
+          assign all_big = false
+          if section.settings.feature_first and blog.articles.size > 0
+            assign feature_first = true
+            # a page whose rest would not fill one grid row (e.g. the last page): every post big, no lone cards
+            assign rest = blog.articles.size | minus: 1
+            assign cols = section.settings.grid_column | plus: 0
+            if blog_layout == 'grid' and rest > 0 and rest < cols
+              assign all_big = true
+              for article in blog.articles
+                render 'semen-article-feature', article: article
+              endfor
+            else
+              render 'semen-article-feature', article: blog.articles.first
+            endif
+          endif
+        -%}
         <div class="row">
           {%- for article in blog.articles -%}
+          {%- if all_big -%}{%- break -%}{%- endif -%}
+          {%- if feature_first and forloop.first -%}{%- continue -%}{%- endif -%}
           <div class="{{ col }} {% if forloop.index == 3 %}col--last{% endif %}">
             {%- liquid
               case section.settings.item_style
@@ -442,6 +468,13 @@
       "step": 1,
       "label": "Omejitev",
       "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_first",
+      "label": "Najnovejša objava velika",
+      "info": "Prva objava na vsaki strani bloga (na prvi strani najnovejša) se prikaže velika, pod njo pa toliko objav, kot je nastavljeno pri Omejitvi. Pri 3 stolpcih izberite 6 ali 9, da so vrstice polne.",
+      "default": false
     },
     {
       "type": "header",

@@ -155,8 +155,24 @@
 {%- if section.settings.anchor != blank -%}
   <span id="{{ section.settings.anchor | handleize }}" style="display: block; scroll-margin-top: 90px;"></span>
 {%- endif -%}
+{%- if section.settings.layout == 'full' -%}
+<style>
+  /* Šemen: zemljevid čez celo širino, kartica z naslovom lebdi na njem (levo, poravnana z vsebino) */
+  #MapSection--{{ section.id }} .map-section__iframe::before { display: none; }
+  @media only screen and (min-width: 750px) {
+    #MapSection--{{ section.id }}.map-section--full { min-height: {{ section.settings.map_height }}px; }
+    #MapSection--{{ section.id }}.map-section--full .map-section__background-wrapper { left: 0 !important; width: 100% !important; pointer-events: auto; }
+    #MapSection--{{ section.id }}.map-section--full .map-section__wrapper { pointer-events: none; }
+    #MapSection--{{ section.id }}.map-section--full .map-section__content-wrapper { flex: 0 0 auto !important; max-width: 460px; pointer-events: auto; margin-left: max(20px, calc((100vw - var(--g-container, 1200px)) / 2 + 20px)); }
+    #MapSection--{{ section.id }}.map-section--full .map-section__content { min-height: 0 !important; height: auto; margin: 0 !important; padding: 44px 40px !important; background-color: var(--s-bg, #faf7f0) !important; }
+  }
+  @media only screen and (max-width: 749px) {
+    #MapSection--{{ section.id }}.map-section--full .map-section__iframe { height: {{ section.settings.map_height | times: 0.7 | round }}px; }
+  }
+</style>
+{%- endif -%}
 <div id="MapSection--{{ section.id }}"
-     class="map-section
+     class="map-section{% if section.settings.layout == 'full' %} map-section--full{% endif %}
            {% if display_map %}map-section--display-map{% endif %}
            {% if onboarding == true %}map-section--onboarding{% endif %}"
      data-section-id="{{ section.id }}"
@@ -258,6 +274,26 @@
       "type": "checkbox",
       "label": "Pokaži žebljiček",
       "default": true
+    },
+    {
+      "id": "layout",
+      "type": "select",
+      "label": "Postavitev",
+      "default": "split",
+      "options": [
+        { "value": "split", "label": "Besedilo levo, zemljevid desno" },
+        { "value": "full", "label": "Zemljevid čez celo širino, besedilo na kartici" }
+      ]
+    },
+    {
+      "id": "map_height",
+      "type": "range",
+      "label": "Višina zemljevida (čez celo širino)",
+      "min": 400,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 640
     },
     {
       "id": "anchor",

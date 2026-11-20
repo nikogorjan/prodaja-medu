@@ -11,11 +11,39 @@
       {%- if collection != blank -%}
       {%- assign product_limit = rows -%}
       <div class="row {% if section.settings.enable_creative %} psection-creative {% endif %} {% unless section.settings.padding %} m-0 {% endunless %}" data-aos="{{ section.settings.animation }}">
-        {%- for product in collection.products limit: product_limit -%}
-        <div class="{{ section.settings.colgrid }} col-md-6 col-sm-6 col-xs-6 col-6 {% unless section.settings.padding %} p-0 {% endunless %} col-item " 
-          data-aos="{{ section.settings.animation }}"  data-aos-delay="{{ forloop.index | times: 50 }}" >
+        {%- liquid
+          # Šemen: "Razvrsti po številu nagrad" - izdelki z več nagradami (metapolje custom.nagrade) so prvi,
+          # pri enakem številu ostane vrstni red zbirke. Zanka gre po ravneh od največ nagrad do 0.
+          assign top_awards = 0
+          if section.settings.sort_awards
+            for p in collection.products
+              assign n = p.metafields.custom.nagrade.value.size | default: 0
+              if n > top_awards
+                assign top_awards = n
+              endif
+            endfor
+          endif
+          assign shown = 0
+        -%}
+        {%- for level in (0..top_awards) reversed -%}
+        {%- for product in collection.products -%}
+        {%- liquid
+          if shown >= product_limit
+            break
+          endif
+          if section.settings.sort_awards
+            assign n = product.metafields.custom.nagrade.value.size | default: 0
+            if n != level
+              continue
+            endif
+          endif
+          assign shown = shown | plus: 1
+        -%}
+        <div class="{{ section.settings.colgrid }} col-md-6 col-sm-6 col-xs-6 col-6 {% unless section.settings.padding %} p-0 {% endunless %} col-item "
+          data-aos="{{ section.settings.animation }}"  data-aos-delay="{{ shown | times: 50 }}" >
           {%- render 'product-card', product: product, collection: collection -%}
         </div>
+        {%- endfor -%}
         {%- endfor -%}
         {% if section.settings.txtbutton != blank %}
         <div class="text-center col-12">
@@ -227,6 +255,13 @@
       "type": "collection",
       "id": "collection",
       "label": "Zbirka"
+    },
+    {
+      "type": "checkbox",
+      "id": "sort_awards",
+      "label": "Razvrsti po številu nagrad",
+      "info": "Izdelki z največ nagradami (metapolje Nagrade) so prvi. Pri enakem številu ostane vrstni red zbirke.",
+      "default": true
     },
     {
       "type": "checkbox",

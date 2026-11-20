@@ -1,3 +1,5 @@
-node_modules/
-.shopify/
-.DS_Store
+# Claude Code personal settings (permissions for this machine), never committed
+.claude/settings.local.json
+
+# temporary folder for files uploaded to Shopify through the browser
+.upload-tmp/

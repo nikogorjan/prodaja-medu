@@ -86,6 +86,15 @@
     .sct-{{ sid }} .sct-panel { padding: 52px 48px; }
     .sct-{{ sid }} .sct-form-wrap { border-left: 0; padding: 52px 56px 56px; }
   }
+  {%- if s.scheme == 'white' %}
+  /* Slonokoščeno ozadje: podatki in obrazec brez kartice, neposredno na podlagi (polja z obrobo) */
+  .sct-{{ sid }} .sct-panel { --s-panel-bg: transparent; padding: 0 0 40px !important; }
+  .sct-{{ sid }} .sct-form-wrap { background: transparent; border: 0; padding: 0 !important; }
+  @media (min-width: 990px) {
+    .sct-{{ sid }} .sct-grid { column-gap: 96px; }
+    .sct-{{ sid }} .sct-panel { padding: 0 !important; }
+  }
+  {%- endif %}
 </style>
 
 <section class="sct-{{ sid }}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>

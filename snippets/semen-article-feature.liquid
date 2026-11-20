@@ -1,0 +1,37 @@
+{%- comment -%}
+  Izpostavljena objava (Čebelarstvo Šemen): najnovejša objava velika, s fotografijo levo ter datumom, naslovom,
+  izvlečkom in gumbom desno. Uporabljata jo Novice na naslovnici (featured-articles) in seznam na strani bloga
+  (blog-template-1), ko je vklopljena nastavitev "Najnovejša objava velika"; ta objava se med manjšimi ne ponovi.
+  Fotografija je naslovna slika objave (Spletna trgovina › Objave v blogu › objava › Slika).
+  Uporaba: {% render 'semen-article-feature', article: blog.articles.first %}
+{%- endcomment -%}
+{%- if article != blank -%}
+  {%- liquid
+    assign sl_months = 'januar,februar,marec,april,maj,junij,julij,avgust,september,oktober,november,december' | split: ','
+    assign month_index = article.published_at | date: '%m' | plus: 0 | minus: 1
+    if request.locale.iso_code == 'sl'
+      assign read_more = 'Preberi več'
+    else
+      assign read_more = 'blogs.article.read_more' | t
+    endif
+  -%}
+  <article class="s-feature">
+    <a class="s-feature__media" href="{{ article.url }}" tabindex="-1" aria-hidden="true">
+      {%- if article.image -%}
+        {{ article.image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: '' }}
+      {%- endif -%}
+    </a>
+    <div class="s-feature__body">
+      <time class="subtop s-feature__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+        {%- if request.locale.iso_code == 'sl' -%}
+          {{ article.published_at | date: '%d' | plus: 0 }}. {{ sl_months[month_index] }} {{ article.published_at | date: '%Y' }}
+        {%- else -%}
+          {{ article.published_at | date: format: 'date' }}
+        {%- endif -%}
+      </time>
+      <h3 class="h2 s-feature__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h3>
+      <p class="s-feature__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 42 }}</p>
+      <a class="btn btn-theme s-feature__btn" href="{{ article.url }}">{{ read_more }}</a>
+    </div>
+  </article>
+{%- endif -%}

@@ -587,6 +587,65 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     .s-awards--stack img.s-award:nth-child(6) { z-index: 3; }
     .s-awards--stack img.s-award:nth-child(7) { z-index: 2; }
     .s-awards--stack img.s-award:nth-child(8) { z-index: 1; }
+    /* Izpostavljena objava (snippet semen-article-feature): Novice na naslovnici in seznam na strani bloga. */
+    .s-feature { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; align-items: center; margin: 0 0 56px; text-align: left; }
+    .s-feature__media { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--s-plate, #f3ebda); }
+    .s-feature__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2, .6, .2, 1); }
+    .s-feature:hover .s-feature__media img { transform: scale(1.03); }
+    .s-feature__date { display: block; margin-bottom: 12px; }
+    .s-feature .s-feature__title.h2 { margin: 0 0 16px; font-size: clamp(22px, 2.4vw, 32px) !important; line-height: 1.15 !important; text-wrap: balance; }
+    .s-feature__title a { color: inherit; text-decoration: none; }
+    .s-feature__excerpt { max-width: 52ch; margin: 0 0 30px; color: var(--s-muted, #5c6978); }
+    @media (min-width: 990px) {
+      .s-feature { grid-template-columns: 7fr 5fr; gap: 56px; margin-bottom: 72px; }
+    }
+    /* Postavitve slik v vsebini objave (razredi v HTML objave; brez teh pravil se slike samo zložijo ena pod drugo).
+       s-bento: velika slika levo + dve desno; s-duo: dve sliki; s-wide: ena široka; s-media: slika ob besedilu. */
+    .rte .s-bento, .rte .s-duo, .rte .s-wide { display: grid; gap: 12px; margin: 36px 0 12px; }
+    .rte .s-bento img, .rte .s-duo img, .rte .s-wide img, .rte .s-media img { display: block; width: 100%; height: 100%; max-width: none; margin: 0 !important; object-fit: cover; }
+    .rte .s-bento { grid-template-columns: 2fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); aspect-ratio: 16 / 9; }
+    .rte .s-bento img:first-child { grid-row: span 2; }
+    .rte .s-duo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rte .s-duo img { aspect-ratio: 4 / 3; height: auto; }
+    .rte .s-wide img { aspect-ratio: 16 / 9; height: auto; }
+    .rte .s-media { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: center; margin: 36px 0; }
+    .rte .s-media img { aspect-ratio: 4 / 3; height: auto; }
+    .rte .s-media > div > p:last-child { margin-bottom: 0; }
+    .rte .s-caption { margin: 0 0 36px; font-size: 14px; color: var(--s-muted, #5c6978); }
+    .rte .s-lead { font-size: 1.18em; line-height: 1.6; }
+    /* Brezplačna dostava v košarici: ena vrstica besedila na pšeničnem pasu, brez progresne vrstice (snippet free-shipping) */
+    .s-freeship { margin: 0 0 16px; padding: 12px 16px; background: var(--s-plate, #f3ebda); text-align: left; }
+    .s-freeship .s-freeship__text { margin: 0; font-size: 13px; line-height: 1.5; text-transform: none; letter-spacing: 0; color: var(--s-ink, #252320); }
+    .s-freeship .s-freeship__text strong { font-weight: 600; }
+    .s-freeship .progress { display: none !important; }
+    /* Pogosta vprašanja v objavi kot harmonika (snippet semen-article-body), videz kot na kontaktni strani */
+    .rte .s-faq { margin: 8px 0 36px; border-bottom: 1px solid var(--s-rule, rgba(37,35,32,.12)); }
+    .rte .s-faq__item { border-top: 1px solid var(--s-rule, rgba(37,35,32,.12)); }
+    .rte .s-faq__q { display: flex; align-items: center; gap: 16px; padding: 20px 0; cursor: pointer; list-style: none; font-family: var(--g-font-1); font-size: 20px; font-weight: 500; line-height: 1.3; color: var(--s-ink, #252320); }
+    .rte .s-faq__q::-webkit-details-marker { display: none; }
+    .rte .s-faq__q::marker { content: ""; }
+    .rte .s-faq__icon { position: relative; flex: 0 0 14px; width: 14px; height: 14px; }
+    .rte .s-faq__icon::before, .rte .s-faq__icon::after { content: ""; position: absolute; left: 0; top: 6.5px; width: 14px; height: 1.5px; background: currentColor; transition: transform .25s ease; }
+    .rte .s-faq__icon::after { transform: rotate(90deg); }
+    .rte .s-faq__item[open] .s-faq__icon::after { transform: rotate(0deg); }
+    .rte .s-faq__q:focus-visible { outline: 2px solid var(--s-gold, #c99a5c); outline-offset: 4px; }
+    .rte .s-faq__a { padding: 0 48px 22px 30px; }
+    .rte .s-faq__a p:last-child { margin-bottom: 0; }
+    @media (max-width: 749px) { .rte .s-faq__q { font-size: 17px; } .rte .s-faq__a { padding-right: 0; } }
+    .rte .s-quote { margin: 44px 0; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.3; text-align: center; text-wrap: balance; color: var(--s-ink, #2b2420); }
+    @media (min-width: 990px) {
+      .rte .s-media { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (min-width: 1200px) {
+      .rte .s-bento, .rte .s-duo, .rte .s-wide { width: calc(100% + 240px); margin-left: -120px; }
+      .rte .s-caption.s-caption--out { margin-left: -120px; }
+    }
+    @media (max-width: 749px) {
+      .rte .s-bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; aspect-ratio: auto; gap: 8px; }
+      .rte .s-bento img:first-child { grid-row: auto; grid-column: span 2; aspect-ratio: 16 / 10; height: auto; }
+      .rte .s-bento img:not(:first-child) { aspect-ratio: 1; height: auto; }
+      .rte .s-duo { gap: 8px; }
+    }
     @media (max-width: 749px) {
       .s-awards { --s-award-size: {{ settings.semen_awards_size_card | default: 68 | times: 0.8 | round }}px; }
       .s-awards--media { --s-award-size: {{ settings.semen_awards_size_media | default: 120 | times: 0.7 | round }}px; }

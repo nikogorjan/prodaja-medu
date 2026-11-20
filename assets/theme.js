@@ -4571,6 +4571,9 @@ theme.freeShipping = (function(){
 
   function generate(cart){
     var priceCart = cart.total_price;
+    // Šemen: cela vrstica (besedilo) se skrije pri prazni košarici
+    var $freeShippingWrap = $freeShippingClass.closest('.free-shipping');
+    priceCart == 0 ? $freeShippingWrap.hide() : $freeShippingWrap.show();
     priceCart == 0 ? $freeShippingClass.hide() : $freeShippingClass.show();
     if (priceCart >= minOrderValue){
       $percentClass.css('width','100%').removeClass('progress-bar-striped bg-primary');
@@ -4580,7 +4583,7 @@ theme.freeShipping = (function(){
       let percent = priceCart / minOrderValue * 100;
       let left = Shopify.formatMoney((minOrderValue - priceCart),theme.moneyFormat);
       $percentClass.css('width',percent+'%').addClass('progress-bar-striped primary');
-      $freeShippingTextClass.html($free_fisrt +' '+ left +' '+ $free_end);
+      $freeShippingTextClass.html($free_fisrt +' <strong>'+ left +'</strong> '+ $free_end);
       $freeShippingTextClass.prev('svg').removeClass('hide');
       //theme.updateCurrencies();
     }

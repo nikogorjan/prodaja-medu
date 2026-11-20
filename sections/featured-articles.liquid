@@ -28,6 +28,22 @@
     margin-bottom: 0 !important;
     padding-bottom: 0px !important;
   }
+  /* fewer posts than columns: the cards share the full container width (no slider) */
+  .blog-section{{ section.id }} .bloglist-static{
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+    gap: {{ section.settings.gutter_padding }}px;
+    margin: 0;
+    opacity: 1 !important;
+  }
+  .blog-section{{ section.id }} .bloglist-static > .bloglist-item{
+    max-width: none;
+    width: auto;
+    padding: 0;
+  }
+  @media (max-width: 749px){
+    .blog-section{{ section.id }} .bloglist-static{ grid-template-columns: minmax(0, 1fr); row-gap: 48px; }
+  }
   @media(max-width:749px){
     .blog__item--3 .article__photo-wrapper{
       padding-top: 100% !important;
@@ -43,14 +59,65 @@
   assign enable_tag = section.settings.enable_tag
   assign enable_comment = section.settings.enable_comment
   assign enable_short = section.settings.enable_short
-  
+
+  # Optional tag filter (Šemen): only posts carrying this tag, case-insensitive. The first matching post is the
+  # big feature when feature_first is on; the slider skips it. With a filter and no matching posts the section
+  # renders nothing for visitors (a short hint in the theme editor).
+  assign feature_blog = blogs[section.settings.blog]
+  assign filter_tag = section.settings.filter_tag | strip | downcase
+  assign match_count = 0
+  assign feature_handle = ''
+  if feature_blog != blank
+    for a in feature_blog.articles
+      if filter_tag != blank
+        assign a_tags = a.tags | join: '|' | downcase | split: '|'
+        unless a_tags contains filter_tag
+          continue
+        endunless
+      endif
+      assign match_count = match_count | plus: 1
+      if feature_handle == ''
+        assign feature_handle = a.handle
+        assign feature_article = a
+      endif
+    endfor
+  endif
+  unless section.settings.feature_first
+    assign feature_handle = ''
+  endunless
+  assign hide_section = false
+  if filter_tag != blank and match_count == 0
+    assign hide_section = true
+  endif
+  # Fewer posts than columns (e.g. 2 tagged posts, 3 columns): a plain grid that fills the full container width
+  # instead of the slider, 1 column on phones.
+  assign grid_count = match_count
+  if feature_handle != ''
+    assign grid_count = grid_count | minus: 1
+  endif
+  assign grid_count = grid_count | at_most: section.settings.limit
+  assign static_grid = false
+  if grid_count > 0 and grid_count < section.settings.show
+    assign static_grid = true
+  endif
 -%}
+{%- if hide_section -%}
+  {%- if request.design_mode -%}
+    <div class="container" style="padding: 32px 0; text-align: center; opacity: .7;">Ni objav z oznako »{{ section.settings.filter_tag | strip | escape }}«. Sekcija je obiskovalcem skrita.</div>
+  {%- endif -%}
+{%- else -%}
 <div class="customstyle{{ section.id }} blog-section{{section.id}}" data-aos="{{ section.settings.animation }}">
   {%- render 'style-section' -%}
 <div class="{{ section.settings.setwidth }}">
   <div class="section-block">
     {%- render 'section-heading' -%}
+    {%- if feature_handle != '' -%}
+      {%- render 'semen-article-feature', article: feature_article -%}
+    {%- endif -%}
     <div class="bloglist-wrapper dots-negative " data-aos="{{ section.settings.animation }}">
+      {%- if static_grid -%}
+      <div class="bloglist-static" id="Bloglist-{{ section.id }}" style="--cols: {{ grid_count }};">
+      {%- else -%}
       <div class="bloglist-slider row" id="Bloglist-{{ section.id }}"
            data-rows="{{ section.settings.rows }}"
            data-slidesToShow="{{ section.settings.show }}"
@@ -60,12 +127,21 @@
            data-infinite="{{ section.settings.infinite }}" 
            data-section-id="{{ section.id }}" 
            data-section-type="slickCarousels">
+      {%- endif -%}
         {%- assign blog = blogs[section.settings.blog] -%}
         {%- assign limit = section.settings.limit -%}
         {%- if blog != blank -%}
-        {%- for article in blog.articles limit: limit -%}
+        {%- assign shown = 0 -%}
+        {%- for article in blog.articles -%}
+        {%- if shown >= limit -%}{%- break -%}{%- endif -%}
+        {%- if article.handle == feature_handle -%}{%- continue -%}{%- endif -%}
+        {%- if filter_tag != blank -%}
+          {%- assign a_tags = article.tags | join: '|' | downcase | split: '|' -%}
+          {%- unless a_tags contains filter_tag -%}{%- continue -%}{%- endunless -%}
+        {%- endif -%}
+        {%- assign shown = shown | plus: 1 -%}
         <div class="bloglist-item col">
-          <div data-aos="{{ section.settings.animation }}"  data-aos-delay="{{ forloop.index | times: 100 }}">
+          <div data-aos="{{ section.settings.animation }}"  data-aos-delay="{{ shown | times: 100 }}">
             {%- liquid
               case section.settings.item_style
               when 'blog-1'
@@ -99,6 +175,7 @@
   </div>
 </div>
 </div>
+{%- endif -%}
 
 {% schema %}
 {
@@ -293,6 +370,12 @@
       "type": "blog"
     },
     {
+      "type": "text",
+      "id": "filter_tag",
+      "label": "Samo objave z oznako",
+      "info": "Npr. Apiterapija. Prazno pomeni vse objave. Velike in male črke niso pomembne."
+    },
+    {
       "type": "header",
       "content": "Slog elementa"
     },
@@ -450,6 +533,13 @@
       "step": 1,
       "label": "Največ elementov",
       "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_first",
+      "label": "Najnovejša objava velika",
+      "info": "Najnovejša objava se prikaže velika (naslovna slika, naslov, izvleček, gumb), ostale objave pa pod njo.",
+      "default": false
     },
     {
       "type": "range",

@@ -1,0 +1,69 @@
+{%- comment -%}
+  Besedilo objave (Čebelarstvo Šemen). Razdelek "Pogosta vprašanja" se prikaže kot harmonika (accordion).
+  Pravilo za pisanje objave: naslov razdelka je naslov 2 "Pogosta vprašanja", vsako vprašanje je naslov 3,
+  odgovor je en odstavek pod njim. Razdelek se konča pri naslednjem naslovu 2. Odstavki za zadnjim odgovorom
+  (npr. povezava v trgovino) ostanejo navadno besedilo pod harmoniko. Objave brez tega naslova se izpišejo
+  nespremenjene. Videz: header-css (.s-faq), enak kot pogosta vprašanja na kontaktni strani.
+  Uporaba: {% render 'semen-article-body', content: article.content %}
+{%- endcomment -%}
+{%- liquid
+  # naslov 2, ki se začne s "Pogosta vprašanja" (npr. "Pogosta vprašanja o lipovem medu")
+  assign marker = '>Pogosta vprašanja'
+  assign is_faq = false
+  if content contains marker
+    assign before = content | split: marker | first
+    # besedilo mora stati takoj za odprto oznako <h2> (z atributi ali brez)
+    assign last_tag = before | split: '<' | last
+    assign tag_name = last_tag | slice: 0, 2
+    if tag_name == 'h2'
+      unless last_tag contains '>'
+        assign is_faq = true
+      endunless
+    endif
+  endif
+-%}
+{%- if is_faq -%}
+  {%- liquid
+    assign rest_full = content | remove_first: before | remove_first: marker
+    assign heading_tail = rest_full | split: '</h2>' | first
+    assign marker = marker | append: heading_tail | append: '</h2>'
+    assign rest = rest_full | remove_first: heading_tail | remove_first: '</h2>'
+    assign zone = rest
+    assign tail = ''
+    if rest contains '<h2'
+      assign zone = rest | split: '<h2' | first
+      assign tail = rest | remove_first: zone
+    endif
+    assign questions = zone | split: '<h3'
+  -%}
+  {%- if questions.size > 1 -%}
+    {{- before }}{{ marker -}}
+    {{- questions.first -}}
+    <div class="s-faq">
+      {%- for q in questions offset: 1 -%}
+        {%- liquid
+          assign head = q | split: '</h3>' | first
+          assign attrs = head | split: '>' | first
+          assign question = head | remove_first: attrs | remove_first: '>' | strip
+          assign answer = q | remove_first: head | remove_first: '</h3>'
+          assign trailing = ''
+          if forloop.last and answer contains '</p>'
+            assign first_p = answer | split: '</p>' | first | append: '</p>'
+            assign trailing = answer | remove_first: first_p
+            assign answer = first_p
+          endif
+        -%}
+        <details class="s-faq__item"{% if forloop.first %} open{% endif %}>
+          <summary class="s-faq__q"><span class="s-faq__icon" aria-hidden="true"></span><span class="s-faq__text">{{ question }}</span></summary>
+          <div class="s-faq__a">{{ answer | strip }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+    {{- trailing -}}
+    {{- tail -}}
+  {%- else -%}
+    {{- content -}}
+  {%- endif -%}
+{%- else -%}
+  {{- content -}}
+{%- endif -%}

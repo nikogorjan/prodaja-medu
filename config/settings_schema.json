@@ -47,7 +47,8 @@
         "type": "color",
         "id": "semen_c_footer",
         "label": "Noga",
-        "default": "#e8cf98"
+        "info": "Na temni barvi je besedilo v nogi svetlo z zlatimi naslovi, na svetli temno.",
+        "default": "#171614"
       },
       {
         "type": "color",
@@ -2477,40 +2478,43 @@
       },
       {
         "type": "header",
-        "content": "🚚 Free shipping"
+        "content": "🚚 Brezplačna dostava"
+      },
+      {
+        "type": "paragraph",
+        "content": "V košarici se pokaže vrstica, koliko še manjka do brezplačne dostave. Tema ne vidi nastavitev dostave v skrbništvu: najprej v Nastavitve › Dostava in dostavljanje dodajte brezplačno ceno dostave s pogojem najnižje vrednosti naročila, nato tu vklopite vrstico in vpišite isti znesek."
       },
       {
         "type": "checkbox",
         "id": "free_shipping_enable",
-        "label": "Enable",
-        "default": true
+        "label": "Pokaži vrstico do brezplačne dostave",
+        "info": "Izklopljeno ali prag 0 pomeni, da se vrstica ne prikaže nikjer.",
+        "default": false
       },
       {
-        "type": "range",
+        "type": "number",
         "id": "free_shipping_value",
-        "min": 0,
-        "max": 1000,
-        "step": 10,
-        "label": "Minimum order value to be free shipping",
-        "default": 100
+        "label": "Brezplačna dostava od (EUR)",
+        "info": "Enak znesek kot pogoj brezplačne dostave v skrbništvu, npr. 50.",
+        "default": 0
       },
       {
         "type": "text",
         "id": "free_first",
-        "default": "Spend",
-        "label": "First Text Price"
+        "default": "Dodajte še",
+        "label": "Besedilo pred zneskom"
       },
       {
         "type": "text",
         "id": "free_end",
-        "default": "for <b>FREE SHIPPING</b>",
-        "label": "End Text Price"
+        "default": "do brezplačne dostave.",
+        "label": "Besedilo za zneskom"
       },
       {
         "type": "text",
         "id": "free_shipping_text",
-        "default": "Your order is free delivery !",
-        "label": "Text"
+        "default": "Vaše naročilo ima brezplačno dostavo.",
+        "label": "Besedilo, ko je prag dosežen"
       },
       {
         "type": "header",

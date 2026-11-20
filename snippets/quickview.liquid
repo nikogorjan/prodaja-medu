@@ -181,7 +181,7 @@
                   <button type="submit" class="btn btn-theme gradient-theme qv-add-button">{{ 'general.quickview.addtocart' | t }}</button>
                 </div>
               </div>
-              {%- render 'free-shipping' -%}
+              {%- comment -%} Šemen: brezplačna dostava samo v košarici {%- endcomment -%}
               <div class="pt-4">
                 {%- if settings.qv_sku -%}
                 <div class=" text-uppercase qv-sku"><small class="text-body d-inline-block" style="min-width: 80px;">{{ 'general.quickview.sku' | t }}: </small><small class="qv-view-sku text-uppercase"></small></div>

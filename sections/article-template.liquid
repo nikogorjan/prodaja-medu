@@ -113,7 +113,7 @@
       
       <div class="content-block">
         <div class="rte rte--indented-images mb-5" itemprop="articleBody">
-          {{ article.content }}
+          {%- render 'semen-article-body', content: article.content -%}
         </div>
         <div class="border-top py-4">
           <div class="d-flex justify-content-start justify-content-lg-between align-items-center flex-wrap">

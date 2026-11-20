@@ -68,6 +68,14 @@
   .sc-{{ sid }} .sc-card-text a { color: inherit; }
   .sc-{{ sid }} .sc-card-link { margin-top: auto; padding-top: 18px; }
   .sc-{{ sid }} .sc-card-link .btn-underline { font-size: 11px; }
+  .sc-{{ sid }} .sc-card-link--btn { padding-top: 26px; }
+  .sc-{{ sid }} .sc-btn-gold { background: var(--s-gold, #c99a5c) !important; border-color: var(--s-gold, #c99a5c) !important; color: var(--s-ink, #252320) !important; }
+  .sc-{{ sid }} .sc-btn-gold:before { background: var(--s-ink, #252320) !important; }
+  .sc-{{ sid }} .sc-btn-gold:hover, .sc-{{ sid }} .sc-btn-gold:hover span { color: var(--s-bg, #ffffff) !important; border-color: var(--s-ink, #252320) !important; }
+  .sc-{{ sid }} .sc-card-title.h2 { margin: 0 0 14px; font-size: 28px; line-height: 1.15; text-wrap: balance; }
+  @media (min-width: 990px) {
+    .sc-{{ sid }} .sc-card-title.h2 { font-size: 38px; }
+  }
   .sc-{{ sid }} .sc-foot { margin-top: 48px; text-align: center; }
   {%- if scheme == 'dark' -%}
   .sc-{{ sid }} .sc-title, .sc-{{ sid }} .sc-card-title { color: #ffffff; }
@@ -134,10 +142,11 @@
             </div>
           {%- endif -%}
           {%- if s.card_style == 'line' -%}<div class="sc-rule" aria-hidden="true"></div>{%- endif -%}
-          {%- if b.title != blank -%}<h3 class="sc-card-title">{{ b.title | escape }}</h3>{%- endif -%}
+          {%- if b.title != blank -%}<h3 class="sc-card-title{% if s.card_title == 'lg' %} h2{% endif %}">{{ b.title | escape }}</h3>{%- endif -%}
           {%- if b.text != blank -%}<div class="sc-card-text">{{ b.text }}</div>{%- endif -%}
           {%- if b.link_label != blank and b.link != blank -%}
-            <div class="sc-card-link"><a class="btn btn-underline" href="{{ b.link }}">{{ b.link_label | escape }}</a></div>
+            {%- assign card_btn = s.card_btn | default: 'btn-underline' -%}
+            <div class="sc-card-link{% unless card_btn == 'btn-underline' %} sc-card-link--btn{% endunless %}"><a class="btn {{ card_btn }}" href="{{ b.link }}">{{ b.link_label | escape }}</a></div>
           {%- endif -%}
         </li>
       {%- endfor -%}
@@ -168,11 +177,13 @@
     { "type": "richtext", "id": "des", "label": "Uvod" },
     { "type": "header", "content": "Kartice" },
     { "type": "select", "id": "columns", "label": "Stolpcev na računalniku", "default": "3", "options": [ { "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" } ] },
-    { "type": "select", "id": "card_style", "label": "Slog kartic", "default": "box", "options": [ { "value": "box", "label": "Okvir" }, { "value": "line", "label": "Brez okvirja, zlata črta" } ] },
+    { "type": "select", "id": "card_style", "label": "Slog kartic", "default": "box", "options": [ { "value": "box", "label": "Okvir" }, { "value": "line", "label": "Brez okvirja" } ] },
+    { "type": "select", "id": "card_title", "label": "Velikost naslovov kartic", "default": "sm", "options": [ { "value": "sm", "label": "Običajna" }, { "value": "lg", "label": "Velika (kot naslov sekcije)" } ] },
+    { "type": "select", "id": "card_btn", "label": "Slog gumbov v karticah", "default": "btn-underline", "options": [ { "value": "btn-underline", "label": "Besedilo" }, { "value": "btn-theme", "label": "Poln, temen" }, { "value": "btn-theme sc-btn-gold", "label": "Poln, zlat" }, { "value": "btn-outline", "label": "Obroba" } ] },
     { "type": "range", "id": "icon_size", "label": "Velikost ikon", "min": 24, "max": 48, "step": 4, "unit": "px", "default": 36 },
     { "type": "text", "id": "button", "label": "Gumb pod karticami" },
     { "type": "url", "id": "link", "label": "Povezava gumba" },
-    { "type": "select", "id": "style_btn", "label": "Slog gumba", "default": "btn-underline", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline", "label": "Obroba" }, { "value": "btn-underline", "label": "Podčrtan" } ] },
+    { "type": "select", "id": "style_btn", "label": "Slog gumba", "default": "btn-underline", "options": [ { "value": "btn-theme", "label": "Poln" }, { "value": "btn-outline", "label": "Obroba" }, { "value": "btn-underline", "label": "Besedilo" } ] },
     { "type": "header", "content": "Odmiki" },
     { "type": "range", "id": "padding_top", "label": "Odmik zgoraj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
     { "type": "range", "id": "padding_bottom", "label": "Odmik spodaj", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }

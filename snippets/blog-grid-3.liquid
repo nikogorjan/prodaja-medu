@@ -28,7 +28,15 @@
     <div class="blog__meta d-flex align-items-center">
       {%- if enable_date -%}
         <span class="blog__date mr-4">
-          {{ article.published_at | time_tag : '%B %d, %Y' }}
+          {%- if request.locale.iso_code == 'sl' -%}
+            {%- liquid
+              assign sl_months = 'januar,februar,marec,april,maj,junij,julij,avgust,september,oktober,november,december' | split: ','
+              assign month_index = article.published_at | date: '%m' | plus: 0 | minus: 1
+            -%}
+            <time datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}">{{ article.published_at | date: '%d' | plus: 0 }}. {{ sl_months[month_index] }} {{ article.published_at | date: '%Y' }}</time>
+          {%- else -%}
+            {{ article.published_at | time_tag : '%B %d, %Y' }}
+          {%- endif -%}
         </span>
       {%- endif -%}
       {%- if enable_comment -%}

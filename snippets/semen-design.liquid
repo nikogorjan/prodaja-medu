@@ -15,7 +15,12 @@
   assign c_bg = settings.semen_c_bg | default: '#faf7f0'
   assign c_tint = settings.semen_c_tint | default: '#f6edd3'
   assign c_plate = settings.semen_c_plate | default: '#f3ebda'
-  assign c_footer = settings.semen_c_footer | default: '#e8cf98'
+  assign c_footer = settings.semen_c_footer | default: '#171614'
+  assign footer_dark = false
+  assign footer_brightness = c_footer | color_brightness
+  if footer_brightness < 128
+    assign footer_dark = true
+  endif
   assign c_dark = settings.semen_c_dark | default: '#2b2825'
   assign c_ink = settings.semen_c_ink | default: '#252320'
   assign c_text = settings.semen_c_text | default: '#3f3b35'
@@ -64,8 +69,6 @@
     --s-ease: cubic-bezier(.2, .6, .2, 1);
     --s-arch: 999px 999px 0 0;
     --s-pattern: 0;
-    /* barve medu od akacije do ajde */
-    --s-honey-spectrum: linear-gradient(90deg, #f3e6b3 0%, #f1c95c 17%, #e6b452 31%, #d8963c 46%, #b9722d 61%, #8f4f22 75%, #63361c 88%, #3a2115 100%);
 
     /* barvne spremenljivke teme (pisave in velikosti ostanejo iz nastavitev teme) */
     --color-body: var(--s-bg);
@@ -147,9 +150,9 @@
   .btn-theme { background-color: var(--s-accent); border-color: var(--s-accent); color: var(--s-bg); }
   .btn-theme:hover { color: var(--s-ink) !important; border-color: var(--s-gold) !important; }
   .btn-theme:focus:not(:hover) { color: var(--s-bg); }
+  /* povezave-gumbi ("Več", "Več o apiterapiji", "V trgovino"): brez podčrtave, ob prehodu bronaste */
   .btn-underline { color: var(--s-ink) !important; }
-  .btn-underline:before { background: var(--s-gold); }
-  .btn-underline:after { background: var(--s-gold-ink); }
+  .btn-underline:before, .btn-underline:after { display: none !important; }
   .btn-underline:hover { color: var(--s-gold-ink) !important; }
   .btn-outline { border: 1px solid var(--s-ink); background: transparent; color: var(--s-ink); }
   .btn-outline:hover { background: var(--s-ink); border-color: var(--s-ink); color: var(--s-bg); }
@@ -159,6 +162,8 @@
   body .site-header { background-color: #ffffff; }
   body .site-nav__link, body .site-nav__title { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--s-ink); }
   body .site-nav__link:hover .site-nav__title, body .site-nav__item:hover .site-nav__title { color: var(--s-gold-ink); }
+  /* meni brez črte pod izbrano ali označeno točko */
+  body .site-nav__title::before, body .site-nav__title::after { display: none !important; }
   body .site-header__cart-indicator { background: var(--s-gold) !important; color: var(--s-ink) !important; }
 
   /* ---------- naslovi sekcij teme ---------- */
@@ -171,12 +176,19 @@
   body .product-card__type { display: none !important; }
   body .product-card__price, body .product-card__price span { color: var(--s-muted); font-variant-numeric: lining-nums tabular-nums; }
   body .product-card__overlay .btn-theme { background: rgba(255, 255, 255, .94); border-color: transparent; color: var(--s-ink); }
-  /* domača stran: izdelki na kremni podlagi in lestvica barv medu pod naslovom */
+  /* domača stran: izdelki na kremni podlagi (brez črte pod naslovom) */
   body [id$="__izdelki_semen"] [class*="customstyle"] { background-color: var(--s-bg) !important; }
-  body [id$="__izdelki_semen"] .section-title-1::after { content: ""; display: block; width: min(320px, 64%); height: 3px; margin: 26px auto 0; background: var(--s-honey-spectrum); }
 
-  /* ---------- slika + besedilo (tema); družina je vedno svetla ---------- */
-  body [id$="__druzina_semen"] [class*="customstyle"] { background-color: var(--s-bg) !important; }
+  /* ---------- naslovnica: razmik med sekcijami določa le odmik v nastavitvah sekcije (96 px, na telefonu 56 px),
+     zato brez dodatnih notranjih robov pod zadnjo vsebino (tools/homepage_layout.py) ---------- */
+  body [id$="__novice_semen"] .bloglist-slider { margin-bottom: 0 !important; }
+  body [id$="__novice_semen"] .blog__item .btn-underline { margin-bottom: 0 !important; }
+  body [id$="__druzina_semen"] .mt-5.mb-5 { margin-bottom: 0 !important; }
+  /* pogosta vprašanja (kjerkoli, zdaj na kontaktni strani): brez dodatnega roba pod zadnjim vprašanjem na telefonu */
+  body #accordion-faqs { margin-bottom: 0 !important; }
+
+  /* ---------- slika + besedilo (tema); družina ima vedno temno besedilo (ozadje iz nastavitve sekcije, na
+     naslovnici pšenični pas skupaj z apiterapijo) ---------- */
   body [id$="__druzina_semen"] .h2, body [id$="__druzina_semen"] h2 { color: var(--s-ink) !important; }
   body [id$="__druzina_semen"] p, body [id$="__druzina_semen"] .rte-setting { color: var(--s-text) !important; }
   body [id$="__druzina_semen"] .image-content__image-container,
@@ -212,6 +224,10 @@
   body .banner-theme .btn-theme.btn-white:before { background: var(--s-bg); }
   body .banner-theme .btn-theme.btn-white:hover { color: var(--s-ink) !important; border-color: var(--s-bg) !important; }
 
+  /* ---------- košarica: tabela izdelkov brez belega ozadja; puščice drsnika priporočil pšenične ---------- */
+  body .cart-table, body .cart-table thead, body .cart-table tbody, body .cart-table tr, body .cart-table th, body .cart-table td { background: transparent !important; }
+  body .swiper-button-prev, body .swiper-button-next { background-color: var(--s-plate) !important; }
+
   /* ---------- pogosta vprašanja ---------- */
   body .card-faqs { border-color: var(--s-rule) !important; }
   body .card-faqs .card-body p { color: var(--s-text); }
@@ -220,38 +236,76 @@
   body .blog__item .blog__meta { background: var(--s-bg) !important; color: var(--s-ink) !important; }
   body .blog__item .blog__meta span { padding: 0 2px !important; border: 0 !important; }
   body .blog__item .blog__meta span::before, body .blog__item .blog__meta span::after { display: none !important; }
-  body .blog__item .blog__content hr { width: 36px; margin: 18px 0; border: 0; border-top: 1px solid var(--s-gold); opacity: 1; }
+  /* kartica z naslovom na fotografiji (blog-3, npr. "Beri dalje" pod objavo): datum brez svetlega traku, bel na fotografiji */
+  body .blog__item--3 .blog__meta { background: transparent !important; color: #fff !important; }
+  body .blog__item--3 .blog__meta, body .blog__item--3 .blog__meta time { font-size: 12px; letter-spacing: .08em; text-transform: none !important; color: #fff !important; }
+  /* brez črtice pod naslovom novice; filter oznak na strani Novice brez črte pod izbrano oznako */
+  body .blog__item hr, body .blog__content hr { display: none !important; }
+  body .template-blog__tags a::before, body .template-blog__tags a::after { display: none !important; }
+  /* zavihki brez črte pod izbranim: opis izdelka (izbrani temen, ostali sivi) in letni časi na strani Apiturizem */
+  body [id$="product-content"] .nav-link::before, body [id$="product-content"] .nav-link::after { display: none !important; }
+  body [id$="product-content"] .nav-link { color: var(--s-muted) !important; }
+  body [id$="product-content"] .nav-link.active { color: var(--s-ink) !important; }
+  body .ss-tab::after { display: none !important; }
+  /* kratke okrasne črtice nad naslovi (koraki v Pridelavi, kartice v slogu "črta") */
+  body .ps-rule, body .sc-rule { display: none !important; }
   body .blog__item .article__photo-wrapper img { transition: transform 1.4s var(--s-ease); }
   body .blog__item:hover .article__photo-wrapper img { transform: scale(1.035); }
 
-  /* ---------- noga: svetla medena (drugačna od pasov sekcij), s svetlimi črtami ---------- */
+  /* ---------- noga: najtemnejši del strani (privzeto skoraj črna) ----------
+     Barvo izbere nastavitev "Noga". Na temni nogi je besedilo svetlo, naslovi in gumb zlati; če je izbrana
+     svetla barva, je besedilo temno (footer_dark izračuna svetlost barve). */
   body .site-footer {
-    --footer-bg: var(--s-footer);
-    --footer-text: var(--s-text);
-    --footer-title: var(--s-footer-title);
-    --footer-text-hover: var(--s-footer-title);
-    --footer-head-border: var(--s-rule-footer);
-    --bottom-copy-border: var(--s-rule-footer);
+    {%- if footer_dark %}
+    --sf-title: var(--s-gold);
+    --sf-text: var(--s-on-dark-muted);
+    --sf-link: var(--s-on-dark);
+    --sf-hover: var(--s-gold);
+    --sf-rule: rgba(255, 255, 255, .14);
+    --sf-field-rule: rgba(255, 255, 255, .34);
+    --sf-btn-bg: var(--s-gold);
+    --sf-btn-text: {{ c_footer }};
+    --sf-btn-hover-bg: var(--s-on-dark);
+    --sf-btn-hover-text: {{ c_footer }};
+    --color-footer-text-rgb: 207, 198, 184;
+    {%- else %}
+    --sf-title: var(--s-footer-title);
+    --sf-text: var(--s-text);
+    --sf-link: var(--s-ink);
+    --sf-hover: var(--s-footer-title);
+    --sf-rule: var(--s-rule-footer);
+    --sf-field-rule: var(--s-rule-strong);
+    --sf-btn-bg: var(--s-accent);
+    --sf-btn-text: var(--s-bg);
+    --sf-btn-hover-bg: var(--s-gold);
+    --sf-btn-hover-text: var(--s-ink);
     --color-footer-text-rgb: {{ text_r }}, {{ text_g }}, {{ text_b }};
-    --color-body-text: var(--s-text);
+    {%- endif %}
+    --footer-bg: var(--s-footer);
+    --footer-text: var(--sf-text);
+    --footer-title: var(--sf-title);
+    --footer-text-hover: var(--sf-hover);
+    --footer-head-border: var(--sf-rule);
+    --bottom-copy-border: var(--sf-rule);
+    --color-body-text: var(--sf-text);
     background-color: var(--s-footer) !important;
-    color: var(--s-text) !important;
+    color: var(--sf-text) !important;
     border-top: 0;
   }
-  body .site-footer .site-footer__section-title { color: var(--s-footer-title) !important; }
-  body .site-footer a, body .site-footer .site-footer__list-item a { color: var(--s-ink) !important; transition: color .25s; }
-  body .site-footer a:hover, body .site-footer .site-footer__list-item a:hover { color: var(--s-footer-title) !important; }
-  body .site-footer p, body .site-footer .rte p, body .site-footer .rte { color: var(--s-text) !important; }
-  body .site-footer .footer-email .form-group label, body .site-footer .form-group label { background-color: var(--s-footer) !important; color: var(--s-text) !important; }
-  body .site-footer .footer__newsletter .form-control { border: 0 !important; border-bottom: 1px solid var(--s-rule-strong) !important; border-radius: 0; padding-left: 0 !important; color: var(--s-ink) !important; }
-  body .site-footer .footer__newsletter .form-control::placeholder { color: var(--s-text); opacity: .85; }
+  body .site-footer .site-footer__section-title { color: var(--sf-title) !important; }
+  body .site-footer a, body .site-footer .site-footer__list-item a { color: var(--sf-link) !important; transition: color .25s; }
+  body .site-footer a:hover, body .site-footer .site-footer__list-item a:hover { color: var(--sf-hover) !important; }
+  body .site-footer p, body .site-footer .rte p, body .site-footer .rte { color: var(--sf-text) !important; }
+  body .site-footer .footer-email .form-group label, body .site-footer .form-group label { background-color: var(--s-footer) !important; color: var(--sf-text) !important; }
+  body .site-footer .footer__newsletter .form-control { border: 0 !important; border-bottom: 1px solid var(--sf-field-rule) !important; border-radius: 0; padding-left: 0 !important; color: var(--sf-link) !important; }
+  body .site-footer .footer__newsletter .form-control::placeholder { color: var(--sf-text); opacity: .85; }
   body .site-footer .footer__newsletter .form-control:focus { border-bottom-color: var(--s-gold) !important; box-shadow: none; }
-  body .site-footer .btn-theme { background: var(--s-accent) !important; border-color: var(--s-accent) !important; color: var(--s-bg) !important; }
+  body .site-footer .btn-theme { background: var(--sf-btn-bg) !important; border-color: var(--sf-btn-bg) !important; color: var(--sf-btn-text) !important; }
   body .site-footer .btn-theme span { color: inherit !important; }
-  body .site-footer .btn-theme:before { background: var(--s-gold); }
-  body .site-footer .btn-theme:hover, body .site-footer .btn-theme:hover span { color: var(--s-ink) !important; border-color: var(--s-gold) !important; }
-  body .site-footer .social-icons a, body .site-footer .social-icons svg { color: var(--s-ink) !important; fill: currentColor; }
-  body .site-footer .social-icons a:hover { color: var(--s-footer-title) !important; }
+  body .site-footer .btn-theme:before { background: var(--sf-btn-hover-bg); }
+  body .site-footer .btn-theme:hover, body .site-footer .btn-theme:hover span { color: var(--sf-btn-hover-text) !important; border-color: var(--sf-btn-hover-bg) !important; }
+  body .site-footer .social-icons a, body .site-footer .social-icons svg { color: var(--sf-link) !important; fill: currentColor; }
+  body .site-footer .social-icons a:hover { color: var(--sf-hover) !important; }
 
   /* ---------- lepljiva vrstica "Dodaj v košarico" na strani izdelka: kremna kot stran ---------- */
   body .sticky-cart-wr {
