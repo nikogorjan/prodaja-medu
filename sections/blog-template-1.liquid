@@ -113,13 +113,38 @@
   <div class="container">
     <div class="row {% if section.settings.sidebar_position == 'left' %}flex-row-reverse{% endif %}">
       {%- liquid
-        # Šemen: with the big post on, each page = 1 big post + a full grid of `limit` posts (no empty slot)
-        assign limit = section.settings.limit
-        if section.settings.feature_first
-          assign limit = limit | plus: 1
-        endif
+        # Šemen: "Najnovejša objava velika" (feature_first). Only page 1 has the big post: page 1 = 1 big post +
+        # `limit` posts in the grid, every further page = `limit` posts, the last page shows what is left (small).
+        # Shopify paginates in equal pages, so the paginate tag below only reads the page number and the number of
+        # posts; the posts are listed with an offset and the page links are built here. blog.articles outside
+        # paginate holds at most 50 posts, so with more than 50 posts this falls back to the normal pagination
+        # (big post only on page 1, then equal pages).
+        assign limit = section.settings.limit | plus: 0
+        assign current = 1
+        assign total = 0
       -%}
       {%- paginate blog.articles by limit -%}
+        {%- assign current = paginate.current_page -%}
+        {%- assign total = paginate.items -%}
+      {%- endpaginate -%}
+      {%- liquid
+        assign shifted = false
+        if section.settings.feature_first and total > 0 and total <= 50
+          assign shifted = true
+        endif
+        assign feature_here = false
+        if section.settings.feature_first and current == 1 and total > 0
+          assign feature_here = true
+        endif
+        if shifted
+          assign rest_total = total | minus: 1
+          assign pages = rest_total | plus: limit | minus: 1 | divided_by: limit
+          if pages < 1
+            assign pages = 1
+          endif
+          assign offset = current | minus: 1 | times: limit | plus: 1
+        endif
+      -%}
       <div class="{% if section.settings.sidebar_enable %}col-md-9 {% if section.settings.sidebar_position == 'left' %} pl-lg-5 {% else %} pr-lg-5{% endif %} {% else %}col-12{% endif %}">
       <tag-blog class="mb-5 d-block" data-aos="{{ animation }}">
         <ul class="list-unstyled template-blog__tags border-bottom border-top d-flex justify-content-center">
@@ -131,28 +156,14 @@
           {%- endfor -%}
         </ul>
         </tag-blog>
-        {%- liquid
-          assign feature_first = false
-          assign all_big = false
-          if section.settings.feature_first and blog.articles.size > 0
-            assign feature_first = true
-            # a page whose rest would not fill one grid row (e.g. the last page): every post big, no lone cards
-            assign rest = blog.articles.size | minus: 1
-            assign cols = section.settings.grid_column | plus: 0
-            if blog_layout == 'grid' and rest > 0 and rest < cols
-              assign all_big = true
-              for article in blog.articles
-                render 'semen-article-feature', article: article
-              endfor
-            else
-              render 'semen-article-feature', article: blog.articles.first
-            endif
-          endif
-        -%}
-        <div class="row">
-          {%- for article in blog.articles -%}
-          {%- if all_big -%}{%- break -%}{%- endif -%}
-          {%- if feature_first and forloop.first -%}{%- continue -%}{%- endif -%}
+        {%- if shifted -%}
+          {%- if feature_here -%}
+            {%- for article in blog.articles limit: 1 -%}
+              {%- render 'semen-article-feature', article: article -%}
+            {%- endfor -%}
+          {%- endif -%}
+          <div class="row">
+            {%- for article in blog.articles offset: offset limit: limit -%}
           <div class="{{ col }} {% if forloop.index == 3 %}col--last{% endif %}">
             {%- liquid
               case section.settings.item_style
@@ -172,13 +183,47 @@
             -%}
             
           </div>
-          {%- endfor -%}
-        </div>
-        {%- if paginate.pages > 1 -%}
-          {% render 'pagination', paginate: paginate, anchor: '', padding-top: 'pagination-blog' %}
+            {%- endfor -%}
+          </div>
+          {%- if pages > 1 -%}
+            {%- render 'semen-pagination', current: current, pages: pages -%}
+          {%- endif -%}
+        {%- else -%}
+          {%- comment -%} feature off, or more than 50 posts: Shopify's normal equal pages {%- endcomment -%}
+          {%- paginate blog.articles by limit -%}
+            {%- if feature_here -%}
+              {%- render 'semen-article-feature', article: blog.articles.first -%}
+            {%- endif -%}
+            <div class="row">
+              {%- for article in blog.articles -%}
+                {%- if feature_here and forloop.first -%}{%- continue -%}{%- endif -%}
+          <div class="{{ col }} {% if forloop.index == 3 %}col--last{% endif %}">
+            {%- liquid
+              case section.settings.item_style
+              when 'blog-1'
+                render 'blog-grid-1', article : article, image_size : image_size, enable_btn_blog : enable_btn_blog, enable_btn_line: enable_btn_line, enable_date : enable_date, enable_tag : enable_tag, enable_comment: enable_comment, enable_short : enable_short, animation: animation
+              when 'blog-3'
+                render 'blog-grid-3', article : article, image_size : image_size, enable_btn_blog : enable_btn_blog, enable_btn_line: enable_btn_line, enable_date : enable_date, enable_tag : enable_tag, enable_comment: enable_comment, enable_short : enable_short
+              when 'blog-5'
+                render 'blog-grid-5', article : article, image_size : image_size, enable_btn_blog : enable_btn_blog, enable_btn_line: enable_btn_line, enable_date : enable_date, enable_tag : enable_tag, enable_comment: enable_comment, enable_short : enable_short
+              when 'blog-6'
+                render 'blog-grid-6', article : article, image_size : image_size, enable_btn_blog : enable_btn_blog, enable_btn_line: enable_btn_line, enable_date : enable_date, enable_tag : enable_tag, enable_comment: enable_comment, enable_short : enable_short
+              when 'blog-7'
+                render 'blog-grid-7', article : article, image_size : image_size, enable_btn_blog : enable_btn_blog, enable_btn_line: enable_btn_line, enable_date : enable_date, enable_tag : enable_tag, enable_comment: enable_comment, enable_short : enable_short
+              else
+                render 'blog-grid-blank'
+              endcase
+            -%}
+            
+          </div>
+              {%- endfor -%}
+            </div>
+            {%- if paginate.pages > 1 -%}
+              {% render 'pagination', paginate: paginate, anchor: '', padding-top: 'pagination-blog' %}
+            {%- endif -%}
+          {%- endpaginate -%}
         {%- endif -%}
       </div>
-      {%- endpaginate -%}
       {%- if section.settings.sidebar_enable -%}
       {%- render 'blogSidebar' -%}
       {%- endif -%}
@@ -473,7 +518,7 @@
       "type": "checkbox",
       "id": "feature_first",
       "label": "Najnovejša objava velika",
-      "info": "Prva objava na vsaki strani bloga (na prvi strani najnovejša) se prikaže velika, pod njo pa toliko objav, kot je nastavljeno pri Omejitvi. Pri 3 stolpcih izberite 6 ali 9, da so vrstice polne.",
+      "info": "Najnovejša objava se na 1. strani prikaže velika, pod njo toliko objav, kot je nastavljeno pri Omejitvi. Ostale strani imajo samo mrežo z enakim številom objav. Pri 3 stolpcih izberite 6 ali 9, da so vrstice polne.",
       "default": false
     },
     {
