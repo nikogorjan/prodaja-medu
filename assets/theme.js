@@ -4576,13 +4576,13 @@ theme.freeShipping = (function(){
     priceCart == 0 ? $freeShippingWrap.hide() : $freeShippingWrap.show();
     priceCart == 0 ? $freeShippingClass.hide() : $freeShippingClass.show();
     if (priceCart >= minOrderValue){
-      $percentClass.css('width','100%').removeClass('progress-bar-striped bg-primary');
+      $percentClass.css('width','100%').attr('aria-valuenow', 100).removeClass('progress-bar-striped bg-primary');
       $freeShippingTextClass.text(theme.strings.freeShipping);
       $freeShippingTextClass.prev('svg').removeClass('hide');
     }else{
       let percent = priceCart / minOrderValue * 100;
       let left = Shopify.formatMoney((minOrderValue - priceCart),theme.moneyFormat);
-      $percentClass.css('width',percent+'%').addClass('progress-bar-striped primary');
+      $percentClass.css('width',percent+'%').attr('aria-valuenow', Math.round(percent)).addClass('progress-bar-striped primary');
       $freeShippingTextClass.html($free_fisrt +' <strong>'+ left +'</strong> '+ $free_end);
       $freeShippingTextClass.prev('svg').removeClass('hide');
       //theme.updateCurrencies();

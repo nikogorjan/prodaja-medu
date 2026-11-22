@@ -617,7 +617,9 @@ article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:bl
     .s-freeship { margin: 0 0 16px; padding: 12px 16px; background: var(--s-plate, #f3ebda); text-align: left; }
     .s-freeship .s-freeship__text { margin: 0; font-size: 13px; line-height: 1.5; text-transform: none; letter-spacing: 0; color: var(--s-ink, #252320); }
     .s-freeship .s-freeship__text strong { font-weight: 600; }
-    .s-freeship .progress { display: none !important; }
+    /* Črta napredka do brezplačne dostave: širino nastavi theme.js (theme.freeShipping), npr. 6,50 € od 65 € = 10 % */
+    .s-freeship .progress { height: 4px; margin: 10px 0 2px; padding: 0; background: var(--s-rule-strong, rgba(37,35,32,.22)); border: 0; border-radius: 2px; box-shadow: none; overflow: hidden; }
+    .s-freeship .progress .progress-bar { width: 0; height: 100%; background-color: var(--s-gold, #c99a5c) !important; background-image: none !important; border-radius: 2px; animation: none !important; transition: width .6s var(--s-ease, ease); }
     /* Pogosta vprašanja v objavi kot harmonika (snippet semen-article-body), videz kot na kontaktni strani */
     .rte .s-faq { margin: 8px 0 36px; border-bottom: 1px solid var(--s-rule, rgba(37,35,32,.12)); }
     .rte .s-faq__item { border-top: 1px solid var(--s-rule, rgba(37,35,32,.12)); }
